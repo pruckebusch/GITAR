@@ -1,0 +1,19 @@
+#ifndef KERNEL_CONFIG_H
+#define KERNEL_CONFIG_H
+
+#include "unique-names.h"
+
+#define NUM_COMPONENTS 20
+#define NUM_HIL_COMPONENTS 20
+
+
+enum CMP_TYPE {
+	NULL_COMPONENT,
+	HIL_COMPONENT,
+	NET_COMPONENT,
+	APP_COMPONENT,
+};
+
+
+
+#endif /*KERNEL_CONFIG_H*/

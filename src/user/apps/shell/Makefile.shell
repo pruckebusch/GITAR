@@ -1,0 +1,1 @@
+shell_src = shell.c shell-file.c shell-coffee.c shell-base64.c shell-exec.c shell-text.c

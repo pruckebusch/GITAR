@@ -1,0 +1,209 @@
+# -*- makefile -*-
+
+ifndef GITAR
+  ${error GITAR not defined! You must specify where GITAR resides}
+endif
+
+ifeq ($(TARGET),)
+  -include Makefile.target
+  ifeq ($(TARGET),)
+    ${info TARGET not defined, using target 'native'}
+    TARGET=native
+  else
+    ${info using saved target '$(TARGET)'}
+  endif
+endif
+
+usage:
+	@echo "make [TARGET=(TARGET)] [savetarget] [targets]"
+
+targets:
+	@ls -1 $(GITAR)/src/system/hal/platform $(TARGETDIRS) | grep -v CVS
+
+savetarget:
+	-@rm -f Makefile.target
+	@echo "saving Makefile.target"
+	@echo >Makefile.target "TARGET = $(TARGET)"
+	
+savedefines:
+	-@rm -f Makefile.$(TARGET).defines
+	@echo "saving Makefile.$(TARGET).defines"
+	@echo >Makefile.$(TARGET).defines "DEFINES = $(DEFINES)"
+
+OBJECTDIR = obj_$(TARGET)
+
+include $(GITAR)/make/Makefile.kernel
+
+include $(GITAR)/make/Makefile.contiki
+
+### Include application makefiles
+
+ifdef APPS
+  APP_DIRS = ${wildcard ${addprefix $(GITAR)/src/user/apps/, $(APPS)} $(APPS)}
+  APPINCLUDES = ${foreach APP, $(APPS), ${wildcard ${foreach DIR, $(APP_DIRS), $(DIR)/Makefile.$(APP)}}}
+  -include $(APPINCLUDES)
+  APP_SOURCES = ${foreach APP, $(APPS), $($(APP)_src)}
+endif
+
+	
+### Include target makefile (TODO Unsafe?)
+
+target_makefile = $(GITAR)/make/platform/Makefile.$(TARGET)
+
+#${info including target makefile '$(target_makefile)'}
+
+# Check if the target makefile exists, and create the object directory if necessary.
+ifeq ($(target_makefile),)
+  ${error The target platform "$(TARGET)" does not exist (maybe it was misspelled?)}
+else
+  include $(target_makefile)
+endif
+
+### Verbosity control. Use  make V=1  to get verbose builds.
+
+ifeq ($(V),1)
+  TRACE_CC =
+  TRACE_LD =
+  TRACE_AR =
+  TRACE_AS =
+  Q=
+else
+  TRACE_CC = @echo "  CC       " $<
+  TRACE_LD = @echo "  LD       " $@
+  TRACE_AR = @echo "  AR       " $@
+  TRACE_AS = @echo "  AS       " $<
+  Q=@
+endif
+
+### Forward comma-separated list of arbitrary defines to the compiler
+
+COMMA := ,
+CFLAGS += ${addprefix -D,${subst $(COMMA), ,$(DEFINES)}}
+
+oname = ${patsubst %.c,%.o,${patsubst %.S,%.o,$(1)}}
+
+#GITAR_OBJECTFILES = ${addprefix $(OBJECTDIR)/,${call oname, $(SOURCEFILES)}}
+
+# Provide way to create $(OBJECTDIR) if it has been removed by make clean
+$(OBJECTDIR):
+	mkdir $@
+
+### Setup directory search path for source and header files
+        
+SOURCEDIRS = $(PROJECTDIRS) $(GITAR) $(PLATFORM_DIRS) $(CPU_DIRS) $(CONTIKIDIRS) $(KERNELDIRS) $(APP_DIRS)
+SOURCEDIRS += $(GITAR)/src/system/hal
+SOURCEDIRS += $(GITAR)/src/system/hil
+
+SOURCEFILES = $(KERNELFILES) $(CONTIKIFILES) $(PLATFORM_FILES) $(CPU_FILES) $(APP_SOURCES)
+
+GITAR_OBJECTFILES += ${addprefix $(OBJECTDIR)/,${call oname, $(SOURCEFILES)}}
+
+PROJECT_OBJECTFILES += ${addprefix $(OBJECTDIR)/,${call oname, $(PROJECT_SOURCEFILES)}}
+
+vpath %.c $(SOURCEDIRS)
+vpath %.S $(SOURCEDIRS)
+
+CFLAGS += ${addprefix -I,$(SOURCEDIRS)}
+
+### Automatic dependency generation
+
+ifneq ($(MAKECMDGOALS),clean)
+-include ${addprefix $(OBJECTDIR)/, $(SOURCEFILES:.c=.d) $(PROJECT_SOURCEFILES:.c=.d)}
+endif
+
+### See http://make.paulandlesley.org/autodep.html#advanced
+
+define FINALIZE_DEPENDENCY
+cp $(@:.o=.d) $(@:.o=.$$$$); \
+sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
+    -e '/^$$/ d' -e 's/$$/ :/' < $(@:.o=.$$$$) >> $(@:.o=.d); \
+rm -f $(@:.o=.$$$$)
+endef
+
+clean:
+	rm -f *~ *core core *.srec \
+	*.lst *.map \
+	*.cprg *.bin *.data gitar*.a *.firmware core-labels.S *.ihex *.ini \
+	*.ce *.co
+	rm -rf $(CLEAN)
+	-rm -rf $(OBJECTDIR)
+
+distclean: clean
+	-rm -rf $(GITAR_PROJECT).$(TARGET)
+
+ifndef CUSTOM_RULE_C_TO_CE
+%.ce: %.c
+	$(TRACE_CC)
+	$(Q)$(CC) $(CFLAGS) -DAUTOSTART_ENABLE -c $< -o $@
+	$(STRIP) --strip-unneeded -g -x $@
+endif
+
+ifndef CUSTOM_RULE_C_TO_OBJECTDIR_O
+$(OBJECTDIR)/%.o: %.c | $(OBJECTDIR)
+	$(TRACE_CC)
+	$(Q)$(CC) $(CFLAGS) -MMD -c $< -o $@
+	@$(FINALIZE_DEPENDENCY)
+endif
+
+ifndef CUSTOM_RULE_S_TO_OBJECTDIR_O
+$(OBJECTDIR)/%.o: %.S | $(OBJECTDIR)
+	$(TRACE_AS)
+	$(Q)$(AS) $(ASFLAGS) -o $@ $<
+endif
+
+ifndef CUSTOM_RULE_C_TO_O
+%.o: %.c
+	$(TRACE_CC)
+	$(Q)$(CC) $(CFLAGS) -c $< -o $@
+endif
+
+
+ifndef CUSTOM_RULE_C_TO_CO
+%.co: %.c
+	$(TRACE_CC)
+	$(Q)$(CC) $(CFLAGS) -DAUTOSTART_ENABLE -c $< -o $@
+endif
+
+ifndef AROPTS
+  AROPTS = rcf
+endif
+
+ifndef CUSTOM_RULE_ALLOBJS_TO_TARGETLIB
+gitar-$(TARGET).a: $(GITAR_OBJECTFILES)
+	$(TRACE_AR)
+	$(Q)$(AR) $(AROPTS) $@ $^
+endif
+
+ifndef LD
+  LD = $(CC)
+endif
+
+ifndef CUSTOM_RULE_LINK
+%.$(TARGET): %.co $(PROJECT_OBJECTFILES) $(PROJECT_LIBRARIES) gitar-$(TARGET).a
+	$(TRACE_LD)
+	cp obj_$(TARGET)/kernel-main.o obj_$(TARGET)/kernel-main.o.back
+	cp $(GITAR_PROJECT).co obj_$(TARGET)/
+	$(Q)$(LD) $(LDFLAGS) $(TARGET_STARTFILES) ${filter-out %.a,$^} \
+	    ${filter %.a,$^} $(TARGET_LIBFILES) -o $@
+endif
+
+%.ramprof: %.$(TARGET)
+	$(NM) -S -td --size-sort $< | grep -i " [abdrw] " | cut -d' ' -f2,4
+
+%.flashprof: %.$(TARGET)
+	$(NM) -S -td --size-sort $< | grep -i " [t] " | cut -d' ' -f2,4
+
+# Don't treat %.$(TARGET) as an intermediate file because it is
+# in fact the primary target.
+.PRECIOUS: %.$(TARGET)
+
+# Cancel the predefined implict rule for compiling and linking
+# a single C source into a binary to force GNU make to consider
+# the match-anything rule below instead.
+%: %.c
+
+# Match-anything pattern rule to allow the project makefiles to
+# abstract from the actual binary name. It needs to contain some
+# command in order to be a rule, not just a prerequisite.
+%: %.$(TARGET)
+	@

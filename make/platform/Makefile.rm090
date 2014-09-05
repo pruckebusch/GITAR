@@ -1,0 +1,67 @@
+
+# Defaults
+
+NODE_ID=9
+MOTE=/dev/ttyUSB0
+
+# Programming
+
+RM090_BSL=$(GITAR)/tools/rm090/ibcn-f5x-tos-bsl
+BSL_OPTIONS=-5 -R --invert-reset --swap-reset-test -r -e -I
+
+# Contiki main file
+
+ifndef GITAR_TARGET_MAIN
+	GITAR_TARGET_MAIN = kernel-main.c
+endif
+
+# Additional source files
+
+HIL_DEV = leds.c serial-line.c sensors.c #slip.c
+
+HAL_CHIPS = cc2520.c
+HAL_CPU = cc2520-arch-sfd.c cc2520-arch.c spi.c uart1.c uart1-putchar.c #uart0.c uart0-putchar.c slip_uart0.c  slip_uart1.c 
+
+PLATFORM_LIB = node-id.c
+PLATFORM_DEV = leds-arch.c button-sensor.c radio-sensor.c
+HAL_PLATFORM = gitar-rm090-platform.c $(PLATFORM_DEV) $(PLATFORM_LIB)
+
+PLATFORM_DIRS = ${addprefix $(GITAR)/src/system/hal/platform/rm090/, . dev lib lib/cfs lib/util }
+PLATFORM_DIRS += ${addprefix $(GITAR)/src/system/hal/chips/, . cc2520 }
+
+PLATFORM_FILES += $(HIL_DEV) $(HAL_CHIPS) $(HAL_CPU) $(HAL_PLATFORM) rm090-system-facade.c
+
+
+# Disable printf by default to save space
+ifeq ($(ENABLE_PRINTF), 1)
+CFLAGS+=-DENABLE_PRINTF
+endif
+
+# Set node id
+CFLAGS += -DNODE_ID=$(NODE_ID)
+
+ifeq ($(UIP_CONF_IPV6),1)
+CFLAGS += -DWITH_UIP6=1
+endif
+
+SMALL=0
+
+MCU=msp430f5437
+include $(GITAR)/make/cpu/Makefile.msp430
+
+ifndef MSPGCC_VERSION
+	MSPGCC_VERSION := ${shell $(CC) -dumpversion}
+endif
+
+ifneq (,$(findstring 4.7.,$(MSPGCC_VERSION)))
+	CFLAGS += -mmemory-model=medium
+	LDFLAGS += -mmemory-model=medium
+endif
+
+#CFLAGS += -g
+
+%.hex: %.ihex
+	mv $< $@
+
+%.upload: %.hex
+	$(RM090_BSL) -c $(MOTE) $(BSL_OPTIONS) -p $<

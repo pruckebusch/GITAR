@@ -1,0 +1,8 @@
+GITAR_BASE_DIR = $(GITAR)/src/kernel/
+GITARDIRS = ${addprefix $(GITAR_BASE_DIR), core  system-facade core/deploytime-mgmt core/runtime-mgmt . }
+
+GITAR_CORE
+
+
+FILES = gitar-kernel.c component-db.c component-factory.c serial-pkg-source.c pkg-manager.c #pkg-installer.c pkg-manager.c pkg-repository.c
+

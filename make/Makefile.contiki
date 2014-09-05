@@ -1,0 +1,42 @@
+# -*- makefile -*-
+
+LOWERCASE = -abcdefghijklmnopqrstuvwxyz
+UPPERCASE = _ABCDEFGHIJKLMNOPQRSTUVWXYZ
+TARGET_UPPERCASE := ${strip ${shell echo $(TARGET) | sed y!$(LOWERCASE)!$(UPPERCASE)!}}
+CFLAGS += -DCONTIKI=1 -DCONTIKI_TARGET_$(TARGET_UPPERCASE)=1
+
+SYS_PROCESS = process.c autostart.c mt.c
+SYS_TIMER = ctimer.c etimer.c rtimer.c stimer.c timer.c
+SYS = $(SYS_PROCESS) $(SYS_TIMER)
+
+#LIB_BASE64_DECODER = base64-decoder.c 
+#LIB_CRC16 = crc16.c
+#LIB_LIST = list.c
+#LIB_PACKETBUF = packetbuf.c
+#LIB_QUEUE = 
+#LIB_RANDOM = random.c
+#LIB_RINGBUF = ringbuf.c
+#LIB_TYPE =
+
+#LIB_QUEUE = queue.c
+
+ifdef CONTIKI_COMPACT_ELF
+LIB_LOADER	= elfloader_compact.c cle.c sym.c cmod.c symtab.c
+else 
+LIB_LOADER	= elfloader.c symtab.c
+endif
+LIB_CFS = cfs-coffee.c
+LIB_RIME = rimeaddr.c packetbuf.c #rimestats.c
+LIB_UTIL = energest.c memb.c random.c list.c ringbuf.c crc16.c  # arg.c assert.c base64-decoder.c strncasecmp.c mmem.c
+LIB = $(LIB_CFS) $(LIB_RIME) $(LIB_UTIL) $(LIB_LOADER)
+
+DEV = #nullradio.c
+
+CONTIKIFILES = $(SYS) $(LIB) $(DEV)
+
+CONTIKIDIRS = ${addprefix $(GITAR)/src/system/, hil hal . }
+CONTIKIDIRS += ${addprefix $(GITAR)/src/system/hil/, sys lib dev types}
+CONTIKIDIRS += ${addprefix $(GITAR)/src/system/hil/sys/, process timer }
+CONTIKIDIRS += ${addprefix $(GITAR)/src/system/hil/lib/, cfs loader rime util queue }
+
+#${info including contiki source files '$(CONTIKIFILES)' in dirs '$(CONTIKIDIRS)'}

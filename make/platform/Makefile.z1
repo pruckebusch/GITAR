@@ -1,0 +1,164 @@
+#PLATFORM_FILES += gitar-z1-platform.c 
+CLEAN += *.z1
+
+ifdef GCC
+CFLAGS+=-Os -g
+endif
+
+ifdef IAR
+CFLAGS += -D__MSP430F2617__=1 -e --vla -Ohz --multiplier=16s --core=430X --double=32
+else
+LDFLAGS += -Wl,--defsym -Wl,__P1SEL2=0x0041 -Wl,--defsym -Wl,__P5SEL2=0x0045
+endif
+
+CLEAN += symbols.c symbols.h
+
+HIL_DEV = leds.c serial-line.c sht11-sensor.c sensors.c # slip.c
+
+HAL_CHIPS = cc2420.c  cc2420-aes.c sht11.c
+HAL_CPU = cc2420-arch-sfd.c cc2420-arch.c leds-arch.c spi.c uart0.c uart0-putchar.c button.c #  slip_uart0.c  slip_uart1.c uart1.c uart1-putchar.c
+
+PLATFORM_LIB = node-id.c checkpoint-arch.c
+PLATFORM_DEV = cc2420-arch.c xmem.c i2cmaster.c adxl345.c button-sensor.c light-sensor.c relay-phidget.c temperature-sensor.c tmp102.c z1-phidgets.c battery-sensor.c  light-ziglet.c radio-sensor.c sky-sensors.c tlc59116.c #potentiometer-sensor.c light.c
+HAL_PLATFORM = gitar-z1-platform.c $(PLATFORM_DEV) $(PLATFORM_LIB)
+
+PLATFORM_DIRS = ${addprefix $(GITAR)/src/system/hal/platform/z1/, . dev lib lib/cfs lib/util }
+PLATFORM_DIRS += ${addprefix $(GITAR)/src/system/hal/chips/, . cc2420 sht11 }
+
+#ifndef GITAR_TARGET_MAIN
+#GITAR_TARGET_MAIN = gitar-z1-main.c
+#endif
+
+ifndef GITAR_TARGET_MAIN
+GITAR_TARGET_MAIN = kernel-main.c
+endif
+
+PLATFORM_FILES += $(HIL_DEV) $(HAL_CHIPS) $(HAL_CPU) $(HAL_PLATFORM) z1-system-facade.c
+
+#${info including platform source files '$(PLATFORM_FILES)' in dirs '$(PLATFORM_DIRS)'}
+
+MCU=msp430f2617
+include $(GITAR)/make/cpu/Makefile.msp430
+
+# Add LDFLAGS after IAR_PATH is set
+ifdef IAR
+LDFLAGSNO += -xm "$(IAR_PATH)/lib/dlib/dl430xsfn.r43" -f "$(IAR_PATH)/config/lnk430f2617.xcl"
+LDFLAGS += $(LDFLAGSNO) -Felf -yn
+endif
+
+gitar-$(TARGET).a: ${addprefix $(OBJECTDIR)/,symbols.o}
+#	$(AR) rcf $@ $^
+
+
+NUMPAR=20
+IHEXFILE=tmpimage.ihex
+
+ifeq ($(HOST_OS),Darwin)
+  ifndef MOTELIST
+      USBDEVPREFIX=
+      SERIALDUMP = $(GITAR)/tools/sky/serialdump-linux
+      MOTELIST = $(GITAR)/tools/z1/motelist-z1-macos
+      BSL = $(GITAR)/tools/z1/z1-bsl-nopic --z1
+      BSL_FILETYPE = -I
+      MOTES = $(shell $(MOTELIST) -c 2>&- | \
+         cut -f 2 -d ,)
+      CMOTES=$(MOTES) 
+  endif
+else
+  # If we are not running under Mac, we assume Linux
+    ifndef MOTELIST
+      USBDEVPREFIX=
+      SERIALDUMP = $(GITAR)/tools/sky/serialdump-linux
+      MOTELIST = $(GITAR)/tools/z1/motelist-z1
+      BSL = $(GITAR)/tools/z1/z1-bsl-nopic --z1
+      BSL_FILETYPE = -I
+      MOTES = $(shell $(MOTELIST) -c 2>&- | \
+         cut -f 2 -d , | \
+         perl -ne 'print $$1 . " " if(m-(/dev/\w+)-);')
+      CMOTES=$(MOTES)
+    endif
+endif
+
+
+
+motelist: z1-motelist
+
+z1-motelist:
+	$(MOTELIST)
+z1-motes:
+	@echo $(MOTES)
+
+ifdef MOTE
+%.upload: %.ihex
+	cp $< $(IHEXFILE)
+	$(MAKE) z1-u.$(subst /,-,$(word $(MOTE), $(MOTES)))
+else # MOTE
+%.upload: %.ihex
+	cp $< $(IHEXFILE)
+	@echo $(MOTES)
+	$(MAKE) z1-reset z1-upload
+endif # MOTE
+
+z1-upload: z1-reset
+	$(MAKE) -j $(NUMPAR) z1-upload-sequence
+
+z1-upload-sequence:	$(foreach PORT, $(MOTES), z1-u.$(subst /,-,$(PORT)))
+	@echo Done
+
+z1-reset:
+	$(MAKE) -k -j $(NUMPAR) z1-reset-sequence
+
+z1-reset-sequence:	$(foreach PORT, $(MOTES), z1-r.$(subst /,-,$(PORT)))
+	@echo Done
+
+z1-u.%:
+	@echo +++++ Erasing $(subst -,/,$*); \
+	$(BSL) -c $(subst -,/,$*) -e && sleep 2 ; \
+	echo +++++ Programming $(subst -,/,$*) ; \
+	$(BSL) -c $(subst -,/,$*) $(BSL_FILETYPE) -p $(IHEXFILE) && sleep 2 ; \
+	echo +++++ Resetting $(subst -,/,$*) ; \
+	$(BSL) -c $(subst -,/,$*) -r
+
+z1-r.%:
+	$(BSL) -c $(subst -,/,$*) -r
+
+sizeplot:
+	msp430-size $(OBJECTDIR)/*.o | $(GITAR)/tools/sky/check-size > size-data
+	gnuplot $(GITAR)/tools/sky/plot-size
+	gv size.pdf
+
+winslip:
+ifdef INTERFACE
+	$(GITAR)/tools/wpcapslip/wpcapslip -s $(USBDEVPREFIX)$(firstword $(CMOTES)) $(INTERFACE) 172.16.0.0 255.255.0.0
+else
+	@echo "Usage: \"$(MAKE) $@ INTERFACE=<the IP address of a local network interface>\""
+	@echo "Use the \"ipconfig\" command to find out the IP addresses of the local interfaces"
+endif
+
+linslip: $(GITAR)/tools/tunslip
+	$(GITAR)/tools/tunslip -s $(USBDEVPREFIX)$(firstword $(CMOTES)) 172.16.0.0 255.255.0.0
+
+$(GITAR)/tools/tunslip:
+	(cd $(GITAR)/tools; $(MAKE) tunslip)
+
+ifdef MOTE
+serialdump:
+	$(SERIALDUMP) -b115200 $(USBDEVPREFIX)$(word $(MOTE), $(CMOTES)) | $(GITAR)/tools/timestamp | tee serialdump-`date +%Y%m%d-%H%M`
+
+serialview:
+	$(SERIALDUMP) -b115200 $(USBDEVPREFIX)$(word $(MOTE), $(CMOTES)) | $(GITAR)/tools/timestamp
+
+login:
+	$(SERIALDUMP) -b115200 $(USBDEVPREFIX)$(word $(MOTE), $(CMOTES))
+else
+serialdump:
+	$(SERIALDUMP) -b115200 $(USBDEVPREFIX)$(firstword $(CMOTES)) | $(GITAR)/tools/timestamp | tee serialdump-`date +%Y%m%d-%H%M`
+
+serialview:
+	$(SERIALDUMP) -b115200 $(USBDEVPREFIX)$(firstword $(CMOTES)) | $(GITAR)/tools/timestamp
+
+login:
+	$(SERIALDUMP) -b115200 $(USBDEVPREFIX)$(firstword $(CMOTES))
+endif
+
+

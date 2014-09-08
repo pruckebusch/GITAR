@@ -30,8 +30,6 @@ PROCESS_THREAD(test_blink, ev, data)
 		leds_off(LEDS_GREEN);
 		PROCESS_WAIT_UNTIL(etimer_expired(&t));
 		etimer_reset(&t);
-
-
 	}
 	PROCESS_END();
 }

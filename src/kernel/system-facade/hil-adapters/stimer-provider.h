@@ -23,22 +23,5 @@ hil_component_t stimer = { {STIMER, 2, 7,HIL_COMPONENT, 6, "stimer"}, {stimer_fu
 
 component_id stimer_local_id;
 
-/*
-inline void create_stimer_component(){
-
-	stimer.info.version = 2;
-	stimer.info.subrelease = 7;
-	stimer.info.type = HIL_COMPONENT;
-	stimer.info.name = "stimer";
-	stimer.info.name_len = 6;
-	stimer.info.unique_id = gitar_kernel_calculate_unique_id(stimer.info.name, stimer.info.name_len);
-	//crc16_data(&(stimer.info.name[0]), stimer.info.name_len, 0);
-
-	stimer.interface.function_array = &(stimer_functions[0]);
-	stimer.interface.process_array = NULL;
-	stimer.interface.num_functions = STIMER_FUNCTION_LAST;
-	stimer.interface.num_processes = 0;
-}
-*/
 #endif /* __STIMER_PROVIDER_H__ */
 

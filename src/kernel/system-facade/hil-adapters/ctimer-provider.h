@@ -21,23 +21,5 @@ const void* ctimer_functions[CTIMER_FUNCTION_LAST] = {ctimer_reset, ctimer_resta
 hil_component_t ctimer = { { CTIMER, 2, 7, HIL_COMPONENT, 6, "ctimer"} , {ctimer_functions, NULL, CTIMER_FUNCTION_LAST, CTIMER_PROCESS_LAST} };
 
 component_id ctimer_local_id;
-
-/*
-inline void create_ctimer_component(){
-
-	ctimer.info.version = 2;
-	ctimer.info.subrelease = 7;
-	ctimer.info.type = HIL_COMPONENT;
-	ctimer.info.name = "ctimer";
-	ctimer.info.name_len = 6;
-	ctimer.info.unique_id = gitar_kernel_calculate_unique_id(ctimer.info.name, ctimer.info.name_len);
-	//= crc16_data(&(ctimer.info.name[0]), ctimer.info.name_len, 0);
-
-	ctimer.interface.function_array = &(ctimer_functions[0]);
-	ctimer.interface.process_array = NULL;
-	ctimer.interface.num_functions = CTIMER_FUNCTION_LAST;
-	ctimer.interface.num_processes = 0;
-}
-*/
 #endif /* __CTIMER_PROVIDER_H__ */
 

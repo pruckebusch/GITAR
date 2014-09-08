@@ -18,20 +18,5 @@ hil_component_t serial_line = { {SERIAL_LINE, 2, 7,HIL_COMPONENT, 11, "serial-li
 
 component_id serial_line_local_id;
 
-/*
-inline void create_serial_line_component(){
-
-	serial_line.info.version = 2;
-	serial_line.info.subrelease = 7;
-	serial_line.info.type = HIL_COMPONENT;
-	serial_line.info.name = "serial-line";
-	serial_line.info.name_len = 11;
-	serial_line.info.unique_id = gitar_kernel_calculate_unique_id(serial_line.info.name, serial_line.info.name_len);
-	serial_line.interface.function_array = NULL;
-	serial_line.interface.process_array = &(serial_line_processes[0]);
-	serial_line.interface.num_functions = SERIAL_LINE_FUNCTION_LAST;
-	serial_line.interface.num_processes = SERIAL_LINE_PROCESS_LAST;
-}
-*/
 #endif /* __SERIAL_LINE_PROVIDER_H__ */
 

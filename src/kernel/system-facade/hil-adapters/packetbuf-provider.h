@@ -35,23 +35,6 @@ const void* packetbuf_functions[PACKETBUF_FUNCTION_LAST]={packetbuf_clear, packe
 hil_component_t packetbuf = { { PACKETBUF, 2, 7, HIL_COMPONENT, 9, "packetbuf"} , {packetbuf_functions, NULL, PACKETBUF_FUNCTION_LAST, PACKETBUF_PROCESS_LAST} };
 
 component_id packetbuf_local_id;
-/*
-inline void create_packetbuf_component(){
 
-	packetbuf.info.type = HIL_COMPONENT;
-	packetbuf.info.name = "packetbuf";
-	packetbuf.info.name_len = 9;
-	packetbuf.info.unique_id = gitar_kernel_calculate_unique_id(packetbuf.info.name, packetbuf.info.name_len);
-	//crc16_data(&(packetbuf.info.name[0]), packetbuf.info.name_len, 0);
-	
-	packetbuf.interface.function_array = &(packetbuf_functions[0]);
-	packetbuf.interface.process_array = NULL;
-	packetbuf.interface.num_functions = PACKETBUF_FUNCTION_LAST;
-	packetbuf.interface.num_processes = 0;
-	packetbuf.info.version = 2;
-	packetbuf.info.subrelease = 7;
-
-}
-*/
 #endif /* __PACKETBUF_PROVIDER_H__ */
 

@@ -18,7 +18,5 @@ const void* leds_functions[LEDS_FUNCTION_LAST] = {leds_get,leds_on,leds_off,leds
 hil_component_t leds = { {LEDS, 2, 7,HIL_COMPONENT, 4, "leds"}, {leds_functions, NULL, LEDS_FUNCTION_LAST, 0} };
 
 component_id leds_local_id;
-
-
 #endif /* __LEDS_PROVIDER_H__ */
 

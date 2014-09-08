@@ -20,23 +20,5 @@ hil_component_t rimeaddr = { {RIMEADDR, 2, 7,HIL_COMPONENT, 8, "rimeaddr"}, {rim
 
 component_id rimeaddr_local_id;
 
-/*
-inline void create_rimeaddr_component(){
-
-	rimeaddr.info.version = 2;
-	rimeaddr.info.subrelease = 7;
-	rimeaddr.info.type = HIL_COMPONENT;
-	rimeaddr.info.name = "rimeaddr";
-	rimeaddr.info.name_len = 8;
-	rimeaddr.info.unique_id = gitar_kernel_calculate_unique_id(rimeaddr.info.name, rimeaddr.info.name_len);
-	//crc16_data(&(rimeaddr.info.name[0]), rimeaddr.info.name_len, 0);
-
-	rimeaddr.interface.function_array = &(rimeaddr_functions[0]);
-	rimeaddr.interface.process_array = NULL;
-	rimeaddr.interface.num_functions = RIMEADDR_FUNCTION_LAST;
-	rimeaddr.interface.num_processes = 0;
-
-}
-*/
 #endif /* __RIMEADDR_PROVIDER_H__ */
 

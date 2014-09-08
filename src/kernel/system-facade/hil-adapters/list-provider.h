@@ -28,24 +28,5 @@ const void* list_functions[LIST_FUNCTION_LAST]={list_init, list_head, list_tail,
 hil_component_t list = { { LIST, 2, 7, HIL_COMPONENT, 4, "list"} , {list_functions, NULL, LIST_FUNCTION_LAST, LIST_PROCESS_LAST} };
 
 component_id list_local_id;
-
-/*
-inline void create_list_component(){
-
-	list.info.version = 2;
-	list.info.subrelease = 7;
-	list.info.type = HIL_COMPONENT;
-	list.info.name = "list";
-	list.info.name_len = 4;
-	list.info.unique_id = gitar_kernel_calculate_unique_id(list.info.name, list.info.name_len);
-	//crc16_data(&(list.info.name[0]), list.info.name_len, 0);
-
-	list.interface.function_array = &(list_functions[0]);
-	list.interface.process_array = NULL;
-	list.interface.num_functions = LIST_FUNCTION_LAST;
-	list.interface.num_processes = 0;
-
-}
-*/
 #endif /* __LIST_PROVIDER_H__ */
 

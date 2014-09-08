@@ -5,12 +5,12 @@
 
 static void blinker_adapter_init();
 
-static const component_t blinker_comp = {{10, 1, 0,APP_COMPONENT, 7, "blinker"}, {NULL, NULL, 0, 0}, {&blinker_adapter_init, NULL, NULL}} ;
 static component_id blinker_comp_id = 10;
+static const component_t blinker_comp = {{blinker_comp_id, 1, 0, APP_COMPONENT, 7, "blinker"}, {NULL, NULL, 0, 0}, {&blinker_adapter_init, NULL, NULL}} ;
 
-static component_user_list_entry_t process_user = {NULL, 10};
-static component_user_list_entry_t leds_user = {NULL, 10};
-static component_user_list_entry_t etimer_user = {NULL, 10};
+static component_user_list_entry_t process_user = {NULL, blinker_comp_id};
+static component_user_list_entry_t leds_user = {NULL, blinker_comp_id};
+static component_user_list_entry_t etimer_user = {NULL, blinker_comp_id};
 
 static void blinker_adapter_init(){
 

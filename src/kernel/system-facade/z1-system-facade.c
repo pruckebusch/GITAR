@@ -1,8 +1,6 @@
 /*
 Include system level
 */
-
-
 #define DEBUG 0
 #if DEBUG
 #include <stdio.h>
@@ -115,7 +113,6 @@ static struct timer mgt_timer;
 #endif
 
 void init_platform(void);
-
 
 #ifndef RF_CHANNEL
 #define RF_CHANNEL              26

@@ -22,7 +22,7 @@ component_id kernel_add_cmp(component_t* component){
 }
 
 component_id kernel_search_cmp(component_info_t* info){
-	component_db_entry_t* db_entry = component_db_select_by_unique_id(info);
+	component_db_entry_t* db_entry = component_db_select_uid(info);
 	if(db_entry != NULL){
 		PRINTF("Gitar kernel found component %u\n", db_entry->cmp_id);
 		return db_entry->cmp_id;
@@ -32,7 +32,7 @@ component_id kernel_search_cmp(component_info_t* info){
 }
 
 component_t* kernel_get_cmp_ref(component_id id){
-	component_db_entry_t* db_entry = component_db_select_by_local_id(id);
+	component_db_entry_t* db_entry = component_db_select_locid(id);
 	PRINTF("Gitar kernel get componentref\n");
 	if(db_entry != NULL){
 		PRINTF("Gitar kernel found component ref %p\n", db_entry->cmp_ref);
@@ -42,7 +42,7 @@ component_t* kernel_get_cmp_ref(component_id id){
 }
 
 void kernel_add_cmp_user(component_user_list_entry_t* user, component_id owner_id){
-	component_db_entry_t* db_entry = component_db_select_by_local_id(owner_id);
+	component_db_entry_t* db_entry = component_db_select_locid(owner_id);
 	PRINTF("Gitar kernel add component user\n");
 	if(db_entry != NULL){
 		list_add(db_entry->cmp_ref->users, user);
@@ -57,7 +57,7 @@ component_id kernel_add_hil_cmp(hil_component_t* component){
 }
 
 component_id kernel_search_hil_cmp(component_info_t* info){
-	hil_component_db_entry_t* db_entry = component_hil_db_select_by_unique_id(info);
+	hil_component_db_entry_t* db_entry = component_hil_db_select_uid(info);
 	if(db_entry != NULL){
 		PRINTF("Gitar kernel found HIL component %u\n", db_entry->cmp_id);
 		return db_entry->cmp_id;
@@ -67,7 +67,7 @@ component_id kernel_search_hil_cmp(component_info_t* info){
 }
 
 hil_component_t* kernel_get_hil_cmp_ref(component_id id){
-	hil_component_db_entry_t* db_entry = component_hil_db_select_by_local_id(id);
+	hil_component_db_entry_t* db_entry = component_hil_db_select_by_locid(id);
 	PRINTF("Gitar kernel get HIL component ref\n");
 	if(db_entry != NULL){
 		PRINTF("Gitar kernel found HIL component ref %p\n", db_entry->cmp_ref);

@@ -36,7 +36,7 @@ component_db_entry_t* component_db_select_name(component_info_t* cmp_info);
 
 component_id component_hil_db_add(hil_component_t* cmp);
 
-hil_component_db_entry_t* component_hil_db_select_by_locid(component_id cmp_id);
+hil_component_db_entry_t* component_hil_db_select_locid(component_id cmp_id);
 
 hil_component_db_entry_t* component_hil_db_select_uid(component_info_t* cmp_info);
 

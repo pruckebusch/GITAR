@@ -63,7 +63,7 @@ component_id component_hil_db_add(hil_component_t* cmp){
 	return NULL_COMPONENT_ID;
 }
 
-hil_component_db_entry_t* component_hil_db_select_by_locid(component_id cmp_id){
+hil_component_db_entry_t* component_hil_db_select_locid(component_id cmp_id){
 	if(hil_component_db[cmp_id].cmp_ref != NULL){
 		return &(hil_component_db[cmp_id]);
 	}

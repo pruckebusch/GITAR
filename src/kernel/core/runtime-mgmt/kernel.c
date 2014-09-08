@@ -67,7 +67,7 @@ component_id kernel_search_hil_cmp(component_info_t* info){
 }
 
 hil_component_t* kernel_get_hil_cmp_ref(component_id id){
-	hil_component_db_entry_t* db_entry = component_hil_db_select_by_locid(id);
+	hil_component_db_entry_t* db_entry = component_hil_db_select_locid(id);
 	PRINTF("Gitar kernel get HIL component ref\n");
 	if(db_entry != NULL){
 		PRINTF("Gitar kernel found HIL component ref %p\n", db_entry->cmp_ref);

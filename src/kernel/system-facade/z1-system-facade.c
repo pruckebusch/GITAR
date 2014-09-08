@@ -155,6 +155,26 @@ print_processes(struct process * const processes[])
   }
   putchar('\n');
 }
+
+static void 
+gpio_conf_init(){
+    GPIO_PIN_CONFIGURE(3,7);
+    GPIO_PIN_CONFIGURE(3,6);
+    GPIO_PIN_CONFIGURE(6,5);
+    GPIO_PIN_CONFIGURE(6,1);
+    GPIO_PIN_CONFIGURE(6,7);
+    GPIO_PIN_CONFIGURE(6,6);
+
+    //TODO: use some ifdef for measurements or so
+    /*GPIO_PIN_INIT(3,7);
+    GPIO_PIN_INIT(3,6);
+    GPIO_PIN_INIT(6,5);
+    GPIO_PIN_INIT(6,1);
+    GPIO_PIN_INIT(6,7);
+    GPIO_PIN_INIT(6,6);
+
+    GPIO_PIN_TOGGLE(3,7);*/
+}
 /*---------------------------------------------------------------------------*/
 
 error_t system_init(){
@@ -162,23 +182,7 @@ error_t system_init(){
    * Initalize hardware.
    */
   msp430_cpu_init();
-
-	GPIO_PIN_CONFIGURE(3,7);
-	GPIO_PIN_CONFIGURE(3,6);
-	GPIO_PIN_CONFIGURE(6,5);
-	GPIO_PIN_CONFIGURE(6,1);
-	GPIO_PIN_CONFIGURE(6,7);
-	GPIO_PIN_CONFIGURE(6,6);
-
-	/*GPIO_PIN_INIT(3,7);
-	GPIO_PIN_INIT(3,6);
-	GPIO_PIN_INIT(6,5);
-	GPIO_PIN_INIT(6,1);
-	GPIO_PIN_INIT(6,7);
-	GPIO_PIN_INIT(6,6);
-
-	GPIO_PIN_TOGGLE(3,7);*/
-
+  gpio_conf_init();
   clock_init();
   leds_init();
   //leds_on(LEDS_RED);
@@ -186,11 +190,10 @@ error_t system_init(){
   clock_wait(100);
 #if DEBUG
   uart0_init(BAUD2UBR(115200)); /* Must come before first PRINTF */
- #endif
+#endif
   //PRINTF("CPU and UART initialized starting system\n");
 
   xmem_init();
-
   rtimer_init();
   /*
    * Hardware initialization done!
@@ -247,11 +250,8 @@ error_t system_init(){
   process_start(&etimer_process, NULL);
 
   ctimer_init();
-
   init_platform(); 
-
   set_rime_addr();
-
   cc2420_init();
   accm_init();
 
@@ -286,11 +286,8 @@ error_t system_init(){
 
   //leds_off(LEDS_GREEN);
 
-
-
   energest_init();
   ENERGEST_ON(ENERGEST_TYPE_CPU);
-
 
   /*
    * This is the scheduler loop.
@@ -300,7 +297,6 @@ error_t system_init(){
 #endif
     
 /*	GPIO_PIN_TOGGLE(3,7);*/
-
   return SUCCESS;
 }
 
@@ -313,36 +309,6 @@ error_t system_start(){
 
 	return SUCCESS;
 }
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------*/
 
 /*---------------------------------------------------------------------------*/
 error_t system_register_hil_components(){
@@ -376,7 +342,7 @@ error_t system_register_hil_components(){
 error_t system_run(){
 	
     int r;
-/*  	GPIO_PIN_TOGGLE(3,6);*/
+    /* GPIO_PIN_TOGGLE(3,6);*/
     do {
       /* Reset watchdog. */
       watchdog_periodic();
@@ -411,7 +377,7 @@ error_t system_run(){
       /* We only want to measure the processing done in IRQs when we
 	 are asleep, so we discard the processing time done when we
 	 were awake. */
-		//energest_type_set(ENERGEST_TYPE_IRQ, irq_energest);
+      //energest_type_set(ENERGEST_TYPE_IRQ, irq_energest);
       watchdog_stop();
 /*			GPIO_PIN_TOGGLE(6,5);*/
       _BIS_SR(GIE | SCG0 | SCG1 | CPUOFF); /* LPM3 sleep. This
@@ -438,10 +404,3 @@ error_t system_exit(){
 	//TODO
 	return SUCCESS;
 }
-/*
-int
-putchar(int c)
-{
-  uart0_writeb((char)c);
-  return c;
-}*/

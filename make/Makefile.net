@@ -1,0 +1,42 @@
+BASE_USER_DIR = $(GITAR)/src/user
+BASE_NET_DIR =  $(GITAR)/src/user/net
+SYS_NET_DIR = $(GITAR)/src/system/hil/net
+
+NETDIRS += $(BASE_NET_DIR) $(BASE_USER_DIR) $(SYS_NET_DIR)
+NETFILES = netstack.c
+
+#MAC_RDC_MAC = sicslowmac.c
+MAC_RDC = cxmac.c xmac.c contikimac.c lpp.c nullrdc.c nullrdc-noframer.c phase.c
+MAC_MAC = csma.c nullmac.c
+MAC_FRAMER = framer-nullmac.c framer-802154.c frame802154.c
+MAC_LIB = packetbuf.c queuebuf.c packetqueue.c
+
+NETFILES += $(MAC_RDC) $(MAC_MAC) $(MAC_FRAMER) $(MAC_LIB)
+NETDIRS += $(BASE_NET_DIR)/mac
+
+ifeq ($(WITH_RIME),1)
+${info including rime netstack}
+RIME_CHAMELEON = chameleon.c channel.c chameleon-raw.c chameleon-bitopt.c
+RIME_BASE      = rimeaddr.c rime.c timesynch.c rimestats.c announcement.c polite-announcement.c broadcast-announcement.c
+RIME_SINGLEHOP = broadcast.c stbroadcast.c unicast.c stunicast.c runicast.c abc.c rucb.c polite.c ipolite.c
+RIME_MULTIHOP  = netflood.c multihop.c rmh.c trickle.c
+RIME_MESH      = mesh.c route.c route-discovery.c
+RIME_COLLECT   = collect.c collect-neighbor.c neighbor-discovery.c collect-link-estimate.c
+RIME_RUDOLPH   = rudolph0.c rudolph1.c rudolph2.c
+
+NETDIRS +=  $(BASE_NET_DIR)/rime
+NETFILES += $(RIME_BASE) $(RIME_SINGLEHOP) $(RIME_MULTIHOP) $(RIME_MESH) $(RIME_COLLECT) $(RIME_RUDOLPH) $(RIME_CHAMELEON) $(RIME_UIP6)
+
+else ifeq ($(WITH_UIP),1)
+${info including uip netstack IPv4}
+
+else ifeq ($(WITH_UIP6),1)
+${info including uip netstack IPv6}
+RIME_BASE      = rimeaddr.c timesynch.c rimestats.c
+
+
+else
+${info including empty netstack}
+NETFILES += framer-nullmac.c  nullmac.c  nullrdc.c
+
+endif

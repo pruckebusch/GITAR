@@ -1,7 +1,7 @@
 #ifndef __RIMEADDR_PROVIDER_H__
 #define __RIMEADDR_PROVIDER_H__
 
-#include "net/rime/rimeaddr.h"
+#include "lib/rime/rimeaddr.h"
 
 enum RIMEADDR_FUNCTION {
 	RIMEADDR_FUNCTION_COPY,

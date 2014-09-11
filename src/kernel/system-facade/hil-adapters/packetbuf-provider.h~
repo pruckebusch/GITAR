@@ -1,7 +1,7 @@
 #ifndef __PACKETBUF_PROVIDER_H__
 #define __PACKETBUF_PROVIDER_H__
 
-#include "net/rime/packetbuf.h"
+#include "lib/rime/packetbuf.h"
 
 
 enum PACKETBUF_FUNCTION {

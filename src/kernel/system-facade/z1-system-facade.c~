@@ -59,7 +59,7 @@ Include system level
 #include "lib/util/node-id.h"
 #include "lib/util/energest.h"
 #include "lib/util/crc16.h"
-//#include "lib/util/printf-debug.h"
+#include "lib/util/printf-debug.h"
 
 #include "types/error.h"
 

@@ -45,6 +45,8 @@ ifdef APPS
   APP_SOURCES = ${foreach APP, $(APPS), $($(APP)_src)}
 endif
 
+### Include network stack makefiles
+include $(GITAR)/make/Makefile.net
 	
 ### Include target makefile (TODO Unsafe?)
 
@@ -90,11 +92,11 @@ $(OBJECTDIR):
 
 ### Setup directory search path for source and header files
         
-SOURCEDIRS = $(PROJECTDIRS) $(GITAR) $(PLATFORM_DIRS) $(CPU_DIRS) $(CONTIKIDIRS) $(KERNELDIRS) $(APP_DIRS)
+SOURCEDIRS = $(PROJECTDIRS) $(GITAR) $(PLATFORM_DIRS) $(CPU_DIRS) $(CONTIKIDIRS) $(KERNELDIRS) $(NETDIRS) $(APP_DIRS)
 SOURCEDIRS += $(GITAR)/src/system/hal
 SOURCEDIRS += $(GITAR)/src/system/hil
 
-SOURCEFILES = $(KERNELFILES) $(CONTIKIFILES) $(PLATFORM_FILES) $(CPU_FILES) $(APP_SOURCES)
+SOURCEFILES = $(KERNELFILES) $(CONTIKIFILES) $(PLATFORM_FILES) $(CPU_FILES) $(NETFILES) $(APP_SOURCES)
 
 GITAR_OBJECTFILES += ${addprefix $(OBJECTDIR)/,${call oname, $(SOURCEFILES)}}
 

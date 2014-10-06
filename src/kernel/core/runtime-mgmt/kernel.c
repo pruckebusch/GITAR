@@ -1,5 +1,13 @@
+
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
+
 #include "kernel.h"
-#include "printf-debug.h"
 
 void print_cmp(component_t* c){
 	PRINTF("Component %p:\n", c);

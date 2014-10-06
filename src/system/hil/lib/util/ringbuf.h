@@ -85,8 +85,7 @@ struct ringbuf {
  *             bytes.
  *
  */
-void    ringbuf_init(struct ringbuf *r, uint8_t *a,
-		     uint8_t size_power_of_two);
+void    ringbuf_init(struct ringbuf *r, uint8_t *a, uint8_t size_power_of_two);
 
 /**
  * \brief      Insert a byte into the ring buffer

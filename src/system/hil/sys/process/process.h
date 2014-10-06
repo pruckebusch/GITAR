@@ -374,8 +374,7 @@ CCIF int process_post(struct process *p, process_event_t ev, void* data);
  * \param data A pointer to additional data that is posted together
  * with the event.
  */
-CCIF void process_post_synch(struct process *p,
-			     process_event_t ev, void* data);
+CCIF void process_post_synch(struct process *p, process_event_t ev, void* data);
 
 /**
  * \brief      Cause a process to exit

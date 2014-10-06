@@ -56,6 +56,7 @@
 
 #include "contiki-conf.h"
 #include "lib/cfs/cfs.h"
+#include "lib/cfs/cfs-impl.h"
 #include "cfs-coffee-arch.h"
 #include "lib/cfs/cfs-coffee.h"
 
@@ -808,7 +809,7 @@ merge_log(coffee_page_t file_page, int extend)
 
   read_header(&hdr, file_page);
 
-  fd = cfs_open(hdr.name, CFS_READ);
+  fd = cfs_impl_open(hdr.name, CFS_READ);
   if(fd < 0) {
     return -1;
   }
@@ -820,17 +821,17 @@ merge_log(coffee_page_t file_page, int extend)
   max_pages = hdr.max_pages << extend;
   new_file = reserve(hdr.name, max_pages, 1, 0);
   if(new_file == NULL) {
-    cfs_close(fd);
+    cfs_impl_close(fd);
     return -1;
   }
 
   offset = 0;
   do {
     char buf[hdr.log_record_size == 0 ? COFFEE_PAGE_SIZE : hdr.log_record_size];
-    n = cfs_read(fd, buf, sizeof(buf));
+    n = cfs_impl_read(fd, buf, sizeof(buf));
     if(n < 0) {
       remove_by_page(new_file->page, !REMOVE_LOG, !CLOSE_FDS, ALLOW_GC);
-      cfs_close(fd);
+      cfs_impl_close(fd);
       return -1;
     } else if(n > 0) {
       COFFEE_WRITE(buf, n, absolute_offset(new_file->page, offset));
@@ -848,7 +849,7 @@ merge_log(coffee_page_t file_page, int extend)
 
   if(remove_by_page(file_page, REMOVE_LOG, !CLOSE_FDS, !ALLOW_GC) < 0) {
     remove_by_page(new_file->page, !REMOVE_LOG, !CLOSE_FDS, !ALLOW_GC);
-    cfs_close(fd);
+    cfs_impl_close(fd);
     return -1;
   }
 
@@ -861,7 +862,7 @@ merge_log(coffee_page_t file_page, int extend)
   new_file->flags &= ~COFFEE_FILE_MODIFIED;
   new_file->end = offset;
 
-  cfs_close(fd);
+  cfs_impl_close(fd);
 
   return 0;
 }
@@ -993,7 +994,7 @@ get_available_fd(void)
 }
 /*---------------------------------------------------------------------------*/
 int
-cfs_open(const char *name, int flags)
+cfs_impl_open(const char *name, int flags)
 {
   int fd;
   struct file_desc *fdp;
@@ -1029,7 +1030,7 @@ cfs_open(const char *name, int flags)
 }
 /*---------------------------------------------------------------------------*/
 void
-cfs_close(int fd)
+cfs_impl_close(int fd)
 {
   if(FD_VALID(fd)) {
     coffee_fd_set[fd].flags = COFFEE_FD_FREE;
@@ -1039,7 +1040,7 @@ cfs_close(int fd)
 }
 /*---------------------------------------------------------------------------*/
 cfs_offset_t
-cfs_seek(int fd, cfs_offset_t offset, int whence)
+cfs_impl_seek(int fd, cfs_offset_t offset, int whence)
 {
   struct file_desc *fdp;
   cfs_offset_t new_offset;
@@ -1071,7 +1072,7 @@ cfs_seek(int fd, cfs_offset_t offset, int whence)
 }
 /*---------------------------------------------------------------------------*/
 int
-cfs_remove(const char *name)
+cfs_impl_remove(const char *name)
 {
   struct file *file;
 
@@ -1090,7 +1091,7 @@ cfs_remove(const char *name)
 }
 /*---------------------------------------------------------------------------*/
 int
-cfs_read(int fd, void *buf, unsigned size)
+cfs_impl_read(int fd, void *buf, unsigned size)
 {
   struct file_desc *fdp;
   struct file *file;
@@ -1147,7 +1148,7 @@ cfs_read(int fd, void *buf, unsigned size)
 }
 /*---------------------------------------------------------------------------*/
 int
-cfs_write(int fd, const void *buf, unsigned size)
+cfs_impl_write(int fd, const void *buf, unsigned size)
 {
   struct file_desc *fdp;
   struct file *file;
@@ -1242,7 +1243,7 @@ cfs_write(int fd, const void *buf, unsigned size)
 }
 /*---------------------------------------------------------------------------*/
 int
-cfs_opendir(struct cfs_dir *dir, const char *name)
+cfs_impl_opendir(struct cfs_dir *dir, const char *name)
 {
   /*
    * Coffee is only guaranteed to support "/" and ".", but it does not 
@@ -1253,7 +1254,7 @@ cfs_opendir(struct cfs_dir *dir, const char *name)
 }
 /*---------------------------------------------------------------------------*/
 int
-cfs_readdir(struct cfs_dir *dir, struct cfs_dirent *record)
+cfs_impl_readdir(struct cfs_dir *dir, struct cfs_dirent *record)
 {
   struct file_header hdr;
   coffee_page_t page;
@@ -1279,7 +1280,7 @@ cfs_readdir(struct cfs_dir *dir, struct cfs_dirent *record)
 }
 /*---------------------------------------------------------------------------*/
 void
-cfs_closedir(struct cfs_dir *dir)
+cfs_impl_closedir(struct cfs_dir *dir)
 {
   return;
 }

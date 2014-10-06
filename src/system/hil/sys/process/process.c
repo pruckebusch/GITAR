@@ -114,7 +114,7 @@ process_start(struct process *p, const char *arg)
   p->state = PROCESS_STATE_RUNNING;
   PT_INIT(&p->pt);
 
-  PRINTF("process: starting '%s'\n", PROCESS_NAME_STRING(p));
+  PRINTF("process: starting '%s' %p\n", PROCESS_NAME_STRING(p), p);
 
   /* Post a synchronous initialization event to the process. */
   process_post_synch(p, PROCESS_EVENT_INIT, (process_data_t)arg);
@@ -184,10 +184,11 @@ call_process(struct process *p, process_event_t ev, process_data_t data)
   
   if((p->state & PROCESS_STATE_RUNNING) &&
      p->thread != NULL) {
-    PRINTF("process: calling process '%s' with event %d\n", PROCESS_NAME_STRING(p), ev);
+    PRINTF("process: calling process '%s', thread %p with event %d\n", PROCESS_NAME_STRING(p), p->thread, ev);
     process_current = p;
     p->state = PROCESS_STATE_CALLED;
     ret = p->thread(&p->pt, ev, data);
+    PRINTF("process: called process '%s', thread %p return %d\n", PROCESS_NAME_STRING(p), p->thread, ret);
     if(ret == PT_EXITED ||
        ret == PT_ENDED ||
        ev == PROCESS_EVENT_EXIT) {

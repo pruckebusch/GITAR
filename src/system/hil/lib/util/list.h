@@ -137,7 +137,7 @@ typedef void ** list_t;
 void   list_init(list_t list);
 void * list_head(list_t list);
 void * list_tail(list_t list);
-void * list_pop (list_t list);
+void * list_pop(list_t list);
 void   list_push(list_t list, void *item);
 
 void * list_chop(list_t list);

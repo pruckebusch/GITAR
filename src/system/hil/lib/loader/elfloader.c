@@ -39,6 +39,7 @@
 #include "lib/loader/symtab.h"
 
 #include "src/system/hil/dev/leds.h"
+#include "gpio-z1.h"
 
 #include <stddef.h>
 #include <string.h>
@@ -136,6 +137,7 @@ struct relevant_section {
 char elfloader_unknown[30];	/* Name that caused link error. */
 
 struct process * const * elfloader_autostart_processes;
+void* cmp_obj_init;
 
 static struct relevant_section bss, data, rodata, text;
 
@@ -174,38 +176,36 @@ seek_write(int fd, unsigned int offset, char *buf, int len)
 }
 */
 /*---------------------------------------------------------------------------*/
-static void *
-find_local_symbol(int fd, const char *symbol,
-		  unsigned int symtab, unsigned short symtabsize,
-		  unsigned int strtab)
+static void * find_local_symbol(int fd, const char *symbol, unsigned int symtab, unsigned short symtabsize, unsigned int strtab)
 {
-  struct elf32_sym s;
-  unsigned int a;
-  char name[30];
-  struct relevant_section *sect;
-  
-  for(a = symtab; a < symtab + symtabsize; a += sizeof(s)) {
-    seek_read(fd, a, (char *)&s, sizeof(s));
+	struct elf32_sym s;
+	unsigned int a;
+	char name[30];
+	struct relevant_section *sect;
 
-    if(s.st_name != 0) {
-      seek_read(fd, strtab + s.st_name, name, sizeof(name));
-      if(strcmp(name, symbol) == 0) {
-	if(s.st_shndx == bss.number) {
-	  sect = &bss;
-	} else if(s.st_shndx == data.number) {
-	  sect = &data;
-  } else if(s.st_shndx == rodata.number) {
-    sect = &rodata;
-	} else if(s.st_shndx == text.number) {
-	  sect = &text;
-	} else {
-	  return NULL;
+	for(a = symtab; a < symtab + symtabsize; a += sizeof(s)) {
+		seek_read(fd, a, (char *)&s, sizeof(s));
+
+		if(s.st_name != 0) {
+			seek_read(fd, strtab + s.st_name, name, sizeof(name));
+			
+			if(strcmp(name, symbol) == 0) {
+				if(s.st_shndx == bss.number) {
+					sect = &bss;
+				} else if(s.st_shndx == data.number) {
+					sect = &data;
+				} else if(s.st_shndx == rodata.number) {
+					sect = &rodata;
+				} else if(s.st_shndx == text.number) {
+					sect = &text;
+				} else {
+					return NULL;
+				}
+				return &(sect->address[s.st_value]);
+			}
+		}
 	}
-	return &(sect->address[s.st_value]);
-      }
-    }
-  }
-  return NULL;
+	return NULL;
 }
 /*---------------------------------------------------------------------------*/
 static int
@@ -291,9 +291,7 @@ relocate_section(int fd,
 }
 /*---------------------------------------------------------------------------*/
 static void *
-find_program_processes(int fd,
-		       unsigned int symtab, unsigned short size,
-		       unsigned int strtab)
+find_program_processes(int fd,const char *symbol, unsigned int symtab, unsigned short size, unsigned int strtab)
 {
   struct elf32_sym s;
   unsigned int a;
@@ -304,7 +302,7 @@ find_program_processes(int fd,
 
     if(s.st_name != 0) {
       seek_read(fd, strtab + s.st_name, name, sizeof(name));
-      if(strcmp(name, "autostart_processes") == 0) {
+      if(strcmp(name, symbol) == 0) {
 	return &data.address[s.st_value];
       }
     }
@@ -360,7 +358,10 @@ elfloader_load(int fd)
   struct process **process;
   int ret;
 
+	GPIO_PIN_SET(3,6);
+
   elfloader_unknown[0] = 0;
+  cmp_obj_init = NULL;
 
   /* The ELF header is located at the start of the buffer. */
   seek_read(fd, 0, (char *)&ehdr, sizeof(ehdr));
@@ -564,13 +565,25 @@ elfloader_load(int fd)
       return ret;
     }
   }
-	leds_blink();
+	GPIO_PIN_CLR(3,6);
+	GPIO_PIN_SET(6,1);
   /* Write text and rodata segment into flash and data segment into RAM. */
   elfloader_arch_write_rom(fd, textoff, textsize, text.address);
   elfloader_arch_write_rom(fd, rodataoff, rodatasize, rodata.address);
-  
   memset(bss.address, 0, bsssize);
   seek_read(fd, dataoff, data.address, datasize);
+  GPIO_PIN_CLR(6,1);
+
+	cmp_obj_init = find_local_symbol(fd, "adapter_init", symtaboff, symtabsize, strtaboff);
+  if(cmp_obj_init != NULL) {
+    PRINTF("elfloader: adapter init found\n");
+  } else {
+    PRINTF("elfloader: no adapter init\n");
+    cmp_obj_init = find_program_processes(fd, "adapter_init", symtaboff, symtabsize, strtaboff);
+    if(cmp_obj_init != NULL) {
+      PRINTF("elfloader: FOUND PRG adapter init\n");
+    }
+  }
 
   PRINTF("elfloader: autostart search\n");
   process = (struct process **) find_local_symbol(fd, "autostart_processes", symtaboff, symtabsize, strtaboff);
@@ -580,7 +593,7 @@ elfloader_load(int fd)
     return ELFLOADER_OK;
   } else {
     PRINTF("elfloader: no autostart\n");
-    process = (struct process **) find_program_processes(fd, symtaboff, symtabsize, strtaboff);
+    process = (struct process **) find_program_processes(fd, "autostart_processes", symtaboff, symtabsize, strtaboff);
     if(process != NULL) {
       PRINTF("elfloader: FOUND PRG\n");
     }

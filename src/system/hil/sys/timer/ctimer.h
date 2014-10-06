@@ -110,8 +110,7 @@ void ctimer_restart(struct ctimer *c);
  *             the callback function f will be called with ptr as argument.
  *
  */
-void ctimer_set(struct ctimer *c, clock_time_t t,
-		void (*f)(void *), void *ptr);
+void ctimer_set(struct ctimer *c, clock_time_t t,void (*f)(void *), void *ptr);
 
 /**
  * \brief      Stop a pending callback timer.

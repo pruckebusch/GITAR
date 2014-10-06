@@ -85,11 +85,5 @@ void leds_off(unsigned char leds);
 void leds_toggle(unsigned char leds);
 void leds_invert(unsigned char leds);
 
-/**
- * Leds implementation
- */
-void leds_arch_init(void);
-unsigned char leds_arch_get(void);
-void leds_arch_set(unsigned char leds);
 
 #endif /* __LEDS_H__ */

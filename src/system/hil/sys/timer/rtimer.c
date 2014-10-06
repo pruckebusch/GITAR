@@ -45,6 +45,7 @@
  */
 
 #include "sys/timer/rtimer.h"
+#include "sys/timer/rtimer-arch.h"
 #include "contiki.h"
 
 #define DEBUG 0

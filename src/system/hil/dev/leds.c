@@ -31,6 +31,7 @@
  */
 
 #include "dev/leds.h"
+#include "dev/leds-arch.h"
 #include "sys/timer/clock.h"
 #include "lib/util/energest.h"
 

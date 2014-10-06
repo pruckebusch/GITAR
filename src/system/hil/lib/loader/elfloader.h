@@ -158,6 +158,11 @@ extern struct process * const * elfloader_autostart_processes;
  */
 extern char elfloader_unknown[30];
 
+/**
+ * A pointer to the object init function for initializing the component loaded with elfloader_load()
+ */
+extern void* cmp_obj_init;
+
 #ifndef ELFLOADER_DATAMEMORY_SIZE
 #ifdef ELFLOADER_CONF_DATAMEMORY_SIZE
 #define ELFLOADER_DATAMEMORY_SIZE ELFLOADER_CONF_DATAMEMORY_SIZE

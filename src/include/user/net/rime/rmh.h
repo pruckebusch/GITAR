@@ -1,0 +1,123 @@
+/**
+ * \addtogroup rime
+ * @{
+ */
+
+/**
+ * \defgroup rimermh Best-effort multihop forwarding
+ * @{
+ *
+ * The rmh module implements a multihop forwarding mechanism. Routes
+ * must have already been setup with the route_add() function. Setting
+ * up routes is done with another Rime module such as the \ref
+ * routediscovery "route-discovery module".
+ *
+ * The hop-by-hop reliable multi-hop unciast primitive is similar to
+ * the best-effot multi-hop unicast primitive except that it uses the
+ * reliable single-hop primitive for the communication between two
+ * single-hop neighbors.
+ *
+ * \section channels Channels
+ *
+ * The rmh module uses 1 channel.
+ *
+ */
+
+/*
+ * Copyright (c) 2006, Swedish Institute of Computer Science.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the Institute nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE INSTITUTE AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE INSTITUTE OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * This file is part of the Contiki operating system.
+ *
+ */
+
+/**
+ * \file
+ *         Multihop forwarding header file
+ * \author
+ *         Adam Dunkels <adam@sics.se>
+ */
+
+#ifndef __RMH_H__
+#define __RMH_H__
+#include "kernel.h"
+#include "rmh-constdef.h"
+
+static component_t* rmh_cmpobj_ref;
+static const component_info_t rmh_cmpobj_info = {RMH, 2, 7, NET_COMPONENT, 3, "rmh"};
+static component_user_list_entry_t rmh_cmp_user;
+
+static void rmh_object_stub_init(){
+	 rmh_cmpobj_ref = kernel_get_cmp_ref(&rmh_cmpobj_info);
+}
+
+
+#include "include/user/net/rime/runicast.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
+
+struct rmh_conn;
+
+#define RMH_ATTRIBUTES  { PACKET_ADDR_ESENDER, PACKET_ADDRSIZE }, \
+                        { PACKET_ADDR_ERECEIVER, PACKET_ADDRSIZE }, \
+                        { PACKET_ATTR_TTL, PACKET_ATTR_BIT * 5 }, \
+                        { PACKET_ATTR_MAX_REXMIT, PACKET_ATTR_BIT * 5 }, \
+                        RUC_ATTRIBUTES
+
+struct rmh_callbacks {
+  void (* recv)(struct rmh_conn *ptr, rimeaddr_t *sender, uint8_t hops);
+  rimeaddr_t *(* forward)(struct rmh_conn *ptr,
+			  const rimeaddr_t *originator,
+			  const rimeaddr_t *dest,
+			  const rimeaddr_t *prevhop,
+			  uint8_t hops);
+};
+
+struct rmh_conn {
+  struct runicast_conn c;
+  const struct rmh_callbacks *cb;
+  uint8_t num_rexmit;
+};
+
+
+/* Stub function declaration for rmh_open(struct rmh_conn *,uint16_t,const struct rmh_callbacks *) */
+static inline void rmh_open(struct rmh_conn *c, uint16_t channel,const struct rmh_callbacks *u){
+	( (void (*)(struct rmh_conn *,uint16_t,const struct rmh_callbacks *)) rmh_cmpobj_ref->interface.function_array[FUNCTION_RMH_OPEN])(c,channel,u);
+}
+
+/* Stub function declaration for rmh_close(struct rmh_conn *) */
+static inline void rmh_close(struct rmh_conn *c){
+	( (void (*)(struct rmh_conn *)) rmh_cmpobj_ref->interface.function_array[FUNCTION_RMH_CLOSE])(c);
+}
+
+/* Stub function declaration for rmh_send(struct rmh_conn *,rimeaddr_t *,uint8_t,uint8_t) */
+static inline int rmh_send(struct rmh_conn *c, rimeaddr_t *to, uint8_t num_rexmit,uint8_t max_hops){
+	return ( (int (*)(struct rmh_conn *,rimeaddr_t *,uint8_t,uint8_t)) rmh_cmpobj_ref->interface.function_array[FUNCTION_RMH_SEND])(c,to,num_rexmit,max_hops);
+}
+
+#endif /* __RMH_H__ */
+/** @} */
+/** @} */

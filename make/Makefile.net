@@ -10,10 +10,11 @@ MAC_RDC = cxmac.c xmac.c contikimac.c lpp.c nullrdc.c nullrdc-noframer.c phase.c
 MAC_MAC = csma.c nullmac.c
 MAC_FRAMER = framer-nullmac.c framer-802154.c frame802154.c
 MAC_LIB = packetbuf.c queuebuf.c packetqueue.c
+MAC_NBR_TBL = nbr-table.c
 
-NETFILES += $(MAC_RDC) $(MAC_MAC) $(MAC_FRAMER) $(MAC_LIB)
-NETDIRS += $(BASE_NET_DIR)/mac
-
+NETFILES += $(MAC_RDC) $(MAC_MAC) $(MAC_FRAMER) $(MAC_LIB) $(MAC_NBR_TBL)
+NETDIRS += $(SYS_NET_DIR)/mac
+NETDIRS +=  $(BASE_NET_DIR)/rime
 ifeq ($(WITH_RIME),1)
 ${info including rime netstack}
 RIME_CHAMELEON = chameleon.c channel.c chameleon-raw.c chameleon-bitopt.c

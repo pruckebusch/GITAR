@@ -95,6 +95,7 @@ $(OBJECTDIR):
 SOURCEDIRS = $(PROJECTDIRS) $(GITAR) $(PLATFORM_DIRS) $(CPU_DIRS) $(CONTIKIDIRS) $(KERNELDIRS) $(NETDIRS) $(APP_DIRS)
 SOURCEDIRS += $(GITAR)/src/system/hal
 SOURCEDIRS += $(GITAR)/src/system/hil
+SOURCEDIRS += $(GITAR)/src/
 
 SOURCEFILES = $(KERNELFILES) $(CONTIKIFILES) $(PLATFORM_FILES) $(CPU_FILES) $(NETFILES) $(APP_SOURCES)
 
@@ -183,10 +184,12 @@ endif
 ifndef CUSTOM_RULE_LINK
 %.$(TARGET): %.co $(PROJECT_OBJECTFILES) $(PROJECT_LIBRARIES) gitar-$(TARGET).a
 	$(TRACE_LD)
+	@echo "on line 186"
 	cp obj_$(TARGET)/kernel-main.o obj_$(TARGET)/kernel-main.o.back
-	cp $(GITAR_PROJECT).co obj_$(TARGET)/
+	cp *.co obj_$(TARGET)/
 	$(Q)$(LD) $(LDFLAGS) $(TARGET_STARTFILES) ${filter-out %.a,$^} \
 	    ${filter %.a,$^} $(TARGET_LIBFILES) -o $@
+	@echo "on line 191"
 endif
 
 %.ramprof: %.$(TARGET)

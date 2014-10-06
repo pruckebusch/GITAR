@@ -140,6 +140,10 @@ static inline void rtimer_run_next(void){
 	( (void (*)(void)) rtimer_cmpobj_ref->interface.function_array[FUNCTION_RTIMER_RUN_NEXT])();
 }
 
+static inline rtimer_clock_t rtimer_now(){
+	return ( (rtimer_clock_t (*)()) rtimer_cmpobj_ref->interface.function_array[FUNCTION_RTIMER_NOW])();
+}
+
 /**
  * \brief      Get the current clock time
  * \return     The current time
@@ -150,7 +154,7 @@ static inline void rtimer_run_next(void){
  *
  * \hideinitializer
  */
-#define RTIMER_NOW() rtimer_arch_now()
+#define RTIMER_NOW() rtimer_now()
 
 /**
  * \brief      Get the time that a task last was executed

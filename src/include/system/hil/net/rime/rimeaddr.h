@@ -136,6 +136,17 @@ static inline void rimeaddr_set_node_addr(rimeaddr_t *addr){
 extern rimeaddr_t rimeaddr_node_addr;
 
 /**
+ * \brief      Get the address of the current node
+ * \return		The address
+ *
+ *             This function gets the Rime address of the node.
+ *
+ */
+static inline rimeaddr_t* rimeaddr_get_node_addr(){
+	return ((rimeaddr_t* (*)()) rimeaddr_cmpobj_ref->interface.function_array[FUNCTION_RIMEADDR_GET_NODE_ADDR])();
+}
+
+/**
  * \brief      The null Rime address
  *
  *             This variable contains the null Rime address. The null
@@ -147,6 +158,17 @@ extern rimeaddr_t rimeaddr_node_addr;
  *
  */
 extern const rimeaddr_t rimeaddr_null;
+
+/**
+ * \brief      Get the null Rime address of the current node
+ * \return		The address
+ *
+ *             This function gets the null Rime address of the node.
+ *
+ */
+static inline rimeaddr_t* rimeaddr_get_null(){
+	return ((rimeaddr_t* (*)()) rimeaddr_cmpobj_ref->interface.function_array[FUNCTION_RIMEADDR_GET_NULL])();
+}
 
 #endif /* __RIMEADDR_H__ */
 /** @} */

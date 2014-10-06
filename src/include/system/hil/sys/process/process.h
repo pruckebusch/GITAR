@@ -414,6 +414,9 @@ static inline void process_exit(struct process *p){
 	( (void (*)(struct process *)) process_cmpobj_ref->interface.function_array[FUNCTION_PROCESS_EXIT])(p);
 }
 
+static inline struct process* process_get_current_process(){
+	return ( (struct process* (*)()) process_cmpobj_ref->interface.function_array[FUNCTION_PROCESS_GET_CURRENT_PROCESS])();
+}
 
 /**
  * Get a pointer to the currently running process.
@@ -424,7 +427,7 @@ static inline void process_exit(struct process *p){
  *
  * \hideinitializer
  */
-#define PROCESS_CURRENT() process_current
+#define PROCESS_CURRENT() process_get_current_process()
 CCIF extern struct process *process_current;
 
 /**

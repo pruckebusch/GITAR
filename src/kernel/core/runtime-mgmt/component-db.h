@@ -26,20 +26,20 @@ typedef struct component_db_entry{
 
 void component_db_init();
 
-component_id component_db_add(component_t* cmp);
+void component_db_add(component_t* cmp);
 
-component_db_entry_t* component_db_select_locid(component_id cmp_id);
+//~ component_db_entry_t* component_db_select_locid(component_id cmp_id);
 
-component_db_entry_t* component_db_select_uid(component_info_t* cmp_info);
+component_db_entry_t* component_db_select_uid(const component_info_t* cmp_info);
 
-component_db_entry_t* component_db_select_name(component_info_t* cmp_info);
+component_db_entry_t* component_db_select_name(const component_info_t* cmp_info);
 
-component_id component_hil_db_add(hil_component_t* cmp);
+void component_hil_db_add(hil_component_t* cmp);
 
-hil_component_db_entry_t* component_hil_db_select_locid(component_id cmp_id);
+//~ hil_component_db_entry_t* component_hil_db_select_locid(component_id cmp_id);
 
-hil_component_db_entry_t* component_hil_db_select_uid(component_info_t* cmp_info);
+hil_component_db_entry_t* component_hil_db_select_uid(const component_info_t* cmp_info);
 
-hil_component_db_entry_t* component_hil_db_select_name(component_info_t* cmp_info);
+hil_component_db_entry_t* component_hil_db_select_name(const component_info_t* cmp_info);
 
 #endif /*COMPONENT_DB_H*/

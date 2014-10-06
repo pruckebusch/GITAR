@@ -4,7 +4,7 @@
 #include "unique-names.h"
 
 #define NUM_COMPONENTS 20
-#define NUM_HIL_COMPONENTS 20
+#define NUM_HIL_COMPONENTS 40
 
 
 enum CMP_TYPE {

@@ -5,21 +5,32 @@
 #include "system-facade.h"
 #include "kernel.h"
 
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#define PRINTDEBUG(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#define PRINTDEBUG(...)
+#endif
+
+
 int main(){
 
 	uint16_t system_run_counter = 0;
 
 	system_init();
 	
-/*	printf("System started\n");*/
+	PRINTF("System started\n");
 	
 	kernel_init();
 	
-/*	printf("Kernel started\n");*/
+	PRINTF("Kernel started\n");
 	
 	system_register_hil_components();
 	
-/*	printf("Facade started\n");*/
+	PRINTF("Facade started\n");
 	
 	//now initialized pre-installed user level components
 	
@@ -29,11 +40,12 @@ int main(){
 	while(1){
 		system_run_counter++;
 		if(system_run() == SUCCESS){
-
+			//~ PRINTF("System RUNNED %u times\n", system_run_counter);
 		} else {
+			//~ PRINTF("System Failure\n", system_run_counter);
 			break;
 		}
-		//printf("System RUNNED %u times\n", system_run_counter);		
+		PRINTF("System RUNNED %u times\n", system_run_counter);		
 	}
 	
 	system_exit();

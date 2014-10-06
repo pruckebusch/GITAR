@@ -1,4 +1,3 @@
-
 #include "src/include/system/hil/sys/process/process.h"
 #include "src/include/system/hil/sys/process/autostart.h"
 #include "src/include/system/hil/sys/timer/etimer.h"

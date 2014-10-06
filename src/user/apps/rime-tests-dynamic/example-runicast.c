@@ -139,8 +139,8 @@ PROCESS_THREAD(test_runicast_process, ev, data)
   memb_init(&history_mem);
 
   /* Receiver node: do nothing */
-  if(rimeaddr_node_addr.u8[0] == 1 &&
-     rimeaddr_node_addr.u8[1] == 0) {
+  if(rimeaddr_get_node_addr()->u8[0] == 1 &&
+     rimeaddr_get_node_addr()->u8[1] == 0) {
     PROCESS_WAIT_EVENT_UNTIL(0);
   }
 
@@ -158,8 +158,8 @@ PROCESS_THREAD(test_runicast_process, ev, data)
       recv.u8[1] = 0;
 
       PRINTF("%u.%u: sending runicast to address %u.%u\n",
-	     rimeaddr_node_addr.u8[0],
-	     rimeaddr_node_addr.u8[1],
+	     rimeaddr_get_node_addr()->u8[0],
+	     rimeaddr_get_node_addr()->u8[1],
 	     recv.u8[0],
 	     recv.u8[1]);
 

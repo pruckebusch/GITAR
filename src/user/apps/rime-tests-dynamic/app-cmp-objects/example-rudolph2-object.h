@@ -1,11 +1,11 @@
 #ifndef __EXAMPLE_RUDOLPH2_APP_COMPONENT_OBJECT_H__
 #define __EXAMPLE_RUDOLPH2_APP_COMPONENT_OBJECT_H__
 
-static void example_rudolph2_object_init();
+void example_rudolph2_object_init();
 
 static const component_t example_rudolph2_cmpobj = { { EXAMPLE_RUDOLPH2, 2, 7, APP_COMPONENT, 16, "example_rudolph2"} , {NULL, NULL,0,0},{&example_rudolph2_object_init, NULL, NULL}};
 
-static void example_rudolph2_object_init(){
+void example_rudolph2_object_init(){
 	kernel_add_cmp(&example_rudolph2_cmpobj);
 	rudolph2_object_stub_init();
 	rudolph2_cmp_user.unique_id=EXAMPLE_RUDOLPH2;

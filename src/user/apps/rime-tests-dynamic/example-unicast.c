@@ -88,7 +88,7 @@ PROCESS_THREAD(example_unicast_process, ev, data)
     packetbuf_copyfrom("Hello", 5);
     addr.u8[0] = 1;
     addr.u8[1] = 0;
-    if(!rimeaddr_cmp(&addr, &rimeaddr_node_addr)) {
+    if(!rimeaddr_cmp(&addr, rimeaddr_get_node_addr())) {
       unicast_send(&uc, &addr);
     }
 

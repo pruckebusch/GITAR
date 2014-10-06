@@ -37,13 +37,11 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "include/system/hil/dev/button-sensor.h"
-
 #include "src/include/system/hil/sys/process/process.h"
 #include "src/include/system/hil/sys/process/autostart.h"
 #include "src/include/system/hil/sys/timer/clock.h"
 #include "src/include/system/hil/lib/cfs/cfs.h"
-
+#include "include/system/hil/dev/button-sensor.h"
 #include "src/include/system/hil/dev/leds.h"
 //~ #include "src/include/system/hil/net/rime.h"
 #include "src/include/system/hil/net/rime/rimeaddr.h"
@@ -92,7 +90,7 @@ write_chunk(struct rudolph2_conn *c, int offset, int flag,
   if(flag == RUDOLPH2_FLAG_LASTCHUNK) {
     int i;
     PRINTF("+++ rudolph2 entire file received at %d, %d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1]);
+	   rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
     leds_off(LEDS_RED);
     leds_on(LEDS_YELLOW);
 
@@ -102,13 +100,13 @@ write_chunk(struct rudolph2_conn *c, int offset, int flag,
       int r = cfs_read(fd, &buf, 1);
       if (r != 1) {
 	PRINTF("%d.%d: error: read failed at %d\n",
-	       rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
+	       rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],
 	       i);
 	break;
       }       
       else if(buf != (unsigned char)i) {
 	PRINTF("%d.%d: error: diff at %d, %d != %d\n",
-	       rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
+	       rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],
 	       i, (unsigned char)i, buf);
 	break;
       }
@@ -127,7 +125,7 @@ read_chunk(struct rudolph2_conn *c, int offset, uint8_t *to, int maxsize)
   cfs_seek(fd, offset, CFS_SEEK_SET);
   ret = cfs_read(fd, to, maxsize);
   /*  PRINTF("%d.%d: read_chunk %d bytes at %d, %d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
+	 rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],
 	 ret, offset, (unsigned char)to[0]);*/
   cfs_close(fd);
   return ret;
@@ -147,17 +145,17 @@ PROCESS_THREAD(example_rudolph2_process, ev, data)
 
   
   rudolph2_open(&rudolph2, 142, &rudolph2_call);
-  SENSORS_ACTIVATE(button_sensor);
+  SENSORS_ACTIVATE(*button_sensor_get());
 
   PROCESS_PAUSE();
   
-  if(rimeaddr_node_addr.u8[0] == 1 &&
-     rimeaddr_node_addr.u8[1] == 0) {
+  if(rimeaddr_get_node_addr()->u8[0] == 1 &&
+     rimeaddr_get_node_addr()->u8[1] == 0) {
     {
       int i;
       
       PRINTF("%d.%d: selected data source\n",
-	     rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1]);
+	     rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
       
       fd = cfs_open("hej", CFS_WRITE);
       for(i = 0; i < FILESIZE; i++) {
@@ -165,7 +163,7 @@ PROCESS_THREAD(example_rudolph2_process, ev, data)
 	int w = cfs_write(fd, &buf, 1);
 	if (w != 1) {
 	  PRINTF("%d.%d: error: write failed at %d\n",
-	       rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
+	       rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],
 	       i);
 	  break;
 	}       
@@ -178,8 +176,8 @@ PROCESS_THREAD(example_rudolph2_process, ev, data)
   
   while(1) {
 
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
-			     data == &button_sensor);
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_get_sensors_event() &&
+			     data == button_sensor_get());
     rudolph2_stop(&rudolph2);
 
   }

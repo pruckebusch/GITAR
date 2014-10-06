@@ -37,13 +37,12 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "include/system/hil/dev/button-sensor.h"
-
 #include "src/include/system/hil/sys/process/process.h"
 #include "src/include/system/hil/sys/process/autostart.h"
 //~ #include "src/include/system/hil/net/rime.h"
 #include "src/include/system/hil/net/rime/packetbuf.h"
 #include "src/include/system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/dev/button-sensor.h"
 
 #include "src/include/user/net/rime/mesh.h"
 
@@ -96,13 +95,13 @@ PROCESS_THREAD(example_mesh_process, ev, data)
 
   mesh_open(&mesh, 132, &callbacks);
 
-  SENSORS_ACTIVATE(button_sensor);
+  SENSORS_ACTIVATE(*button_sensor_get());
 
   while(1) {
     rimeaddr_t addr;
 
     /* Wait for button click before sending the first message. */
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event && data == &button_sensor);
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_get_sensors_event() && data == button_sensor_get());
 
     PRINTF("Button clicked\n");
 

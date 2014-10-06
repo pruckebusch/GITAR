@@ -40,11 +40,11 @@
 #include "src/include/system/hil/sys/process/process.h"
 #include "src/include/system/hil/sys/process/autostart.h"
 #include "src/include/system/hil/sys/timer/etimer.h"
-#include "src/include/system/hil/sys/timer/clock.h"
 #include "src/include/system/hil/lib/util/random.h"
-//~ #include "src/include/system/hil/net/rime.h"
 #include "src/include/system/hil/net/rime/packetbuf.h"
-#include "src/include/system/hil/net/rime/rimeaddr.h"
+//~ #include "src/include/system/hil/sys/timer/clock.h"
+//~ #include "src/include/system/hil/net/rime.h"
+//~ #include "src/include/system/hil/net/rime/rimeaddr.h"
 
 #include "src/include/user/net/rime/broadcast.h"
 

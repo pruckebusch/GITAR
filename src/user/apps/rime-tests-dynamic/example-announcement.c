@@ -85,7 +85,7 @@ PROCESS_THREAD(example_announcement_process, ev, data)
   announcement_register(&example_announcement,128,received_announcement);
 
   /* Set the lowest eight bytes of the Rime address as the value. */
-  announcement_set_value(&example_announcement, rimeaddr_node_addr.u8[0]);
+  announcement_set_value(&example_announcement, rimeaddr_get_node_addr()->u8[0]);
 
   while(1) {
     static struct etimer et;

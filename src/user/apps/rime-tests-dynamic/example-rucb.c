@@ -37,15 +37,13 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "include/system/hil/dev/button-sensor.h"
-
 #include "src/include/system/hil/sys/process/process.h"
 #include "src/include/system/hil/sys/process/autostart.h"
 #include "src/include/system/hil/sys/timer/clock.h"
-
 //~ #include "src/include/system/hil/net/rime.h"
 #include "src/include/system/hil/net/rime/packetbuf.h"
 #include "src/include/system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/dev/button-sensor.h"
 
 #include "src/include/user/net/rime/rucb.h"
 
@@ -106,12 +104,12 @@ PROCESS_THREAD(example_rucb_process, ev, data)
 
   
   rucb_open(&rucb, 137, &rucb_call);
-  SENSORS_ACTIVATE(button_sensor);
+  SENSORS_ACTIVATE(*button_sensor_get());
 
   PROCESS_PAUSE();
 
-  if(rimeaddr_node_addr.u8[0] == 51 &&
-      rimeaddr_node_addr.u8[1] == 0) {
+  if(rimeaddr_get_node_addr()->u8[0] == 51 &&
+      rimeaddr_get_node_addr()->u8[1] == 0) {
     rimeaddr_t recv;
 
     recv.u8[0] = 52;
@@ -119,8 +117,8 @@ PROCESS_THREAD(example_rucb_process, ev, data)
     start_time = clock_time();
 
     /*PRINTF("%u.%u: sending rucb to address %u.%u at time %u\n",
-        rimeaddr_node_addr.u8[0],
-        rimeaddr_node_addr.u8[1],
+        rimeaddr_get_node_addr()->u8[0],
+        rimeaddr_get_node_addr()->u8[1],
         recv.u8[0],
         recv.u8[1],
         start_time);*/
@@ -130,8 +128,8 @@ PROCESS_THREAD(example_rucb_process, ev, data)
 
   while(1) {
 
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
-			     data == &button_sensor);
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_get_sensors_event() &&
+			     data == button_sensor_get());
     /*rucb_stop(&rucb);*/
 
   }

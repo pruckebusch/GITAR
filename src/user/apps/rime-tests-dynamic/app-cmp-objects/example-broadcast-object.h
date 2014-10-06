@@ -1,11 +1,11 @@
 #ifndef __EXAMPLE_BROADCAST_APP_COMPONENT_OBJECT_H__
 #define __EXAMPLE_BROADCAST_APP_COMPONENT_OBJECT_H__
 
-static void example_broadcast_object_init();
+void example_broadcast_object_init();
 
 static const component_t example_broadcast_cmpobj = { { EXAMPLE_BROADCAST, 2, 7, APP_COMPONENT, 17, "example_broadcast"} , {NULL, NULL,0,0},{&example_broadcast_object_init, NULL, NULL}};
 
-static void example_broadcast_object_init(){
+void example_broadcast_object_init(){
 	kernel_add_cmp(&example_broadcast_cmpobj);
 	broadcast_object_stub_init();
 	broadcast_cmp_user.unique_id=EXAMPLE_BROADCAST;

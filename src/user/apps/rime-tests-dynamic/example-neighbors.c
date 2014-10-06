@@ -51,7 +51,6 @@
  *         received.
  */
 
-
 #include "src/include/system/hil/sys/process/process.h"
 #include "src/include/system/hil/sys/process/autostart.h"
 #include "src/include/system/hil/sys/timer/etimer.h"
@@ -193,8 +192,8 @@ broadcast_recv(struct broadcast_conn *c, const rimeaddr_t *from)
   }
 
   /* We can now fill in the fields in our neighbor entry. */
-  n->last_rssi = packetbuf_attr(PACKETBUF_ATTR_RSSI);
-  n->last_lqi = packetbuf_attr(PACKETBUF_ATTR_LINK_QUALITY);
+  n->last_rssi = packetbuf_get_attr(PACKETBUF_ATTR_RSSI);
+  n->last_lqi = packetbuf_get_attr(PACKETBUF_ATTR_LINK_QUALITY);
 
   /* Compute the average sequence number gap we have seen from this neighbor. */
   seqno_gap = m->seqno - n->last_seqno;
@@ -211,8 +210,8 @@ broadcast_recv(struct broadcast_conn *c, const rimeaddr_t *from)
   PRINTF("broadcast message received from %d.%d with seqno %d, RSSI %u, LQI %u, avg seqno gap %d.%02d\n",
          from->u8[0], from->u8[1],
          m->seqno,
-         packetbuf_attr(PACKETBUF_ATTR_RSSI),
-         packetbuf_attr(PACKETBUF_ATTR_LINK_QUALITY),
+         packetbuf_get_attr(PACKETBUF_ATTR_RSSI),
+         packetbuf_get_attr(PACKETBUF_ATTR_LINK_QUALITY),
          (int)(n->avg_seqno_gap / SEQNO_EWMA_UNITY),
          (int)(((100UL * n->avg_seqno_gap) / SEQNO_EWMA_UNITY) % 100));
 }

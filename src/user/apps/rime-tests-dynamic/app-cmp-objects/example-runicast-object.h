@@ -1,11 +1,11 @@
 #ifndef __EXAMPLE_RUNICAST_APP_COMPONENT_OBJECT_H__
 #define __EXAMPLE_RUNICAST_APP_COMPONENT_OBJECT_H__
 
-static void example_runicast_object_init();
+void example_runicast_object_init();
 
 static const component_t example_runicast_cmpobj = { { EXAMPLE_RUNICAST, 2, 7, APP_COMPONENT, 16, "example_runicast"} , {NULL, NULL,0,0},{&example_runicast_object_init, NULL, NULL}};
 
-static void example_runicast_object_init(){
+void example_runicast_object_init(){
 	kernel_add_cmp(&example_runicast_cmpobj);
 	runicast_object_stub_init();
 	runicast_cmp_user.unique_id=EXAMPLE_RUNICAST;

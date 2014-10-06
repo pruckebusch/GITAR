@@ -1,11 +1,11 @@
 #ifndef __EXAMPLE_COLLECT_APP_COMPONENT_OBJECT_H__
 #define __EXAMPLE_COLLECT_APP_COMPONENT_OBJECT_H__
 
-static void example_collect_object_init();
+void example_collect_object_init();
 
 static const component_t example_collect_cmpobj = { { EXAMPLE_COLLECT, 2, 7, APP_COMPONENT, 15, "example_collect"} , {NULL, NULL,0,0},{&example_collect_object_init, NULL, NULL}};
 
-static void example_collect_object_init(){
+void example_collect_object_init(){
 	kernel_add_cmp(&example_collect_cmpobj);
 	collect_object_stub_init();
 	collect_cmp_user.unique_id=EXAMPLE_COLLECT;
@@ -14,6 +14,7 @@ static void example_collect_object_init(){
 	packetbuf_object_stub_init();
 	random_object_stub_init();
 	rimeaddr_object_stub_init();
+	string_object_stub_init();
 }
 
 #endif /*__EXAMPLE_COLLECT_APP_COMPONENT_OBJECT_H__*/

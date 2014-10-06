@@ -37,13 +37,11 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/include/system/hil/dev/button-sensor.h"
-
 #include "src/include/system/hil/sys/process/process.h"
 #include "src/include/system/hil/sys/process/autostart.h"
 #include "src/include/system/hil/sys/timer/clock.h"
 #include "src/include/system/hil/lib/cfs/cfs.h"
-
+#include "src/include/system/hil/dev/button-sensor.h"
 #include "src/include/system/hil/dev/leds.h"
 //~ #include "src/include/system/hil/net/rime.h"
 #include "src/include/system/hil/net/rime/packetbuf.h"
@@ -137,11 +135,11 @@ PROCESS_THREAD(example_rudolph0_process, ev, data)
 
   
   rudolph0_open(&rudolph0, 138, &rudolph0_call);
-  SENSORS_ACTIVATE(button_sensor);
+  SENSORS_ACTIVATE(*button_sensor_get());
 
   while(1) {
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
-			     data == &button_sensor);
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_get_sensors_event() &&
+			     data == button_sensor_get());
     {
       int i;
       
@@ -154,8 +152,8 @@ PROCESS_THREAD(example_rudolph0_process, ev, data)
     }
     rudolph0_send(&rudolph0, CLOCK_SECOND / 4);
 
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
-			     data == &button_sensor);
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_get_sensors_event() &&
+			     data == button_sensor_get());
     rudolph0_stop(&rudolph0);
 
   }

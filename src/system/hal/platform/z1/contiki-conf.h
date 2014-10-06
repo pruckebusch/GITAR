@@ -180,7 +180,7 @@
 	#define UIP_CONF_TCP_SPLIT       0
 #endif
 
-#define PACKETBUF_CONF_ATTRS_INLINE 1
+#define PACKETBUF_CONF_ATTRS_INLINE 0
 
 #ifndef RF_CHANNEL
 #define RF_CHANNEL              26

@@ -100,5 +100,8 @@ status(int type)
   return 0;
 }
 /*---------------------------------------------------------------------------*/
-SENSORS_SENSOR(button_sensor, BUTTON_SENSOR,
-	       value, configure, status);
+SENSORS_SENSOR(button_sensor, BUTTON_SENSOR, value, configure, status);
+
+struct sensors_sensor* button_sensor_get(){
+	return &button_sensor;
+}

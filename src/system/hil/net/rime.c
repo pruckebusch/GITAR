@@ -50,10 +50,18 @@
 #define PRINTF(...)
 #endif
 
+#include <stddef.h>
+
+#include "contiki-conf.h"
+#include "sys/timer/clock.h"
 #include "net/netstack.h"
 #include "net/rime.h"
 #include "net/rime/chameleon.h"
-#include "net/rime/route.h"
+#include "net/rime/queuebuf.h"
+#include "net/rime/abc.h"
+#include "net/rime/rimestats.h"
+#include "net/rime/rimeaddr.h"
+//~ #include "net/rime/route.h"
 #include "net/rime/announcement.h"
 #include "net/rime/broadcast-announcement.h"
 #include "net/mac/mac.h"
@@ -88,20 +96,17 @@
 LIST(sniffers);
 
 /*---------------------------------------------------------------------------*/
-void
-rime_sniffer_add(struct rime_sniffer *s)
+void rime_sniffer_add(struct rime_sniffer *s)
 {
   list_add(sniffers, s);
 }
 /*---------------------------------------------------------------------------*/
-void
-rime_sniffer_remove(struct rime_sniffer *s)
+void rime_sniffer_remove(struct rime_sniffer *s)
 {
   list_remove(sniffers, s);
 }
 /*---------------------------------------------------------------------------*/
-static void
-input(void)
+static void input(void)
 {
   struct rime_sniffer *s;
   struct channel *c;
@@ -120,8 +125,7 @@ input(void)
   }
 }
 /*---------------------------------------------------------------------------*/
-static void
-init(void)
+static void init(void)
 {
   queuebuf_init();
   packetbuf_clear();
@@ -137,14 +141,10 @@ init(void)
    * for now, and should at least get us started with experimenting
    * with announcements.
    */
-  broadcast_announcement_init(BROADCAST_ANNOUNCEMENT_CHANNEL,
-                              BROADCAST_ANNOUNCEMENT_BUMP_TIME,
-                              BROADCAST_ANNOUNCEMENT_MIN_TIME,
-                              BROADCAST_ANNOUNCEMENT_MAX_TIME);
+  broadcast_announcement_init(BROADCAST_ANNOUNCEMENT_CHANNEL,BROADCAST_ANNOUNCEMENT_BUMP_TIME, BROADCAST_ANNOUNCEMENT_MIN_TIME, BROADCAST_ANNOUNCEMENT_MAX_TIME);
 }
 /*---------------------------------------------------------------------------*/
-static void
-packet_sent(void *ptr, int status, int num_tx)
+static void packet_sent(void *ptr, int status, int num_tx)
 {
   struct channel *c = ptr;
   struct rime_sniffer *s;
@@ -173,8 +173,7 @@ packet_sent(void *ptr, int status, int num_tx)
   abc_sent(c, status, num_tx);
 }
 /*---------------------------------------------------------------------------*/
-int
-rime_output(struct channel *c)
+int rime_output(struct channel *c)
 {
   RIMESTATS_ADD(tx);
   if(chameleon_create(c)) {

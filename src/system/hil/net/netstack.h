@@ -114,15 +114,15 @@ struct network_driver {
   void (* input)(void);
 };
 
-/*extern const struct network_driver NETSTACK_NETWORK;
+extern const struct network_driver NETSTACK_NETWORK;
 extern const struct rdc_driver     NETSTACK_RDC;
 extern const struct mac_driver     NETSTACK_MAC;
 extern const struct radio_driver   NETSTACK_RADIO;
 extern const struct framer         NETSTACK_FRAMER;
-*/
+
 void netstack_init(void);
 
-struct network_driver netstack_get_network_driver();
+/*struct network_driver netstack_get_network_driver();
 struct rdc_driver netstack_get_rdc_driver();
 struct mac_driver netstack_get_mac_driver();
 struct radio_driver netstack_get_radio_driver();
@@ -133,6 +133,6 @@ void netstack_set_rdc_driver(struct rdc_driver* rdc_driver);
 void netstack_set_mac_driver(struct mac_driver* mac_driver);
 void netstack_set_radio_driver(struct radio_driver* radio_driver);
 void netstack_set_framer(struct framer* framer);
-
+*/
 
 #endif /* NETSTACK_H */

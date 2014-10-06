@@ -37,6 +37,7 @@
 
 #include "contiki.h"
 #include "dev/leds.h"
+#include "dev/leds-arch.h"
 
 /*---------------------------------------------------------------------------*/
 void

@@ -44,11 +44,11 @@
 #include "sys/process/mt.h"
 #include "lib/cfs/cfs.h"
 #include "lib/cfs/cfs-coffee.h"
-#include "dev/leds.h"
+#include "dev/leds-arch.h"
 #include "dev/watchdog.h"
 #include <stdio.h>
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 #define PRINTF(...) printf(__VA_ARGS__)
 #else

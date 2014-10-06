@@ -42,23 +42,31 @@
 #include "dev/xmem.h"
 #include <string.h>
 
-
+#ifdef CONF_SET_NODE_ID
+#warning Setting manual node id $(CONF_SET_NODE_ID)
+#define NODE_ID CONF_SET_NODE_ID
+unsigned short node_id = NODE_ID;
+#else
+#warning Trying to restore node id from xmem
 unsigned short node_id = 0;
+#endif
+
 unsigned char node_mac[8];
 
 /*---------------------------------------------------------------------------*/
 void
 node_id_restore(void)
 {
-  unsigned char buf[12];
-  xmem_pread(buf, 12, NODE_ID_XMEM_OFFSET);
-  if(buf[0] == 0xad &&
-     buf[1] == 0xde) {
-    node_id = (buf[2] << 8) | buf[3];
-    memcpy(node_mac, &buf[4], 8);
-  } else {
-    node_id = 0;
-  }
+	if(node_id == 0){
+		unsigned char buf[12];
+		xmem_pread(buf, 12, NODE_ID_XMEM_OFFSET);
+		if(buf[0] == 0xad && buf[1] == 0xde) {
+			node_id = (buf[2] << 8) | buf[3];
+			memcpy(node_mac, &buf[4], 8);
+		} else {
+			node_id = 0;
+		}
+	}
 }
 /*---------------------------------------------------------------------------*/
 void

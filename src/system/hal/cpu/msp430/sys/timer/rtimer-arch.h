@@ -49,5 +49,7 @@
 #endif
 
 rtimer_clock_t rtimer_arch_now(void);
+void rtimer_arch_init(void);
+void rtimer_arch_schedule(rtimer_clock_t t);
 
 #endif /* __RTIMER_ARCH_H__ */

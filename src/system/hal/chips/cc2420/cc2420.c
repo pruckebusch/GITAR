@@ -48,8 +48,9 @@
 
 #include "net/rime/packetbuf.h"
 #include "net/rime/rimestats.h"
-
-//#include "net/netstack.h"
+#if WITH_UIP  || WITH_UIP6 || WITH_RIME
+#include "net/netstack.h"
+#endif
 
 //#include "sys/timetable.h"
 
@@ -647,8 +648,10 @@ PROCESS_THREAD(cc2420_process, ev, data)
     len = cc2420_read(packetbuf_dataptr(), PACKETBUF_SIZE);
     
     packetbuf_set_datalen(len);
-    
-    //NETSTACK_RDC.input();
+#if WITH_UIP  || WITH_UIP6 || WITH_RIME    
+    NETSTACK_RDC.input();
+#endif
+
 #if CC2420_TIMETABLE_PROFILING
     TIMETABLE_TIMESTAMP(cc2420_timetable, "end");
     timetable_aggregate_compute_detailed(&aggregate_time,

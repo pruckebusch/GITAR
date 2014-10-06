@@ -39,6 +39,7 @@
 #include "contiki.h"
 #include "lib/util/energest.h"
 #include "sys/timer/rtimer.h"
+#include "sys/timer/rtimer-arch.h"
 #include "sys/process/process.h"
 #include "dev/watchdog.h"
 #include "isr_compat.h"

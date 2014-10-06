@@ -32,6 +32,7 @@
 
 #include <stdio.h>
 #include "sys/process/mt.h"
+#include "sys/process/mtarch.h"
 
 #ifdef __IAR_SYSTEMS_ICC__
 #define __asm__ asm

@@ -40,7 +40,6 @@
 #define __SKY_SENSORS_H__
 
 int  sky_sensors_status(uint16_t input, int type);
-int  sky_sensors_configure(uint16_t input, uint8_t reference,
-                           int type, int value);
+int  sky_sensors_configure(uint16_t input, uint8_t reference,int type, int value);
 
 #endif /* __SKY_SENSORS_H__ */

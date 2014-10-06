@@ -1,14 +1,14 @@
 #ifndef COMPONENT_H_
 #define COMPONENT_H_
 
-#include "list.h"
-#include "process.h"
+#include "kernel-list.h"
+#include "src/system/hil/sys/process/process.h"
 
 typedef uint8_t component_id;
 
 typedef struct component_user_list_entry {
 	struct component_user_list_entry* next;
-	component_id user_id;
+	uint16_t unique_id;
 } component_user_list_entry_t;
 
 struct component;
@@ -22,29 +22,29 @@ typedef struct component_adapter {
 typedef struct component_interface {
 	const void** function_array	;
 	const struct process** process_array;
-	uint8_t num_functions;
-	uint8_t num_processes;
+	const uint8_t num_functions;
+	const uint8_t num_processes;
 } component_interface_t;
 
 typedef struct component_info {
-	uint16_t unique_id;
-	uint8_t version;
-	uint8_t subrelease;
-	uint8_t type;	
-	uint8_t name_len;
+	const uint16_t unique_id;
+	const uint8_t version;
+	const uint8_t subrelease;
+	const uint8_t type;	
+	const uint8_t name_len;
 	const char* name;
 } component_info_t;
 
 typedef struct component {
-	component_info_t info;
-	component_interface_t interface;
-	component_adapter_t adapter;
-	LIST_STRUCT(users);
+	const component_info_t info;
+	const component_interface_t interface;
+	const component_adapter_t adapter;
+	KERNEL_LIST_STRUCT(users);
 } component_t;
 
 typedef struct hil_component {
-	component_info_t info;
-	component_interface_t interface;
+	const component_info_t info;
+	const component_interface_t interface;
 } hil_component_t;
 
 #endif /* COMPONENT_H_ */

@@ -42,12 +42,22 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include <stdio.h>
-#include <stddef.h> /* for offsetof */
+#include "src/user/net/rime/rudolph1.h"
 
-#include "net/rime.h"
-#include "net/rime/rudolph1.h"
-#include "cfs/cfs.h"
+#include "include/system/hil/lib/cfs/cfs.h"
+
+//~ #include "src/system/hil/net/rime.h"
+//~ #include <stddef.h> /* for offsetof */
+
+#include "include/user/net/rime/rudolph1-object.h"
+
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 #define DEFAULT_SEND_INTERVAL CLOCK_SECOND * 2
 #define TRICKLE_INTERVAL CLOCK_SECOND / 2
@@ -72,14 +82,6 @@ enum {
   TYPE_DATA,
   TYPE_NACK,
 };
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 #define LT(a, b) ((signed char)((a) - (b)) < 0)
 

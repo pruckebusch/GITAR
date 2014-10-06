@@ -51,9 +51,11 @@
 #ifndef __COLLECT_NEIGHBOR_H__
 #define __COLLECT_NEIGHBOR_H__
 
-#include "net/rime/rimeaddr.h"
-#include "net/rime/collect-link-estimate.h"
-#include "lib/util/list.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/lib/util/list.h"
+#include "include/system/hil/sys/timer/ctimer.h"
+
+#include "include/user/net/rime/collect-link-estimate.h"
 
 struct collect_neighbor_list {
   LIST_STRUCT(list);
@@ -76,19 +78,15 @@ list_t collect_neighbor_list(struct collect_neighbor_list *neighbor_list);
 
 void collect_neighbor_list_new(struct collect_neighbor_list *neighbor_list);
 
-int collect_neighbor_list_add(struct collect_neighbor_list *neighbor_list,
-                              const rimeaddr_t *addr, uint16_t rtmetric);
-void collect_neighbor_list_remove(struct collect_neighbor_list *neighbor_list,
-                                  const rimeaddr_t *addr);
-struct collect_neighbor *collect_neighbor_list_find(struct collect_neighbor_list *neighbor_list,
-                                               const rimeaddr_t *addr);
+int collect_neighbor_list_add(struct collect_neighbor_list *neighbor_list, const rimeaddr_t *addr, uint16_t rtmetric);
+void collect_neighbor_list_remove(struct collect_neighbor_list *neighbor_list, const rimeaddr_t *addr);
+struct collect_neighbor *collect_neighbor_list_find(struct collect_neighbor_list *neighbor_list,const rimeaddr_t *addr);
 struct collect_neighbor *collect_neighbor_list_best(struct collect_neighbor_list *neighbor_list);
 int collect_neighbor_list_num(struct collect_neighbor_list *neighbor_list);
 struct collect_neighbor *collect_neighbor_list_get(struct collect_neighbor_list *neighbor_list, int num);
 void collect_neighbor_list_purge(struct collect_neighbor_list *neighbor_list);
 
-void collect_neighbor_update_rtmetric(struct collect_neighbor *n,
-                                      uint16_t rtmetric);
+void collect_neighbor_update_rtmetric(struct collect_neighbor *n,uint16_t rtmetric);
 void collect_neighbor_tx(struct collect_neighbor *n, uint16_t num_tx);
 void collect_neighbor_rx(struct collect_neighbor *n);
 void collect_neighbor_tx_fail(struct collect_neighbor *n, uint16_t num_tx);

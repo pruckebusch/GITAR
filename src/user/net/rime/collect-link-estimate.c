@@ -41,14 +41,11 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "net/rime/collect.h"
-#include "net/rime/collect-link-estimate.h"
+#include "contiki-conf.h"
+#include "src/user/net/rime/collect-link-estimate.h"
 
-#define INITIAL_LINK_ESTIMATE 16
-
-#define COLLECT_LINK_ESTIMATE_ALPHA ((3 * (COLLECT_LINK_ESTIMATE_UNIT)) / 8)
-
-#define MAX_ESTIMATES 255
+#include "include/user/net/rime/collect.h"
+#include "include/user/net/rime/collect-link-estimate-object.h"
 
 #define DEBUG 0
 #if DEBUG
@@ -57,6 +54,12 @@
 #else
 #define PRINTF(...)
 #endif
+
+#define INITIAL_LINK_ESTIMATE 16
+
+#define COLLECT_LINK_ESTIMATE_ALPHA ((3 * (COLLECT_LINK_ESTIMATE_UNIT)) / 8)
+
+#define MAX_ESTIMATES 255
 
 /*---------------------------------------------------------------------------*/
 void

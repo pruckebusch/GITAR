@@ -42,17 +42,11 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "net/rime/netflood.h"
+#include "src/user/net/rime/netflood.h"
 
-#include <string.h>
+//~ #include <string.h>
 
-#define HOPS_MAX 16
-
-struct netflood_hdr {
-  uint16_t originator_seqno;
-  rimeaddr_t originator;
-  uint16_t hops;
-};
+#include "include/user/net/rime/netflood-object.h"
 
 #define DEBUG 0
 #if DEBUG
@@ -61,6 +55,14 @@ struct netflood_hdr {
 #else
 #define PRINTF(...)
 #endif
+
+#define HOPS_MAX 16
+
+struct netflood_hdr {
+  uint16_t originator_seqno;
+  rimeaddr_t originator;
+  uint16_t hops;
+};
 
 /*---------------------------------------------------------------------------*/
 static int

@@ -65,8 +65,8 @@
 #ifndef __BROADCAST_H__
 #define __BROADCAST_H__
 
-#include "net/rime/abc.h"
-#include "net/rime/rimeaddr.h"
+#include "src/include/system/hil/net/rime/abc.h"
+#include "src/include/system/hil/net/rime/rimeaddr.h"
 
 struct broadcast_conn;
 
@@ -104,8 +104,7 @@ struct broadcast_conn {
  *             when a packet arrives on the channel.
  *
  */
-void broadcast_open(struct broadcast_conn *c, uint16_t channel,
-	       const struct broadcast_callbacks *u);
+void broadcast_open(struct broadcast_conn *c, uint16_t channel, const struct broadcast_callbacks *u);
 
 /**
  * \brief      Close a broadcast connection

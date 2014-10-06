@@ -62,7 +62,7 @@
 #ifndef __UNICAST_H__
 #define __UNICAST_H__
 
-#include "net/rime/broadcast.h"
+#include "include/user/net/rime/broadcast.h"
 
 struct unicast_conn;
 
@@ -79,8 +79,7 @@ struct unicast_conn {
   const struct unicast_callbacks *u;
 };
 
-void unicast_open(struct unicast_conn *c, uint16_t channel,
-	      const struct unicast_callbacks *u);
+void unicast_open(struct unicast_conn *c, uint16_t channel,const struct unicast_callbacks *u);
 void unicast_close(struct unicast_conn *c);
 
 int unicast_send(struct unicast_conn *c, const rimeaddr_t *receiver);

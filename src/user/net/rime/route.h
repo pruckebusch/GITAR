@@ -51,7 +51,7 @@
 #ifndef __ROUTE_H__
 #define __ROUTE_H__
 
-#include "net/rime/rimeaddr.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
 
 struct route_entry {
   struct route_entry *next;
@@ -66,8 +66,7 @@ struct route_entry {
 };
 
 void route_init(void);
-int route_add(const rimeaddr_t *dest, const rimeaddr_t *nexthop,
-	      uint8_t cost, uint8_t seqno);
+int route_add(const rimeaddr_t *dest, const rimeaddr_t *nexthop,uint8_t cost, uint8_t seqno);
 struct route_entry *route_lookup(const rimeaddr_t *dest);
 void route_refresh(struct route_entry *e);
 void route_decay(struct route_entry *e);

@@ -93,10 +93,10 @@
 #ifndef __IPOLITE_H__
 #define __IPOLITE_H__
 
-#include "sys/timer/ctimer.h"
+#include "include/user/net/rime/broadcast.h"
 
-#include "net/rime/broadcast.h"
-#include "net/rime/queuebuf.h"
+#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/net/rime/queuebuf.h"
 
 struct ipolite_conn;
 
@@ -155,8 +155,7 @@ struct ipolite_conn {
  *             packet is received, or when another event occurs on the
  *             connection (see \ref "struct ipolite_callbacks").
  */
-void ipolite_open(struct ipolite_conn *c, uint16_t channel, uint8_t maxdups,
-		  const struct ipolite_callbacks *cb);
+void ipolite_open(struct ipolite_conn *c, uint16_t channel, uint8_t maxdups,const struct ipolite_callbacks *cb);
 
 /**
  * \brief      Close an ipolite connection
@@ -179,8 +178,7 @@ void ipolite_close(struct ipolite_conn *c);
  *             received with the same header.
  *
  */
-int  ipolite_send(struct ipolite_conn *c, clock_time_t interval,
-		  uint8_t hdrsize);
+int  ipolite_send(struct ipolite_conn *c, clock_time_t interval,uint8_t hdrsize);
 
 /**
  * \brief      Cancel a pending packet

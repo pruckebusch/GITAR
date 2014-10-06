@@ -78,7 +78,7 @@
 #ifndef __RUNICAST_H__
 #define __RUNICAST_H__
 
-#include "net/rime/stunicast.h"
+#include "include/user/net/rime/stunicast.h"
 
 struct runicast_conn;
 
@@ -103,12 +103,10 @@ struct runicast_conn {
   uint8_t max_rxmit;
 };
 
-void runicast_open(struct runicast_conn *c, uint16_t channel,
-	       const struct runicast_callbacks *u);
+void runicast_open(struct runicast_conn *c, uint16_t channel,const struct runicast_callbacks *u);
 void runicast_close(struct runicast_conn *c);
 
-int runicast_send(struct runicast_conn *c, const rimeaddr_t *receiver,
-		  uint8_t max_retransmissions);
+int runicast_send(struct runicast_conn *c, const rimeaddr_t *receiver,uint8_t max_retransmissions);
 
 uint8_t runicast_is_transmitting(struct runicast_conn *c);
 

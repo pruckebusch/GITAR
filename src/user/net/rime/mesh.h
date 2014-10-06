@@ -61,9 +61,10 @@
 #ifndef __MESH_H__
 #define __MESH_H__
 
-#include "net/rime/queuebuf.h"
-#include "net/rime/multihop.h"
-#include "net/rime/route-discovery.h"
+#include "include/system/hil/net/rime/queuebuf.h"
+
+#include "include/user/net/rime/multihop.h"
+#include "include/user/net/rime/route-discovery.h"
 
 struct mesh_conn;
 
@@ -103,8 +104,7 @@ struct mesh_conn {
  *             when a packet arrives on the channel.
  *
  */
-void mesh_open(struct mesh_conn *c, uint16_t channels,
-	       const struct mesh_callbacks *callbacks);
+void mesh_open(struct mesh_conn *c, uint16_t channels,const struct mesh_callbacks *callbacks);
 
 /**
  * \brief      Close an mesh connection

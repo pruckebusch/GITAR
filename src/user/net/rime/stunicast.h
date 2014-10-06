@@ -72,9 +72,10 @@
 #ifndef __STUNICAST_H__
 #define __STUNICAST_H__
 
-#include "sys/timer/ctimer.h"
-#include "net/rime/unicast.h"
-#include "net/rime/queuebuf.h"
+#include "include/user/net/rime/unicast.h"
+
+#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/net/rime/queuebuf.h"
 
 struct stunicast_conn;
 
@@ -93,12 +94,10 @@ struct stunicast_conn {
   rimeaddr_t receiver;
 };
 
-void stunicast_open(struct stunicast_conn *c, uint16_t channel,
-	       const struct stunicast_callbacks *u);
+void stunicast_open(struct stunicast_conn *c, uint16_t channel,const struct stunicast_callbacks *u);
 void stunicast_close(struct stunicast_conn *c);
 
-int stunicast_send_stubborn(struct stunicast_conn *c, const rimeaddr_t *receiver,
-		      clock_time_t rxmittime);
+int stunicast_send_stubborn(struct stunicast_conn *c, const rimeaddr_t *receiver,clock_time_t rxmittime);
 void stunicast_cancel(struct stunicast_conn *c);
 
 int stunicast_send(struct stunicast_conn *c, const rimeaddr_t *receiver);

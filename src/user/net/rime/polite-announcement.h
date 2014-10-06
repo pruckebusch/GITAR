@@ -59,9 +59,9 @@
 #ifndef __POLITE_ANNOUNCEMENT_H__
 #define __POLITE_ANNOUNCEMENT_H__
 
-void polite_announcement_init(uint16_t channel,
-			      clock_time_t min,
-			      clock_time_t max);
+#include "include/system/hil/sys/timer/clock.h"
+
+void polite_announcement_init(uint16_t channel,clock_time_t min,clock_time_t max);
 
 #endif /* __POLITE_ANNOUNCEMENT_H__ */
 /** @} */

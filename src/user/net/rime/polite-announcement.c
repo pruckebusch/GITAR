@@ -42,20 +42,32 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "contiki.h"
+#include "contiki-conf.h"
+#include "src/user/net/rime/polite-announcement.h"
 
-#include "lib/util/list.h"
-#include "net/rime.h"
-#include "net/rime/announcement.h"
-#include "net/rime/ipolite.h"
+#include "include/system/hil/lib/util/list.h"
+#include "include/system/hil/net/rime/announcement.h"
+#include "include/user/net/rime/ipolite.h"
 
-#if NETSIM
-#include "ether.h"
-#endif
+//~ #include "include/system/hil/net/rime.h"
 
-#include <string.h>
+//~ #if NETSIM
+//~ #include "ether.h"
+//~ #endif
+//~ 
+//~ #include <string.h>
+//~ #include <stdio.h>
+//~ #include <stddef.h>
+
+#include "include/user/net/rime/polite-announcement-object.h"
+
+#define DEBUG 0
+#if DEBUG
 #include <stdio.h>
-#include <stddef.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 struct announcement_data {
   uint16_t id;
@@ -81,14 +93,6 @@ static struct polite_announcement_state {
   clock_time_t interval;
   clock_time_t min_interval, max_interval;
 } c;
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 #define MIN(a, b) ((a)<(b)?(a):(b))
 

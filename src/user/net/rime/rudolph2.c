@@ -48,13 +48,24 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include <stdio.h>
-#include <stddef.h> /* for offsetof */
+#include "src/user/net/rime/rudolph2.h"
 
-#include "net/rime.h"
-#include "net/rime/polite.h"
-#include "net/rime/rudolph2.h"
-#include "cfs/cfs.h"
+#include "include/system/hil/lib/cfs/cfs.h"
+#include "include/user/net/rime/polite.h"
+
+//~ #include "include/system/hil/lib/net/rime.h"
+
+//~ #include <stddef.h> /* for offsetof */
+
+#include "include/user/net/rime/rudolph2-object.h"
+
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 #define SEND_INTERVAL CLOCK_SECOND / 2
 #define STEADY_INTERVAL CLOCK_SECOND * 16
@@ -80,14 +91,6 @@ enum {
 #define FLAG_LAST_SENT     0x01
 #define FLAG_LAST_RECEIVED 0x02
 #define FLAG_IS_STOPPED    0x04
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 #define LT(a, b) ((signed short)((a) - (b)) < 0)
 

@@ -42,13 +42,22 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include <stdio.h>
-
-#include "lib/util/list.h"
-#include "lib/util/memb.h"
-#include "sys/timer/ctimer.h"
-#include "net/rime/route.h"
 #include "contiki-conf.h"
+#include "src/user/net/rime/route.h"
+
+#include "include/system/hil/lib/util/list.h"
+#include "include/system/hil/lib/util/memb.h"
+#include "include/system/hil/sys/timer/ctimer.h"
+
+#include "include/user/net/rime/route-object.h"
+
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 #ifdef ROUTE_CONF_ENTRIES
 #define NUM_RT_ENTRIES ROUTE_CONF_ENTRIES
@@ -77,15 +86,6 @@ MEMB(route_mem, struct route_entry, NUM_RT_ENTRIES);
 static struct ctimer t;
 
 static int max_time = DEFAULT_LIFETIME;
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
-
 
 /*---------------------------------------------------------------------------*/
 static void

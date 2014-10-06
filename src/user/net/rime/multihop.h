@@ -70,8 +70,9 @@
 #ifndef __MULTIHOP_H__
 #define __MULTIHOP_H__
 
-#include "net/rime/unicast.h"
-#include "net/rime/rimeaddr.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
+
+#include "include/user/net/rime/unicast.h"
 
 struct multihop_conn;
 
@@ -99,8 +100,7 @@ struct multihop_conn {
   const struct multihop_callbacks *cb;
 };
 
-void multihop_open(struct multihop_conn *c, uint16_t channel,
-	     const struct multihop_callbacks *u);
+void multihop_open(struct multihop_conn *c, uint16_t channel,const struct multihop_callbacks *u);
 void multihop_close(struct multihop_conn *c);
 int multihop_send(struct multihop_conn *c, const rimeaddr_t *to);
 void multihop_resend(struct multihop_conn *c, const rimeaddr_t *nexthop);

@@ -59,8 +59,8 @@
 #ifndef __RUDOLPH0_H__
 #define __RUDOLPH0_H__
 
-#include "net/rime/stbroadcast.h"
-#include "net/rime/polite.h"
+#include "include/user/net/rime/stbroadcast.h"
+#include "include/user/net/rime/polite.h"
 
 struct rudolph0_conn;
 
@@ -104,8 +104,7 @@ struct rudolph0_conn {
   struct rudolph0_datapacket current;
 };
 
-void rudolph0_open(struct rudolph0_conn *c, uint16_t channel,
-		   const struct rudolph0_callbacks *cb);
+void rudolph0_open(struct rudolph0_conn *c, uint16_t channel,const struct rudolph0_callbacks *cb);
 void rudolph0_close(struct rudolph0_conn *c);
 void rudolph0_send(struct rudolph0_conn *c, clock_time_t interval);
 void rudolph0_stop(struct rudolph0_conn *c);

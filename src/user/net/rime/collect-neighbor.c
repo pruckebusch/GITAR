@@ -42,15 +42,26 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include <limits.h>
+//~ #include <limits.h>
+//~ #include <stdio.h>
+
+#include "contiki-conf.h"
+#include "src/user/net/rime/collect-neighbor.h"
+
+#include "include/system/hil/lib/util/memb.h"
+#include "include/system/hil/lib/util/list.h"
+
+#include "include/user/net/rime/collect.h"
+
+#include "include/user/net/rime/collect-neighbor-object.h"
+
+#define DEBUG 0
+#if DEBUG
 #include <stdio.h>
-
-#include "contiki.h"
-#include "lib/util/memb.h"
-#include "lib/util/list.h"
-
-#include "net/rime/collect-neighbor.h"
-#include "net/rime/collect.h"
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 #ifdef COLLECT_NEIGHBOR_CONF_MAX_COLLECT_NEIGHBORS
 #define MAX_COLLECT_NEIGHBORS COLLECT_NEIGHBOR_CONF_MAX_COLLECT_NEIGHBORS
@@ -68,14 +79,6 @@ MEMB(collect_neighbors_mem, struct collect_neighbor, MAX_COLLECT_NEIGHBORS);
 
 #define EXPECTED_CONGESTION_DURATION CLOCK_SECOND * 240
 #define CONGESTION_PENALTY           8 * COLLECT_LINK_ESTIMATE_UNIT
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 /*---------------------------------------------------------------------------*/
 static void

@@ -93,9 +93,9 @@
 #ifndef __POLITE_H__
 #define __POLITE_H__
 
-#include "net/rime/abc.h"
-#include "net/rime/queuebuf.h"
-#include "sys/timer/ctimer.h"
+#include "include/system/hil/net/rime/abc.h"
+#include "include/system/hil/net/rime/queuebuf.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
 struct polite_conn;
 
@@ -150,8 +150,7 @@ struct polite_conn {
  *             packet is received, or when another event occurs on the
  *             connection (see \ref "struct polite_callbacks").
  */
-void polite_open(struct polite_conn *c, uint16_t channel,
-		 const struct polite_callbacks *cb);
+void polite_open(struct polite_conn *c, uint16_t channel,const struct polite_callbacks *cb);
 
 /**
  * \brief      Close a polite connection

@@ -74,8 +74,8 @@
 #ifndef __NETFLOOD_H__
 #define __NETFLOOD_H__
 
-#include "net/rime/queuebuf.h"
-#include "net/rime/ipolite.h"
+#include "include/system/hil/net/rime/queuebuf.h"
+#include "include/user/net/rime/ipolite.h"
 
 struct netflood_conn;
 
@@ -99,8 +99,7 @@ struct netflood_conn {
   uint8_t last_originator_seqno;
 };
 
-void netflood_open(struct netflood_conn *c, clock_time_t queue_time,
-	     uint16_t channel, const struct netflood_callbacks *u);
+void netflood_open(struct netflood_conn *c, clock_time_t queue_time, uint16_t channel, const struct netflood_callbacks *u);
 void netflood_close(struct netflood_conn *c);
 
 int netflood_send(struct netflood_conn *c, uint8_t seqno);

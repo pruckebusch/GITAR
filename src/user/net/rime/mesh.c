@@ -42,14 +42,16 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "contiki.h"
-#include "net/rime.h"
-#include "net/rime/route.h"
-#include "net/rime/mesh.h"
+#include "contiki-conf.h"
+#include "src/user/net/rime/mesh.h"
 
-#include <stddef.h> /* For offsetof */
+#include "include/user/net/rime/route.h"
 
-#define PACKET_TIMEOUT (CLOCK_SECOND * 10)
+
+//~ #include "net/rime.h"
+//~ #include <stddef.h> /* For offsetof */
+
+#include "include/user/net/rime/mesh-object.h"
 
 #define DEBUG 0
 #if DEBUG
@@ -58,6 +60,8 @@
 #else
 #define PRINTF(...)
 #endif
+
+#define PACKET_TIMEOUT (CLOCK_SECOND * 10)
 
 /*---------------------------------------------------------------------------*/
 static void

@@ -42,10 +42,20 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include <stddef.h> /* for offsetof */
+#include "src/user/net/rime/rudolph0.h"
 
-#include "net/rime.h"
-#include "net/rime/rudolph0.h"
+//~ #include <stddef.h> /* for offsetof */
+//~ #include "include/system/hil/net/rime.h"
+
+#include "include/user/net/rime/rudolph0-object.h"
+
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 #define STEADY_TIME CLOCK_SECOND * 2
 
@@ -61,14 +71,6 @@ enum {
 };
 
 #define VERSION_LT(a, b) ((signed char)((a) - (b)) < 0)
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 /*---------------------------------------------------------------------------*/
 static void

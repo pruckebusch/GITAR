@@ -42,8 +42,13 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "net/rime.h"
-#include <string.h>
+
+#include "src/user/net/rime/broadcast.h"
+//~ #include <string.h>
+#include "src/include/system/hil/net/rime/abc.h"
+#include "src/include/system/hil/net/rime/rimeaddr.h"
+
+#include "include/user/net/rime/broadcast-object.h"
 
 static const struct packetbuf_attrlist attributes[] =
   {
@@ -59,9 +64,7 @@ static const struct packetbuf_attrlist attributes[] =
 #endif
 
 /*---------------------------------------------------------------------------*/
-static void
-recv_from_abc(struct abc_conn *bc)
-{
+static void recv_from_abc(struct abc_conn *bc) {
   rimeaddr_t sender;
   struct broadcast_conn *c = (struct broadcast_conn *)bc;
 
@@ -75,8 +78,7 @@ recv_from_abc(struct abc_conn *bc)
   }
 }
 /*---------------------------------------------------------------------------*/
-static void
-sent_by_abc(struct abc_conn *bc, int status, int num_tx)
+static void sent_by_abc(struct abc_conn *bc, int status, int num_tx)
 {
   struct broadcast_conn *c = (struct broadcast_conn *)bc;
 
@@ -92,23 +94,18 @@ sent_by_abc(struct abc_conn *bc, int status, int num_tx)
 /*---------------------------------------------------------------------------*/
 static const struct abc_callbacks broadcast = {recv_from_abc, sent_by_abc};
 /*---------------------------------------------------------------------------*/
-void
-broadcast_open(struct broadcast_conn *c, uint16_t channel,
-	  const struct broadcast_callbacks *u)
-{
+void broadcast_open(struct broadcast_conn *c, uint16_t channel,const struct broadcast_callbacks *u) {
   abc_open(&c->c, channel, &broadcast);
   c->u = u;
   channel_set_attributes(channel, attributes);
 }
 /*---------------------------------------------------------------------------*/
-void
-broadcast_close(struct broadcast_conn *c)
+void broadcast_close(struct broadcast_conn *c)
 {
   abc_close(&c->c);
 }
 /*---------------------------------------------------------------------------*/
-int
-broadcast_send(struct broadcast_conn *c)
+int broadcast_send(struct broadcast_conn *c)
 {
   PRINTF("%d.%d: broadcast_send\n",
 	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1]);

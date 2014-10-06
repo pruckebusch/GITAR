@@ -59,13 +59,16 @@
 #ifndef __COLLECT_H__
 #define __COLLECT_H__
 
-#include "net/rime/announcement.h"
-#include "net/rime/runicast.h"
-#include "net/rime/neighbor-discovery.h"
-#include "net/rime/collect-neighbor.h"
-#include "net/rime/packetqueue.h"
-#include "sys/timer/ctimer.h"
-#include "lib/util/list.h"
+#include "include/user/net/rime/unicast.h"
+
+#include "include/system/hil/net/rime/packetqueue.h"
+#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/lib/util/list.h"
+#include "include/system/hil/net/rime/announcement.h"
+
+#include "include/user/net/rime/neighbor-discovery.h"
+#include "include/user/net/rime/collect-neighbor.h"
+
 
 #define COLLECT_PACKET_ID_BITS 8
 
@@ -126,9 +129,7 @@ enum {
   COLLECT_ROUTER,
 };
 
-void collect_open(struct collect_conn *c, uint16_t channels,
-                  uint8_t is_router,
-                  const struct collect_callbacks *callbacks);
+void collect_open(struct collect_conn *c, uint16_t channels, uint8_t is_router, const struct collect_callbacks *callbacks);
 void collect_close(struct collect_conn *c);
 
 int collect_send(struct collect_conn *c, int rexmits);

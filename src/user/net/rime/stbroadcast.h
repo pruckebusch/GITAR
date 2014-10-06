@@ -60,10 +60,9 @@
 #ifndef __STBROADCAST_H__
 #define __STBROADCAST_H__
 
-#include "sys/timer/ctimer.h"
-
-#include "net/rime/broadcast.h"
-#include "net/rime/queuebuf.h"
+#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/net/rime/queuebuf.h"
+#include "include/user/net/rime/broadcast.h"
 
 struct stbroadcast_conn;
 
@@ -100,8 +99,7 @@ struct stbroadcast_conn {
  *             that operates on the connection is called.
  *
  */
-void stbroadcast_open(struct stbroadcast_conn *c, uint16_t channel,
-		const struct stbroadcast_callbacks *u);
+void stbroadcast_open(struct stbroadcast_conn *c, uint16_t channel,const struct stbroadcast_callbacks *u);
 void stbroadcast_close(struct stbroadcast_conn *c);
 
 /**

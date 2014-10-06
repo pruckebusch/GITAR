@@ -37,11 +37,12 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "net/rime/rucb.h"
-#include "net/rime.h"
-#include <string.h>
+#include "src/user/net/rime/rucb.h"
+//~ #include "include/system/hil/sys/process/timetable.h"
+//~ #include "include/system/hil/net/rime.h"
+//~ #include <string.h>
 
-#define MAX_TRANSMISSIONS 8
+#include "include/user/net/rime/rucb-object.h"
 
 #define DEBUG 0
 #if DEBUG
@@ -51,7 +52,8 @@
 #define PRINTF(...)
 #endif
 
-//#include "sys/timetable.h"
+#define MAX_TRANSMISSIONS 8
+
 /*---------------------------------------------------------------------------*/
 static int
 read_data(struct rucb_conn *c)

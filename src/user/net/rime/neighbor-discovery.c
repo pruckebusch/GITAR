@@ -42,26 +42,23 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "contiki.h"
+#include "contiki-conf.h"
+#include "src/user/net/rime/neighbor-discovery.h"
 
-#include "net/rime.h"
-#include "net/rime/neighbor-discovery.h"
+#include "include/system/hil/lib/util/random.h"
 
-#include "dev/radio-sensor.h"
+//~ #include "include/system/hil/net/rime.h"
+//~ #include "include/system/hil/dev/radio-sensor.h"
 
-#include "lib/util/random.h"
+//~ #if CONTIKI_TARGET_NETSIM
+//~ #include "ether.h"
+//~ #endif
 
-#if CONTIKI_TARGET_NETSIM
-#include "ether.h"
-#endif
+//~ #include <string.h>
+//~ #include <stdio.h>
+//~ #include <stddef.h>
 
-#include <string.h>
-#include <stdio.h>
-#include <stddef.h>
-
-struct adv_msg {
-  uint16_t val;
-};
+#include "include/user/net/rime/neighbor-discovery-object.h"
 
 #define DEBUG 0
 #if DEBUG
@@ -70,6 +67,10 @@ struct adv_msg {
 #else
 #define PRINTF(...)
 #endif
+
+struct adv_msg {
+  uint16_t val;
+};
 
 /*---------------------------------------------------------------------------*/
 static void

@@ -42,16 +42,12 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "contiki.h"
-#include "net/rime.h"
-#include "net/rime/rmh.h"
+#include "contiki-conf.h"
+#include "src/user/net/rime/rmh.h"
 
-struct data_hdr {
-  rimeaddr_t dest;
-  rimeaddr_t originator;
-  uint8_t hops;
-  uint8_t max_rexmits;
-};
+//~ #include "include/system/hil/net/rime.h"
+
+#include "include/user/net/rime/rmh-object.h"
 
 #define DEBUG 0
 #if DEBUG
@@ -60,6 +56,13 @@ struct data_hdr {
 #else
 #define PRINTF(...)
 #endif
+
+struct data_hdr {
+  rimeaddr_t dest;
+  rimeaddr_t originator;
+  uint8_t hops;
+  uint8_t max_rexmits;
+};
 
 /*---------------------------------------------------------------------------*/
 static void

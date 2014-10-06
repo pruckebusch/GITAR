@@ -59,9 +59,9 @@
 #ifndef __RUDOLPH1_H__
 #define __RUDOLPH1_H__
 
-#include "net/rime/trickle.h"
-#include "net/rime/ipolite.h"
-#include "sys/timer/ctimer.h"
+#include "include/user/net/rime/trickle.h"
+#include "include/user/net/rime/ipolite.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
 struct rudolph1_conn;
 
@@ -90,8 +90,7 @@ struct rudolph1_conn {
   uint8_t nacks;
 };
 
-void rudolph1_open(struct rudolph1_conn *c, uint16_t channel,
-		   const struct rudolph1_callbacks *cb);
+void rudolph1_open(struct rudolph1_conn *c, uint16_t channel,const struct rudolph1_callbacks *cb);
 void rudolph1_close(struct rudolph1_conn *c);
 void rudolph1_send(struct rudolph1_conn *c, clock_time_t send_interval);
 void rudolph1_stop(struct rudolph1_conn *c);

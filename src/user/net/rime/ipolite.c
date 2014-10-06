@@ -42,19 +42,14 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "net/rime.h"
-#include "net/rime/ipolite.h"
-#include "lib/util/random.h"
+#include "src/user/net/rime/ipolite.h"
 
-#include <string.h>
+#include "include/system/hil/lib/util/random.h"
 
-#ifndef MAX
-#define MAX(a, b) ((a) > (b)? (a) : (b))
-#endif /* MAX */
+//~ #include "net/rime.h"
+//~ #include <string.h>
 
-#ifndef MIN
-#define MIN(a, b) ((a) < (b)? (a) : (b))
-#endif /* MIN */
+#include "include/user/net/rime/ipolite-object.h"
 
 #define DEBUG 0
 #if DEBUG
@@ -63,6 +58,14 @@
 #else
 #define PRINTF(...)
 #endif
+
+#ifndef MAX
+#define MAX(a, b) ((a) > (b)? (a) : (b))
+#endif /* MAX */
+
+#ifndef MIN
+#define MIN(a, b) ((a) < (b)? (a) : (b))
+#endif /* MIN */
 
 /*---------------------------------------------------------------------------*/
 static void

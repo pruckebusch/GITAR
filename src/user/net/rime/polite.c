@@ -42,11 +42,14 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "net/rime.h"
-#include "net/rime/polite.h"
-#include "lib/util/random.h"
+#include "src/user/net/rime/polite.h"
 
-#include <string.h>
+#include "include/system/hil/lib/util/random.h"
+
+//~ #include "include/system/hil/net/rime.h"
+//~ #include <string.h>
+
+#include "include/user/net/rime/polite-object.h"
 
 #ifndef MAX
 #define MAX(a,b) ((a) > (b)? (a) : (b))

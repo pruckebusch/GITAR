@@ -57,10 +57,10 @@
 #ifndef __TRICKLE_H__
 #define __TRICKLE_H__
 
-#include "sys/timer/ctimer.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
-#include "net/rime/broadcast.h"
-#include "net/rime/queuebuf.h"
+#include "include/user/net/rime/broadcast.h"
+#include "include/system/hil/net/rime/queuebuf.h"
 
 #define TRICKLE_ATTRIBUTES  { PACKETBUF_ATTR_EPACKET_ID, PACKETBUF_ATTR_BIT * 8 },\
                             BROADCAST_ATTRIBUTES
@@ -83,8 +83,7 @@ struct trickle_conn {
   uint8_t duplicates;
 };
 
-void trickle_open(struct trickle_conn *c, clock_time_t interval,
-		  uint16_t channel, const struct trickle_callbacks *cb);
+void trickle_open(struct trickle_conn *c, clock_time_t interval,uint16_t channel, const struct trickle_callbacks *cb);
 void trickle_close(struct trickle_conn *c);
 
 void trickle_send(struct trickle_conn *c);

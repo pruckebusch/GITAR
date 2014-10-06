@@ -59,8 +59,8 @@
 #ifndef __RUDOLPH2_H__
 #define __RUDOLPH2_H__
 
-#include "net/rime/polite.h"
-#include "sys/timer/ctimer.h"
+#include "include/user/net/rime/polite.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
 struct rudolph2_conn;
 
@@ -90,8 +90,7 @@ struct rudolph2_conn {
   uint8_t flags;
 };
 
-void rudolph2_open(struct rudolph2_conn *c, uint16_t channel,
-		   const struct rudolph2_callbacks *cb);
+void rudolph2_open(struct rudolph2_conn *c, uint16_t channel,const struct rudolph2_callbacks *cb);
 void rudolph2_close(struct rudolph2_conn *c);
 void rudolph2_send(struct rudolph2_conn *c, clock_time_t interval);
 void rudolph2_stop(struct rudolph2_conn *c);

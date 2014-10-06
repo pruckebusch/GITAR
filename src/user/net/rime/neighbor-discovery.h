@@ -59,8 +59,8 @@
 #ifndef __NEIGHBOR_DISCOVERY_H__
 #define __NEIGHBOR_DISCOVERY_H__
 
-#include "net/rime/broadcast.h"
-#include "sys/timer/ctimer.h"
+#include "include/user/net/rime/broadcast.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
 struct neighbor_discovery_conn;
 
@@ -79,12 +79,7 @@ struct neighbor_discovery_conn {
   uint16_t val;
 };
 
-void neighbor_discovery_open(struct neighbor_discovery_conn *c,
-			     uint16_t channel,
-			     clock_time_t initial,
-			     clock_time_t min,
-			     clock_time_t max,
-			     const struct neighbor_discovery_callbacks *u);
+void neighbor_discovery_open(struct neighbor_discovery_conn *c,uint16_t channel,clock_time_t initial,clock_time_t min,clock_time_t max,const struct neighbor_discovery_callbacks *u);
 void neighbor_discovery_close(struct neighbor_discovery_conn *c);
 void neighbor_discovery_set_val(struct neighbor_discovery_conn *c, uint16_t val);
 

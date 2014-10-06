@@ -65,8 +65,8 @@
 #ifndef __RMH_H__
 #define __RMH_H__
 
-#include "net/rime/runicast.h"
-#include "net/rime/rimeaddr.h"
+#include "include/user/net/rime/runicast.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
 
 struct rmh_conn;
 
@@ -91,11 +91,9 @@ struct rmh_conn {
   uint8_t num_rexmit;
 };
 
-void rmh_open(struct rmh_conn *c, uint16_t channel,
-	      const struct rmh_callbacks *u);
+void rmh_open(struct rmh_conn *c, uint16_t channel,const struct rmh_callbacks *u);
 void rmh_close(struct rmh_conn *c);
-int rmh_send(struct rmh_conn *c, rimeaddr_t *to, uint8_t num_rexmit,
-	     uint8_t max_hops);
+int rmh_send(struct rmh_conn *c, rimeaddr_t *to, uint8_t num_rexmit,uint8_t max_hops);
 
 #endif /* __RMH_H__ */
 /** @} */

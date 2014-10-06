@@ -42,13 +42,26 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "contiki.h"
-#include "net/rime.h"
-#include "net/rime/route.h"
-#include "net/rime/route-discovery.h"
+#include "contiki-conf.h"
+#include "src/user/net/rime/route-discovery.h"
 
-#include <stddef.h> /* For offsetof */
+//~ #include "include/system/hil/net/rime.h"
+#include "include/user/net/rime/route.h"
+
+//~ #include <stddef.h> /* For offsetof */
+//~ #if CONTIKI_TARGET_NETSIM
+//~ #include "ether.h"
+//~ #endif
+
+#include "include/user/net/rime/route-discovery-object.h"
+
+#define DEBUG 0
+#if DEBUG
 #include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 struct route_msg {
   rimeaddr_t dest;
@@ -62,19 +75,6 @@ struct rrep_hdr {
   rimeaddr_t dest;
   rimeaddr_t originator;
 };
-
-#if CONTIKI_TARGET_NETSIM
-#include "ether.h"
-#endif
-
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 /*---------------------------------------------------------------------------*/
 static char rrep_pending;		/* A reply for a request is pending. */

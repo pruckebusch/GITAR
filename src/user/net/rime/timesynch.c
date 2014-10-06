@@ -43,11 +43,15 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "contiki.h"
-#include "lib/util/random.h"
-#include "net/rime.h"
-#include "net/rime/timesynch.h"
-#include <string.h>
+#include "contiki-conf.h"
+#include "src/user/net/rime/timesynch.h"
+
+#include "include/system/hil/lib/util/random.h"
+//~ #include "include/system/hil/net/rime.h"
+
+//~ #include <string.h>
+
+#include "include/user/net/rime/timesynch-object.h"
 
 #if TIMESYNCH_CONF_ENABLED
 static int authority_level;

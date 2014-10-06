@@ -40,7 +40,7 @@
 #ifndef __RUCB_H__
 #define __RUCB_H__
 
-#include "net/rime/runicast.h"
+#include "include/user/net/rime/runicast.h"
 
 struct rucb_conn;
 
@@ -69,8 +69,7 @@ struct rucb_conn {
   int last_size;
 };
 
-void rucb_open(struct rucb_conn *c, uint16_t channel,
-	      const struct rucb_callbacks *u);
+void rucb_open(struct rucb_conn *c, uint16_t channel,const struct rucb_callbacks *u);
 void rucb_close(struct rucb_conn *c);
 
 int rucb_send(struct rucb_conn *c, const rimeaddr_t *receiver);

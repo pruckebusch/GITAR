@@ -42,9 +42,11 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "net/rime/stunicast.h"
-#include "net/rime.h"
-#include <string.h>
+#include "src/user/net/rime/stunicast.h"
+//~ #include "net/rime.h"
+//~ #include <string.h>
+
+#include "include/user/net/rime/stunicast-object.h"
 
 #define DEBUG 0
 #if DEBUG

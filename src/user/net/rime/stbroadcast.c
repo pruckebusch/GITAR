@@ -43,9 +43,11 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "net/rime/stbroadcast.h"
-#include "net/rime.h"
-#include <string.h>
+#include "src/user/net/rime/stbroadcast.h"
+//~ #include "include/system/hil/net/rime.h"
+//~ #include <string.h>
+
+#include "include/user/net/rime/stbroadcast-object.h"
 
 /*---------------------------------------------------------------------------*/
 static void

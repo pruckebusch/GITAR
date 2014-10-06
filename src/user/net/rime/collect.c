@@ -42,22 +42,33 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "contiki.h"
-#include "net/netstack.h"
-#include "net/rime.h"
-#include "net/rime/collect.h"
-#include "net/rime/collect-neighbor.h"
-#include "net/rime/collect-link-estimate.h"
+#include "contiki-conf.h"
+#include "src/user/net/rime/collect.h"
+#include "src/system/hil/net/rime/rimestats.h"
 
-#include "net/rime/packetqueue.h"
+#include "include/system/hil/net/netstack.h"
+#include "include/system/hil/net/rime/packetqueue.h"
+//~ #include "include/system/hil/dev/radio-sensor.h"
+#include "include/system/hil/lib/util/random.h"
 
-#include "dev/radio-sensor.h"
+#include "include/user/net/rime/collect-neighbor.h"
+#include "include/user/net/rime/collect-link-estimate.h"
 
-#include "lib/util/random.h"
+#include "include/user/net/rime/collect-object.h"
 
-#include <string.h>
+//~ #include <string.h>
+//~ #include <stdio.h>
+//~ #include <stddef.h>
+
+/* Debug definition: draw routing tree in Cooja. */
+#define DRAW_TREE 0
+#define DEBUG 0
+#if DEBUG
 #include <stdio.h>
-#include <stddef.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 static const struct packetbuf_attrlist attributes[] =
   {
@@ -175,7 +186,7 @@ MEMB(send_queue_memb, struct packetqueue_item, MAX_SENDING_QUEUE);
 
 
 /* Statistics structure */
-struct {
+static struct {
   uint32_t foundroute;
   uint32_t newparent;
   uint32_t routelost;
@@ -194,16 +205,6 @@ struct {
   uint32_t ackdrop;
   uint32_t timedout;
 } stats;
-
-/* Debug definition: draw routing tree in Cooja. */
-#define DRAW_TREE 0
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 /* Forward declarations. */
 static void send_queued_packet(struct collect_conn *c);

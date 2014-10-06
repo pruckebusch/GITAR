@@ -42,12 +42,22 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "net/rime/trickle.h"
-#include "lib/util/random.h"
+#include "src/user/net/rime/trickle.h"
+#include "include/system/hil/lib/util/random.h"
 
-#if CONTIKI_TARGET_NETSIM
-#include "ether.h"
+#include "include/user/net/rime/trickle-object.h"
+
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
 #endif
+
+//~ #if CONTIKI_TARGET_NETSIM
+//~ #include "ether.h"
+//~ #endif
 
 #define INTERVAL_MIN 1
 #define INTERVAL_MAX 4
@@ -60,15 +70,6 @@ static const struct packetbuf_attrlist attributes[] =
   {
     TRICKLE_ATTRIBUTES PACKETBUF_ATTR_LAST
   };
-
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 static int run_trickle(struct trickle_conn *c);
 /*---------------------------------------------------------------------------*/

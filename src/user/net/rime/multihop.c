@@ -42,18 +42,14 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "contiki.h"
-#include "net/rime.h"
-#include "net/rime/multihop.h"
-#include "net/rime/route.h"
+#include "contiki-conf.h"
+#include "src/user/net/rime/multihop.h"
 
-#include <string.h>
+#include "include/user/net/rime/route.h"
+//~ #include "net/rime.h"
+//~ #include <string.h>
 
-static const struct packetbuf_attrlist attributes[] =
-  {
-    MULTIHOP_ATTRIBUTES
-    PACKETBUF_ATTR_LAST
-  };
+#include "include/user/net/rime/multihop-object.h"
 
 #define DEBUG 0
 #if DEBUG
@@ -62,6 +58,12 @@ static const struct packetbuf_attrlist attributes[] =
 #else
 #define PRINTF(...)
 #endif
+
+static const struct packetbuf_attrlist attributes[] =
+  {
+    MULTIHOP_ATTRIBUTES
+    PACKETBUF_ATTR_LAST
+  };
 
 /*---------------------------------------------------------------------------*/
 void

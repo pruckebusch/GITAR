@@ -43,10 +43,20 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "net/rime/runicast.h"
-#include "net/rime.h"
-#include <string.h>
+#include "src/user/net/rime/runicast.h"
+#include "src/system/hil/net/rime/rimestats.h"
 
+//~ #include <string.h>
+
+#include "include/user/net/rime/runicast-object.h"
+
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 #ifdef RUNICAST_CONF_REXMIT_TIME
 #define REXMIT_TIME RUNICAST_CONF_REXMIT_TIME
@@ -59,14 +69,6 @@ static const struct packetbuf_attrlist attributes[] =
     RUNICAST_ATTRIBUTES
     PACKETBUF_ATTR_LAST
   };
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 /*---------------------------------------------------------------------------*/
 static void

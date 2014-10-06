@@ -33,75 +33,112 @@ Include system level
 
 // Include SYS
 // Contiki Process
-#include "sys/process/process.h"
-#include "sys/process/autostart.h"
-#include "sys/process/pt.h"
+#include "src/system/hil/sys/process/process.h"
+#include "src/system/hil/sys/process/autostart.h"
+#include "src/system/hil/sys/process/pt.h"
 // Contiki Timers
-#include "sys/timer/timer.h"
-#include "sys/timer/ctimer.h"
-#include "sys/timer/etimer.h"
-#include "sys/timer/rtimer.h"
-#include "sys/timer/clock.h"
+#include "src/system/hil/sys/timer/timer.h"
+#include "src/system/hil/sys/timer/ctimer.h"
+#include "src/system/hil/sys/timer/etimer.h"
+#include "src/system/hil/sys/timer/rtimer.h"
+#include "src/system/hil/sys/timer/clock.h"
 
 // Include Lib
 // Contiki loader
-#include "lib/loader/loader.h"
+#include "src/system/hil/lib/loader/loader.h"
 
 // Contiki file system
 #include "cfs-coffee-arch.h"
-#include "lib/cfs/cfs-coffee.h"
+#include "src/system/hil/lib/cfs/cfs-coffee.h"
 
-// Contiki rime
-#include "net/rime/rimeaddr.h"
+// Contiki net
+#include "src/system/hil/net/rime/rimeaddr.h"
+#if WITH_UIP  || WITH_UIP6 || WITH_RIME
+#include "src/system/hil/net/netstack.h"
+#endif
 
 // Contiki Util
-#include "lib/util/random.h"
-#include "lib/util/node-id.h"
-#include "lib/util/energest.h"
-#include "lib/util/crc16.h"
-//#include "lib/util/printf-debug.h"
+#include "src/system/hil/lib/util/random.h"
+#include "src/system/hil/lib/util/node-id.h"
+#include "src/system/hil/lib/util/energest.h"
+#include "src/system/hil/lib/util/crc16.h"
+//#include "src/system/hil/lib/util/printf-debug.h"
 
-#include "types/error.h"
+#include "src/system/hil/types/error.h"
 
 // Contiki HIL dev
-#include "dev/leds.h"
+#include "src/system/hil/dev/leds.h"
 #if DEBUG
-#include "dev/serial-line.h"
+#include "src/system/hil/dev/serial-line.h"
 #endif
-#include "dev/button-sensor.h"
-#include "dev/battery-sensor.h"
+#include "src/system/hil/dev/button-sensor.h"
+#include "src/system/hil/dev/battery-sensor.h"
 
 /*
 Include kernel level
 */
 
-#include "kernel.h"
-#include "kernel-config.h"
-#include "system-facade.h"
+#include "src/kernel/core/runtime-mgmt/kernel.h"
+#include "src/kernel/core/runtime-mgmt/kernel-config.h"
+#include "src/kernel/system-facade/system-facade.h"
 
-// Include HIL component providers
-// Contiki SYS
-#include "stimer-provider.h"
-#include "clock-provider.h"
-#include "ctimer-provider.h"
-#include "etimer-provider.h"
-#include "process-provider.h"
-#include "timer-provider.h"
-#include "rtimer-provider.h"
-// Contiki LIB
-#include "cfs-provider.h"
-#include "elfloader-provider.h"
-#include "memb-provider.h"
-//#include "mmem-provider.h"
-#include "list-provider.h"
-#include "packetbuf-provider.h"
-#include "random-provider.h"
-#include "rimeaddr-provider.h"
-#include "leds-provider.h"
-// Contiki DEV
-#if DEBUG
-#include "serial-line-provider.h"
+// Include HIL component objects
+#if WITH_RIME
+	//contiki system net
+#include "include/system/hil/net/rime-object.h"
+#include "include/system/hil/net/netstack-object.h"
+//contiki system net mac
+//~ #include "include/system/hil/net/mac/phase-object.h"
+//~ #include "include/system/hil/net/mac/xmac-object.h"
+//~ #include "include/system/hil/net/mac/frame802154-object.h"
+//~ #include "include/system/hil/net/mac/csma-object.h"
+//contiki system net rime
+#include "include/system/hil/net/rime/broadcast-announcement-object.h"
+#include "include/system/hil/net/rime/rimeaddr-object.h"
+#include "include/system/hil/net/rime/announcement-object.h"
+#include "include/system/hil/net/rime/queuebuf-object.h"
+#include "include/system/hil/net/rime/packetbuf-object.h"
+#include "include/system/hil/net/rime/chameleon-object.h"
+#include "include/system/hil/net/rime/packetqueue-object.h"
+#include "include/system/hil/net/rime/abc-object.h"
+#include "include/system/hil/net/rime/channel-object.h"
 #endif
+//contiki system sys timer
+#include "include/system/hil/sys/timer/rtimer-object.h"
+#include "include/system/hil/sys/timer/etimer-object.h"
+#include "include/system/hil/sys/timer/clock-object.h"
+#include "include/system/hil/sys/timer/timer-object.h"
+#include "include/system/hil/sys/timer/stimer-object.h"
+#include "include/system/hil/sys/timer/ctimer-object.h"
+//contiki system sys process
+#include "include/system/hil/sys/process/autostart-object.h"
+#include "include/system/hil/sys/process/mt-object.h"
+#include "include/system/hil/sys/process/process-object.h"
+//contiki system dev
+#include "include/system/hil/dev/leds-object.h"
+#if DEBUG
+#include "include/system/hil/dev/serial-line-object.h"
+#endif
+#include "include/system/hil/dev/sensors-object.h"
+//~ #include "include/system/hil/dev/watchdog-object.h"
+//~ #include "include/system/hil/dev/xmem-object.h"
+//~ #include "include/system/hil/dev/spi-object.h"
+//contiki system lib loader
+#include "include/system/hil/lib/loader/symtab-object.h"
+#include "include/system/hil/lib/loader/elfloader-object.h"
+//contiki system lib util
+#include "include/system/hil/lib/util/node-id-object.h"
+#include "include/system/hil/lib/util/compower-object.h"
+#include "include/system/hil/lib/util/ringbuf-object.h"
+#include "include/system/hil/lib/util/crc16-object.h"
+#include "include/system/hil/lib/util/list-object.h"
+#include "include/system/hil/lib/util/random-object.h"
+#include "include/system/hil/lib/util/memb-object.h"
+#include "include/system/hil/lib/util/energest-object.h"
+//contiki system lib cfs
+#include "include/system/hil/lib/cfs/cfs-object.h"
+#include "include/system/hil/lib/cfs/cfs-coffee-object.h"
+
 #include "gpio-z1.h"
 
 SENSORS(&button_sensor);
@@ -144,17 +181,17 @@ static void set_rime_addr(void) {
   PRINTF("%d\n", addr.u8[i]);
 }
 /*---------------------------------------------------------------------------*/
-static void
-print_processes(struct process * const processes[])
-{
-  /*  const struct process * const * p = processes;*/
-  PRINTF("Starting");
-  while(*processes != NULL) {
-    PRINTF(" '%s'", (*processes)->name);
-    processes++;
-  }
-  putchar('\n');
-}
+//~ static void
+//~ print_processes(const struct process * processes[])
+//~ {
+  //~ /*  const struct process * const * p = processes;*/
+  //~ PRINTF("Starting");
+  //~ while(*processes != NULL) {
+    //~ PRINTF(" '%s'", (*processes)->name);
+    //~ processes++;
+  //~ }
+  //~ putchar('\n');
+//~ }
 
 static void 
 gpio_conf_init(){
@@ -279,6 +316,13 @@ error_t system_init(){
     PRINTF("Node id is not set.\n");
   }
 
+#if WITH_UIP  || WITH_UIP6 || WITH_RIME
+	#warning Adding netstack initialisers!!!
+	NETSTACK_RDC.init();
+  NETSTACK_MAC.init();
+  NETSTACK_NETWORK.init();
+#endif
+
 #if DEBUG
   uart0_set_input(serial_line_input_byte);
   serial_line_init();
@@ -302,9 +346,11 @@ error_t system_init(){
 
 error_t system_start(){
 	 
-  print_processes(autostart_processes);
+  //~ print_processes(autostart_processes);
+  putchar('\n');
+  PRINTF("Starting processes \n");
 	autostart_start(autostart_processes);
-
+	PRINTF("Starting watchdog \n");
 	watchdog_start();
 
 	return SUCCESS;
@@ -312,30 +358,46 @@ error_t system_start(){
 
 /*---------------------------------------------------------------------------*/
 error_t system_register_hil_components(){
-
-	kernel_add_hil_cmp(&process);
-	kernel_add_hil_cmp(&ctimer);
-	kernel_add_hil_cmp(&etimer);
-	kernel_add_hil_cmp(&clock);
-	kernel_add_hil_cmp(&timer);
-	kernel_add_hil_cmp(&rtimer);
-	
-	kernel_add_hil_cmp(&packetbuf);
-	kernel_add_hil_cmp(&rimeaddr);
-	kernel_add_hil_cmp(&list);
-	kernel_add_hil_cmp(&random);
-	#if DEBUG
-	kernel_add_hil_cmp(&serial_line);
+	#if WITH_RIME
+	abc_object_init();
+	announcement_object_init();
+	broadcast_announcement_object_init();
+	chameleon_object_init();
+	channel_object_init();
+	netstack_object_init();
+	packetbuf_object_init();
+	packetqueue_object_init();
+	queuebuf_object_init();
+	rimeaddr_object_init();
+	rime_object_init();
+	compower_object_init();
 	#endif
-	
-	kernel_add_hil_cmp(&cfs);
-	kernel_add_hil_cmp(&elfloader);
-	kernel_add_hil_cmp(&stimer);
-	kernel_add_hil_cmp(&memb);
-	//kernel_add_hil_cmp(&mmem);
-	
-	kernel_add_hil_cmp(&leds);
-	
+	autostart_object_init();
+	cfs_coffee_object_init();
+	cfs_object_init();
+	clock_object_init();
+	crc16_object_init();
+	ctimer_object_init();
+	elfloader_object_init();
+	energest_object_init();
+	etimer_object_init();
+	leds_object_init();
+	list_object_init();
+	memb_object_init();
+	mt_object_init();
+	node_id_object_init();
+	process_object_init();
+	random_object_init();
+	ringbuf_object_init();
+	rtimer_object_init();
+	sensors_object_init();
+	stimer_object_init();
+	symtab_object_init();
+	timer_object_init();
+	#if DEBUG
+	serial_line_object_init();
+	#endif
+	 
 	return SUCCESS;
 }
 

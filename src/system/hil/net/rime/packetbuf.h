@@ -417,9 +417,9 @@ packetbuf_addr(uint8_t type)
 }
 #else /* PACKETBUF_CONF_ATTRS_INLINE */
 int               packetbuf_set_attr(uint8_t type, const packetbuf_attr_t val);
-packetbuf_attr_t packetbuf_attr(uint8_t type);
+packetbuf_attr_t packetbuf_get_attr(uint8_t type);
 int               packetbuf_set_addr(uint8_t type, const rimeaddr_t *addr);
-const rimeaddr_t *packetbuf_addr(uint8_t type);
+const rimeaddr_t *packetbuf_get_addr(uint8_t type);
 #endif /* PACKETBUF_CONF_ATTRS_INLINE */
 
 void              packetbuf_attr_clear(void);

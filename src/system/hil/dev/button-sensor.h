@@ -36,6 +36,8 @@
 
 extern const struct sensors_sensor button_sensor;
 
+struct sensors_sensor* button_sensor_get();
+
 #define BUTTON_SENSOR "Button"
 
 #endif /* __BUTTON_SENSOR_H__ */

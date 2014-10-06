@@ -388,7 +388,7 @@ CCIF void process_post_synch(struct process *p, process_event_t ev, void* data);
  */
 CCIF void process_exit(struct process *p);
 
-
+CCIF struct process* process_get_current_process();
 /**
  * Get a pointer to the currently running process.
  *
@@ -398,7 +398,7 @@ CCIF void process_exit(struct process *p);
  *
  * \hideinitializer
  */
-#define PROCESS_CURRENT() process_current
+#define PROCESS_CURRENT() process_get_current_process()
 CCIF extern struct process *process_current;
 
 /**

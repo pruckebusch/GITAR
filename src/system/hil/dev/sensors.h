@@ -66,6 +66,8 @@ const struct sensors_sensor *sensors_first(void);
 
 void sensors_changed(const struct sensors_sensor *s);
 
+process_event_t sensors_get_sensors_event();
+
 extern process_event_t sensors_event;
 
 PROCESS_NAME(sensors_process);

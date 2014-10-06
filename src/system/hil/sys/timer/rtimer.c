@@ -106,3 +106,6 @@ rtimer_run_next(void)
   return;
 }
 /*---------------------------------------------------------------------------*/
+rtimer_clock_t rtimer_now(){
+	return rtimer_arch_now();
+}

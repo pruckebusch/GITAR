@@ -386,4 +386,8 @@ process_is_running(struct process *p)
   return p->state != PROCESS_STATE_NONE;
 }
 /*---------------------------------------------------------------------------*/
+struct process* process_get_current_process(){
+	return process_current;
+}
+/*---------------------------------------------------------------------------*/
 /** @} */

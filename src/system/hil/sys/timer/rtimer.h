@@ -118,6 +118,8 @@ int rtimer_set(struct rtimer *task, rtimer_clock_t time, rtimer_clock_t duration
  */
 void rtimer_run_next(void);
 
+rtimer_clock_t rtimer_now();
+
 /**
  * \brief      Get the current clock time
  * \return     The current time
@@ -128,7 +130,7 @@ void rtimer_run_next(void);
  *
  * \hideinitializer
  */
-#define RTIMER_NOW() rtimer_arch_now()
+#define RTIMER_NOW() rtimer_now()
 
 /**
  * \brief      Get the time that a task last was executed

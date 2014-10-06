@@ -291,7 +291,7 @@ packetbuf_set_attr(uint8_t type, const packetbuf_attr_t val)
 }
 /*---------------------------------------------------------------------------*/
 packetbuf_attr_t
-packetbuf_attr(uint8_t type)
+packetbuf_get_attr(uint8_t type)
 {
   return packetbuf_attrs[type].val;
 }
@@ -305,7 +305,7 @@ packetbuf_set_addr(uint8_t type, const rimeaddr_t *addr)
 }
 /*---------------------------------------------------------------------------*/
 const rimeaddr_t *
-packetbuf_addr(uint8_t type)
+packetbuf_get_addr(uint8_t type)
 {
   return &packetbuf_addrs[type - PACKETBUF_ADDR_FIRST].addr;
 }

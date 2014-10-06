@@ -103,6 +103,15 @@ int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2);
 void rimeaddr_set_node_addr(rimeaddr_t *addr);
 
 /**
+ * \brief      Get the address of the current node
+ * \return		The address
+ *
+ *             This function gets the Rime address of the node.
+ *
+ */
+rimeaddr_t* rimeaddr_get_node_addr();
+
+/**
  * \brief      The Rime address of the node
  *
  *             This variable contains the Rime address of the
@@ -112,6 +121,15 @@ void rimeaddr_set_node_addr(rimeaddr_t *addr);
  *
  */
 extern rimeaddr_t rimeaddr_node_addr;
+
+/**
+ * \brief      Get the null Rime address of the current node
+ * \return		The address
+ *
+ *             This function gets the null Rime address of the node.
+ *
+ */
+rimeaddr_t* rimeaddr_get_null();
 
 /**
  * \brief      The null Rime address

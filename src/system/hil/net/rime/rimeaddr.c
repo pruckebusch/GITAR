@@ -71,4 +71,12 @@ void rimeaddr_set_node_addr(rimeaddr_t *t)
   rimeaddr_copy(&rimeaddr_node_addr, t);
 }
 /*---------------------------------------------------------------------------*/
+rimeaddr_t* rimeaddr_get_node_addr(){
+	return &rimeaddr_node_addr;
+}
+/*---------------------------------------------------------------------------*/
+rimeaddr_t* rimeaddr_get_null(){
+	return &rimeaddr_null;
+}
+/*---------------------------------------------------------------------------*/
 /** @} */

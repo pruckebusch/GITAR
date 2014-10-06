@@ -136,3 +136,6 @@ PROCESS_THREAD(sensors_process, ev, data)
   PROCESS_END();
 }
 /*---------------------------------------------------------------------------*/
+process_event_t sensors_get_sensors_event(){
+		return sensors_event;
+}

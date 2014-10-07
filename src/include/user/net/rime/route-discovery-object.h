@@ -7,9 +7,8 @@
 static void route_discovery_object_init();
 
 static const void* route_discovery_cmpobj_functions[FUNCTION_ROUTE_DISCOVERY_LAST]={route_discovery_discover,route_discovery_close,route_discovery_open};
-static const struct process* route_discovery_cmpobj_processes[PROCESS_ROUTE_DISCOVERY_LAST] = {};
 
-static const component_t route_discovery_cmpobj = { { ROUTE_DISCOVERY, 2, 7, NET_COMPONENT, 15, "route_discovery"} , {route_discovery_cmpobj_functions, route_discovery_cmpobj_processes, FUNCTION_ROUTE_DISCOVERY_LAST, PROCESS_ROUTE_DISCOVERY_LAST},{&route_discovery_object_init, NULL, NULL}};
+static const component_t route_discovery_cmpobj = { { ROUTE_DISCOVERY, 2, 7, NET_COMPONENT} , {FUNCTION_ROUTE_DISCOVERY_LAST,route_discovery_cmpobj_functions} , {&route_discovery_object_init, NULL, NULL}};
 
 static void route_discovery_object_init(){
 	kernel_add_cmp(&route_discovery_cmpobj);

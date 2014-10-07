@@ -62,7 +62,7 @@
 #include "neighbor-discovery-constdef.h"
 
 static component_t* neighbor_discovery_cmpobj_ref;
-static const component_info_t neighbor_discovery_cmpobj_info = {NEIGHBOR_DISCOVERY, 2, 7, NET_COMPONENT, 18, "neighbor_discovery"};
+static const component_info_t neighbor_discovery_cmpobj_info = {NEIGHBOR_DISCOVERY, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t neighbor_discovery_cmp_user;
 
 static void neighbor_discovery_object_stub_init(){
@@ -70,8 +70,8 @@ static void neighbor_discovery_object_stub_init(){
 }
 
 
-#include "include/user/net/rime/broadcast.h"
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "src/include/user/net/rime/broadcast.h"
+#include "src/include/system/hil/sys/timer/ctimer.h"
 
 struct neighbor_discovery_conn;
 

@@ -96,7 +96,7 @@
 #include "ipolite-constdef.h"
 
 static component_t* ipolite_cmpobj_ref;
-static const component_info_t ipolite_cmpobj_info = {IPOLITE, 2, 7, NET_COMPONENT, 7, "ipolite"};
+static const component_info_t ipolite_cmpobj_info = {IPOLITE, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t ipolite_cmp_user;
 
 static void ipolite_object_stub_init(){
@@ -104,10 +104,10 @@ static void ipolite_object_stub_init(){
 }
 
 
-#include "include/user/net/rime/broadcast.h"
+#include "src/include/user/net/rime/broadcast.h"
 
-#include "include/system/hil/sys/timer/ctimer.h"
-#include "include/system/hil/net/rime/queuebuf.h"
+#include "src/include/system/hil/sys/timer/ctimer.h"
+#include "src/include/system/hil/net/rime/queuebuf.h"
 
 struct ipolite_conn;
 

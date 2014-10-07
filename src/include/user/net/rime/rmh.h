@@ -68,7 +68,7 @@
 #include "rmh-constdef.h"
 
 static component_t* rmh_cmpobj_ref;
-static const component_info_t rmh_cmpobj_info = {RMH, 2, 7, NET_COMPONENT, 3, "rmh"};
+static const component_info_t rmh_cmpobj_info = {RMH, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t rmh_cmp_user;
 
 static void rmh_object_stub_init(){
@@ -76,8 +76,8 @@ static void rmh_object_stub_init(){
 }
 
 
-#include "include/user/net/rime/runicast.h"
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "src/include/user/net/rime/runicast.h"
+#include "src/include/system/hil/net/rime/rimeaddr.h"
 
 struct rmh_conn;
 

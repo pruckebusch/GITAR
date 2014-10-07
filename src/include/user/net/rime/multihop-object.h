@@ -7,9 +7,8 @@
 static void multihop_object_init();
 
 static const void* multihop_cmpobj_functions[FUNCTION_MULTIHOP_LAST]={multihop_send,multihop_resend,multihop_open,multihop_close};
-static const struct process* multihop_cmpobj_processes[PROCESS_MULTIHOP_LAST] = {};
 
-static const component_t multihop_cmpobj = { { MULTIHOP, 2, 7, NET_COMPONENT, 8, "multihop"} , {multihop_cmpobj_functions, multihop_cmpobj_processes, FUNCTION_MULTIHOP_LAST, PROCESS_MULTIHOP_LAST},{&multihop_object_init, NULL, NULL}};
+static const component_t multihop_cmpobj = { { MULTIHOP, 2, 7, NET_COMPONENT} , {FUNCTION_MULTIHOP_LAST,multihop_cmpobj_functions} , {&multihop_object_init, NULL, NULL}};
 
 static void multihop_object_init(){
 	kernel_add_cmp(&multihop_cmpobj);

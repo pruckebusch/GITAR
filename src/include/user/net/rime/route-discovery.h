@@ -60,7 +60,7 @@
 #include "route-discovery-constdef.h"
 
 static component_t* route_discovery_cmpobj_ref;
-static const component_info_t route_discovery_cmpobj_info = {ROUTE_DISCOVERY, 2, 7, NET_COMPONENT, 15, "route_discovery"};
+static const component_info_t route_discovery_cmpobj_info = {ROUTE_DISCOVERY, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t route_discovery_cmp_user;
 
 static void route_discovery_object_stub_init(){
@@ -68,9 +68,9 @@ static void route_discovery_object_stub_init(){
 }
 
 
-#include "include/user/net/rime/unicast.h"
-#include "include/user/net/rime/netflood.h"
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "src/include/user/net/rime/unicast.h"
+#include "src/include/user/net/rime/netflood.h"
+#include "src/include/system/hil/sys/timer/ctimer.h"
 
 struct route_discovery_conn;
 

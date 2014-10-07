@@ -7,9 +7,8 @@
 static void trickle_object_init();
 
 static const void* trickle_cmpobj_functions[FUNCTION_TRICKLE_LAST]={trickle_close,trickle_open,trickle_send};
-static const struct process* trickle_cmpobj_processes[PROCESS_TRICKLE_LAST] = {};
 
-static const component_t trickle_cmpobj = { { TRICKLE, 2, 7, NET_COMPONENT, 7, "trickle"} , {trickle_cmpobj_functions, trickle_cmpobj_processes, FUNCTION_TRICKLE_LAST, PROCESS_TRICKLE_LAST},{&trickle_object_init, NULL, NULL}};
+static const component_t trickle_cmpobj = { { TRICKLE, 2, 7, NET_COMPONENT} , {FUNCTION_TRICKLE_LAST,trickle_cmpobj_functions} , {&trickle_object_init, NULL, NULL}};
 
 static void trickle_object_init(){
 	kernel_add_cmp(&trickle_cmpobj);

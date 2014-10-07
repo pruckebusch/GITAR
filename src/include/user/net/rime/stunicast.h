@@ -75,7 +75,7 @@
 #include "stunicast-constdef.h"
 
 static component_t* stunicast_cmpobj_ref;
-static const component_info_t stunicast_cmpobj_info = {STUNICAST, 2, 7, NET_COMPONENT, 9, "stunicast"};
+static const component_info_t stunicast_cmpobj_info = {STUNICAST, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t stunicast_cmp_user;
 
 static void stunicast_object_stub_init(){
@@ -83,10 +83,10 @@ static void stunicast_object_stub_init(){
 }
 
 
-#include "include/user/net/rime/unicast.h"
+#include "src/include/user/net/rime/unicast.h"
 
-#include "include/system/hil/sys/timer/ctimer.h"
-#include "include/system/hil/net/rime/queuebuf.h"
+#include "src/include/system/hil/sys/timer/ctimer.h"
+#include "src/include/system/hil/net/rime/queuebuf.h"
 
 struct stunicast_conn;
 

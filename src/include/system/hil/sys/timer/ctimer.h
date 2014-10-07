@@ -57,14 +57,14 @@
 #include "ctimer-constdef.h"
 
 static hil_component_t* ctimer_cmpobj_ref;
-static const component_info_t ctimer_cmpobj_info = {CTIMER, 2, 7, HIL_COMPONENT, 6, "ctimer"};
+static const component_info_t ctimer_cmpobj_info = {CTIMER, 2, 7, HIL_COMPONENT};
 
 static void ctimer_object_stub_init(){
 	 ctimer_cmpobj_ref = kernel_get_hil_cmp_ref(&ctimer_cmpobj_info);
 }
 
 
-#include "include/system/hil/sys/timer/etimer.h"
+#include "src/include/system/hil/sys/timer/etimer.h"
 
 struct ctimer {
   struct ctimer *next;

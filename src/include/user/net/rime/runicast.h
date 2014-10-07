@@ -81,7 +81,7 @@
 #include "runicast-constdef.h"
 
 static component_t* runicast_cmpobj_ref;
-static const component_info_t runicast_cmpobj_info = {RUNICAST, 2, 7, NET_COMPONENT, 8, "runicast"};
+static const component_info_t runicast_cmpobj_info = {RUNICAST, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t runicast_cmp_user;
 
 static void runicast_object_stub_init(){
@@ -89,7 +89,7 @@ static void runicast_object_stub_init(){
 }
 
 
-#include "include/user/net/rime/stunicast.h"
+#include "src/include/user/net/rime/stunicast.h"
 
 struct runicast_conn;
 

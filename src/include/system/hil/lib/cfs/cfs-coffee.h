@@ -41,14 +41,14 @@
 #include "cfs-coffee-constdef.h"
 
 static hil_component_t* cfs_coffee_cmpobj_ref;
-static const component_info_t cfs_coffee_cmpobj_info = {CFS_COFFEE, 2, 7, HIL_COMPONENT, 10, "cfs_coffee"};
+static const component_info_t cfs_coffee_cmpobj_info = {CFS_COFFEE, 2, 7, HIL_COMPONENT};
 
 static void cfs_coffee_object_stub_init(){
 	 cfs_coffee_cmpobj_ref = kernel_get_hil_cmp_ref(&cfs_coffee_cmpobj_info);
 }
 
 
-#include "include/system/hil/lib/cfs/cfs.h"
+#include "src/include/system/hil/lib/cfs/cfs.h"
 
 /**
  * Instruct Coffee that the access pattern to this file is adapted to 

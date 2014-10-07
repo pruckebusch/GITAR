@@ -7,9 +7,8 @@
 static void rudolph2_object_init();
 
 static const void* rudolph2_cmpobj_functions[FUNCTION_RUDOLPH2_LAST]={rudolph2_close,rudolph2_open,rudolph2_stop,rudolph2_send};
-static const struct process* rudolph2_cmpobj_processes[PROCESS_RUDOLPH2_LAST] = {};
 
-static const component_t rudolph2_cmpobj = { { RUDOLPH2, 2, 7, NET_COMPONENT, 8, "rudolph2"} , {rudolph2_cmpobj_functions, rudolph2_cmpobj_processes, FUNCTION_RUDOLPH2_LAST, PROCESS_RUDOLPH2_LAST},{&rudolph2_object_init, NULL, NULL}};
+static const component_t rudolph2_cmpobj = { { RUDOLPH2, 2, 7, NET_COMPONENT} , {FUNCTION_RUDOLPH2_LAST,rudolph2_cmpobj_functions} , {&rudolph2_object_init, NULL, NULL}};
 
 static void rudolph2_object_init(){
 	kernel_add_cmp(&rudolph2_cmpobj);

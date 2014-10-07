@@ -7,9 +7,8 @@
 static void collect_object_init();
 
 static const void* collect_cmpobj_functions[FUNCTION_COLLECT_LAST]={collect_set_keepalive,collect_close,collect_open,collect_print_stats,collect_depth,collect_set_sink,collect_parent,collect_send};
-static const struct process* collect_cmpobj_processes[PROCESS_COLLECT_LAST] = {};
 
-static const component_t collect_cmpobj = { { COLLECT, 2, 7, NET_COMPONENT, 7, "collect"} , {collect_cmpobj_functions, collect_cmpobj_processes, FUNCTION_COLLECT_LAST, PROCESS_COLLECT_LAST},{&collect_object_init, NULL, NULL}};
+static const component_t collect_cmpobj = { { COLLECT, 2, 7, NET_COMPONENT} , {FUNCTION_COLLECT_LAST,collect_cmpobj_functions} , {&collect_object_init, NULL, NULL}};
 
 static void collect_object_init(){
 	kernel_add_cmp(&collect_cmpobj);

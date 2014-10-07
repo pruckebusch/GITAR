@@ -43,14 +43,14 @@
 #include "xmac-constdef.h"
 
 static hil_component_t* xmac_cmpobj_ref;
-static const component_info_t xmac_cmpobj_info = {XMAC, 2, 7, HIL_COMPONENT, 4, "xmac"};
+static const component_info_t xmac_cmpobj_info = {XMAC, 2, 7, HIL_COMPONENT};
 
 static void xmac_object_stub_init(){
 	 xmac_cmpobj_ref = kernel_get_hil_cmp_ref(&xmac_cmpobj_info);
 }
 
 
-#include "include/system/hil/sys/timer/rtimer.h"
+#include "src/include/system/hil/sys/timer/rtimer.h"
 #include "net/mac/rdc.h"
 #include "dev/radio.h"
 

@@ -35,7 +35,7 @@
 #include "random-constdef.h"
 
 static hil_component_t* random_cmpobj_ref;
-static const component_info_t random_cmpobj_info = {RANDOM, 2, 7, HIL_COMPONENT, 6, "random"};
+static const component_info_t random_cmpobj_info = {RANDOM, 2, 7, HIL_COMPONENT};
 
 static void random_object_stub_init(){
 	 random_cmpobj_ref = kernel_get_hil_cmp_ref(&random_cmpobj_info);

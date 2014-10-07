@@ -7,9 +7,8 @@
 static void broadcast_object_init();
 
 static const void* broadcast_cmpobj_functions[FUNCTION_BROADCAST_LAST]={broadcast_send,broadcast_open,broadcast_close};
-static const struct process* broadcast_cmpobj_processes[PROCESS_BROADCAST_LAST] = {};
 
-static const component_t broadcast_cmpobj = { { BROADCAST, 2, 7, NET_COMPONENT, 9, "broadcast"} , {broadcast_cmpobj_functions, broadcast_cmpobj_processes, FUNCTION_BROADCAST_LAST, PROCESS_BROADCAST_LAST},{&broadcast_object_init, NULL, NULL}};
+static const component_t broadcast_cmpobj = { { BROADCAST, 2, 7, NET_COMPONENT} , {FUNCTION_BROADCAST_LAST,broadcast_cmpobj_functions} , {&broadcast_object_init, NULL, NULL}};
 
 static void broadcast_object_init(){
 	kernel_add_cmp(&broadcast_cmpobj);

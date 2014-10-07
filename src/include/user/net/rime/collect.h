@@ -62,7 +62,7 @@
 #include "collect-constdef.h"
 
 static component_t* collect_cmpobj_ref;
-static const component_info_t collect_cmpobj_info = {COLLECT, 2, 7, NET_COMPONENT, 7, "collect"};
+static const component_info_t collect_cmpobj_info = {COLLECT, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t collect_cmp_user;
 
 static void collect_object_stub_init(){
@@ -70,15 +70,15 @@ static void collect_object_stub_init(){
 }
 
 
-#include "include/user/net/rime/unicast.h"
+#include "src/include/user/net/rime/unicast.h"
 
-#include "include/system/hil/net/rime/packetqueue.h"
-#include "include/system/hil/sys/timer/ctimer.h"
-#include "include/system/hil/lib/util/list.h"
-#include "include/system/hil/net/rime/announcement.h"
+#include "src/include/system/hil/net/rime/packetqueue.h"
+#include "src/include/system/hil/sys/timer/ctimer.h"
+#include "src/include/system/hil/lib/util/list.h"
+#include "src/include/system/hil/net/rime/announcement.h"
 
-#include "include/user/net/rime/neighbor-discovery.h"
-#include "include/user/net/rime/collect-neighbor.h"
+#include "src/include/user/net/rime/neighbor-discovery.h"
+#include "src/include/user/net/rime/collect-neighbor.h"
 
 
 #define COLLECT_PACKET_ID_BITS 8

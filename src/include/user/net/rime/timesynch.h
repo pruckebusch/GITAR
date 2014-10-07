@@ -70,7 +70,7 @@
 #include "timesynch-constdef.h"
 
 static component_t* timesynch_cmpobj_ref;
-static const component_info_t timesynch_cmpobj_info = {TIMESYNCH, 2, 7, NET_COMPONENT, 9, "timesynch"};
+static const component_info_t timesynch_cmpobj_info = {TIMESYNCH, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t timesynch_cmp_user;
 
 static void timesynch_object_stub_init(){
@@ -79,7 +79,7 @@ static void timesynch_object_stub_init(){
 
 
 //~ #include "net/mac/mac.h"
-#include "include/system/hil/sys/timer/rtimer.h"
+#include "src/include/system/hil/sys/timer/rtimer.h"
 
 /**
  * \brief      Initialize the timesynch module

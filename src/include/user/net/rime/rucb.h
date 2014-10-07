@@ -43,7 +43,7 @@
 #include "rucb-constdef.h"
 
 static component_t* rucb_cmpobj_ref;
-static const component_info_t rucb_cmpobj_info = {RUCB, 2, 7, NET_COMPONENT, 4, "rucb"};
+static const component_info_t rucb_cmpobj_info = {RUCB, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t rucb_cmp_user;
 
 static void rucb_object_stub_init(){
@@ -51,7 +51,7 @@ static void rucb_object_stub_init(){
 }
 
 
-#include "include/user/net/rime/runicast.h"
+#include "src/include/user/net/rime/runicast.h"
 
 struct rucb_conn;
 

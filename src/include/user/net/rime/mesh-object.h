@@ -7,9 +7,8 @@
 static void mesh_object_init();
 
 static const void* mesh_cmpobj_functions[FUNCTION_MESH_LAST]={mesh_open,mesh_close,mesh_ready,mesh_send};
-static const struct process* mesh_cmpobj_processes[PROCESS_MESH_LAST] = {};
 
-static const component_t mesh_cmpobj = { { MESH, 2, 7, NET_COMPONENT, 4, "mesh"} , {mesh_cmpobj_functions, mesh_cmpobj_processes, FUNCTION_MESH_LAST, PROCESS_MESH_LAST},{&mesh_object_init, NULL, NULL}};
+static const component_t mesh_cmpobj = { { MESH, 2, 7, NET_COMPONENT} , {FUNCTION_MESH_LAST,mesh_cmpobj_functions} , {&mesh_object_init, NULL, NULL}};
 
 static void mesh_object_init(){
 	kernel_add_cmp(&mesh_cmpobj);

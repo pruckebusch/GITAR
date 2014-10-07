@@ -68,7 +68,7 @@
 #include "broadcast-constdef.h"
 
 static component_t* broadcast_cmpobj_ref;
-static const component_info_t broadcast_cmpobj_info = {BROADCAST, 2, 7, NET_COMPONENT, 9, "broadcast"};
+static const component_info_t broadcast_cmpobj_info = {BROADCAST, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t broadcast_cmp_user;
 
 static void broadcast_object_stub_init(){

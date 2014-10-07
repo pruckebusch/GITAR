@@ -76,14 +76,14 @@
 #include "timer-constdef.h"
 
 static hil_component_t* timer_cmpobj_ref;
-static const component_info_t timer_cmpobj_info = {TIMER, 2, 7, HIL_COMPONENT, 5, "timer"};
+static const component_info_t timer_cmpobj_info = {TIMER, 2, 7, HIL_COMPONENT};
 
 static void timer_object_stub_init(){
 	 timer_cmpobj_ref = kernel_get_hil_cmp_ref(&timer_cmpobj_info);
 }
 
 
-#include "include/system/hil/sys/timer/clock.h"
+#include "src/include/system/hil/sys/timer/clock.h"
 
 /**
  * A timer.

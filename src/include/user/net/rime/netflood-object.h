@@ -7,9 +7,8 @@
 static void netflood_object_init();
 
 static const void* netflood_cmpobj_functions[FUNCTION_NETFLOOD_LAST]={netflood_open,netflood_close,netflood_send};
-static const struct process* netflood_cmpobj_processes[PROCESS_NETFLOOD_LAST] = {};
 
-static const component_t netflood_cmpobj = { { NETFLOOD, 2, 7, NET_COMPONENT, 8, "netflood"} , {netflood_cmpobj_functions, netflood_cmpobj_processes, FUNCTION_NETFLOOD_LAST, PROCESS_NETFLOOD_LAST},{&netflood_object_init, NULL, NULL}};
+static const component_t netflood_cmpobj = { { NETFLOOD, 2, 7, NET_COMPONENT} , {FUNCTION_NETFLOOD_LAST,netflood_cmpobj_functions} , {&netflood_object_init, NULL, NULL}};
 
 static void netflood_object_init(){
 	kernel_add_cmp(&netflood_cmpobj);

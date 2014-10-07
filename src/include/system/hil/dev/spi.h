@@ -42,7 +42,7 @@
 #include "spi-constdef.h"
 
 static hil_component_t* spi_cmpobj_ref;
-static const component_info_t spi_cmpobj_info = {SPI, 2, 7, HIL_COMPONENT, 3, "spi"};
+static const component_info_t spi_cmpobj_info = {SPI, 2, 7, HIL_COMPONENT};
 
 static void spi_object_stub_init(){
 	 spi_cmpobj_ref = kernel_get_hil_cmp_ref(&spi_cmpobj_info);

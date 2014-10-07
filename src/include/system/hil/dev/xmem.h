@@ -34,7 +34,7 @@
 #include "xmem-constdef.h"
 
 static hil_component_t* xmem_cmpobj_ref;
-static const component_info_t xmem_cmpobj_info = {XMEM, 2, 7, HIL_COMPONENT, 4, "xmem"};
+static const component_info_t xmem_cmpobj_info = {XMEM, 2, 7, HIL_COMPONENT};
 
 static void xmem_object_stub_init(){
 	 xmem_cmpobj_ref = kernel_get_hil_cmp_ref(&xmem_cmpobj_info);

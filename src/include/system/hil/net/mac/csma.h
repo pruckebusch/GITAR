@@ -44,7 +44,7 @@
 #include "csma-constdef.h"
 
 static hil_component_t* csma_cmpobj_ref;
-static const component_info_t csma_cmpobj_info = {CSMA, 2, 7, HIL_COMPONENT, 4, "csma"};
+static const component_info_t csma_cmpobj_info = {CSMA, 2, 7, HIL_COMPONENT};
 
 static void csma_object_stub_init(){
 	 csma_cmpobj_ref = kernel_get_hil_cmp_ref(&csma_cmpobj_info);

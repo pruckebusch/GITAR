@@ -50,7 +50,7 @@
 #include "leds-constdef.h"
 
 static hil_component_t* leds_cmpobj_ref;
-static const component_info_t leds_cmpobj_info = {LEDS, 2, 7, HIL_COMPONENT, 4, "leds"};
+static const component_info_t leds_cmpobj_info = {LEDS, 2, 7, HIL_COMPONENT};
 
 static void leds_object_stub_init(){
 	 leds_cmpobj_ref = kernel_get_hil_cmp_ref(&leds_cmpobj_info);

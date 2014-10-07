@@ -42,14 +42,14 @@
 #include "serial-line-constdef.h"
 
 static hil_component_t* serial_line_cmpobj_ref;
-static const component_info_t serial_line_cmpobj_info = {SERIAL_LINE, 2, 7, HIL_COMPONENT, 11, "serial_line"};
+static const component_info_t serial_line_cmpobj_info = {SERIAL_LINE, 2, 7, HIL_COMPONENT};
 
 static void serial_line_object_stub_init(){
 	 serial_line_cmpobj_ref = kernel_get_hil_cmp_ref(&serial_line_cmpobj_info);
 }
 
 
-#include "include/system/hil/sys/process/process.h"
+#include "src/include/system/hil/sys/process/process.h"
 
 /**
  * Event posted when a line of input has been received.

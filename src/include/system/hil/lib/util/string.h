@@ -5,7 +5,7 @@
 #include "string-constdef.h"
 
 static hil_component_t* string_cmpobj_ref;
-static const component_info_t string_cmpobj_info = {STRING, 2, 7, HIL_COMPONENT, 6, "string"};
+static const component_info_t string_cmpobj_info = {STRING, 2, 7, HIL_COMPONENT};
 
 static void string_object_stub_init(){
 	 string_cmpobj_ref = kernel_get_hil_cmp_ref(&string_cmpobj_info);

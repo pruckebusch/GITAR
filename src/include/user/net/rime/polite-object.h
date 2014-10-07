@@ -7,9 +7,8 @@
 static void polite_object_init();
 
 static const void* polite_cmpobj_functions[FUNCTION_POLITE_LAST]={polite_send,polite_cancel,polite_close,polite_open};
-static const struct process* polite_cmpobj_processes[PROCESS_POLITE_LAST] = {};
 
-static const component_t polite_cmpobj = { { POLITE, 2, 7, NET_COMPONENT, 6, "polite"} , {polite_cmpobj_functions, polite_cmpobj_processes, FUNCTION_POLITE_LAST, PROCESS_POLITE_LAST},{&polite_object_init, NULL, NULL}};
+static const component_t polite_cmpobj = { { POLITE, 2, 7, NET_COMPONENT} , {FUNCTION_POLITE_LAST,polite_cmpobj_functions} , {&polite_object_init, NULL, NULL}};
 
 static void polite_object_init(){
 	kernel_add_cmp(&polite_cmpobj);

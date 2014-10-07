@@ -65,15 +65,15 @@
 #include "etimer-constdef.h"
 
 static hil_component_t* etimer_cmpobj_ref;
-static const component_info_t etimer_cmpobj_info = {ETIMER, 2, 7, HIL_COMPONENT, 6, "etimer"};
+static const component_info_t etimer_cmpobj_info = {ETIMER, 2, 7, HIL_COMPONENT};
 
 static void etimer_object_stub_init(){
 	 etimer_cmpobj_ref = kernel_get_hil_cmp_ref(&etimer_cmpobj_info);
 }
 
 
-#include "include/system/hil/sys/timer/timer.h"
-#include "include/system/hil/sys/process/process.h"
+#include "src/include/system/hil/sys/timer/timer.h"
+#include "src/include/system/hil/sys/process/process.h"
 
 /**
  * A timer.

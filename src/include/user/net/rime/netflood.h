@@ -77,7 +77,7 @@
 #include "netflood-constdef.h"
 
 static component_t* netflood_cmpobj_ref;
-static const component_info_t netflood_cmpobj_info = {NETFLOOD, 2, 7, NET_COMPONENT, 8, "netflood"};
+static const component_info_t netflood_cmpobj_info = {NETFLOOD, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t netflood_cmp_user;
 
 static void netflood_object_stub_init(){
@@ -85,8 +85,8 @@ static void netflood_object_stub_init(){
 }
 
 
-#include "include/system/hil/net/rime/queuebuf.h"
-#include "include/user/net/rime/ipolite.h"
+#include "src/include/system/hil/net/rime/queuebuf.h"
+#include "src/include/user/net/rime/ipolite.h"
 
 struct netflood_conn;
 

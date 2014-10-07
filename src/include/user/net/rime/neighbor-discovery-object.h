@@ -7,9 +7,8 @@
 static void neighbor_discovery_object_init();
 
 static const void* neighbor_discovery_cmpobj_functions[FUNCTION_NEIGHBOR_DISCOVERY_LAST]={neighbor_discovery_start,neighbor_discovery_close,neighbor_discovery_set_val,neighbor_discovery_open};
-static const struct process* neighbor_discovery_cmpobj_processes[PROCESS_NEIGHBOR_DISCOVERY_LAST] = {};
 
-static const component_t neighbor_discovery_cmpobj = { { NEIGHBOR_DISCOVERY, 2, 7, NET_COMPONENT, 18, "neighbor_discovery"} , {neighbor_discovery_cmpobj_functions, neighbor_discovery_cmpobj_processes, FUNCTION_NEIGHBOR_DISCOVERY_LAST, PROCESS_NEIGHBOR_DISCOVERY_LAST},{&neighbor_discovery_object_init, NULL, NULL}};
+static const component_t neighbor_discovery_cmpobj = { { NEIGHBOR_DISCOVERY, 2, 7, NET_COMPONENT} , {FUNCTION_NEIGHBOR_DISCOVERY_LAST,neighbor_discovery_cmpobj_functions} , {&neighbor_discovery_object_init, NULL, NULL}};
 
 static void neighbor_discovery_object_init(){
 	kernel_add_cmp(&neighbor_discovery_cmpobj);

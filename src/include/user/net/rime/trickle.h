@@ -60,7 +60,7 @@
 #include "trickle-constdef.h"
 
 static component_t* trickle_cmpobj_ref;
-static const component_info_t trickle_cmpobj_info = {TRICKLE, 2, 7, NET_COMPONENT, 7, "trickle"};
+static const component_info_t trickle_cmpobj_info = {TRICKLE, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t trickle_cmp_user;
 
 static void trickle_object_stub_init(){
@@ -68,10 +68,10 @@ static void trickle_object_stub_init(){
 }
 
 
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "src/include/system/hil/sys/timer/ctimer.h"
 
-#include "include/user/net/rime/broadcast.h"
-#include "include/system/hil/net/rime/queuebuf.h"
+#include "src/include/user/net/rime/broadcast.h"
+#include "src/include/system/hil/net/rime/queuebuf.h"
 
 #define TRICKLE_ATTRIBUTES  { PACKETBUF_ATTR_EPACKET_ID, PACKETBUF_ATTR_BIT * 8 },\
                             BROADCAST_ATTRIBUTES

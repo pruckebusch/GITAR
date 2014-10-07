@@ -9,10 +9,4 @@ enum RMH_FUNCTION {
 	FUNCTION_RMH_LAST,
 };
 
-
-enum RMH_PROCESSES {
-	PROCESS_RMH_LAST,
-};
-
-
 #endif /*__RMH_COMPONENT_CONSTDEF_H__*/

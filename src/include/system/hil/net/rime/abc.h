@@ -60,15 +60,15 @@
 #include "abc-constdef.h"
 
 static hil_component_t* abc_cmpobj_ref;
-static const component_info_t abc_cmpobj_info = {ABC, 2, 7, HIL_COMPONENT, 3, "abc"};
+static const component_info_t abc_cmpobj_info = {ABC, 2, 7, HIL_COMPONENT};
 
 static void abc_object_stub_init(){
 	 abc_cmpobj_ref = kernel_get_hil_cmp_ref(&abc_cmpobj_info);
 }
 
 
-#include "include/system/hil/net/rime/packetbuf.h"
-#include "include/system/hil/net/rime/channel.h"
+#include "src/include/system/hil/net/rime/packetbuf.h"
+#include "src/include/system/hil/net/rime/channel.h"
 
 struct abc_conn;
 

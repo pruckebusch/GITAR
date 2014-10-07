@@ -7,9 +7,8 @@
 static void unicast_object_init();
 
 static const void* unicast_cmpobj_functions[FUNCTION_UNICAST_LAST]={unicast_send,unicast_close,unicast_open};
-static const struct process* unicast_cmpobj_processes[PROCESS_UNICAST_LAST] = {};
 
-static const component_t unicast_cmpobj = { { UNICAST, 2, 7, NET_COMPONENT, 7, "unicast"} , {unicast_cmpobj_functions, unicast_cmpobj_processes, FUNCTION_UNICAST_LAST, PROCESS_UNICAST_LAST},{&unicast_object_init, NULL, NULL}};
+static const component_t unicast_cmpobj = { { UNICAST, 2, 7, NET_COMPONENT} , {FUNCTION_UNICAST_LAST,unicast_cmpobj_functions} , {&unicast_object_init, NULL, NULL}};
 
 static void unicast_object_init(){
 	kernel_add_cmp(&unicast_cmpobj);

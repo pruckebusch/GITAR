@@ -69,14 +69,14 @@
 #include "announcement-constdef.h"
 
 static hil_component_t* announcement_cmpobj_ref;
-static const component_info_t announcement_cmpobj_info = {ANNOUNCEMENT, 2, 7, HIL_COMPONENT, 12, "announcement"};
+static const component_info_t announcement_cmpobj_info = {ANNOUNCEMENT, 2, 7, HIL_COMPONENT};
 
 static void announcement_object_stub_init(){
 	 announcement_cmpobj_ref = kernel_get_hil_cmp_ref(&announcement_cmpobj_info);
 }
 
 
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "src/include/system/hil/net/rime/rimeaddr.h"
 
 struct announcement;
 
@@ -281,7 +281,7 @@ static inline void announcement_heard(const rimeaddr_t *from, uint16_t id, uint1
 
 /* Stub function declaration for announcement_register_listen_callback(void (*) */
 static inline void announcement_register_listen_callback(void (*callback)(int time)){
-	( (void (*)(void (*)(int)))	announcement_cmpobj_ref->interface.function_array[FUNCTION_ANNOUNCEMENT_REGISTER_LISTEN_CALLBACK])(callback);
+	( (void (*)(void (*)(int))) announcement_cmpobj_ref->interface.function_array[FUNCTION_ANNOUNCEMENT_REGISTER_LISTEN_CALLBACK])(callback);
 }
 
 enum {

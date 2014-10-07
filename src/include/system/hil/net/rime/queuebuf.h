@@ -56,14 +56,14 @@
 #include "queuebuf-constdef.h"
 
 static hil_component_t* queuebuf_cmpobj_ref;
-static const component_info_t queuebuf_cmpobj_info = {QUEUEBUF, 2, 7, HIL_COMPONENT, 8, "queuebuf"};
+static const component_info_t queuebuf_cmpobj_info = {QUEUEBUF, 2, 7, HIL_COMPONENT};
 
 static void queuebuf_object_stub_init(){
 	 queuebuf_cmpobj_ref = kernel_get_hil_cmp_ref(&queuebuf_cmpobj_info);
 }
 
 
-#include "include/system/hil/net/rime/packetbuf.h"
+#include "src/include/system/hil/net/rime/packetbuf.h"
 
 /* QUEUEBUF_NUM is the total number of queuebuf */
 #ifdef QUEUEBUF_CONF_NUM

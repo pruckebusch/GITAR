@@ -7,9 +7,8 @@
 static void stunicast_object_init();
 
 static const void* stunicast_cmpobj_functions[FUNCTION_STUNICAST_LAST]={stunicast_set_timer,stunicast_cancel,stunicast_close,stunicast_send,stunicast_open,stunicast_send_stubborn,stunicast_receiver};
-static const struct process* stunicast_cmpobj_processes[PROCESS_STUNICAST_LAST] = {};
 
-static const component_t stunicast_cmpobj = { { STUNICAST, 2, 7, NET_COMPONENT, 9, "stunicast"} , {stunicast_cmpobj_functions, stunicast_cmpobj_processes, FUNCTION_STUNICAST_LAST, PROCESS_STUNICAST_LAST},{&stunicast_object_init, NULL, NULL}};
+static const component_t stunicast_cmpobj = { { STUNICAST, 2, 7, NET_COMPONENT} , {FUNCTION_STUNICAST_LAST,stunicast_cmpobj_functions} , {&stunicast_object_init, NULL, NULL}};
 
 static void stunicast_object_init(){
 	kernel_add_cmp(&stunicast_cmpobj);

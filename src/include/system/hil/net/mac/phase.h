@@ -43,19 +43,19 @@
 #include "phase-constdef.h"
 
 static hil_component_t* phase_cmpobj_ref;
-static const component_info_t phase_cmpobj_info = {PHASE, 2, 7, HIL_COMPONENT, 5, "phase"};
+static const component_info_t phase_cmpobj_info = {PHASE, 2, 7, HIL_COMPONENT};
 
 static void phase_object_stub_init(){
 	 phase_cmpobj_ref = kernel_get_hil_cmp_ref(&phase_cmpobj_info);
 }
 
 
-#include "include/system/hil/net/rime/rimeaddr.h"
-#include "include/system/hil/sys/timer/timer.h"
-#include "include/system/hil/sys/timer/rtimer.h"
-#include "include/system/hil/lib/util/list.h"
-#include "include/system/hil/lib/util/memb.h"
-#include "include/system/hil/net/netstack.h"
+#include "src/include/system/hil/net/rime/rimeaddr.h"
+#include "src/include/system/hil/sys/timer/timer.h"
+#include "src/include/system/hil/sys/timer/rtimer.h"
+#include "src/include/system/hil/lib/util/list.h"
+#include "src/include/system/hil/lib/util/memb.h"
+#include "src/include/system/hil/net/netstack.h"
 
 typedef enum {
   PHASE_UNKNOWN,

@@ -65,7 +65,7 @@
 #include "unicast-constdef.h"
 
 static component_t* unicast_cmpobj_ref;
-static const component_info_t unicast_cmpobj_info = {UNICAST, 2, 7, NET_COMPONENT, 7, "unicast"};
+static const component_info_t unicast_cmpobj_info = {UNICAST, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t unicast_cmp_user;
 
 static void unicast_object_stub_init(){
@@ -73,7 +73,7 @@ static void unicast_object_stub_init(){
 }
 
 
-#include "include/user/net/rime/broadcast.h"
+#include "src/include/user/net/rime/broadcast.h"
 
 struct unicast_conn;
 

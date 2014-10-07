@@ -43,14 +43,14 @@
 #include "autostart-constdef.h"
 
 static hil_component_t* autostart_cmpobj_ref;
-static const component_info_t autostart_cmpobj_info = {AUTOSTART, 2, 7, HIL_COMPONENT, 9, "autostart"};
+static const component_info_t autostart_cmpobj_info = {AUTOSTART, 2, 7, HIL_COMPONENT};
 
 static void autostart_object_stub_init(){
 	 autostart_cmpobj_ref = kernel_get_hil_cmp_ref(&autostart_cmpobj_info);
 }
 
 
-#include "include/system/hil/sys/process/process.h"
+#include "src/include/system/hil/sys/process/process.h"
 
 #if ! CC_NO_VA_ARGS
 #if AUTOSTART_ENABLE

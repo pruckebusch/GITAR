@@ -54,7 +54,7 @@
 #include "collect-neighbor-constdef.h"
 
 static component_t* collect_neighbor_cmpobj_ref;
-static const component_info_t collect_neighbor_cmpobj_info = {COLLECT_NEIGHBOR, 2, 7, NET_COMPONENT, 16, "collect_neighbor"};
+static const component_info_t collect_neighbor_cmpobj_info = {COLLECT_NEIGHBOR, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t collect_neighbor_cmp_user;
 
 static void collect_neighbor_object_stub_init(){
@@ -62,11 +62,11 @@ static void collect_neighbor_object_stub_init(){
 }
 
 
-#include "include/system/hil/net/rime/rimeaddr.h"
-#include "include/system/hil/lib/util/list.h"
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "src/include/system/hil/net/rime/rimeaddr.h"
+#include "src/include/system/hil/lib/util/list.h"
+#include "src/include/system/hil/sys/timer/ctimer.h"
 
-#include "include/user/net/rime/collect-link-estimate.h"
+#include "src/include/user/net/rime/collect-link-estimate.h"
 
 struct collect_neighbor_list {
   LIST_STRUCT(list);

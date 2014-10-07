@@ -62,7 +62,7 @@
 #include "polite-announcement-constdef.h"
 
 static component_t* polite_announcement_cmpobj_ref;
-static const component_info_t polite_announcement_cmpobj_info = {POLITE_ANNOUNCEMENT, 2, 7, NET_COMPONENT, 19, "polite_announcement"};
+static const component_info_t polite_announcement_cmpobj_info = {POLITE_ANNOUNCEMENT, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t polite_announcement_cmp_user;
 
 static void polite_announcement_object_stub_init(){
@@ -70,7 +70,7 @@ static void polite_announcement_object_stub_init(){
 }
 
 
-#include "include/system/hil/sys/timer/clock.h"
+#include "src/include/system/hil/sys/timer/clock.h"
 
 
 /* Stub function declaration for polite_announcement_init(uint16_t,clock_time_t,clock_time_t) */

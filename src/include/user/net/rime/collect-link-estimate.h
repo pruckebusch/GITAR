@@ -57,7 +57,7 @@
 #include "collect-link-estimate-constdef.h"
 
 static component_t* collect_link_estimate_cmpobj_ref;
-static const component_info_t collect_link_estimate_cmpobj_info = {COLLECT_LINK_ESTIMATE, 2, 7, NET_COMPONENT, 21, "collect_link_estimate"};
+static const component_info_t collect_link_estimate_cmpobj_info = {COLLECT_LINK_ESTIMATE, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t collect_link_estimate_cmp_user;
 
 static void collect_link_estimate_object_stub_init(){

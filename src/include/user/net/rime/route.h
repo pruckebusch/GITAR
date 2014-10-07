@@ -54,7 +54,7 @@
 #include "route-constdef.h"
 
 static component_t* route_cmpobj_ref;
-static const component_info_t route_cmpobj_info = {ROUTE, 2, 7, NET_COMPONENT, 5, "route"};
+static const component_info_t route_cmpobj_info = {ROUTE, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t route_cmp_user;
 
 static void route_object_stub_init(){
@@ -62,7 +62,7 @@ static void route_object_stub_init(){
 }
 
 
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "src/include/system/hil/net/rime/rimeaddr.h"
 
 struct route_entry {
   struct route_entry *next;

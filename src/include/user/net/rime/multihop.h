@@ -73,7 +73,7 @@
 #include "multihop-constdef.h"
 
 static component_t* multihop_cmpobj_ref;
-static const component_info_t multihop_cmpobj_info = {MULTIHOP, 2, 7, NET_COMPONENT, 8, "multihop"};
+static const component_info_t multihop_cmpobj_info = {MULTIHOP, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t multihop_cmp_user;
 
 static void multihop_object_stub_init(){
@@ -81,9 +81,9 @@ static void multihop_object_stub_init(){
 }
 
 
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "src/include/system/hil/net/rime/rimeaddr.h"
 
-#include "include/user/net/rime/unicast.h"
+#include "src/include/user/net/rime/unicast.h"
 
 struct multihop_conn;
 

@@ -7,9 +7,8 @@
 static void stbroadcast_object_init();
 
 static const void* stbroadcast_cmpobj_functions[FUNCTION_STBROADCAST_LAST]={stbroadcast_send_stubborn,stbroadcast_close,stbroadcast_set_timer,stbroadcast_cancel,stbroadcast_open};
-static const struct process* stbroadcast_cmpobj_processes[PROCESS_STBROADCAST_LAST] = {};
 
-static const component_t stbroadcast_cmpobj = { { STBROADCAST, 2, 7, NET_COMPONENT, 11, "stbroadcast"} , {stbroadcast_cmpobj_functions, stbroadcast_cmpobj_processes, FUNCTION_STBROADCAST_LAST, PROCESS_STBROADCAST_LAST},{&stbroadcast_object_init, NULL, NULL}};
+static const component_t stbroadcast_cmpobj = { { STBROADCAST, 2, 7, NET_COMPONENT} , {FUNCTION_STBROADCAST_LAST,stbroadcast_cmpobj_functions} , {&stbroadcast_object_init, NULL, NULL}};
 
 static void stbroadcast_object_init(){
 	kernel_add_cmp(&stbroadcast_cmpobj);

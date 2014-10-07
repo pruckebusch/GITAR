@@ -64,7 +64,7 @@
 #include "mesh-constdef.h"
 
 static component_t* mesh_cmpobj_ref;
-static const component_info_t mesh_cmpobj_info = {MESH, 2, 7, NET_COMPONENT, 4, "mesh"};
+static const component_info_t mesh_cmpobj_info = {MESH, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t mesh_cmp_user;
 
 static void mesh_object_stub_init(){
@@ -72,10 +72,10 @@ static void mesh_object_stub_init(){
 }
 
 
-#include "include/system/hil/net/rime/queuebuf.h"
+#include "src/include/system/hil/net/rime/queuebuf.h"
 
-#include "include/user/net/rime/multihop.h"
-#include "include/user/net/rime/route-discovery.h"
+#include "src/include/user/net/rime/multihop.h"
+#include "src/include/user/net/rime/route-discovery.h"
 
 struct mesh_conn;
 

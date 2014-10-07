@@ -71,7 +71,7 @@
 #include "clock-constdef.h"
 
 static hil_component_t* clock_cmpobj_ref;
-static const component_info_t clock_cmpobj_info = {CLOCK, 2, 7, HIL_COMPONENT, 5, "clock"};
+static const component_info_t clock_cmpobj_info = {CLOCK, 2, 7, HIL_COMPONENT};
 
 static void clock_object_stub_init(){
 	 clock_cmpobj_ref = kernel_get_hil_cmp_ref(&clock_cmpobj_info);

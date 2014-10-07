@@ -48,7 +48,7 @@
 #include "rime-constdef.h"
 
 static hil_component_t* rime_cmpobj_ref;
-static const component_info_t rime_cmpobj_info = {RIME, 2, 7, HIL_COMPONENT, 4, "rime"};
+static const component_info_t rime_cmpobj_info = {RIME, 2, 7, HIL_COMPONENT};
 
 static void rime_object_stub_init(){
 	 rime_cmpobj_ref = kernel_get_hil_cmp_ref(&rime_cmpobj_info);
@@ -75,7 +75,7 @@ static void rime_object_stub_init(){
 //~ #include "net/rime/runicast.h"
 //~ #include "net/rime/timesynch.h"
 //~ #include "net/rime/trickle.h"
-#include "include/system/hil/net/rime/channel.h"
+#include "src/include/system/hil/net/rime/channel.h"
 #include "net/mac/mac.h"
 /**
  * \brief      Initialize Rime

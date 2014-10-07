@@ -63,7 +63,7 @@
 #include "stbroadcast-constdef.h"
 
 static component_t* stbroadcast_cmpobj_ref;
-static const component_info_t stbroadcast_cmpobj_info = {STBROADCAST, 2, 7, NET_COMPONENT, 11, "stbroadcast"};
+static const component_info_t stbroadcast_cmpobj_info = {STBROADCAST, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t stbroadcast_cmp_user;
 
 static void stbroadcast_object_stub_init(){
@@ -71,9 +71,9 @@ static void stbroadcast_object_stub_init(){
 }
 
 
-#include "include/system/hil/sys/timer/ctimer.h"
-#include "include/system/hil/net/rime/queuebuf.h"
-#include "include/user/net/rime/broadcast.h"
+#include "src/include/system/hil/sys/timer/ctimer.h"
+#include "src/include/system/hil/net/rime/queuebuf.h"
+#include "src/include/user/net/rime/broadcast.h"
 
 struct stbroadcast_conn;
 

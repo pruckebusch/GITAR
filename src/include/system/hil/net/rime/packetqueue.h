@@ -56,20 +56,20 @@
 #include "packetqueue-constdef.h"
 
 static hil_component_t* packetqueue_cmpobj_ref;
-static const component_info_t packetqueue_cmpobj_info = {PACKETQUEUE, 2, 7, HIL_COMPONENT, 11, "packetqueue"};
+static const component_info_t packetqueue_cmpobj_info = {PACKETQUEUE, 2, 7, HIL_COMPONENT};
 
 static void packetqueue_object_stub_init(){
 	 packetqueue_cmpobj_ref = kernel_get_hil_cmp_ref(&packetqueue_cmpobj_info);
 }
 
 
-#include "include/system/hil/lib/util/list.h"
-#include "include/system/hil/lib/util/memb.h"
+#include "src/include/system/hil/lib/util/list.h"
+#include "src/include/system/hil/lib/util/memb.h"
 
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "src/include/system/hil/sys/timer/ctimer.h"
 
-#include "include/system/hil/net/rime/packetbuf.h"
-#include "include/system/hil/net/rime/queuebuf.h"
+#include "src/include/system/hil/net/rime/packetbuf.h"
+#include "src/include/system/hil/net/rime/queuebuf.h"
 
 /**
  * \brief      Representation of a packet queue.

@@ -55,7 +55,7 @@
 #include "packetbuf-constdef.h"
 
 static hil_component_t* packetbuf_cmpobj_ref;
-static const component_info_t packetbuf_cmpobj_info = {PACKETBUF, 2, 7, HIL_COMPONENT, 9, "packetbuf"};
+static const component_info_t packetbuf_cmpobj_info = {PACKETBUF, 2, 7, HIL_COMPONENT};
 
 static void packetbuf_object_stub_init(){
 	 packetbuf_cmpobj_ref = kernel_get_hil_cmp_ref(&packetbuf_cmpobj_info);
@@ -63,7 +63,7 @@ static void packetbuf_object_stub_init(){
 
 
 #include "contiki-conf.h"
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "src/include/system/hil/net/rime/rimeaddr.h"
 
 /**
  * \brief      The size of the packetbuf, in bytes
@@ -498,26 +498,15 @@ packetbuf_addr(uint8_t type)
   return &packetbuf_addrs[type - PACKETBUF_ADDR_FIRST].addr;
 }
 #else /* PACKETBUF_CONF_ATTRS_INLINE */
-static inline int packetbuf_set_attr(uint8_t type, const packetbuf_attr_t val){
-return ( (int (*)(uint8_t, const packetbuf_attr_t)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_SET_ATTR])(type,val);
-}
-
-static inline packetbuf_attr_t packetbuf_get_attr(uint8_t type){
-	return ( (packetbuf_attr_t (*)(uint8_t)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_GET_ATTR])(type);
-}
-
-static inline int packetbuf_set_addr(uint8_t type, const rimeaddr_t *addr){
-	return ( (int (*)(uint8_t, const rimeaddr_t *)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_SET_ADDR])(type,addr);
-}
-
-static inline const rimeaddr_t *packetbuf_get_addr(uint8_t type){
-	return ( (const rimeaddr_t* (*)(uint8_t)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_GET_ADDR])(type);
-}
+int               packetbuf_set_attr(uint8_t type, const packetbuf_attr_t val);
+packetbuf_attr_t packetbuf_get_attr(uint8_t type);
+int               packetbuf_set_addr(uint8_t type, const rimeaddr_t *addr);
+const rimeaddr_t *packetbuf_get_addr(uint8_t type);
 #endif /* PACKETBUF_CONF_ATTRS_INLINE */
 
 
 /* Stub function declaration for packetbuf_attr_clear(void) */
-static inline void             packetbuf_attr_clear(void){
+static inline void              packetbuf_attr_clear(void){
 	( (void (*)(void)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_ATTR_CLEAR])();
 }
 

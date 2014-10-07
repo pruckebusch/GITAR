@@ -62,7 +62,7 @@
 #include "rudolph2-constdef.h"
 
 static component_t* rudolph2_cmpobj_ref;
-static const component_info_t rudolph2_cmpobj_info = {RUDOLPH2, 2, 7, NET_COMPONENT, 8, "rudolph2"};
+static const component_info_t rudolph2_cmpobj_info = {RUDOLPH2, 2, 7, NET_COMPONENT};
 static component_user_list_entry_t rudolph2_cmp_user;
 
 static void rudolph2_object_stub_init(){
@@ -70,8 +70,8 @@ static void rudolph2_object_stub_init(){
 }
 
 
-#include "include/user/net/rime/polite.h"
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "src/include/user/net/rime/polite.h"
+#include "src/include/system/hil/sys/timer/ctimer.h"
 
 struct rudolph2_conn;
 

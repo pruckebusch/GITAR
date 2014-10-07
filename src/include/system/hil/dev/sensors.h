@@ -32,19 +32,19 @@
 
 #ifndef __SENSORS_H__
 #define __SENSORS_H__
-
 #include "kernel.h"
 #include "sensors-constdef.h"
 
-static hil_component_t* sensor_cmpobj_ref;
-static const component_info_t sensor_cmpobj_info = {SENSORS_UID, 2, 7, HIL_COMPONENT, 7, "sensors"};
+static hil_component_t* sensors_cmpobj_ref;
+static const component_info_t sensors_cmpobj_info = {SENSORS_UID, 2, 7, HIL_COMPONENT};
 
-static void sensor_object_stub_init(){
-	 sensor_cmpobj_ref = kernel_get_hil_cmp_ref(&sensor_cmpobj_info);
+static void sensors_object_stub_init(){
+	 sensors_cmpobj_ref = kernel_get_hil_cmp_ref(&sensors_cmpobj_info);
 }
 
+
 //#include "contiki.h"
-#include "include/system/hil/sys/process/process.h"
+#include "src/system/hil/sys/process/process.h"
 
 /* some constants for the configure API */
 #define SENSORS_HW_INIT 128 /* internal - used only for initialization */
@@ -70,25 +70,29 @@ struct sensors_sensor {
   int          (* status)    (int type);
 };
 
+
+/* Stub function declaration for sensors_find(const char *) */
 static inline const struct sensors_sensor *sensors_find(const char *type){
-	return ((const struct sensors_sensor* (*)(const char*)) sensor_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_FIND])(type);
+	return ( (const struct sensors_sensor* (*)(const char *)) sensors_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_FIND])(type);
 }
 
+/* Stub function declaration for sensors_next(const struct sensors_sensor *) */
 static inline const struct sensors_sensor *sensors_next(const struct sensors_sensor *s){
-	return ((const struct sensors_sensor* (*)(const struct sensors_sensor*)) sensor_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_NEXT])(s);
+	return ( (const struct sensors_sensor* (*)(const struct sensors_sensor *)) sensors_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_NEXT])(s);
 }
 
+/* Stub function declaration for sensors_first(void) */
 static inline const struct sensors_sensor *sensors_first(void){
-	return ((const struct sensors_sensor* (*)()) sensor_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_FIRST])();
+	return ( (const struct sensors_sensor* (*)(void)) sensors_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_FIRST])();
 }
 
+
+/* Stub function declaration for sensors_changed(const struct sensors_sensor *) */
 static inline void sensors_changed(const struct sensors_sensor *s){
-	((void (*)(const struct sensors_sensor*)) sensor_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_CHANGED])(s);
+	( (void (*)(const struct sensors_sensor *)) sensors_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_CHANGED])(s);
 }
 
-static inline process_event_t sensors_get_sensors_event(){
-	return ((process_event_t (*)()) sensor_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_GET_SENSORS_EVENT])();
-}
+process_event_t sensors_get_sensors_event();
 
 extern process_event_t sensors_event;
 

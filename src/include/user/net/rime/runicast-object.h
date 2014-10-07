@@ -7,9 +7,8 @@
 static void runicast_object_init();
 
 static const void* runicast_cmpobj_functions[FUNCTION_RUNICAST_LAST]={runicast_open,runicast_send,runicast_close,runicast_is_transmitting};
-static const struct process* runicast_cmpobj_processes[PROCESS_RUNICAST_LAST] = {};
 
-static const component_t runicast_cmpobj = { { RUNICAST, 2, 7, NET_COMPONENT, 8, "runicast"} , {runicast_cmpobj_functions, runicast_cmpobj_processes, FUNCTION_RUNICAST_LAST, PROCESS_RUNICAST_LAST},{&runicast_object_init, NULL, NULL}};
+static const component_t runicast_cmpobj = { { RUNICAST, 2, 7, NET_COMPONENT} , {FUNCTION_RUNICAST_LAST,runicast_cmpobj_functions} , {&runicast_object_init, NULL, NULL}};
 
 static void runicast_object_init(){
 	kernel_add_cmp(&runicast_cmpobj);

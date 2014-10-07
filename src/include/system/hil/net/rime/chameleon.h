@@ -43,14 +43,14 @@
 #include "chameleon-constdef.h"
 
 static hil_component_t* chameleon_cmpobj_ref;
-static const component_info_t chameleon_cmpobj_info = {CHAMELEON, 2, 7, HIL_COMPONENT, 9, "chameleon"};
+static const component_info_t chameleon_cmpobj_info = {CHAMELEON, 2, 7, HIL_COMPONENT};
 
 static void chameleon_object_stub_init(){
 	 chameleon_cmpobj_ref = kernel_get_hil_cmp_ref(&chameleon_cmpobj_info);
 }
 
 
-#include "include/system/hil/net/rime/channel.h"
+#include "src/include/system/hil/net/rime/channel.h"
 
 struct chameleon_module {
   struct channel *(* input)(void);

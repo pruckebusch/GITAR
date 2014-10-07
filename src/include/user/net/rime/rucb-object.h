@@ -7,9 +7,8 @@
 static void rucb_object_init();
 
 static const void* rucb_cmpobj_functions[FUNCTION_RUCB_LAST]={rucb_send,rucb_open,rucb_close};
-static const struct process* rucb_cmpobj_processes[PROCESS_RUCB_LAST] = {};
 
-static const component_t rucb_cmpobj = { { RUCB, 2, 7, NET_COMPONENT, 4, "rucb"} , {rucb_cmpobj_functions, rucb_cmpobj_processes, FUNCTION_RUCB_LAST, PROCESS_RUCB_LAST},{&rucb_object_init, NULL, NULL}};
+static const component_t rucb_cmpobj = { { RUCB, 2, 7, NET_COMPONENT} , {FUNCTION_RUCB_LAST,rucb_cmpobj_functions} , {&rucb_object_init, NULL, NULL}};
 
 static void rucb_object_init(){
 	kernel_add_cmp(&rucb_cmpobj);

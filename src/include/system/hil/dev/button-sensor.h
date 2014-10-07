@@ -31,24 +31,22 @@
  */
 #ifndef __BUTTON_SENSOR_H__
 #define __BUTTON_SENSOR_H__
-
 #include "kernel.h"
 #include "button-sensor-constdef.h"
 
 static hil_component_t* button_sensor_cmpobj_ref;
-static const component_info_t button_sensor_cmpobj_info = {BUTTON_SENSOR_UID, 2, 7, HIL_COMPONENT, 13, "button_sensor"};
+static const component_info_t button_sensor_cmpobj_info = {BUTTON_SENSOR_UID, 2, 7, HIL_COMPONENT};
 
 static void button_sensor_object_stub_init(){
 	 button_sensor_cmpobj_ref = kernel_get_hil_cmp_ref(&button_sensor_cmpobj_info);
 }
 
-#include "include/system/hil/dev/sensors.h"
+
+#include "src/include/system/hil/dev/sensors.h"
 
 extern const struct sensors_sensor button_sensor;
 
-static inline struct sensors_sensor* button_sensor_get(){
-	return ((struct sensors_sensor* (*)()) button_sensor_cmpobj_ref->interface.function_array[FUNCTION_BUTTON_SENSOR_GET])();
-}
+struct sensors_sensor* button_sensor_get();
 
 #define BUTTON_SENSOR "Button"
 

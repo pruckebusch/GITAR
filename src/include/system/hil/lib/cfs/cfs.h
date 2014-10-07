@@ -61,14 +61,14 @@
 #include "cfs-constdef.h"
 
 static hil_component_t* cfs_cmpobj_ref;
-static const component_info_t cfs_cmpobj_info = {CFS, 2, 7, HIL_COMPONENT, 3, "cfs"};
+static const component_info_t cfs_cmpobj_info = {CFS, 2, 7, HIL_COMPONENT};
 
 static void cfs_object_stub_init(){
 	 cfs_cmpobj_ref = kernel_get_hil_cmp_ref(&cfs_cmpobj_info);
 }
 
 
-#include "contiki-conf.h"
+#include "contiki.h"
 
 #ifndef CFS_CONF_OFFSET_TYPE
 typedef int cfs_offset_t;

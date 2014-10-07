@@ -3,7 +3,7 @@
 
 void example_multihop_object_init();
 
-static const component_t example_multihop_cmpobj = { { EXAMPLE_MULTIHOP, 2, 7, APP_COMPONENT, 16, "example_multihop"} , {NULL, NULL,0,0},{&example_multihop_object_init, NULL, NULL}};
+static const component_t example_multihop_cmpobj = { { EXAMPLE_MULTIHOP, 2, 7, APP_COMPONENT} , {0,NULL},{&example_multihop_object_init, NULL, NULL}};
 
 void example_multihop_object_init(){
 	kernel_add_cmp(&example_multihop_cmpobj);

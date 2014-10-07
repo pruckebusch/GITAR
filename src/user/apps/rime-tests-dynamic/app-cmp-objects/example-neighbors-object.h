@@ -3,7 +3,7 @@
 
 void example_neighbors_object_init();
 
-static const component_t example_neighbors_cmpobj = { { EXAMPLE_NEIGHBORS, 2, 7, APP_COMPONENT, 17, "example_neighbors"} , {NULL, NULL,0,0},{&example_neighbors_object_init, NULL, NULL}};
+static const component_t example_neighbors_cmpobj = { { EXAMPLE_NEIGHBORS, 2, 7, APP_COMPONENT} , {0,NULL},{&example_neighbors_object_init, NULL, NULL}};
 
 void example_neighbors_object_init(){
 	kernel_add_cmp(&example_neighbors_cmpobj);

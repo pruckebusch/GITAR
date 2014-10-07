@@ -3,7 +3,7 @@
 
 void example_polite_object_init();
 
-static const component_t example_polite_cmpobj = { { EXAMPLE_POLITE, 2, 7, APP_COMPONENT, 14, "example_polite"} , {NULL, NULL,0,0},{&example_polite_object_init, NULL, NULL}};
+static const component_t example_polite_cmpobj = { { EXAMPLE_POLITE, 2, 7, APP_COMPONENT} , {0,NULL},{&example_polite_object_init, NULL, NULL}};
 
 void example_polite_object_init(){
 	kernel_add_cmp(&example_polite_cmpobj);

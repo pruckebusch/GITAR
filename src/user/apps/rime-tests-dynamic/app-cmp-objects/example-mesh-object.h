@@ -3,7 +3,7 @@
 
 void example_mesh_object_init();
 
-static const component_t example_mesh_cmpobj = { { EXAMPLE_MESH, 2, 7, APP_COMPONENT, 12, "example_mesh"} , {NULL, NULL,0,0},{&example_mesh_object_init, NULL, NULL}};
+static const component_t example_mesh_cmpobj = { { EXAMPLE_MESH, 2, 7, APP_COMPONENT} , {0,NULL},{&example_mesh_object_init, NULL, NULL}};
 
 void example_mesh_object_init(){
 	kernel_add_cmp(&example_mesh_cmpobj);

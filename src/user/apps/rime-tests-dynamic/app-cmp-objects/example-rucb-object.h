@@ -3,7 +3,7 @@
 
 void example_rucb_object_init();
 
-static const component_t example_rucb_cmpobj = { { EXAMPLE_RUCB, 2, 7, APP_COMPONENT, 12, "example_rucb"} , {NULL, NULL,0,0},{&example_rucb_object_init, NULL, NULL}};
+static const component_t example_rucb_cmpobj = { { EXAMPLE_RUCB, 2, 7, APP_COMPONENT} , {0,NULL},{&example_rucb_object_init, NULL, NULL}};
 
 void example_rucb_object_init(){
 	kernel_add_cmp(&example_rucb_cmpobj);

@@ -3,7 +3,7 @@
 
 void example_collect_object_init();
 
-static const component_t example_collect_cmpobj = { { EXAMPLE_COLLECT, 2, 7, APP_COMPONENT, 15, "example_collect"} , {NULL, NULL,0,0},{&example_collect_object_init, NULL, NULL}};
+static const component_t example_collect_cmpobj = { { EXAMPLE_COLLECT, 2, 7, APP_COMPONENT} , {0,NULL},{&example_collect_object_init, NULL, NULL}};
 
 void example_collect_object_init(){
 	kernel_add_cmp(&example_collect_cmpobj);
@@ -14,7 +14,6 @@ void example_collect_object_init(){
 	packetbuf_object_stub_init();
 	random_object_stub_init();
 	rimeaddr_object_stub_init();
-	string_object_stub_init();
 }
 
 #endif /*__EXAMPLE_COLLECT_APP_COMPONENT_OBJECT_H__*/

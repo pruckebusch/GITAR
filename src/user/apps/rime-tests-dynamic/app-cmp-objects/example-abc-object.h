@@ -3,7 +3,7 @@
 
 void example_abc_object_init();
 
-static const component_t example_abc_cmpobj = { { EXAMPLE_ABC, 2, 7, APP_COMPONENT, 11, "example_abc"} , {NULL, NULL,0,0},{&example_abc_object_init, NULL, NULL}};
+static const component_t example_abc_cmpobj = { { EXAMPLE_ABC, 2, 7, APP_COMPONENT} , {0,NULL},{&example_abc_object_init, NULL, NULL}};
 
 void example_abc_object_init(){
 	kernel_add_cmp(&example_abc_cmpobj);

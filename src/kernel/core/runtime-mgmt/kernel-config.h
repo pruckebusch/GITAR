@@ -3,6 +3,9 @@
 
 #include "unique-names.h"
 
+#define COMPONENT_CONF_WITH_PROCESS_ARRAY 0
+#define COMPONENT_CONF_WITH_NAME 0
+
 #define NUM_COMPONENTS 20
 #define NUM_HIL_COMPONENTS 40
 

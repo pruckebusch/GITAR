@@ -20,19 +20,23 @@ typedef struct component_adapter {
 } component_adapter_t;
 
 typedef struct component_interface {
-	const void** function_array	;
-	const struct process** process_array;
 	const uint8_t num_functions;
+	const void** function_array;
+	#if COMPONENT_CONF_WITH_PROCESS_ARRAY
 	const uint8_t num_processes;
+	const struct process** process_array;
+	#endif
 } component_interface_t;
 
 typedef struct component_info {
 	const uint16_t unique_id;
 	const uint8_t version;
 	const uint8_t subrelease;
-	const uint8_t type;	
+	const uint8_t type;
+	#if COMPONENT_CONF_WITH_NAME
 	const uint8_t name_len;
 	const char* name;
+	#endif
 } component_info_t;
 
 typedef struct component {

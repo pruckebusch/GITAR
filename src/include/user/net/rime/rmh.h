@@ -67,13 +67,7 @@
 #include "kernel.h"
 #include "rmh-constdef.h"
 
-static component_t* rmh_cmpobj_ref;
-static const component_info_t rmh_cmpobj_info = {RMH, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t rmh_cmp_user;
-
-static void rmh_object_stub_init(){
-	 rmh_cmpobj_ref = kernel_get_cmp_ref(&rmh_cmpobj_info);
-}
+static const component_t* rmh_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/runicast.h"

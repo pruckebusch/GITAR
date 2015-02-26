@@ -140,8 +140,7 @@ received_announcement(struct announcement *a,
 {
   struct example_neighbor *e;
 
-  /*  PRINTF("Got announcement from %d.%d, id %d, value %d\n",
-      from->u8[0], from->u8[1], id, value);*/
+  /*  PRINTF("Got announcement from %d.%d, id %d, value %d\n",from->u8[0], from->u8[1], id, value);*/
 
   /* We received an announcement from a neighbor so we need to update
      the neighbor list, or add a new entry to the table. */
@@ -198,15 +197,11 @@ forward(struct multihop_conn *c,
       ++i;
     }
     if(n != NULL) {
-      PRINTF("%d.%d: Forwarding packet to %d.%d (%d in list), hops %d\n",
-	     rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],
-	     n->addr.u8[0], n->addr.u8[1], num,
-	     packetbuf_get_attr(PACKETBUF_ATTR_HOPS));
+      PRINTF("%d.%d: Forwarding packet to %d.%d (%d in list), hops %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],n->addr.u8[0], n->addr.u8[1], num,packetbuf_get_attr(PACKETBUF_ATTR_HOPS));
       return &n->addr;
     }
   }
-  PRINTF("%d.%d: did not find a neighbor to foward to\n",
-	 rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
+  PRINTF("%d.%d: did not find a neighbor to foward to\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
   return NULL;
 }
 static const struct multihop_callbacks multihop_call = {recv, forward};

@@ -43,6 +43,7 @@
  */
 
 #include "net/rime/broadcast.h"
+#include "net/rime/packetbuf.h"
 #include <string.h>
 
 static const struct packetbuf_attrlist attributes[] =
@@ -63,11 +64,9 @@ static void recv_from_abc(struct abc_conn *bc) {
   rimeaddr_t sender;
   struct broadcast_conn *c = (struct broadcast_conn *)bc;
 
-  rimeaddr_copy(&sender, packetbuf_addr(PACKETBUF_ADDR_SENDER));
+  rimeaddr_copy(&sender, packetbuf_get_addr(PACKETBUF_ADDR_SENDER));
   
-  PRINTF("%d.%d: broadcast: from %d.%d\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1],
-	 sender.u8[0], sender.u8[1]);
+  PRINTF("%d.%d: broadcast: from %d.%d\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],sender.u8[0], sender.u8[1]);
   if(c->u->recv) {
     c->u->recv(c, &sender);
   }
@@ -77,11 +76,7 @@ static void sent_by_abc(struct abc_conn *bc, int status, int num_tx)
 {
   struct broadcast_conn *c = (struct broadcast_conn *)bc;
 
-  PRINTF("%d.%d: sent to %d.%d status %d num_tx %d\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1],
-	 packetbuf_addr(PACKETBUF_ADDR_SENDER)->u8[0],
-         packetbuf_addr(PACKETBUF_ADDR_SENDER)->u8[1],
-         status, num_tx);
+  PRINTF("%d.%d: sent to %d.%d status %d num_tx %d\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],packetbuf_get_addr(PACKETBUF_ADDR_SENDER)->u8[0],packetbuf_get_addr(PACKETBUF_ADDR_SENDER)->u8[1],status, num_tx);
   if(c->u->sent) {
     c->u->sent(c, status, num_tx);
   }
@@ -102,9 +97,8 @@ void broadcast_close(struct broadcast_conn *c)
 /*---------------------------------------------------------------------------*/
 int broadcast_send(struct broadcast_conn *c)
 {
-  PRINTF("%d.%d: broadcast_send\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1]);
-  packetbuf_set_addr(PACKETBUF_ADDR_SENDER, &rimeaddr_node_addr);
+  PRINTF("%d.%d: broadcast_send\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1]);
+  packetbuf_set_addr(PACKETBUF_ADDR_SENDER, rimeaddr_get_node_addr());
   return abc_send(&c->c);
 }
 /*---------------------------------------------------------------------------*/

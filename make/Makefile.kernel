@@ -1,5 +1,5 @@
 
-CORE_RUNTIME = kernel.c component-db.c kernel-list.c #component-factory.c
+CORE_RUNTIME = kernel.c component-db.c #kernel-list.c component-factory.c
 CORE_DEPLOYTIME = #serial-pkg-source.c pkg-manager.c pkg-installer.c pkg-manager.c pkg-repository.c
 KERNEL_CORE = $(CORE_RUNTIME) $(CORE_DEPLOYTIME)
 KERNELFILES = $(KERNEL_CORE)

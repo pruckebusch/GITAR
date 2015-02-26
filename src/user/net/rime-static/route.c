@@ -42,13 +42,20 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include <stdio.h>
 
 #include "lib/util/list.h"
 #include "lib/util/memb.h"
 #include "sys/timer/ctimer.h"
 #include "net/rime/route.h"
 #include "contiki-conf.h"
+
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 #ifdef ROUTE_CONF_ENTRIES
 #define NUM_RT_ENTRIES ROUTE_CONF_ENTRIES
@@ -78,15 +85,6 @@ static struct ctimer t;
 
 static int max_time = DEFAULT_LIFETIME;
 
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
-
-
 /*---------------------------------------------------------------------------*/
 static void
 periodic(void *ptr)
@@ -96,10 +94,7 @@ periodic(void *ptr)
   for(e = list_head(route_table); e != NULL; e = list_item_next(e)) {
     e->time++;
     if(e->time >= max_time) {
-      PRINTF("route periodic: removing entry to %d.%d with nexthop %d.%d and cost %d\n",
-	     e->dest.u8[0], e->dest.u8[1],
-	     e->nexthop.u8[0], e->nexthop.u8[1],
-	     e->cost);
+      PRINTF("route periodic: removing entry to %d.%d with nexthop %d.%d and cost %d\n",e->dest.u8[0], e->dest.u8[1],e->nexthop.u8[0], e->nexthop.u8[1],e->cost);
       list_remove(route_table, e);
       memb_free(&route_mem, e);
     }
@@ -133,10 +128,7 @@ route_add(const rimeaddr_t *dest, const rimeaddr_t *nexthop,
     if(e == NULL) {
       /* Remove oldest entry.  XXX */
       e = list_chop(route_table);
-      PRINTF("route_add: removing entry to %d.%d with nexthop %d.%d and cost %d\n",
-	     e->dest.u8[0], e->dest.u8[1],
-	     e->nexthop.u8[0], e->nexthop.u8[1],
-	     e->cost);
+      PRINTF("route_add: removing entry to %d.%d with nexthop %d.%d and cost %d\n",e->dest.u8[0], e->dest.u8[1],e->nexthop.u8[0], e->nexthop.u8[1],e->cost);
     }
   }
 
@@ -150,10 +142,7 @@ route_add(const rimeaddr_t *dest, const rimeaddr_t *nexthop,
   /* New entry goes first. */
   list_push(route_table, e);
 
-  PRINTF("route_add: new entry to %d.%d with nexthop %d.%d and cost %d\n",
-	 e->dest.u8[0], e->dest.u8[1],
-	 e->nexthop.u8[0], e->nexthop.u8[1],
-	 e->cost);
+  PRINTF("route_add: new entry to %d.%d with nexthop %d.%d and cost %d\n",e->dest.u8[0], e->dest.u8[1],e->nexthop.u8[0], e->nexthop.u8[1],e->cost);
   
   return 0;
 }
@@ -170,8 +159,7 @@ route_lookup(const rimeaddr_t *dest)
   
   /* Find the route with the lowest cost. */
   for(e = list_head(route_table); e != NULL; e = list_item_next(e)) {
-    /*    printf("route_lookup: comparing %d.%d.%d.%d with %d.%d.%d.%d\n",
-	   uip_ipaddr_to_quad(dest), uip_ipaddr_to_quad(&e->dest));*/
+    /*    PRINTF("route_lookup: comparing %d.%d.%d.%d with %d.%d.%d.%d\n",uip_ipaddr_to_quad(dest), uip_ipaddr_to_quad(&e->dest));*/
 
     if(rimeaddr_cmp(dest, &e->dest)) {
       if(e->cost < lowest_cost) {
@@ -192,11 +180,7 @@ route_refresh(struct route_entry *e)
     e->time = 0;
     e->decay = 0;
     
-    PRINTF("route_refresh: time %d last %d decay %d for entry to %d.%d with nexthop %d.%d and cost %d\n",
-           e->time, e->time_last_decay, e->decay,
-           e->dest.u8[0], e->dest.u8[1],
-           e->nexthop.u8[0], e->nexthop.u8[1],
-           e->cost);
+    PRINTF("route_refresh: time %d last %d decay %d for entry to %d.%d with nexthop %d.%d and cost %d\n",e->time, e->time_last_decay, e->decay,e->dest.u8[0], e->dest.u8[1],e->nexthop.u8[0], e->nexthop.u8[1],e->cost);
 
   }
 }
@@ -207,11 +191,7 @@ route_decay(struct route_entry *e)
   /* If routes are not refreshed, they decay over time. This function
      is called to decay a route. The route can only be decayed once
      per second. */
-  PRINTF("route_decay: time %d last %d decay %d for entry to %d.%d with nexthop %d.%d and cost %d\n",
-	 e->time, e->time_last_decay, e->decay,
-	 e->dest.u8[0], e->dest.u8[1],
-	 e->nexthop.u8[0], e->nexthop.u8[1],
-	 e->cost);
+  PRINTF("route_decay: time %d last %d decay %d for entry to %d.%d with nexthop %d.%d and cost %d\n",e->time, e->time_last_decay, e->decay,e->dest.u8[0], e->dest.u8[1],e->nexthop.u8[0], e->nexthop.u8[1],e->cost);
   
   if(e->time != e->time_last_decay) {
     /* Do not decay a route too often - not more than once per second. */
@@ -219,10 +199,7 @@ route_decay(struct route_entry *e)
     e->decay++;
 
     if(e->decay >= DECAY_THRESHOLD) {
-      PRINTF("route_decay: removing entry to %d.%d with nexthop %d.%d and cost %d\n",
-	     e->dest.u8[0], e->dest.u8[1],
-	     e->nexthop.u8[0], e->nexthop.u8[1],
-	     e->cost);
+      PRINTF("route_decay: removing entry to %d.%d with nexthop %d.%d and cost %d\n",e->dest.u8[0], e->dest.u8[1],e->nexthop.u8[0], e->nexthop.u8[1],e->cost);
       route_remove(e);
     }
   }

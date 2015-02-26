@@ -63,13 +63,7 @@
 #include "kernel.h"
 #include "mesh-constdef.h"
 
-static component_t* mesh_cmpobj_ref;
-static const component_info_t mesh_cmpobj_info = {MESH, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t mesh_cmp_user;
-
-static void mesh_object_stub_init(){
-	 mesh_cmpobj_ref = kernel_get_cmp_ref(&mesh_cmpobj_info);
-}
+static const component_t* mesh_cmpobj_ref;
 
 
 #include "src/include/system/hil/net/rime/queuebuf.h"

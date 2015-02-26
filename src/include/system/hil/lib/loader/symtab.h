@@ -34,12 +34,7 @@
 #include "kernel.h"
 #include "symtab-constdef.h"
 
-static hil_component_t* symtab_cmpobj_ref;
-static const component_info_t symtab_cmpobj_info = {SYMTAB, 2, 7, HIL_COMPONENT};
-
-static void symtab_object_stub_init(){
-	 symtab_cmpobj_ref = kernel_get_hil_cmp_ref(&symtab_cmpobj_info);
-}
+static const hil_component_t* symtab_cmpobj_ref;
 
 
 

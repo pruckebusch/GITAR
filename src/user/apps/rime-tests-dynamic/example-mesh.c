@@ -43,6 +43,7 @@
 #include "src/include/system/hil/net/rime/packetbuf.h"
 #include "src/include/system/hil/net/rime/rimeaddr.h"
 #include "include/system/hil/dev/button-sensor.h"
+#include "include/system/hil/lib/util/string.h"
 
 #include "src/include/user/net/rime/mesh.h"
 
@@ -78,9 +79,7 @@ timedout(struct mesh_conn *c)
 static void
 recv(struct mesh_conn *c, const rimeaddr_t *from, uint8_t hops)
 {
-  PRINTF("Data received from %d.%d: %.*s (%d)\n",
-	 from->u8[0], from->u8[1],
-	 packetbuf_datalen(), (char *)packetbuf_dataptr(), packetbuf_datalen());
+  PRINTF("Data received from %d.%d: %.*s (%d)\n",from->u8[0], from->u8[1], packetbuf_datalen(), (char *)packetbuf_dataptr(), packetbuf_datalen());
 
   packetbuf_copyfrom(MESSAGE, strlen(MESSAGE));
   mesh_send(&mesh, from);

@@ -141,7 +141,7 @@ static void init(void)
    * for now, and should at least get us started with experimenting
    * with announcements.
    */
-  broadcast_announcement_init(BROADCAST_ANNOUNCEMENT_CHANNEL,BROADCAST_ANNOUNCEMENT_BUMP_TIME, BROADCAST_ANNOUNCEMENT_MIN_TIME, BROADCAST_ANNOUNCEMENT_MAX_TIME);
+  //~ broadcast_announcement_init(BROADCAST_ANNOUNCEMENT_CHANNEL,BROADCAST_ANNOUNCEMENT_BUMP_TIME, BROADCAST_ANNOUNCEMENT_MIN_TIME, BROADCAST_ANNOUNCEMENT_MAX_TIME);
 }
 /*---------------------------------------------------------------------------*/
 static void packet_sent(void *ptr, int status, int num_tx)

@@ -46,7 +46,7 @@
 
 #include "src/user/net/rime/mesh.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)
@@ -76,9 +76,7 @@ timedout(struct mesh_conn *c)
 static void
 recv(struct mesh_conn *c, const rimeaddr_t *from, uint8_t hops)
 {
-  PRINTF("Data received from %d.%d: %.*s (%d)\n",
-	 from->u8[0], from->u8[1],
-	 packetbuf_datalen(), (char *)packetbuf_dataptr(), packetbuf_datalen());
+  PRINTF("Data received from %d.%d: %.*s (%d)\n",from->u8[0], from->u8[1], packetbuf_datalen(), (char *)packetbuf_dataptr(), packetbuf_datalen());
 
   packetbuf_copyfrom(MESSAGE, strlen(MESSAGE));
   mesh_send(&mesh, from);
@@ -93,13 +91,13 @@ PROCESS_THREAD(example_mesh_process, ev, data)
 
   mesh_open(&mesh, 132, &callbacks);
 
-  SENSORS_ACTIVATE(button_sensor);
+  SENSORS_ACTIVATE(*button_sensor_get());
 
   while(1) {
     rimeaddr_t addr;
 
     /* Wait for button click before sending the first message. */
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event && data == &button_sensor);
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_get_sensors_event() && data == button_sensor_get());
 
     PRINTF("Button clicked\n");
 

@@ -55,12 +55,7 @@
 #include "kernel.h"
 #include "ringbuf-constdef.h"
 
-static hil_component_t* ringbuf_cmpobj_ref;
-static const component_info_t ringbuf_cmpobj_info = {RINGBUF, 2, 7, HIL_COMPONENT};
-
-static void ringbuf_object_stub_init(){
-	 ringbuf_cmpobj_ref = kernel_get_hil_cmp_ref(&ringbuf_cmpobj_info);
-}
+static const hil_component_t* ringbuf_cmpobj_ref;
 
 
 #include "contiki-conf.h"

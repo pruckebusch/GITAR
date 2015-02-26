@@ -70,12 +70,7 @@
 #include "kernel.h"
 #include "stimer-constdef.h"
 
-static hil_component_t* stimer_cmpobj_ref;
-static const component_info_t stimer_cmpobj_info = {STIMER, 2, 7, HIL_COMPONENT};
-
-static void stimer_object_stub_init(){
-	 stimer_cmpobj_ref = kernel_get_hil_cmp_ref(&stimer_cmpobj_info);
-}
+static const hil_component_t* stimer_cmpobj_ref;
 
 
 #include "src/include/system/hil/sys/timer/clock.h"

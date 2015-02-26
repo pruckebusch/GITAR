@@ -48,7 +48,7 @@
 
 #include "src/user/net/rime/collect.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)
@@ -65,11 +65,7 @@ AUTOSTART_PROCESSES(&example_collect_process);
 static void
 recv(const rimeaddr_t *originator, uint8_t seqno, uint8_t hops)
 {
-  PRINTF("Sink got message from %d.%d, seqno %d, hops %d: len %d '%s'\n",
-	 originator->u8[0], originator->u8[1],
-	 seqno, hops,
-	 packetbuf_datalen(),
-	 (char *)packetbuf_dataptr());
+  PRINTF("Sink got message from %d.%d, seqno %d, hops %d: len %d '%s'\n",originator->u8[0], originator->u8[1],seqno, hops,packetbuf_datalen(),(char *)packetbuf_dataptr());
 }
 /*---------------------------------------------------------------------------*/
 static const struct collect_callbacks callbacks = { recv };
@@ -83,8 +79,7 @@ PROCESS_THREAD(example_collect_process, ev, data)
 
   collect_open(&tc, 130, COLLECT_ROUTER, &callbacks);
 
-  if(rimeaddr_node_addr.u8[0] == 1 &&
-     rimeaddr_node_addr.u8[1] == 0) {
+  if(rimeaddr_get_node_addr()->u8[0] == 1 && rimeaddr_get_node_addr()->u8[1] == 0) {
 	PRINTF("I am sink\n");
 	collect_set_sink(&tc, 1);
   }
@@ -110,16 +105,16 @@ PROCESS_THREAD(example_collect_process, ev, data)
 
       PRINTF("Sending\n");
       packetbuf_clear();
-      packetbuf_set_datalen(sprintf(packetbuf_dataptr(),
-				  "%s", "Hello") + 1);
+      strcpy(packetbuf_dataptr(),"Hello");
+      packetbuf_set_datalen(6);
       collect_send(&tc, 15);
 
       parent = collect_parent(&tc);
       if(!rimeaddr_cmp(parent, &oldparent)) {
-        if(!rimeaddr_cmp(&oldparent, &rimeaddr_null)) {
+        if(!rimeaddr_cmp(&oldparent, rimeaddr_get_null())) {
           PRINTF("#L %d 0\n", oldparent.u8[0]);
         }
-        if(!rimeaddr_cmp(parent, &rimeaddr_null)) {
+        if(!rimeaddr_cmp(parent, rimeaddr_get_null())) {
           PRINTF("#L %d 1\n", parent->u8[0]);
         }
         rimeaddr_copy(&oldparent, parent);

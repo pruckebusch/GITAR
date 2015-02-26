@@ -59,12 +59,7 @@
 #include "kernel.h"
 #include "abc-constdef.h"
 
-static hil_component_t* abc_cmpobj_ref;
-static const component_info_t abc_cmpobj_info = {ABC, 2, 7, HIL_COMPONENT};
-
-static void abc_object_stub_init(){
-	 abc_cmpobj_ref = kernel_get_hil_cmp_ref(&abc_cmpobj_info);
-}
+static const hil_component_t* abc_cmpobj_ref;
 
 
 #include "src/include/system/hil/net/rime/packetbuf.h"

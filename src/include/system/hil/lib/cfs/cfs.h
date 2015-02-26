@@ -60,12 +60,7 @@
 #include "kernel.h"
 #include "cfs-constdef.h"
 
-static hil_component_t* cfs_cmpobj_ref;
-static const component_info_t cfs_cmpobj_info = {CFS, 2, 7, HIL_COMPONENT};
-
-static void cfs_object_stub_init(){
-	 cfs_cmpobj_ref = kernel_get_hil_cmp_ref(&cfs_cmpobj_info);
-}
+static const hil_component_t* cfs_cmpobj_ref;
 
 
 #include "contiki.h"

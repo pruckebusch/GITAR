@@ -4,9 +4,9 @@
 #include "src/system/hil/net/rime/broadcast-announcement.h"
 #include "src/include/system/hil/net/rime/broadcast-announcement-constdef.h"
 
-static const void* broadcast_announcement_cmpobj_functions[FUNCTION_BROADCAST_ANNOUNCEMENT_LAST]={broadcast_announcement_init,broadcast_announcement_beacon_interval};
+static const void* const broadcast_announcement_cmpobj_functions[FUNCTION_BROADCAST_ANNOUNCEMENT_LAST]={broadcast_announcement_init,broadcast_announcement_beacon_interval};
 
-static const hil_component_t broadcast_announcement_cmpobj = { { BROADCAST_ANNOUNCEMENT, 2, 7, HIL_COMPONENT} , {FUNCTION_BROADCAST_ANNOUNCEMENT_LAST,broadcast_announcement_cmpobj_functions} };
+static const hil_component_t const broadcast_announcement_cmpobj = { { BROADCAST_ANNOUNCEMENT, 2, 7, HIL_COMPONENT,FUNCTION_BROADCAST_ANNOUNCEMENT_LAST} , {broadcast_announcement_cmpobj_functions} };
 
 static void broadcast_announcement_object_init(){
 	kernel_add_hil_cmp(&broadcast_announcement_cmpobj);

@@ -114,8 +114,7 @@ sent(struct stbroadcast_conn *stbroadcast)
     read_new_datapacket(c);
   } else {
     stbroadcast_set_timer(&c->c, STEADY_TIME);
-    PRINTF("Steady: Sending the same data chunk next time datalen %d, %d\n",
-	   c->current.datalen, RUDOLPH0_DATASIZE);
+    PRINTF("Steady: Sending the same data chunk next time datalen %d, %d\n",c->current.datalen, RUDOLPH0_DATASIZE);
   }
 }
 /*---------------------------------------------------------------------------*/

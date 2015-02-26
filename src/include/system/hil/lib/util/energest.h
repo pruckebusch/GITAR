@@ -42,12 +42,7 @@
 #include "kernel.h"
 #include "energest-constdef.h"
 
-static hil_component_t* energest_cmpobj_ref;
-static const component_info_t energest_cmpobj_info = {ENERGEST, 2, 7, HIL_COMPONENT};
-
-static void energest_object_stub_init(){
-	 energest_cmpobj_ref = kernel_get_hil_cmp_ref(&energest_cmpobj_info);
-}
+static const hil_component_t* energest_cmpobj_ref;
 
 
 #include "src/include/system/hil/sys/timer/rtimer.h"

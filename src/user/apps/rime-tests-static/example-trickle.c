@@ -47,7 +47,7 @@
 
 #include "src/user/net/rime/trickle.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)
@@ -62,9 +62,7 @@ AUTOSTART_PROCESSES(&example_trickle_process);
 static void
 trickle_recv(struct trickle_conn *c)
 {
-  PRINTF("%d.%d: trickle message received '%s'\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 (char *)packetbuf_dataptr());
+  PRINTF("%d.%d: trickle message received '%s'\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],(char *)packetbuf_dataptr());
 }
 const static struct trickle_callbacks trickle_call = {trickle_recv};
 static struct trickle_conn trickle;
@@ -75,11 +73,11 @@ PROCESS_THREAD(example_trickle_process, ev, data)
   PROCESS_BEGIN();
 
   trickle_open(&trickle, CLOCK_SECOND, 145, &trickle_call);
-  SENSORS_ACTIVATE(button_sensor);
+  SENSORS_ACTIVATE(*button_sensor_get());
 
   while(1) {
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
-			     data == &button_sensor);
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_get_sensors_event() &&
+			     data == button_sensor_get());
 
     packetbuf_copyfrom("Hello, world", 13);
     trickle_send(&trickle);

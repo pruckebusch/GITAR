@@ -56,12 +56,7 @@
 #include "kernel.h"
 #include "rimeaddr-constdef.h"
 
-static hil_component_t* rimeaddr_cmpobj_ref;
-static const component_info_t rimeaddr_cmpobj_info = {RIMEADDR, 2, 7, HIL_COMPONENT};
-
-static void rimeaddr_object_stub_init(){
-	 rimeaddr_cmpobj_ref = kernel_get_hil_cmp_ref(&rimeaddr_cmpobj_info);
-}
+static const hil_component_t* rimeaddr_cmpobj_ref;
 
 
 #include "contiki-conf.h"
@@ -131,7 +126,11 @@ static inline void rimeaddr_set_node_addr(rimeaddr_t *addr){
  *             This function gets the Rime address of the node.
  *
  */
-rimeaddr_t* rimeaddr_get_node_addr();
+
+/* Stub function declaration for rimeaddr_get_node_addr() */
+static inline rimeaddr_t* rimeaddr_get_node_addr(){
+	return ( (rimeaddr_t* (*)()) rimeaddr_cmpobj_ref->interface.function_array[FUNCTION_RIMEADDR_GET_NODE_ADDR])();
+}
 
 /**
  * \brief      The Rime address of the node
@@ -151,7 +150,11 @@ extern rimeaddr_t rimeaddr_node_addr;
  *             This function gets the null Rime address of the node.
  *
  */
-rimeaddr_t* rimeaddr_get_null();
+
+/* Stub function declaration for rimeaddr_get_null() */
+static inline rimeaddr_t* rimeaddr_get_null(){
+	return ( (rimeaddr_t* (*)()) rimeaddr_cmpobj_ref->interface.function_array[FUNCTION_RIMEADDR_GET_NULL])();
+}
 
 /**
  * \brief      The null Rime address

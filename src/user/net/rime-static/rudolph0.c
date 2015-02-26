@@ -47,6 +47,15 @@
 #include "net/rime.h"
 #include "net/rime/rudolph0.h"
 
+
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
+
 #define STEADY_TIME CLOCK_SECOND * 2
 
 #define DEFAULT_SEND_INTERVAL CLOCK_SECOND / 2
@@ -61,14 +70,6 @@ enum {
 };
 
 #define VERSION_LT(a, b) ((signed char)((a) - (b)) < 0)
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 /*---------------------------------------------------------------------------*/
 static void
@@ -112,8 +113,7 @@ sent(struct stbroadcast_conn *stbroadcast)
     read_new_datapacket(c);
   } else {
     stbroadcast_set_timer(&c->c, STEADY_TIME);
-    PRINTF("Steady: Sending the same data chunk next time datalen %d, %d\n",
-	   c->current.datalen, RUDOLPH0_DATASIZE);
+    PRINTF("Steady: Sending the same data chunk next time datalen %d, %d\n",c->current.datalen, RUDOLPH0_DATASIZE);
   }
 }
 /*---------------------------------------------------------------------------*/

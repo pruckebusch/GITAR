@@ -48,7 +48,7 @@
 
 #include "src/user/net/rime/runicast.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)
@@ -96,28 +96,24 @@ recv_runicast(struct runicast_conn *c, const rimeaddr_t *from, uint8_t seqno)
   } else {
     /* Detect duplicate callback */
     if(e->seq == seqno) {
-      PRINTF("runicast message received from %d.%d, seqno %d (DUPLICATE)\n",
-	     from->u8[0], from->u8[1], seqno);
+      PRINTF("runicast message received from %d.%d, seqno %d (DUPLICATE)\n",from->u8[0], from->u8[1], seqno);
       return;
     }
     /* Update existing history entry */
     e->seq = seqno;
   }
 
-  PRINTF("runicast message received from %d.%d, seqno %d\n",
-	 from->u8[0], from->u8[1], seqno);
+  PRINTF("runicast message received from %d.%d, seqno %d\n", from->u8[0], from->u8[1], seqno);
 }
 static void
 sent_runicast(struct runicast_conn *c, const rimeaddr_t *to, uint8_t retransmissions)
 {
-  PRINTF("runicast message sent to %d.%d, retransmissions %d\n",
-	 to->u8[0], to->u8[1], retransmissions);
+  PRINTF("runicast message sent to %d.%d, retransmissions %d\n", to->u8[0], to->u8[1], retransmissions);
 }
 static void
 timedout_runicast(struct runicast_conn *c, const rimeaddr_t *to, uint8_t retransmissions)
 {
-  PRINTF("runicast message timed out when sending to %d.%d, retransmissions %d\n",
-	 to->u8[0], to->u8[1], retransmissions);
+  PRINTF("runicast message timed out when sending to %d.%d, retransmissions %d\n", to->u8[0], to->u8[1], retransmissions);
 }
 static const struct runicast_callbacks runicast_callbacks = {recv_runicast,
 							     sent_runicast,
@@ -137,8 +133,8 @@ PROCESS_THREAD(test_runicast_process, ev, data)
   memb_init(&history_mem);
 
   /* Receiver node: do nothing */
-  if(rimeaddr_node_addr.u8[0] == 1 &&
-     rimeaddr_node_addr.u8[1] == 0) {
+  if(rimeaddr_get_node_addr()->u8[0] == 1 &&
+     rimeaddr_get_node_addr()->u8[1] == 0) {
     PROCESS_WAIT_EVENT_UNTIL(0);
   }
 
@@ -155,11 +151,7 @@ PROCESS_THREAD(test_runicast_process, ev, data)
       recv.u8[0] = 1;
       recv.u8[1] = 0;
 
-      PRINTF("%u.%u: sending runicast to address %u.%u\n",
-	     rimeaddr_node_addr.u8[0],
-	     rimeaddr_node_addr.u8[1],
-	     recv.u8[0],
-	     recv.u8[1]);
+      PRINTF("%u.%u: sending runicast to address %u.%u\n", rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1], recv.u8[0], recv.u8[1]);
 
       runicast_send(&runicast, &recv, MAX_RETRANSMISSIONS);
     }

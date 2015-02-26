@@ -215,7 +215,7 @@ packet_sent(void *ptr, int status, int num_transmissions)
   }
 
   for(q = list_head(n->queued_packet_list); q != NULL; q = list_item_next(q)) {
-    if(queuebuf_attr(q->buf, PACKETBUF_ATTR_MAC_SEQNO) == packetbuf_attr(PACKETBUF_ATTR_MAC_SEQNO)) {
+    if(queuebuf_attr(q->buf, PACKETBUF_ATTR_MAC_SEQNO) == packetbuf_get_attr(PACKETBUF_ATTR_MAC_SEQNO)) {
       break;
     }
   }
@@ -293,7 +293,7 @@ send_packet(mac_callback_t sent, void *ptr)
   struct rdc_buf_list *q;
   struct neighbor_queue *n;
   static uint16_t seqno;
-  const rimeaddr_t *addr = packetbuf_addr(PACKETBUF_ADDR_RECEIVER);
+  const rimeaddr_t *addr = packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER);
 
   if(seqno == 0) {
     /* PACKETBUF_ATTR_MAC_SEQNO cannot be zero, due to a pecuilarity
@@ -330,16 +330,16 @@ send_packet(mac_callback_t sent, void *ptr)
 				if(q->buf != NULL) {
 					struct qbuf_metadata *metadata = (struct qbuf_metadata *)q->ptr;
 					/* Neighbor and packet successfully allocated */
-					if(packetbuf_attr(PACKETBUF_ATTR_MAX_MAC_TRANSMISSIONS) == 0) {
+					if(packetbuf_get_attr(PACKETBUF_ATTR_MAX_MAC_TRANSMISSIONS) == 0) {
 						/* Use default configuration for max transmissions */
 						metadata->max_transmissions = CSMA_MAX_MAC_TRANSMISSIONS;
 					} else {
-						metadata->max_transmissions = packetbuf_attr(PACKETBUF_ATTR_MAX_MAC_TRANSMISSIONS);
+						metadata->max_transmissions = packetbuf_get_attr(PACKETBUF_ATTR_MAX_MAC_TRANSMISSIONS);
 					}
 					metadata->sent = sent;
 					metadata->cptr = ptr;
 
-					if(packetbuf_attr(PACKETBUF_ATTR_PACKET_TYPE) == PACKETBUF_ATTR_PACKET_TYPE_ACK) {
+					if(packetbuf_get_attr(PACKETBUF_ATTR_PACKET_TYPE) == PACKETBUF_ATTR_PACKET_TYPE_ACK) {
 						list_push(n->queued_packet_list, q);
 					} else {
 						list_add(n->queued_packet_list, q);

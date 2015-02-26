@@ -123,9 +123,7 @@ write_data(struct rudolph1_conn *c, int chunk, uint8_t *data, int datalen)
   }
 
   if(datalen < RUDOLPH1_DATASIZE) {
-    PRINTF("%d.%d: get %d bytes, file complete\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   datalen);
+    PRINTF("%d.%d: get %d bytes, file complete\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],datalen);
     c->cb->write_chunk(c, chunk * RUDOLPH1_DATASIZE,
 		       RUDOLPH1_FLAG_LASTCHUNK, data, datalen);
   } else {
@@ -146,9 +144,7 @@ send_nack(struct rudolph1_conn *c)
   hdr->version = c->version;
   hdr->chunk = c->chunk;
 
-  PRINTF("%d.%d: Sending nack for %d:%d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 hdr->version, hdr->chunk);
+  PRINTF("%d.%d: Sending nack for %d:%d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],hdr->version, hdr->chunk);
   ipolite_send(&c->ipolite, NACK_TIMEOUT, sizeof(struct rudolph1_hdr));
 }
 /*---------------------------------------------------------------------------*/
@@ -156,9 +152,7 @@ static void
 handle_data(struct rudolph1_conn *c, struct rudolph1_datapacket *p)
 {
   if(LT(c->version, p->h.version)) {
-    PRINTF("%d.%d: rudolph1 new version %d, chunk %d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   p->h.version, p->h.chunk);
+    PRINTF("%d.%d: rudolph1 new version %d, chunk %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],p->h.version, p->h.chunk);
     c->version = p->h.version;
     c->highest_chunk_heard = c->chunk = 0;
       if(p->h.chunk != 0) {
@@ -169,23 +163,17 @@ handle_data(struct rudolph1_conn *c, struct rudolph1_datapacket *p)
       }
       /*    }*/
   } else if(p->h.version == c->version) {
-    PRINTF("%d.%d: got chunk %d (%d) highest heard %d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   p->h.chunk, c->chunk, c->highest_chunk_heard);
+    PRINTF("%d.%d: got chunk %d (%d) highest heard %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],p->h.chunk, c->chunk, c->highest_chunk_heard);
 
     if(p->h.chunk == c->chunk) {
-      PRINTF("%d.%d: received chunk %d\n",
-	     rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	     p->h.chunk);
+      PRINTF("%d.%d: received chunk %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],p->h.chunk);
       write_data(c, p->h.chunk, p->data, p->datalen);
       if(c->highest_chunk_heard < c->chunk) {
 	c->highest_chunk_heard = c->chunk;
       }
       c->chunk++;
     } else if(p->h.chunk > c->chunk) {
-      PRINTF("%d.%d: received chunk %d > %d, sending NACK\n",
-	     rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	     p->h.chunk, c->chunk);
+      PRINTF("%d.%d: received chunk %d > %d, sending NACK\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],p->h.chunk, c->chunk);
       send_nack(c);
       c->highest_chunk_heard = p->h.chunk;
     } else if(p->h.chunk < c->chunk) {
@@ -211,9 +199,7 @@ recv_trickle(struct trickle_conn *trickle)
   struct rudolph1_datapacket *p = packetbuf_dataptr();
 
   if(p->h.type == TYPE_DATA) {
-    PRINTF("%d.%d: received trickle with chunk %d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   p->h.chunk);
+    PRINTF("%d.%d: received trickle with chunk %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],p->h.chunk);
     handle_data(c, p);
   }
 }
@@ -221,15 +207,13 @@ recv_trickle(struct trickle_conn *trickle)
 static void
 sent_ipolite(struct ipolite_conn *ipolite)
 {
-  PRINTF("%d.%d: Sent ipolite\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1]);
+  PRINTF("%d.%d: Sent ipolite\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
 }
 /*---------------------------------------------------------------------------*/
 static void
 dropped_ipolite(struct ipolite_conn *ipolite)
 {
-  PRINTF("%d.%d: dropped ipolite\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1]);
+  PRINTF("%d.%d: dropped ipolite\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
 }
 /*---------------------------------------------------------------------------*/
 static void
@@ -239,23 +223,16 @@ recv_ipolite(struct ipolite_conn *ipolite, const rimeaddr_t *from)
     ((char *)ipolite - offsetof(struct rudolph1_conn, ipolite));
   struct rudolph1_datapacket *p = packetbuf_dataptr();
 
-  PRINTF("%d.%d: Got ipolite type %d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 p->h.type);
+  PRINTF("%d.%d: Got ipolite type %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],p->h.type);
 
   c->nacks++;
 
   if(p->h.type == TYPE_NACK) {
-    PRINTF("%d.%d: Got NACK for %d:%d (%d:%d)\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   p->h.version, p->h.chunk,
-	   c->version, c->chunk);
+    PRINTF("%d.%d: Got NACK for %d:%d (%d:%d)\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],p->h.version, p->h.chunk,c->version, c->chunk);
     if(p->h.version == c->version) {
       if(p->h.chunk < c->chunk) {
 	/* Format and send a repair packet */
-	PRINTF("%d.%d: sending repair for chunk %d\n",
-	       rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	       p->h.chunk);
+	PRINTF("%d.%d: sending repair for chunk %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],p->h.chunk);
 	format_data(c, p->h.chunk);
 	ipolite_send(&c->ipolite, REPAIR_TIMEOUT, sizeof(struct rudolph1_hdr));
       }
@@ -265,9 +242,7 @@ recv_ipolite(struct ipolite_conn *ipolite, const rimeaddr_t *from)
     }
   } else if(p->h.type == TYPE_DATA) {
     /* This is a repair packet from someone else. */
-    PRINTF("%d.%d: got repair for chunk %d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   p->h.chunk);
+    PRINTF("%d.%d: got repair for chunk %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],p->h.chunk);
     handle_data(c, p);
   }
 }
@@ -283,9 +258,7 @@ send_next_packet(void *ptr)
     if(len == RUDOLPH1_DATASIZE) {
       ctimer_set(&c->t, c->send_interval, send_next_packet, c);
     }
-    PRINTF("%d.%d: send_next_packet chunk %d, next %d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   c->chunk, c->chunk + 1);
+    PRINTF("%d.%d: send_next_packet chunk %d, next %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],c->chunk, c->chunk + 1);
 
     c->highest_chunk_heard = c->chunk;
     c->chunk++;

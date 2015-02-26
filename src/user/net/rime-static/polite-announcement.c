@@ -49,13 +49,17 @@
 #include "net/rime/announcement.h"
 #include "net/rime/ipolite.h"
 
-#if NETSIM
-#include "ether.h"
-#endif
 
 #include <string.h>
-#include <stdio.h>
 #include <stddef.h>
+
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 struct announcement_data {
   uint16_t id;
@@ -82,14 +86,6 @@ static struct polite_announcement_state {
   clock_time_t min_interval, max_interval;
 } c;
 
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
-
 #define MIN(a, b) ((a)<(b)?(a):(b))
 
 /*---------------------------------------------------------------------------*/
@@ -111,8 +107,7 @@ send_adv(clock_time_t interval)
   packetbuf_set_datalen(ANNOUNCEMENT_MSG_HEADERLEN +
 		      sizeof(struct announcement_data) * adata->num);
 
-  PRINTF("%d.%d: sending neighbor advertisement with %d announcements\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1], adata->num);
+  PRINTF("%d.%d: sending neighbor advertisement with %d announcements\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1], adata->num);
 
   if(adata->num > 0) {
     /* Send the packet only if it contains more than zero announcements. */
@@ -132,9 +127,7 @@ adv_packet_received(struct ipolite_conn *ipolite, const rimeaddr_t *from)
 
   /* Copy number of announcements */
   memcpy(&adata, ptr, sizeof(struct announcement_msg));
-  PRINTF("%d.%d: adv_packet_received from %d.%d with %d announcements\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 from->u8[0], from->u8[1], adata.num);
+  PRINTF("%d.%d: adv_packet_received from %d.%d with %d announcements\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],from->u8[0], from->u8[1], adata.num);
 
   if(ANNOUNCEMENT_MSG_HEADERLEN + adata.num * sizeof(struct announcement_data) > packetbuf_datalen()) {
     /* The number of announcements is too large - corrupt packet has

@@ -353,11 +353,11 @@ cc2420_transmit(unsigned short payload_len)
   GET_LOCK();
 
   txpower = 0;
-  if(packetbuf_attr(PACKETBUF_ATTR_RADIO_TXPOWER) > 0) {
+  if(packetbuf_get_attr(PACKETBUF_ATTR_RADIO_TXPOWER) > 0) {
     /* Remember the current transmission power */
     txpower = cc2420_get_txpower();
     /* Set the specified transmission power */
-    set_txpower(packetbuf_attr(PACKETBUF_ATTR_RADIO_TXPOWER) - 1);
+    set_txpower(packetbuf_get_attr(PACKETBUF_ATTR_RADIO_TXPOWER) - 1);
   }
 
   total_len = payload_len + AUX_LEN;
@@ -387,7 +387,7 @@ cc2420_transmit(unsigned short payload_len)
       {
         rtimer_clock_t sfd_timestamp;
         sfd_timestamp = cc2420_sfd_start_time;
-        if(packetbuf_attr(PACKETBUF_ATTR_PACKET_TYPE) ==
+        if(packetbuf_get_attr(PACKETBUF_ATTR_PACKET_TYPE) ==
            PACKETBUF_ATTR_PACKET_TYPE_TIMESTAMP) {
           /* Write timestamp to last two bytes of packet in TXFIFO. */
           CC2420_WRITE_RAM(&sfd_timestamp, CC2420RAM_TXFIFO + payload_len - 1, 2);
@@ -421,7 +421,7 @@ cc2420_transmit(unsigned short payload_len)
 	off();
       }
 
-      if(packetbuf_attr(PACKETBUF_ATTR_RADIO_TXPOWER) > 0) {
+      if(packetbuf_get_attr(PACKETBUF_ATTR_RADIO_TXPOWER) > 0) {
         /* Restore the transmission power */
         set_txpower(txpower & 0xff);
       }
@@ -436,7 +436,7 @@ cc2420_transmit(unsigned short payload_len)
   RIMESTATS_ADD(contentiondrop);
   PRINTF("cc2420: do_send() transmission never started\n");
 
-  if(packetbuf_attr(PACKETBUF_ATTR_RADIO_TXPOWER) > 0) {
+  if(packetbuf_get_attr(PACKETBUF_ATTR_RADIO_TXPOWER) > 0) {
     /* Restore the transmission power */
     set_txpower(txpower & 0xff);
   }

@@ -61,12 +61,7 @@
 #include "kernel.h"
 #include "broadcast-announcement-constdef.h"
 
-static hil_component_t* broadcast_announcement_cmpobj_ref;
-static const component_info_t broadcast_announcement_cmpobj_info = {BROADCAST_ANNOUNCEMENT, 2, 7, HIL_COMPONENT};
-
-static void broadcast_announcement_object_stub_init(){
-	 broadcast_announcement_cmpobj_ref = kernel_get_hil_cmp_ref(&broadcast_announcement_cmpobj_info);
-}
+static const hil_component_t* broadcast_announcement_cmpobj_ref;
 
 
 

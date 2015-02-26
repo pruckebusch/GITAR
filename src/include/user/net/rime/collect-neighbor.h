@@ -53,13 +53,7 @@
 #include "kernel.h"
 #include "collect-neighbor-constdef.h"
 
-static component_t* collect_neighbor_cmpobj_ref;
-static const component_info_t collect_neighbor_cmpobj_info = {COLLECT_NEIGHBOR, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t collect_neighbor_cmp_user;
-
-static void collect_neighbor_object_stub_init(){
-	 collect_neighbor_cmpobj_ref = kernel_get_cmp_ref(&collect_neighbor_cmpobj_info);
-}
+static const component_t* collect_neighbor_cmpobj_ref;
 
 
 #include "src/include/system/hil/net/rime/rimeaddr.h"

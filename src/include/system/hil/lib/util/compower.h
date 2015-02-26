@@ -56,12 +56,7 @@
 #include "kernel.h"
 #include "compower-constdef.h"
 
-static hil_component_t* compower_cmpobj_ref;
-static const component_info_t compower_cmpobj_info = {COMPOWER, 2, 7, HIL_COMPONENT};
-
-static void compower_object_stub_init(){
-	 compower_cmpobj_ref = kernel_get_hil_cmp_ref(&compower_cmpobj_info);
-}
+static const hil_component_t* compower_cmpobj_ref;
 
 
 /**

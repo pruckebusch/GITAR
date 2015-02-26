@@ -45,6 +45,7 @@
 #include "src/user/net/rime/polite.h"
 
 #include "include/system/hil/lib/util/random.h"
+#include "include/system/hil/lib/util/string.h"
 
 //~ #include "include/system/hil/net/rime.h"
 //~ #include <string.h>

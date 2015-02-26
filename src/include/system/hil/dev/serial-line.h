@@ -41,12 +41,7 @@
 #include "kernel.h"
 #include "serial-line-constdef.h"
 
-static hil_component_t* serial_line_cmpobj_ref;
-static const component_info_t serial_line_cmpobj_info = {SERIAL_LINE, 2, 7, HIL_COMPONENT};
-
-static void serial_line_object_stub_init(){
-	 serial_line_cmpobj_ref = kernel_get_hil_cmp_ref(&serial_line_cmpobj_info);
-}
+static const hil_component_t* serial_line_cmpobj_ref;
 
 
 #include "src/include/system/hil/sys/process/process.h"

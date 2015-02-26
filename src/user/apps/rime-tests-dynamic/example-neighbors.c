@@ -207,13 +207,7 @@ broadcast_recv(struct broadcast_conn *c, const rimeaddr_t *from)
   n->last_seqno = m->seqno;
 
   /* Print out a message. */
-  PRINTF("broadcast message received from %d.%d with seqno %d, RSSI %u, LQI %u, avg seqno gap %d.%02d\n",
-         from->u8[0], from->u8[1],
-         m->seqno,
-         packetbuf_get_attr(PACKETBUF_ATTR_RSSI),
-         packetbuf_get_attr(PACKETBUF_ATTR_LINK_QUALITY),
-         (int)(n->avg_seqno_gap / SEQNO_EWMA_UNITY),
-         (int)(((100UL * n->avg_seqno_gap) / SEQNO_EWMA_UNITY) % 100));
+  PRINTF("broadcast message received from %d.%d with seqno %d, RSSI %u, LQI %u, avg seqno gap %d.%02d\n",from->u8[0], from->u8[1],m->seqno,packetbuf_get_attr(PACKETBUF_ATTR_RSSI),packetbuf_get_attr(PACKETBUF_ATTR_LINK_QUALITY),(int)(n->avg_seqno_gap / SEQNO_EWMA_UNITY),(int)(((100UL * n->avg_seqno_gap) / SEQNO_EWMA_UNITY) % 100));
 }
 /* This is where we define what function to be called when a broadcast
    is received. We pass a pointer to this structure in the
@@ -233,8 +227,7 @@ recv_uc(struct unicast_conn *c, const rimeaddr_t *from)
      UNICAST_TYPE_PONG. If we receive a UNICAST_TYPE_PING message, we
      print out a message and return a UNICAST_TYPE_PONG. */
   if(msg->type == UNICAST_TYPE_PING) {
-    PRINTF("unicast ping received from %d.%d\n",
-           from->u8[0], from->u8[1]);
+    PRINTF("unicast ping received from %d.%d\n",from->u8[0], from->u8[1]);
     msg->type = UNICAST_TYPE_PONG;
     packetbuf_copyfrom(msg, sizeof(struct unicast_message));
     /* Send it back to where it came from. */

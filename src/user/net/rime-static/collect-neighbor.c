@@ -52,6 +52,14 @@
 #include "net/rime/collect-neighbor.h"
 #include "net/rime/collect.h"
 
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
+
 #ifdef COLLECT_NEIGHBOR_CONF_MAX_COLLECT_NEIGHBORS
 #define MAX_COLLECT_NEIGHBORS COLLECT_NEIGHBOR_CONF_MAX_COLLECT_NEIGHBORS
 #else /* COLLECT_NEIGHBOR_CONF_MAX_COLLECT_NEIGHBORS */
@@ -68,14 +76,6 @@ MEMB(collect_neighbors_mem, struct collect_neighbor, MAX_COLLECT_NEIGHBORS);
 
 #define EXPECTED_CONGESTION_DURATION CLOCK_SECOND * 240
 #define CONGESTION_PENALTY           8 * COLLECT_LINK_ESTIMATE_UNIT
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 /*---------------------------------------------------------------------------*/
 static void
@@ -160,8 +160,7 @@ collect_neighbor_list_add(struct collect_neighbor_list *neighbors_list,
   /* Check if the collect_neighbor is already on the list. */
   for(n = list_head(neighbors_list->list); n != NULL; n = list_item_next(n)) {
     if(rimeaddr_cmp(&n->addr, addr)) {
-      PRINTF("collect_neighbor_add: already on list %d.%d\n",
-             addr->u8[0], addr->u8[1]);
+      PRINTF("collect_neighbor_add: already on list %d.%d\n",addr->u8[0], addr->u8[1]);
       break;
     }
   }
@@ -169,8 +168,7 @@ collect_neighbor_list_add(struct collect_neighbor_list *neighbors_list,
   /* If the collect_neighbor was not on the list, we try to allocate memory
      for it. */
   if(n == NULL) {
-    PRINTF("collect_neighbor_add: not on list, allocating %d.%d\n",
-           addr->u8[0], addr->u8[1]);
+    PRINTF("collect_neighbor_add: not on list, allocating %d.%d\n",addr->u8[0], addr->u8[1]);
     n = memb_alloc(&collect_neighbors_mem);
     if(n != NULL) {
       list_add(neighbors_list->list, n);
@@ -207,8 +205,7 @@ collect_neighbor_list_add(struct collect_neighbor_list *neighbors_list,
       n = worst_neighbor;
     }
     if(n != NULL) {
-      PRINTF("collect_neighbor_add: not on list, not allocated, recycling %d.%d\n",
-             n->addr.u8[0], n->addr.u8[1]);
+      PRINTF("collect_neighbor_add: not on list, not allocated, recycling %d.%d\n",n->addr.u8[0], n->addr.u8[1]);
     }
   }
 
@@ -271,10 +268,7 @@ collect_neighbor_list_best(struct collect_neighbor_list *neighbors_list)
 
   /* Find the neighbor with the lowest rtmetric + linkt estimate. */
   for(n = list_head(neighbors_list->list); n != NULL; n = list_item_next(n)) {
-    PRINTF("%d.%d %d+%d=%d, ",
-           n->addr.u8[0], n->addr.u8[1],
-           n->rtmetric, collect_neighbor_link_estimate(n),
-           collect_neighbor_rtmetric(n));
+    PRINTF("%d.%d %d+%d=%d, ",n->addr.u8[0], n->addr.u8[1],n->rtmetric, collect_neighbor_link_estimate(n),collect_neighbor_rtmetric(n));
     if(collect_neighbor_rtmetric_link_estimate(n) < rtmetric) {
       rtmetric = collect_neighbor_rtmetric_link_estimate(n);
       best = n;
@@ -311,8 +305,7 @@ collect_neighbor_list_get(struct collect_neighbor_list *neighbors_list, int num)
   i = 0;
   for(n = list_head(neighbors_list->list); n != NULL; n = list_item_next(n)) {
     if(i == num) {
-      PRINTF("collect_neighbor_get found %d.%d\n",
-             n->addr.u8[0], n->addr.u8[1]);
+      PRINTF("collect_neighbor_get found %d.%d\n",n->addr.u8[0], n->addr.u8[1]);
       return n;
     }
     i++;
@@ -336,9 +329,7 @@ void
 collect_neighbor_update_rtmetric(struct collect_neighbor *n, uint16_t rtmetric)
 {
   if(n != NULL) {
-    PRINTF("%d.%d: collect_neighbor_update %d.%d rtmetric %d\n",
-           rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-           n->addr.u8[0], n->addr.u8[1], rtmetric);
+    PRINTF("%d.%d: collect_neighbor_update %d.%d rtmetric %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],n->addr.u8[0], n->addr.u8[1], rtmetric);
     n->rtmetric = rtmetric;
     n->age = 0;
   }
@@ -383,10 +374,7 @@ collect_neighbor_link_estimate(struct collect_neighbor *n)
     return 0;
   }
   if(collect_neighbor_is_congested(n)) {
-    /*    printf("Congested %d.%d, sould return %d, returning %d\n",
-           n->addr.u8[0], n->addr.u8[1],
-           collect_link_estimate(&n->le),
-           collect_link_estimate(&n->le) + CONGESTION_PENALTY);*/
+    /*    PRINTF("Congested %d.%d, sould return %d, returning %d\n",n->addr.u8[0], n->addr.u8[1],collect_link_estimate(&n->le),collect_link_estimate(&n->le) + CONGESTION_PENALTY);*/
     return collect_link_estimate(&n->le) + CONGESTION_PENALTY;
   } else {
     return collect_link_estimate(&n->le);

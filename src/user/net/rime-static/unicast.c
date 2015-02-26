@@ -47,11 +47,6 @@
 #include "net/rime/unicast.h"
 #include <string.h>
 
-static const struct packetbuf_attrlist attributes[] =
-  {
-    UNICAST_ATTRIBUTES
-    PACKETBUF_ATTR_LAST
-  };
 
 #define DEBUG 0
 #if DEBUG
@@ -61,17 +56,20 @@ static const struct packetbuf_attrlist attributes[] =
 #define PRINTF(...)
 #endif
 
+static const struct packetbuf_attrlist attributes[] =
+  {
+    UNICAST_ATTRIBUTES
+    PACKETBUF_ATTR_LAST
+  };
+
 /*---------------------------------------------------------------------------*/
 static void
 recv_from_broadcast(struct broadcast_conn *broadcast, const rimeaddr_t *from)
 {
   struct unicast_conn *c = (struct unicast_conn *)broadcast;
 
-  PRINTF("%d.%d: uc: recv_from_broadcast, receiver %d.%d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
-	 packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[1]);
-  if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_node_addr)) {
+  PRINTF("%d.%d: uc: recv_from_broadcast, receiver %d.%d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[1]);
+  if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER), rimeaddr_get_node_addr())) {
     if(c->u->recv) {
       c->u->recv(c, from);
     }
@@ -83,10 +81,7 @@ sent_by_broadcast(struct broadcast_conn *broadcast, int status, int num_tx)
 {
   struct unicast_conn *c = (struct unicast_conn *)broadcast;
 
-  PRINTF("%d.%d: uc: sent_by_broadcast, receiver %d.%d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
-	 packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[1]);
+  PRINTF("%d.%d: uc: sent_by_broadcast, receiver %d.%d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[1]);
 
   if(c->u->sent) {
     c->u->sent(c, status, num_tx);
@@ -114,9 +109,7 @@ unicast_close(struct unicast_conn *c)
 int
 unicast_send(struct unicast_conn *c, const rimeaddr_t *receiver)
 {
-  PRINTF("%d.%d: unicast_send to %d.%d\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1],
-	 receiver->u8[0], receiver->u8[1]);
+  PRINTF("%d.%d: unicast_send to %d.%d\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],receiver->u8[0], receiver->u8[1]);
   packetbuf_set_addr(PACKETBUF_ADDR_RECEIVER, receiver);
   return broadcast_send(&c->c);
 }

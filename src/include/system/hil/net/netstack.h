@@ -42,12 +42,7 @@
 #include "kernel.h"
 #include "netstack-constdef.h"
 
-static hil_component_t* netstack_cmpobj_ref;
-static const component_info_t netstack_cmpobj_info = {NETSTACK, 2, 7, HIL_COMPONENT};
-
-static void netstack_object_stub_init(){
-	 netstack_cmpobj_ref = kernel_get_hil_cmp_ref(&netstack_cmpobj_info);
-}
+static const hil_component_t* netstack_cmpobj_ref;
 
 
 #include "contiki-conf.h"

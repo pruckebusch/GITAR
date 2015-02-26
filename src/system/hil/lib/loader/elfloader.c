@@ -162,7 +162,7 @@ seek_read(int fd, unsigned int offset, char *buf, int len)
     for(i = 0; i < len; ++i ) {
       PRINTF("%02x ", buf[i]);
     }
-    printf("\n");
+    PRINTF("\n");
   }
 #endif /* DEBUG */
 }

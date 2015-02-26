@@ -109,7 +109,7 @@ void rimeaddr_set_node_addr(rimeaddr_t *addr);
  *             This function gets the Rime address of the node.
  *
  */
-rimeaddr_t* rimeaddr_get_node_addr();
+const rimeaddr_t* rimeaddr_get_node_addr();
 
 /**
  * \brief      The Rime address of the node
@@ -129,7 +129,7 @@ extern rimeaddr_t rimeaddr_node_addr;
  *             This function gets the null Rime address of the node.
  *
  */
-rimeaddr_t* rimeaddr_get_null();
+const rimeaddr_t* rimeaddr_get_null();
 
 /**
  * \brief      The null Rime address

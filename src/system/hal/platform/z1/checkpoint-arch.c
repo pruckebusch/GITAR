@@ -89,11 +89,11 @@ write_byte(int fd, uint8_t c)
   uint8_t hex[2];
   sprintf(hex, "%02x", c);
   if(cfs_write(fd, hex, 2) != 2) {
-    printf("err #1\n");
+    PRINTF("err #1\n");
   }
 #else /* DATA_AS_HEX */
   if(cfs_write(fd, &c, 1) != 1) {
-    printf("err #2\n");
+    PRINTF("err #2\n");
   }
 #endif /* DATA_AS_HEX */
 }/*---------------------------------------------------------------------------*/
@@ -172,8 +172,8 @@ thread_checkpoint(int fd)
   unsigned char *coffee_mem_end = coffee_mem_start + size - 1;
 #endif /* INCLUDE_RAM */
 
-  /*printf("protected thread memory: %u, size=%u\n", (uint16_t) thread_mem_start, sizeof(checkpoint_thread.thread.stack));*/
-  /*printf("protected coffee memory: %u, size=%u\n", (uint16_t) coffee_mem_start, size);*/
+  /*PRINTF("protected thread memory: %u, size=%u\n", (uint16_t) thread_mem_start, sizeof(checkpoint_thread.thread.stack));*/
+  /*PRINTF("protected coffee memory: %u, size=%u\n", (uint16_t) coffee_mem_start, size);*/
 
   /* RAM */
 #if INCLUDE_RAM
@@ -240,8 +240,8 @@ thread_rollback(int fd)
   unsigned char *coffee_mem_end = coffee_mem_start + size - 1;
 #endif /* INCLUDE_RAM */
 
-  /*printf("protected thread memory: %u, size=%u\n", (uint16_t) thread_mem_start, sizeof(checkpoint_thread.thread.stack));*/
-  /*printf("protected coffee memory: %u, size=%u\n", (uint16_t) coffee_mem_start, size);*/
+  /*PRINTF("protected thread memory: %u, size=%u\n", (uint16_t) thread_mem_start, sizeof(checkpoint_thread.thread.stack));*/
+  /*PRINTF("protected coffee memory: %u, size=%u\n", (uint16_t) coffee_mem_start, size);*/
 
   /* RAM */
 #if INCLUDE_RAM
@@ -319,7 +319,7 @@ thread_loop(void *data)
       write_word(fd, TBR);
       PRINTF(" done!\n");
     } else {
-      printf("Error: unknown command: %u\n", cmd);
+      PRINTF("Error: unknown command: %u\n", cmd);
     }
 
     /* Return to main Contiki thread */

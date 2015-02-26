@@ -261,7 +261,7 @@ turn_radio_on_callback(void *packet)
   list_add(queued_packets_list, p);
   turn_radio_on();
 
-  /*  printf("enc\n");*/
+  /*  PRINTF("enc\n");*/
 }
 #endif /* WITH_ENCOUNTER_OPTIMIZATION */
 
@@ -286,7 +286,7 @@ turn_radio_on_for_neighbor(rimeaddr_t *neighbor, struct queue_list_item *i)
 {
 
 #if WITH_STREAMING
-  if(packetbuf_attr(PACKETBUF_ATTR_PACKET_TYPE) ==
+  if(packetbuf_get_attr(PACKETBUF_ATTR_PACKET_TYPE) ==
      PACKETBUF_ATTR_PACKET_TYPE_STREAM) {
     is_streaming = 1;
     turn_radio_on();
@@ -329,16 +329,16 @@ turn_radio_on_for_neighbor(rimeaddr_t *neighbor, struct queue_list_item *i)
       wait = (((clock_time_t)(e->time - now)) % (OFF_TIME + LISTEN_TIME)) -
         2 * LISTEN_TIME;
 
-      /*      printf("now %d e %d e-n %d w %d %d\n", now, e->time, e->time - now, (e->time - now) % (OFF_TIME), wait);
+      /*      PRINTF("now %d e %d e-n %d w %d %d\n", now, e->time, e->time - now, (e->time - now) % (OFF_TIME), wait);
       
-      printf("Time now %lu last encounter %lu next expected encouter %lu wait %lu/%d (%lu)\n",
+      PRINTF("Time now %lu last encounter %lu next expected encouter %lu wait %lu/%d (%lu)\n",
 	     (1000ul * (unsigned long)now) / CLOCK_SECOND,
 	     (1000ul * (unsigned long)e->time) / CLOCK_SECOND,
 	     (1000ul * (unsigned long)(e->time + OFF_TIME)) / CLOCK_SECOND,
 	     (1000ul * (unsigned long)wait) / CLOCK_SECOND, wait,
 	     (1000ul * (unsigned long)(wait + now)) / CLOCK_SECOND);*/
       
-      /*      printf("Neighbor %d.%d found encounter, waiting %d ticks\n",
+      /*      PRINTF("Neighbor %d.%d found encounter, waiting %d ticks\n",
 	      neighbor->u8[0], neighbor->u8[1], wait);*/
       
       ctimer_set(&e->turn_on_radio_timer, wait, turn_radio_on_callback, i);
@@ -350,7 +350,7 @@ turn_radio_on_for_neighbor(rimeaddr_t *neighbor, struct queue_list_item *i)
   
   /* We did not find the neighbor in the list of recent encounters, so
      we just turn on the radio. */
-  /*  printf("Neighbor %d.%d not found in recent encounters\n",
+  /*  PRINTF("Neighbor %d.%d not found in recent encounters\n",
       neighbor->u8[0], neighbor->u8[1]);*/
   turn_radio_on();
   list_add(queued_packets_list, i);
@@ -442,7 +442,7 @@ send_probe(void)
   hdr = packetbuf_dataptr();
   hdr->type = TYPE_PROBE;
   rimeaddr_copy(&hdr->sender, &rimeaddr_node_addr);
-  /*  rimeaddr_copy(&hdr->receiver, packetbuf_addr(PACKETBUF_ADDR_RECEIVER));*/
+  /*  rimeaddr_copy(&hdr->receiver, packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER));*/
   rimeaddr_copy(&hdr->receiver, &rimeaddr_null);
 
   packetbuf_set_addr(PACKETBUF_ADDR_RECEIVER, &rimeaddr_null);
@@ -470,7 +470,7 @@ send_probe(void)
 
   /*  PRINTF("Sending probe\n");*/
 
-  /*  printf("probe\n");*/
+  /*  PRINTF("probe\n");*/
 
   if(NETSTACK_RADIO.channel_clear()) {
     NETSTACK_RADIO.send(packetbuf_hdrptr(), packetbuf_totlen());
@@ -651,7 +651,7 @@ send_packet(mac_callback_t sent, void *ptr)
   uint8_t is_broadcast = 0;
 
   rimeaddr_copy(&hdr.sender, &rimeaddr_node_addr);
-  rimeaddr_copy(&hdr.receiver, packetbuf_addr(PACKETBUF_ADDR_RECEIVER));
+  rimeaddr_copy(&hdr.receiver, packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER));
   if(rimeaddr_cmp(&hdr.receiver, &rimeaddr_null)) {
     is_broadcast = 1;
   }
@@ -675,9 +675,9 @@ send_packet(mac_callback_t sent, void *ptr)
   PRINTF("%d.%d: queueing packet to %d.%d, channel %d\n",
 	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
 	 hdr.receiver.u8[0], hdr.receiver.u8[1],
-	 packetbuf_attr(PACKETBUF_ATTR_CHANNEL));
+	 packetbuf_get_attr(PACKETBUF_ATTR_CHANNEL));
 #if WITH_ACK_OPTIMIZATION
-  if(packetbuf_attr(PACKETBUF_ATTR_PACKET_TYPE) == PACKETBUF_ATTR_PACKET_TYPE_ACK) {
+  if(packetbuf_get_attr(PACKETBUF_ATTR_PACKET_TYPE) == PACKETBUF_ATTR_PACKET_TYPE_ACK) {
     /* Send ACKs immediately. */
     NETSTACK_RADIO.send(packetbuf_hdrptr(), packetbuf_totlen());
     mac_call_sent_callback(sent, ptr, MAC_TX_OK, 1);
@@ -700,7 +700,7 @@ send_packet(mac_callback_t sent, void *ptr)
       i->packet = queuebuf_new_from_packetbuf();
       if(i->packet == NULL) {
 	memb_free(&queued_packets_memb, i);
-        printf("null packet\n");
+        PRINTF("null packet\n");
         mac_call_sent_callback(sent, ptr, MAC_TX_ERR, 0);
 	return;
       } else {
@@ -734,7 +734,7 @@ send_packet(mac_callback_t sent, void *ptr)
 
       }
     } else {
-      printf("i == NULL\n");
+      PRINTF("i == NULL\n");
       mac_call_sent_callback(sent, ptr, MAC_TX_ERR, 0);
     }
   }
@@ -799,7 +799,7 @@ input_packet(void)
   reception_time = clock_time();
 
   if(NETSTACK_FRAMER.parse() < 0) {
-    printf("lpp input_packet framer error\n");
+    PRINTF("lpp input_packet framer error\n");
   }
 
   memcpy(&hdr, packetbuf_dataptr(), sizeof(struct lpp_hdr));;
@@ -930,8 +930,8 @@ input_packet(void)
           }
 
 #if WITH_ACK_OPTIMIZATION
-          if(packetbuf_attr(PACKETBUF_ATTR_RELIABLE) ||
-             packetbuf_attr(PACKETBUF_ATTR_ERELIABLE)) {
+          if(packetbuf_get_attr(PACKETBUF_ATTR_RELIABLE) ||
+             packetbuf_get_attr(PACKETBUF_ATTR_ERELIABLE)) {
             /* We're sending a packet that needs an ACK, so we keep
                the radio on in anticipation of the ACK. */
             turn_radio_on();

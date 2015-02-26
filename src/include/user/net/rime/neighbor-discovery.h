@@ -61,13 +61,7 @@
 #include "kernel.h"
 #include "neighbor-discovery-constdef.h"
 
-static component_t* neighbor_discovery_cmpobj_ref;
-static const component_info_t neighbor_discovery_cmpobj_info = {NEIGHBOR_DISCOVERY, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t neighbor_discovery_cmp_user;
-
-static void neighbor_discovery_object_stub_init(){
-	 neighbor_discovery_cmpobj_ref = kernel_get_cmp_ref(&neighbor_discovery_cmpobj_info);
-}
+static const component_t* neighbor_discovery_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/broadcast.h"

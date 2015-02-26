@@ -34,12 +34,7 @@
 #include "kernel.h"
 #include "watchdog-constdef.h"
 
-static hil_component_t* watchdog_cmpobj_ref;
-static const component_info_t watchdog_cmpobj_info = {WATCHDOG, 2, 7, HIL_COMPONENT};
-
-static void watchdog_object_stub_init(){
-	 watchdog_cmpobj_ref = kernel_get_hil_cmp_ref(&watchdog_cmpobj_info);
-}
+static const hil_component_t* watchdog_cmpobj_ref;
 
 
 

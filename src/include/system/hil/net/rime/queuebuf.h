@@ -55,12 +55,7 @@
 #include "kernel.h"
 #include "queuebuf-constdef.h"
 
-static hil_component_t* queuebuf_cmpobj_ref;
-static const component_info_t queuebuf_cmpobj_info = {QUEUEBUF, 2, 7, HIL_COMPONENT};
-
-static void queuebuf_object_stub_init(){
-	 queuebuf_cmpobj_ref = kernel_get_hil_cmp_ref(&queuebuf_cmpobj_info);
-}
+static const hil_component_t* queuebuf_cmpobj_ref;
 
 
 #include "src/include/system/hil/net/rime/packetbuf.h"

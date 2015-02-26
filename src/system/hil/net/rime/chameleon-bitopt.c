@@ -151,7 +151,7 @@ set_bits_in_byte(uint8_t *target, int bitpos, uint8_t val, int vallen)
 {
   unsigned short shifted_val;
   shifted_val = val << (8 - bitpos + 8 - vallen);
-  /*  printf("set_bits_in_byte before target[0] 0x%02x target[1] 0x%02x shifted_val 0x%04x val 0x%02x vallen %d\n",
+  /*  PRINTF("set_bits_in_byte before target[0] 0x%02x target[1] 0x%02x shifted_val 0x%04x val 0x%02x vallen %d\n",
       target[0], target[1], shifted_val, val, vallen);*/
   target[0] |= shifted_val >> 8;
   target[1] |= shifted_val & 0xff;
@@ -205,7 +205,7 @@ printbin(int n, int digits)
   }
   output[i] = 0;
   
-  printf(output);
+  PRINTF(output);
 }
 
 static void
@@ -216,16 +216,16 @@ printhdr(uint8_t *hdr, int len)
   j = 0;
   for(i = 0; i < len; ++i) {
     printbin(hdr[i], 8);
-    printf(", ");
+    PRINTF(", ");
     ++j;
     if(j == 10) {
-      printf("\n");
+      PRINTF("\n");
       j = 0;
     }
   }
 
   if(j != 0) {
-    printf("\n");
+    PRINTF("\n");
   }
 }
 #endif
@@ -273,14 +273,14 @@ pack_header(struct channel *c)
     byteptr = bitptr / 8;
     if(PACKETBUF_IS_ADDR(a->type)) {
       set_bits(&hdrptr[byteptr], bitptr & 7,
-	       (uint8_t *)packetbuf_addr(a->type), len);
+	       (uint8_t *)packetbuf_get_addr(a->type), len);
       PRINTF("address %d.%d\n",
 	    /*	    rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],*/
-	    ((uint8_t *)packetbuf_addr(a->type))[0],
-	    ((uint8_t *)packetbuf_addr(a->type))[1]);
+	    ((uint8_t *)packetbuf_get_addr(a->type))[0],
+	    ((uint8_t *)packetbuf_get_addr(a->type))[1]);
     } else {
       packetbuf_attr_t val;
-      val = packetbuf_attr(a->type);
+      val = packetbuf_get_attr(a->type);
       set_bits(&hdrptr[byteptr], bitptr & 7,
 	       (uint8_t *)&val, len);
       PRINTF("value %d\n",

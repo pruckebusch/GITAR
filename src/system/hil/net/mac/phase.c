@@ -157,7 +157,7 @@ phase_wait(const rimeaddr_t *neighbor, rtimer_clock_t cycle_time,
            struct rdc_buf_list *buf_list)
 {
   struct phase *e;
-  //  const rimeaddr_t *neighbor = packetbuf_addr(PACKETBUF_ADDR_RECEIVER);
+  //  const rimeaddr_t *neighbor = packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER);
   /* We go through the list of phases to find if we have recorded a
      phase for this particular neighbor. If so, we can compute the
      time for the next expected phase and setup a ctimer to switch on
@@ -174,11 +174,11 @@ phase_wait(const rimeaddr_t *neighbor, rtimer_clock_t cycle_time,
        on the radio within the CYCLE_TIME period, we compute the
        waiting time with modulo CYCLE_TIME. */
     
-    /*      printf("neighbor phase 0x%02x (cycle 0x%02x)\n", e->time & (cycle_time - 1),
+    /*      PRINTF("neighbor phase 0x%02x (cycle 0x%02x)\n", e->time & (cycle_time - 1),
             cycle_time);*/
 
     /*      if(e->noacks > 0) {
-            printf("additional wait %d\n", additional_wait);
+            PRINTF("additional wait %d\n", additional_wait);
             }*/
     
     now = RTIMER_NOW();

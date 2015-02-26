@@ -107,9 +107,8 @@ send_packet(mac_callback_t sent_callback, void *ptr)
 {
   const rimeaddr_t *addr;
 
-  addr = packetbuf_addr(PACKETBUF_ADDR_RECEIVER);
-  PRINTF("rime-udp: Sending %d bytes to %d.%d\n", packetbuf_totlen(),
-         addr->u8[0], addr->u8[1]);
+  addr = packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER);
+  PRINTF("rime-udp: Sending %d bytes to %d.%d\n", packetbuf_totlen(),addr->u8[0], addr->u8[1]);
 
   if(rimeaddr_cmp(&rimeaddr_null, addr)) {
     uip_udp_packet_send(broadcast_conn,

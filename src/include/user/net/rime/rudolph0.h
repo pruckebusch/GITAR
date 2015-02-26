@@ -61,13 +61,7 @@
 #include "kernel.h"
 #include "rudolph0-constdef.h"
 
-static component_t* rudolph0_cmpobj_ref;
-static const component_info_t rudolph0_cmpobj_info = {RUDOLPH0, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t rudolph0_cmp_user;
-
-static void rudolph0_object_stub_init(){
-	 rudolph0_cmpobj_ref = kernel_get_cmp_ref(&rudolph0_cmpobj_info);
-}
+static const component_t* rudolph0_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/stbroadcast.h"

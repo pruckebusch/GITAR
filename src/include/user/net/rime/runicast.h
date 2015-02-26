@@ -80,13 +80,7 @@
 #include "kernel.h"
 #include "runicast-constdef.h"
 
-static component_t* runicast_cmpobj_ref;
-static const component_info_t runicast_cmpobj_info = {RUNICAST, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t runicast_cmp_user;
-
-static void runicast_object_stub_init(){
-	 runicast_cmpobj_ref = kernel_get_cmp_ref(&runicast_cmpobj_info);
-}
+static const component_t* runicast_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/stunicast.h"

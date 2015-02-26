@@ -54,12 +54,7 @@
 #include "kernel.h"
 #include "rtimer-constdef.h"
 
-static hil_component_t* rtimer_cmpobj_ref;
-static const component_info_t rtimer_cmpobj_info = {RTIMER, 2, 7, HIL_COMPONENT};
-
-static void rtimer_object_stub_init(){
-	 rtimer_cmpobj_ref = kernel_get_hil_cmp_ref(&rtimer_cmpobj_info);
-}
+static const hil_component_t* rtimer_cmpobj_ref;
 
 
 #include "contiki-conf.h"
@@ -140,7 +135,11 @@ static inline void rtimer_run_next(void){
 	( (void (*)(void)) rtimer_cmpobj_ref->interface.function_array[FUNCTION_RTIMER_RUN_NEXT])();
 }
 
-rtimer_clock_t rtimer_now();
+
+/* Stub function declaration for rtimer_now() */
+static inline rtimer_clock_t rtimer_now(){
+	return ( (rtimer_clock_t (*)()) rtimer_cmpobj_ref->interface.function_array[FUNCTION_RTIMER_NOW])();
+}
 
 /**
  * \brief      Get the current clock time

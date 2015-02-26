@@ -84,12 +84,7 @@
 #include "kernel.h"
 #include "mt-constdef.h"
 
-static hil_component_t* mt_cmpobj_ref;
-static const component_info_t mt_cmpobj_info = {MT, 2, 7, HIL_COMPONENT};
-
-static void mt_object_stub_init(){
-	 mt_cmpobj_ref = kernel_get_hil_cmp_ref(&mt_cmpobj_info);
-}
+static const hil_component_t* mt_cmpobj_ref;
 
 
 #include "contiki.h"

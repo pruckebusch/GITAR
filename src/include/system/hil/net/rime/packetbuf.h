@@ -54,12 +54,7 @@
 #include "kernel.h"
 #include "packetbuf-constdef.h"
 
-static hil_component_t* packetbuf_cmpobj_ref;
-static const component_info_t packetbuf_cmpobj_info = {PACKETBUF, 2, 7, HIL_COMPONENT};
-
-static void packetbuf_object_stub_init(){
-	 packetbuf_cmpobj_ref = kernel_get_hil_cmp_ref(&packetbuf_cmpobj_info);
-}
+static const hil_component_t* packetbuf_cmpobj_ref;
 
 
 #include "contiki-conf.h"
@@ -466,42 +461,49 @@ enum {
 extern struct packetbuf_attr packetbuf_attrs[];
 extern struct packetbuf_addr packetbuf_addrs[];
 
-static int               packetbuf_set_attr(uint8_t type, const packetbuf_attr_t val);
-static packetbuf_attr_t    packetbuf_attr(uint8_t type);
-static int               packetbuf_set_addr(uint8_t type, const rimeaddr_t *addr);
-static const rimeaddr_t *packetbuf_addr(uint8_t type);
 
-static inline int
-packetbuf_set_attr(uint8_t type, const packetbuf_attr_t val)
-{
-/*   packetbuf_attrs[type].type = type; */
-  packetbuf_attrs[type].val = val;
-  return 1;
-}
-static inline packetbuf_attr_t
-packetbuf_attr(uint8_t type)
-{
-  return packetbuf_attrs[type].val;
+/* Stub function declaration for packetbuf_set_attr(uint8_t,const packetbuf_attr_t) */
+static inline int packetbuf_set_attr(uint8_t type, const packetbuf_attr_t val){
+	return ( (int (*)(uint8_t,const packetbuf_attr_t)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_SET_ATTR])(type,val);
 }
 
-static inline int
-packetbuf_set_addr(uint8_t type, const rimeaddr_t *addr)
-{
-/*   packetbuf_addrs[type - PACKETBUF_ADDR_FIRST].type = type; */
-  rimeaddr_copy(&packetbuf_addrs[type - PACKETBUF_ADDR_FIRST].addr, addr);
-  return 1;
+/* Stub function declaration for packetbuf_get_attr(uint8_t) */
+static inline packetbuf_attr_t packetbuf_get_attr(uint8_t type){
+	return ( (packetbuf_attr_t (*)(uint8_t)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_GET_ATTR])(type);
 }
 
-static inline const rimeaddr_t *
-packetbuf_addr(uint8_t type)
-{
-  return &packetbuf_addrs[type - PACKETBUF_ADDR_FIRST].addr;
+/* Stub function declaration for packetbuf_set_addr(uint8_t,const rimeaddr_t *) */
+static inline int packetbuf_set_addr(uint8_t type, const rimeaddr_t *addr){
+	return ( (int (*)(uint8_t,const rimeaddr_t *)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_SET_ADDR])(type,addr);
 }
+
+/* Stub function declaration for packetbuf_get_addr(uint8_t) */
+static inline const rimeaddr_t* packetbuf_get_addr(uint8_t type){
+	return ( (const rimeaddr_t* (*)(uint8_t)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_GET_ADDR])(type);
+}
+
 #else /* PACKETBUF_CONF_ATTRS_INLINE */
-int               packetbuf_set_attr(uint8_t type, const packetbuf_attr_t val);
-packetbuf_attr_t packetbuf_get_attr(uint8_t type);
-int               packetbuf_set_addr(uint8_t type, const rimeaddr_t *addr);
-const rimeaddr_t *packetbuf_get_addr(uint8_t type);
+
+/* Stub function declaration for packetbuf_set_attr(uint8_t,const packetbuf_attr_t) */
+static inline int packetbuf_set_attr(uint8_t type, const packetbuf_attr_t val){
+	return ( (int (*)(uint8_t,const packetbuf_attr_t)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_SET_ATTR])(type,val);
+}
+
+/* Stub function declaration for packetbuf_get_attr(uint8_t) */
+static inline packetbuf_attr_t packetbuf_get_attr(uint8_t type){
+	return ( (packetbuf_attr_t (*)(uint8_t)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_GET_ATTR])(type);
+}
+
+/* Stub function declaration for packetbuf_set_addr(uint8_t,const rimeaddr_t *) */
+static inline int packetbuf_set_addr(uint8_t type, const rimeaddr_t *addr){
+	return ( (int (*)(uint8_t,const rimeaddr_t *)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_SET_ADDR])(type,addr);
+}
+
+/* Stub function declaration for packetbuf_get_addr(uint8_t) */
+static inline const rimeaddr_t* packetbuf_get_addr(uint8_t type){
+	return ( (const rimeaddr_t* (*)(uint8_t)) packetbuf_cmpobj_ref->interface.function_array[FUNCTION_PACKETBUF_GET_ADDR])(type);
+}
+
 #endif /* PACKETBUF_CONF_ATTRS_INLINE */
 
 

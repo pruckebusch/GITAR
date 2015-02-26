@@ -64,13 +64,7 @@
 #include "kernel.h"
 #include "unicast-constdef.h"
 
-static component_t* unicast_cmpobj_ref;
-static const component_info_t unicast_cmpobj_info = {UNICAST, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t unicast_cmp_user;
-
-static void unicast_object_stub_init(){
-	 unicast_cmpobj_ref = kernel_get_cmp_ref(&unicast_cmpobj_info);
-}
+static const component_t* unicast_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/broadcast.h"

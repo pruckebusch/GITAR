@@ -47,12 +47,7 @@
 #include "kernel.h"
 #include "rime-constdef.h"
 
-static hil_component_t* rime_cmpobj_ref;
-static const component_info_t rime_cmpobj_info = {RIME, 2, 7, HIL_COMPONENT};
-
-static void rime_object_stub_init(){
-	 rime_cmpobj_ref = kernel_get_hil_cmp_ref(&rime_cmpobj_info);
-}
+static const hil_component_t* rime_cmpobj_ref;
 
 
 //~ #include "net/rime/announcement.h"

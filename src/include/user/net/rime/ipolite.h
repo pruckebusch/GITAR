@@ -95,13 +95,7 @@
 #include "kernel.h"
 #include "ipolite-constdef.h"
 
-static component_t* ipolite_cmpobj_ref;
-static const component_info_t ipolite_cmpobj_info = {IPOLITE, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t ipolite_cmp_user;
-
-static void ipolite_object_stub_init(){
-	 ipolite_cmpobj_ref = kernel_get_cmp_ref(&ipolite_cmpobj_info);
-}
+static const component_t* ipolite_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/broadcast.h"

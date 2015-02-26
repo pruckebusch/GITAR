@@ -42,12 +42,7 @@
 #include "kernel.h"
 #include "channel-constdef.h"
 
-static hil_component_t* channel_cmpobj_ref;
-static const component_info_t channel_cmpobj_info = {CHANNEL, 2, 7, HIL_COMPONENT};
-
-static void channel_object_stub_init(){
-	 channel_cmpobj_ref = kernel_get_hil_cmp_ref(&channel_cmpobj_info);
-}
+static const hil_component_t* channel_cmpobj_ref;
 
 
 struct channel;

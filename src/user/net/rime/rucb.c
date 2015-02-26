@@ -73,8 +73,7 @@ acked(struct runicast_conn *ruc, const rimeaddr_t *to, uint8_t retransmissions)
 {
   struct rucb_conn *c = (struct rucb_conn *)ruc;
   int len;
-  PRINTF("%d.%d: rucb acked\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1]);
+  PRINTF("%d.%d: rucb acked\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1]);
   c->chunk++;
   len = read_data(c);
   if(len == 0 && c->last_size == 0) {
@@ -97,8 +96,7 @@ static void
 timedout(struct runicast_conn *ruc, const rimeaddr_t *to, uint8_t retransmissions)
 {
   struct rucb_conn *c = (struct rucb_conn *)ruc;
-  PRINTF("%d.%d: rucb timedout\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1]);
+  PRINTF("%d.%d: rucb timedout\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1]);
   if(c->u->timedout) {
     c->u->timedout(c);
   }
@@ -109,16 +107,14 @@ recv(struct runicast_conn *ruc, const rimeaddr_t *from, uint8_t seqno)
 {
   struct rucb_conn *c = (struct rucb_conn *)ruc;
 
-  PRINTF("%d.%d: rucb: recv from %d.%d len %d\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1],
-	 from->u8[0], from->u8[1], packetbuf_totlen());
+  PRINTF("%d.%d: rucb: recv from %d.%d len %d\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],from->u8[0], from->u8[1], packetbuf_totlen());
 
   if(seqno == c->last_seqno) {
     return;
   }
   c->last_seqno = seqno;
 
-  if(rimeaddr_cmp(&c->sender, &rimeaddr_null)) {
+  if(rimeaddr_cmp(&c->sender, rimeaddr_get_null())) {
     rimeaddr_copy(&c->sender, from);
     c->u->write_chunk(c, 0, RUCB_FLAG_NEWFILE, packetbuf_dataptr(), 0);
     c->chunk = 0;
@@ -129,9 +125,7 @@ recv(struct runicast_conn *ruc, const rimeaddr_t *from, uint8_t seqno)
     int datalen = packetbuf_datalen();
 
     if(datalen < RUCB_DATASIZE) {
-      PRINTF("%d.%d: get %d bytes, file complete\n",
-	     rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	     datalen);
+      PRINTF("%d.%d: get %d bytes, file complete\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],datalen);
       c->u->write_chunk(c, c->chunk * RUCB_DATASIZE,
 			 RUCB_FLAG_LASTCHUNK, packetbuf_dataptr(), datalen);
     } else {
@@ -142,7 +136,7 @@ recv(struct runicast_conn *ruc, const rimeaddr_t *from, uint8_t seqno)
   }
 
   if(packetbuf_datalen() < RUCB_DATASIZE) {
-    rimeaddr_copy(&c->sender, &rimeaddr_null);
+    rimeaddr_copy(&c->sender, rimeaddr_get_null());
   }
 }
 /*---------------------------------------------------------------------------*/
@@ -152,7 +146,7 @@ void
 rucb_open(struct rucb_conn *c, uint16_t channel,
 	  const struct rucb_callbacks *u)
 {
-  rimeaddr_copy(&c->sender, &rimeaddr_null);
+  rimeaddr_copy(&c->sender, rimeaddr_get_null());
   runicast_open(&c->c, channel, &ruc);
   c->u = u;
   c->last_seqno = -1;
@@ -171,7 +165,7 @@ rucb_send(struct rucb_conn *c, const rimeaddr_t *receiver)
   c->chunk = 0;
   read_data(c);
   rimeaddr_copy(&c->receiver, receiver);
-  rimeaddr_copy(&c->sender, &rimeaddr_node_addr);
+  rimeaddr_copy(&c->sender, rimeaddr_get_node_addr());
   runicast_send(&c->c, receiver, MAX_TRANSMISSIONS);
   return 0;
 }

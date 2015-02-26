@@ -56,12 +56,7 @@
 #include "kernel.h"
 #include "crc16-constdef.h"
 
-static hil_component_t* crc16_cmpobj_ref;
-static const component_info_t crc16_cmpobj_info = {CRC16, 2, 7, HIL_COMPONENT};
-
-static void crc16_object_stub_init(){
-	 crc16_cmpobj_ref = kernel_get_hil_cmp_ref(&crc16_cmpobj_info);
-}
+static const hil_component_t* crc16_cmpobj_ref;
 
 
 /**

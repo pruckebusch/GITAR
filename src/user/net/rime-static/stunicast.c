@@ -59,9 +59,7 @@ static void
 recv_from_uc(struct unicast_conn *uc, const rimeaddr_t *from)
 {
   register struct stunicast_conn *c = (struct stunicast_conn *)uc;
-  PRINTF("%d.%d: stunicast: recv_from_uc from %d.%d\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1],
-	from->u8[0], from->u8[1]);
+  PRINTF("%d.%d: stunicast: recv_from_uc from %d.%d\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],from->u8[0], from->u8[1]);
   if(c->u->recv != NULL) {
     c->u->recv(c, from);
   }
@@ -71,10 +69,7 @@ static void
 sent_by_uc(struct unicast_conn *uc, int status, int num_tx)
 {
   register struct stunicast_conn *c = (struct stunicast_conn *)uc;
-  PRINTF("%d.%d: stunicast: recv_from_uc from %d.%d\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1],
-         packetbuf_addr(PACKETBUF_ADDR_SENDER)->u8[0],
-         packetbuf_addr(PACKETBUF_ADDR_SENDER)->u8[1]);
+  PRINTF("%d.%d: stunicast: recv_from_uc from %d.%d\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],packetbuf_get_addr(PACKETBUF_ADDR_SENDER)->u8[0],packetbuf_get_addr(PACKETBUF_ADDR_SENDER)->u8[1]);
   if(c->u->sent != NULL) {
     c->u->sent(c, status, num_tx);
   }
@@ -109,9 +104,7 @@ send(void *ptr)
 {
   struct stunicast_conn *c = ptr;
 
-  PRINTF("%d.%d: stunicast: resend to %d.%d\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1],
-	 c->receiver.u8[0], c->receiver.u8[1]);
+  PRINTF("%d.%d: stunicast: resend to %d.%d\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],c->receiver.u8[0], c->receiver.u8[1]);
 	 if(c->buf) {
   	queuebuf_to_packetbuf(c->buf);
   	unicast_send(&c->c, &c->receiver);
@@ -142,9 +135,7 @@ stunicast_send_stubborn(struct stunicast_conn *c, const rimeaddr_t *receiver,
   rimeaddr_copy(&c->receiver, receiver);
   ctimer_set(&c->t, rxmittime, send, c);
 
-  PRINTF("%d.%d: stunicast_send_stubborn to %d.%d\n",
-	 rimeaddr_node_addr.u8[0],rimeaddr_node_addr.u8[1],
-	 c->receiver.u8[0],c->receiver.u8[1]);
+  PRINTF("%d.%d: stunicast_send_stubborn to %d.%d\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],c->receiver.u8[0],c->receiver.u8[1]);
   unicast_send(&c->c, &c->receiver);
   /*  if(c->u->sent != NULL) {
     c->u->sent(c);
@@ -157,9 +148,7 @@ stunicast_send_stubborn(struct stunicast_conn *c, const rimeaddr_t *receiver,
 int
 stunicast_send(struct stunicast_conn *c, const rimeaddr_t *receiver)
 {
-  PRINTF("%d.%d: stunicast_send to %d.%d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 receiver->u8[0], receiver->u8[1]);
+  PRINTF("%d.%d: stunicast_send to %d.%d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],receiver->u8[0], receiver->u8[1]);
   return unicast_send(&c->c, receiver);
 }
 /*---------------------------------------------------------------------------*/

@@ -4,9 +4,9 @@
 #include "src/system/hil/sys/process/autostart.h"
 #include "src/include/system/hil/sys/process/autostart-constdef.h"
 
-static const void* autostart_cmpobj_functions[FUNCTION_AUTOSTART_LAST]={autostart_exit,autostart_start};
+static const void* const autostart_cmpobj_functions[FUNCTION_AUTOSTART_LAST]={autostart_exit,autostart_start};
 
-static const hil_component_t autostart_cmpobj = { { AUTOSTART, 2, 7, HIL_COMPONENT} , {FUNCTION_AUTOSTART_LAST,autostart_cmpobj_functions} };
+static const hil_component_t const autostart_cmpobj = { { AUTOSTART, 2, 7, HIL_COMPONENT,FUNCTION_AUTOSTART_LAST} , {autostart_cmpobj_functions} };
 
 static void autostart_object_init(){
 	kernel_add_hil_cmp(&autostart_cmpobj);

@@ -74,13 +74,7 @@
 #include "kernel.h"
 #include "stunicast-constdef.h"
 
-static component_t* stunicast_cmpobj_ref;
-static const component_info_t stunicast_cmpobj_info = {STUNICAST, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t stunicast_cmp_user;
-
-static void stunicast_object_stub_init(){
-	 stunicast_cmpobj_ref = kernel_get_cmp_ref(&stunicast_cmpobj_info);
-}
+static const component_t* stunicast_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/unicast.h"

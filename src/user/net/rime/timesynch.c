@@ -47,6 +47,7 @@
 #include "src/user/net/rime/timesynch.h"
 
 #include "include/system/hil/lib/util/random.h"
+#include "include/system/hil/net/rime/packetbuf.h"
 //~ #include "include/system/hil/net/rime.h"
 
 //~ #include <string.h>
@@ -144,7 +145,7 @@ broadcast_recv(struct broadcast_conn *c, const rimeaddr_t *from)
        own authority level to be one more than the sending node. */
   if(msg.authority_level < authority_level) {
     adjust_offset(msg.timestamp + msg.authority_offset,
-                  packetbuf_attr(PACKETBUF_ATTR_TIMESTAMP));
+                  packetbuf_get_attr(PACKETBUF_ATTR_TIMESTAMP));
     timesynch_set_authority_level(msg.authority_level + 1);
   }
 }

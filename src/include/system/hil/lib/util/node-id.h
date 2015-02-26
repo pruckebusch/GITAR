@@ -37,12 +37,7 @@
 #include "kernel.h"
 #include "node-id-constdef.h"
 
-static hil_component_t* node_id_cmpobj_ref;
-static const component_info_t node_id_cmpobj_info = {NODE_ID, 2, 7, HIL_COMPONENT};
-
-static void node_id_object_stub_init(){
-	 node_id_cmpobj_ref = kernel_get_hil_cmp_ref(&node_id_cmpobj_info);
-}
+static const hil_component_t* node_id_cmpobj_ref;
 
 
 

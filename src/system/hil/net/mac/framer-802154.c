@@ -103,11 +103,11 @@ create(void)
   /* Build the FCF. */
   params.fcf.frame_type = FRAME802154_DATAFRAME;
   params.fcf.security_enabled = 0;
-  params.fcf.frame_pending = packetbuf_attr(PACKETBUF_ATTR_PENDING);
-  if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
+  params.fcf.frame_pending = packetbuf_get_attr(PACKETBUF_ATTR_PENDING);
+  if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
     params.fcf.ack_required = 0;
   } else {
-    params.fcf.ack_required = packetbuf_attr(PACKETBUF_ATTR_MAC_ACK);
+    params.fcf.ack_required = packetbuf_get_attr(PACKETBUF_ATTR_MAC_ACK);
   }
   params.fcf.panid_compression = 0;
 
@@ -115,13 +115,13 @@ create(void)
   params.fcf.frame_version = FRAME802154_IEEE802154_2003;
 
   /* Increment and set the data sequence number. */
-  if(packetbuf_attr(PACKETBUF_ATTR_MAC_SEQNO)) {
-    params.seq = packetbuf_attr(PACKETBUF_ATTR_MAC_SEQNO);
+  if(packetbuf_get_attr(PACKETBUF_ATTR_MAC_SEQNO)) {
+    params.seq = packetbuf_get_attr(PACKETBUF_ATTR_MAC_SEQNO);
   } else {
     params.seq = mac_dsn++;
     packetbuf_set_attr(PACKETBUF_ATTR_MAC_SEQNO, params.seq);
   }
-/*   params.seq = packetbuf_attr(PACKETBUF_ATTR_PACKET_ID); */
+/*   params.seq = packetbuf_get_attr(PACKETBUF_ATTR_PACKET_ID); */
 
   /* Complete the addressing fields. */
   /**
@@ -140,7 +140,7 @@ create(void)
    *  If the output address is NULL in the Rime buf, then it is broadcast
    *  on the 802.15.4 network.
    */
-  if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
+  if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
     /* Broadcast requires short address mode. */
     params.fcf.dest_addr_mode = FRAME802154_SHORTADDRMODE;
     params.dest_addr[0] = 0xFF;
@@ -148,7 +148,7 @@ create(void)
 
   } else {
     rimeaddr_copy((rimeaddr_t *)&params.dest_addr,
-                  packetbuf_addr(PACKETBUF_ADDR_RECEIVER));
+                  packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER));
     /* Use short address mode if rimeaddr size is small */
     if(sizeof(rimeaddr_t) == 2) {
       params.fcf.dest_addr_mode = FRAME802154_SHORTADDRMODE;
@@ -208,8 +208,8 @@ parse(void)
     packetbuf_set_attr(PACKETBUF_ATTR_PACKET_ID, frame.seq);
 
     PRINTF("15.4-IN: %2X", frame.fcf.frame_type);
-    PRINTADDR(packetbuf_addr(PACKETBUF_ADDR_SENDER));
-    PRINTADDR(packetbuf_addr(PACKETBUF_ADDR_RECEIVER));
+    PRINTADDR(packetbuf_get_addr(PACKETBUF_ADDR_SENDER));
+    PRINTADDR(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER));
     PRINTF("%u (%u)\n", packetbuf_datalen(), len);
 
     return len - frame.payload_len;

@@ -65,12 +65,7 @@
 #include "kernel.h"
 #include "memb-constdef.h"
 
-static hil_component_t* memb_cmpobj_ref;
-static const component_info_t memb_cmpobj_info = {MEMB, 2, 7, HIL_COMPONENT};
-
-static void memb_object_stub_init(){
-	 memb_cmpobj_ref = kernel_get_hil_cmp_ref(&memb_cmpobj_info);
-}
+static const hil_component_t* memb_cmpobj_ref;
 
 
 #include "sys/process/cc.h"

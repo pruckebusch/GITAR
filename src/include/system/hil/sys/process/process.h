@@ -55,12 +55,7 @@
 #include "kernel.h"
 #include "process-constdef.h"
 
-static hil_component_t* process_cmpobj_ref;
-static const component_info_t process_cmpobj_info = {PROCESS, 2, 7, HIL_COMPONENT};
-
-static void process_object_stub_init(){
-	 process_cmpobj_ref = kernel_get_hil_cmp_ref(&process_cmpobj_info);
-}
+static const hil_component_t* process_cmpobj_ref;
 
 
 #include "sys/process/pt.h"
@@ -414,7 +409,11 @@ static inline void process_exit(struct process *p){
 	( (void (*)(struct process *)) process_cmpobj_ref->interface.function_array[FUNCTION_PROCESS_EXIT])(p);
 }
 
-CCIF struct process* process_get_current_process();
+
+/* Stub function declaration for process_get_current_process() */
+static inline struct process* process_get_current_process(){
+	return ( (struct process* (*)()) process_cmpobj_ref->interface.function_array[FUNCTION_PROCESS_GET_CURRENT_PROCESS])();
+}
 /**
  * Get a pointer to the currently running process.
  *

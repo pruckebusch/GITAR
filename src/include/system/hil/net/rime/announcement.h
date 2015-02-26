@@ -68,12 +68,7 @@
 #include "kernel.h"
 #include "announcement-constdef.h"
 
-static hil_component_t* announcement_cmpobj_ref;
-static const component_info_t announcement_cmpobj_info = {ANNOUNCEMENT, 2, 7, HIL_COMPONENT};
-
-static void announcement_object_stub_init(){
-	 announcement_cmpobj_ref = kernel_get_hil_cmp_ref(&announcement_cmpobj_info);
-}
+static const hil_component_t* announcement_cmpobj_ref;
 
 
 #include "src/include/system/hil/net/rime/rimeaddr.h"

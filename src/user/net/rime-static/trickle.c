@@ -45,8 +45,12 @@
 #include "net/rime/trickle.h"
 #include "lib/util/random.h"
 
-#if CONTIKI_TARGET_NETSIM
-#include "ether.h"
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
 #endif
 
 #define INTERVAL_MIN 1
@@ -61,15 +65,6 @@ static const struct packetbuf_attrlist attributes[] =
     TRICKLE_ATTRIBUTES PACKETBUF_ATTR_LAST
   };
 
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
-
 static int run_trickle(struct trickle_conn *c);
 /*---------------------------------------------------------------------------*/
 static void
@@ -81,8 +76,7 @@ send(void *ptr)
     queuebuf_to_packetbuf(c->q);
     broadcast_send(&c->c);
   } else {
-    PRINTF("%d.%d: trickle send but c->q == NULL\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1]);
+    PRINTF("%d.%d: trickle send but c->q == NULL\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
   }
 }
 /*---------------------------------------------------------------------------*/
@@ -135,15 +129,9 @@ static void
 recv(struct broadcast_conn *bc, const rimeaddr_t *from)
 {
   struct trickle_conn *c = (struct trickle_conn *)bc;
-  uint16_t seqno = packetbuf_attr(PACKETBUF_ATTR_EPACKET_ID);
+  uint16_t seqno = packetbuf_get_attr(PACKETBUF_ATTR_EPACKET_ID);
 
-  PRINTF("%d.%d: trickle recv seqno %d from %d.%d our %d data len %d channel %d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 seqno,
-	 from->u8[0], from->u8[1],
-	 c->seqno,
-	 packetbuf_datalen(),
-	 packetbuf_attr(PACKETBUF_ATTR_CHANNEL));
+  PRINTF("%d.%d: trickle recv seqno %d from %d.%d our %d data len %d channel %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],seqno,from->u8[0], from->u8[1],c->seqno,packetbuf_datalen(),packetbuf_get_attr(PACKETBUF_ATTR_CHANNEL));
 
   if(seqno == c->seqno) {
     /*    c->cb->recv(c);*/
@@ -200,9 +188,7 @@ trickle_send(struct trickle_conn *c)
   c->seqno++;
   packetbuf_set_attr(PACKETBUF_ATTR_EPACKET_ID, c->seqno);
   c->q = queuebuf_new_from_packetbuf();
-  PRINTF("%d.%d: trickle send seqno %d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 c->seqno);
+  PRINTF("%d.%d: trickle send seqno %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],c->seqno);
   reset_interval(c);
   send(c);
 }

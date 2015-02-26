@@ -40,12 +40,7 @@
 #include "kernel.h"
 #include "cfs-coffee-constdef.h"
 
-static hil_component_t* cfs_coffee_cmpobj_ref;
-static const component_info_t cfs_coffee_cmpobj_info = {CFS_COFFEE, 2, 7, HIL_COMPONENT};
-
-static void cfs_coffee_object_stub_init(){
-	 cfs_coffee_cmpobj_ref = kernel_get_hil_cmp_ref(&cfs_coffee_cmpobj_info);
-}
+static const hil_component_t* cfs_coffee_cmpobj_ref;
 
 
 #include "src/include/system/hil/lib/cfs/cfs.h"

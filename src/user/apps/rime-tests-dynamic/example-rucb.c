@@ -116,12 +116,7 @@ PROCESS_THREAD(example_rucb_process, ev, data)
     recv.u8[1] = 0;
     start_time = clock_time();
 
-    /*PRINTF("%u.%u: sending rucb to address %u.%u at time %u\n",
-        rimeaddr_get_node_addr()->u8[0],
-        rimeaddr_get_node_addr()->u8[1],
-        recv.u8[0],
-        recv.u8[1],
-        start_time);*/
+    /*PRINTF("%u.%u: sending rucb to address %u.%u at time %u\n", rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],recv.u8[0],recv.u8[1],start_time);*/
 
     rucb_send(&rucb, &recv);
   }

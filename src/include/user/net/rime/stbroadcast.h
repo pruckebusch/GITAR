@@ -62,13 +62,7 @@
 #include "kernel.h"
 #include "stbroadcast-constdef.h"
 
-static component_t* stbroadcast_cmpobj_ref;
-static const component_info_t stbroadcast_cmpobj_info = {STBROADCAST, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t stbroadcast_cmp_user;
-
-static void stbroadcast_object_stub_init(){
-	 stbroadcast_cmpobj_ref = kernel_get_cmp_ref(&stbroadcast_cmpobj_info);
-}
+static const component_t* stbroadcast_cmpobj_ref;
 
 
 #include "src/include/system/hil/sys/timer/ctimer.h"

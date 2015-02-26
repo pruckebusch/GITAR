@@ -76,12 +76,7 @@
 #include "kernel.h"
 #include "elfloader-constdef.h"
 
-static hil_component_t* elfloader_cmpobj_ref;
-static const component_info_t elfloader_cmpobj_info = {ELFLOADER, 2, 7, HIL_COMPONENT};
-
-static void elfloader_object_stub_init(){
-	 elfloader_cmpobj_ref = kernel_get_hil_cmp_ref(&elfloader_cmpobj_info);
-}
+static const hil_component_t* elfloader_cmpobj_ref;
 
 
 #include "src/include/system/hil/lib/cfs/cfs.h"

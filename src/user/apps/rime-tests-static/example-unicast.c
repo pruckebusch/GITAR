@@ -46,7 +46,7 @@
 
 #include "src/user/net/rime/unicast.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)
@@ -61,8 +61,7 @@ AUTOSTART_PROCESSES(&example_unicast_process);
 static void
 recv_uc(struct unicast_conn *c, const rimeaddr_t *from)
 {
-  printf("unicast message received from %d.%d\n",
-	 from->u8[0], from->u8[1]);
+  PRINTF("unicast message received from %d.%d\n",from->u8[0], from->u8[1]);
 }
 static const struct unicast_callbacks unicast_callbacks = {recv_uc};
 static struct unicast_conn uc;
@@ -86,7 +85,7 @@ PROCESS_THREAD(example_unicast_process, ev, data)
     packetbuf_copyfrom("Hello", 5);
     addr.u8[0] = 1;
     addr.u8[1] = 0;
-    if(!rimeaddr_cmp(&addr, &rimeaddr_node_addr)) {
+    if(!rimeaddr_cmp(&addr, rimeaddr_get_node_addr())) {
       unicast_send(&uc, &addr);
     }
 

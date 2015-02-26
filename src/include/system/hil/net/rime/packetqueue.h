@@ -55,12 +55,7 @@
 #include "kernel.h"
 #include "packetqueue-constdef.h"
 
-static hil_component_t* packetqueue_cmpobj_ref;
-static const component_info_t packetqueue_cmpobj_info = {PACKETQUEUE, 2, 7, HIL_COMPONENT};
-
-static void packetqueue_object_stub_init(){
-	 packetqueue_cmpobj_ref = kernel_get_hil_cmp_ref(&packetqueue_cmpobj_info);
-}
+static const hil_component_t* packetqueue_cmpobj_ref;
 
 
 #include "src/include/system/hil/lib/util/list.h"

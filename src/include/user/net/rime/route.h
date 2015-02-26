@@ -53,13 +53,7 @@
 #include "kernel.h"
 #include "route-constdef.h"
 
-static component_t* route_cmpobj_ref;
-static const component_info_t route_cmpobj_info = {ROUTE, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t route_cmp_user;
-
-static void route_object_stub_init(){
-	 route_cmpobj_ref = kernel_get_cmp_ref(&route_cmpobj_info);
-}
+static const component_t* route_cmpobj_ref;
 
 
 #include "src/include/system/hil/net/rime/rimeaddr.h"

@@ -59,13 +59,7 @@
 #include "kernel.h"
 #include "route-discovery-constdef.h"
 
-static component_t* route_discovery_cmpobj_ref;
-static const component_info_t route_discovery_cmpobj_info = {ROUTE_DISCOVERY, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t route_discovery_cmp_user;
-
-static void route_discovery_object_stub_init(){
-	 route_discovery_cmpobj_ref = kernel_get_cmp_ref(&route_discovery_cmpobj_info);
-}
+static const component_t* route_discovery_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/unicast.h"

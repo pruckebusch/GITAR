@@ -44,11 +44,6 @@
 #include "net/rime/collect.h"
 #include "net/rime/collect-link-estimate.h"
 
-#define INITIAL_LINK_ESTIMATE 16
-
-#define COLLECT_LINK_ESTIMATE_ALPHA ((3 * (COLLECT_LINK_ESTIMATE_UNIT)) / 8)
-
-#define MAX_ESTIMATES 255
 
 #define DEBUG 0
 #if DEBUG
@@ -57,6 +52,12 @@
 #else
 #define PRINTF(...)
 #endif
+
+#define INITIAL_LINK_ESTIMATE 16
+
+#define COLLECT_LINK_ESTIMATE_ALPHA ((3 * (COLLECT_LINK_ESTIMATE_UNIT)) / 8)
+
+#define MAX_ESTIMATES 255
 
 /*---------------------------------------------------------------------------*/
 void
@@ -76,7 +77,7 @@ collect_link_estimate_update_tx(struct collect_link_estimate *le, uint8_t tx)
     return;
   }
   if(tx == 0) {
-    /*    printf("ERROR tx == 0\n");*/
+    /*    PRINTF("ERROR tx == 0\n");*/
     return;
   }
   if(le != NULL) {

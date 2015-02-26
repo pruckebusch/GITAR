@@ -568,7 +568,7 @@ send_packet(mac_callback_t mac_callback, void *mac_callback_ptr,
   /* If NETSTACK_CONF_BRIDGE_MODE is set, assume PACKETBUF_ADDR_SENDER is already set. */
   packetbuf_set_addr(PACKETBUF_ADDR_SENDER, &rimeaddr_node_addr);
 #endif
-  if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
+  if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
     is_broadcast = 1;
     PRINTDEBUG("contikimac: send broadcast\n");
 
@@ -578,22 +578,22 @@ send_packet(mac_callback_t mac_callback, void *mac_callback_ptr,
   } else {
 #if UIP_CONF_IPV6
     PRINTDEBUG("contikimac: send unicast to %02x%02x:%02x%02x:%02x%02x:%02x%02x\n",
-               packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
-               packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[1],
-               packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[2],
-               packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[3],
-               packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[4],
-               packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[5],
-               packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[6],
-               packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[7]);
+               packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
+               packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[1],
+               packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[2],
+               packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[3],
+               packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[4],
+               packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[5],
+               packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[6],
+               packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[7]);
 #else /* UIP_CONF_IPV6 */
     PRINTDEBUG("contikimac: send unicast to %u.%u\n",
-               packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
-               packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[1]);
+               packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
+               packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[1]);
 #endif /* UIP_CONF_IPV6 */
   }
-  is_reliable = packetbuf_attr(PACKETBUF_ATTR_RELIABLE) ||
-    packetbuf_attr(PACKETBUF_ATTR_ERELIABLE);
+  is_reliable = packetbuf_get_attr(PACKETBUF_ATTR_RELIABLE) ||
+    packetbuf_get_attr(PACKETBUF_ATTR_ERELIABLE);
 
   packetbuf_set_attr(PACKETBUF_ATTR_MAC_ACK, 1);
 
@@ -656,7 +656,7 @@ send_packet(mac_callback_t mac_callback, void *mac_callback_ptr,
 
   if(!is_broadcast && !is_receiver_awake) {
 #if WITH_PHASE_OPTIMIZATION
-    ret = phase_wait(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+    ret = phase_wait(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                      CYCLE_TIME, GUARD_TIME,
                      mac_callback, mac_callback_ptr, buf_list);
     if(ret == PHASE_DEFERRED) {
@@ -746,7 +746,7 @@ send_packet(mac_callback_t mac_callback, void *mac_callback_ptr,
 
   watchdog_periodic();
   t0 = RTIMER_NOW();
-  seqno = packetbuf_attr(PACKETBUF_ATTR_MAC_SEQNO);
+  seqno = packetbuf_get_attr(PACKETBUF_ATTR_MAC_SEQNO);
   for(strobes = 0, collisions = 0;
       got_strobe_ack == 0 && collisions == 0 &&
       RTIMER_CLOCK_LT(RTIMER_NOW(), t0 + STROBE_TIME); strobes++) {
@@ -755,7 +755,7 @@ send_packet(mac_callback_t mac_callback, void *mac_callback_ptr,
 
     if(!is_broadcast && (is_receiver_awake || is_known_receiver) &&
        !RTIMER_CLOCK_LT(RTIMER_NOW(), t0 + MAX_PHASE_STROBE_TIME)) {
-      PRINTF("miss to %d\n", packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[0]);
+      PRINTF("miss to %d\n", packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[0]);
       break;
     }
 
@@ -850,13 +850,13 @@ send_packet(mac_callback_t mac_callback, void *mac_callback_ptr,
 #if WITH_PHASE_OPTIMIZATION
   if(is_known_receiver && got_strobe_ack) {
     PRINTF("no miss %d wake-ups %d\n",
-	   packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
+	   packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
            strobes);
   }
 
   if(!is_broadcast) {
     if(collisions == 0 && is_receiver_awake == 0) {
-      phase_update(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+      phase_update(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
 		   encounter_time, ret);
     }
   }
@@ -944,7 +944,7 @@ input_packet(void)
     off();
   }
 
-  /*  printf("cycle_start 0x%02x 0x%02x\n", cycle_start, cycle_start % CYCLE_TIME);*/
+  /*  PRINTF("cycle_start 0x%02x 0x%02x\n", cycle_start, cycle_start % CYCLE_TIME);*/
 
 #ifdef NETSTACK_DECRYPT
   NETSTACK_DECRYPT();
@@ -965,15 +965,15 @@ input_packet(void)
 
     if(packetbuf_datalen() > 0 &&
        packetbuf_totlen() > 0 &&
-       (rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+       (rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                      &rimeaddr_node_addr) ||
-        rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+        rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                      &rimeaddr_null))) {
       /* This is a regular packet that is destined to us or to the
          broadcast address. */
 
       /* If FRAME_PENDING is set, we are receiving a packets in a burst */
-      we_are_receiving_burst = packetbuf_attr(PACKETBUF_ATTR_PENDING);
+      we_are_receiving_burst = packetbuf_get_attr(PACKETBUF_ATTR_PENDING);
       if(we_are_receiving_burst) {
         on();
         /* Set a timer to turn the radio off in case we do not receive
@@ -989,11 +989,11 @@ input_packet(void)
       {
         int i;
         for(i = 0; i < MAX_SEQNOS; ++i) {
-          if(packetbuf_attr(PACKETBUF_ATTR_PACKET_ID) == received_seqnos[i].seqno &&
-             rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_SENDER),
+          if(packetbuf_get_attr(PACKETBUF_ATTR_PACKET_ID) == received_seqnos[i].seqno &&
+             rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_SENDER),
                           &received_seqnos[i].sender)) {
             /* Drop the packet. */
-            /*        printf("Drop duplicate ContikiMAC layer packet\n");*/
+            /*        PRINTF("Drop duplicate ContikiMAC layer packet\n");*/
             return;
           }
         }
@@ -1001,9 +1001,9 @@ input_packet(void)
           memcpy(&received_seqnos[i], &received_seqnos[i - 1],
                  sizeof(struct seqno));
         }
-        received_seqnos[0].seqno = packetbuf_attr(PACKETBUF_ATTR_PACKET_ID);
+        received_seqnos[0].seqno = packetbuf_get_attr(PACKETBUF_ATTR_PACKET_ID);
         rimeaddr_copy(&received_seqnos[0].sender,
-                      packetbuf_addr(PACKETBUF_ADDR_SENDER));
+                      packetbuf_get_addr(PACKETBUF_ADDR_SENDER));
       }
 
 #if CONTIKIMAC_CONF_COMPOWER

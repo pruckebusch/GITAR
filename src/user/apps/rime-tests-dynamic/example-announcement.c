@@ -66,8 +66,7 @@ received_announcement(struct announcement *a, const rimeaddr_t *from,
   /* We set our own announced value to one plus that of our neighbor. */
   announcement_set_value(a, value + 1);
 
-  PRINTF("Got announcement from %d.%d, id %d, value %d, our new value is %d\n",
-	 from->u8[0], from->u8[1], id, value, value + 1);
+  PRINTF("Got announcement from %d.%d, id %d, value %d, our new value is %d\n",from->u8[0], from->u8[1], id, value, value + 1);
 
 }
 static struct announcement example_announcement;

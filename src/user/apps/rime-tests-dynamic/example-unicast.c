@@ -63,8 +63,7 @@ AUTOSTART_PROCESSES(&example_unicast_process);
 static void
 recv_uc(struct unicast_conn *c, const rimeaddr_t *from)
 {
-  PRINTF("unicast message received from %d.%d\n",
-	 from->u8[0], from->u8[1]);
+  PRINTF("unicast message received from %d.%d\n",from->u8[0], from->u8[1]);
 }
 static const struct unicast_callbacks unicast_callbacks = {recv_uc};
 static struct unicast_conn uc;

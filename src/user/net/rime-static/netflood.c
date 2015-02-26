@@ -46,13 +46,7 @@
 
 #include <string.h>
 
-#define HOPS_MAX 16
 
-struct netflood_hdr {
-  uint16_t originator_seqno;
-  rimeaddr_t originator;
-  uint16_t hops;
-};
 
 #define DEBUG 0
 #if DEBUG
@@ -62,12 +56,19 @@ struct netflood_hdr {
 #define PRINTF(...)
 #endif
 
+#define HOPS_MAX 16
+
+struct netflood_hdr {
+  uint16_t originator_seqno;
+  rimeaddr_t originator;
+  uint16_t hops;
+};
+
 /*---------------------------------------------------------------------------*/
 static int
 send(struct netflood_conn *c)
 {
-  PRINTF("%d.%d: netflood send to ipolite\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1]);
+  PRINTF("%d.%d: netflood send to ipolite\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
   return ipolite_send(&c->c, c->queue_time, 4);
 }
 /*---------------------------------------------------------------------------*/
@@ -101,13 +102,7 @@ recv_from_ipolite(struct ipolite_conn *ipolite, const rimeaddr_t *from)
 	  
 	  /* Rebroadcast received packet. */
 	  if(hops < HOPS_MAX) {
-	    PRINTF("%d.%d: netflood rebroadcasting %d.%d/%d (%d.%d/%d) hops %d\n",
-		   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-		   hdr.originator.u8[0], hdr.originator.u8[1],
-		   hdr.originator_seqno,
-		   c->last_originator.u8[0], c->last_originator.u8[1],
-		   c->last_originator_seqno,
-		  hops);
+	    PRINTF("%d.%d: netflood rebroadcasting %d.%d/%d (%d.%d/%d) hops %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],hdr.originator.u8[0], hdr.originator.u8[1],hdr.originator_seqno,c->last_originator.u8[0], c->last_originator.u8[1],c->last_originator_seqno,hops);
 	    hdr.hops++;
 	    memcpy(packetbuf_dataptr(), &hdr, sizeof(struct netflood_hdr));
 	    send(c);
@@ -163,13 +158,11 @@ netflood_send(struct netflood_conn *c, uint8_t seqno)
 {
   if(packetbuf_hdralloc(sizeof(struct netflood_hdr))) {
     struct netflood_hdr *hdr = packetbuf_hdrptr();
-    rimeaddr_copy(&hdr->originator, &rimeaddr_node_addr);
+    rimeaddr_copy(&hdr->originator, rimeaddr_get_node_addr());
     rimeaddr_copy(&c->last_originator, &hdr->originator);
     c->last_originator_seqno = hdr->originator_seqno = seqno;
     hdr->hops = 0;
-    PRINTF("%d.%d: netflood sending '%s'\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   (char *)packetbuf_dataptr());
+    PRINTF("%d.%d: netflood sending '%s'\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],(char *)packetbuf_dataptr());
     return ipolite_send(&c->c, 0, 4);
   }
   return 0;

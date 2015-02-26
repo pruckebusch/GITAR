@@ -4,9 +4,9 @@
 #include "src/system/hil/net/rime/abc.h"
 #include "src/include/system/hil/net/rime/abc-constdef.h"
 
-static const void* abc_cmpobj_functions[FUNCTION_ABC_LAST]={abc_close,abc_input,abc_open,abc_send,abc_sent};
+static const void* const abc_cmpobj_functions[FUNCTION_ABC_LAST]={abc_close,abc_input,abc_open,abc_send,abc_sent};
 
-static const hil_component_t abc_cmpobj = { { ABC, 2, 7, HIL_COMPONENT} , {FUNCTION_ABC_LAST,abc_cmpobj_functions} };
+static const hil_component_t const abc_cmpobj = { { ABC, 2, 7, HIL_COMPONENT,FUNCTION_ABC_LAST} , {abc_cmpobj_functions} };
 
 static void abc_object_init(){
 	kernel_add_hil_cmp(&abc_cmpobj);

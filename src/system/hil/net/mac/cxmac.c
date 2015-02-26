@@ -336,16 +336,16 @@ parse_announcements(const rimeaddr_t *from)
 
   memcpy(&adata, packetbuf_dataptr(), MIN(packetbuf_datalen(), sizeof(adata)));
 
-  /*  printf("%d.%d: probe from %d.%d with %d announcements\n",
+  /*  PRINTF("%d.%d: probe from %d.%d with %d announcements\n",
 	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
 	 from->u8[0], from->u8[1], adata->num);*/
   /*  for(i = 0; i < packetbuf_datalen(); ++i) {
-    printf("%02x ", ((uint8_t *)packetbuf_dataptr())[i]);
+    PRINTF("%02x ", ((uint8_t *)packetbuf_dataptr())[i]);
   }
-  printf("\n");*/
+  PRINTF("\n");*/
 
   for(i = 0; i < adata.num; ++i) {
-    /*   printf("%d.%d: announcement %d: %d\n",
+    /*   PRINTF("%d.%d: announcement %d: %d\n",
 	  rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
 	  adata->data[i].id,
 	  adata->data[i].value);*/
@@ -438,28 +438,28 @@ send_packet(void)
   /* If NETSTACK_CONF_BRIDGE_MODE is set, assume PACKETBUF_ADDR_SENDER is already set. */
   packetbuf_set_addr(PACKETBUF_ADDR_SENDER, &rimeaddr_node_addr);
 #endif
-  if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
+  if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
     is_broadcast = 1;
     PRINTDEBUG("cxmac: send broadcast\n");
   } else {
 #if UIP_CONF_IPV6
     PRINTDEBUG("cxmac: send unicast to %02x%02x:%02x%02x:%02x%02x:%02x%02x\n",
-           packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
-           packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[1],
-           packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[2],
-           packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[3],
-           packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[4],
-           packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[5],
-           packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[6],
-           packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[7]);
+           packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
+           packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[1],
+           packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[2],
+           packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[3],
+           packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[4],
+           packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[5],
+           packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[6],
+           packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[7]);
 #else
     PRINTDEBUG("cxmac: send unicast to %u.%u\n",
-           packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
-           packetbuf_addr(PACKETBUF_ADDR_RECEIVER)->u8[1]);
+           packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[0],
+           packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER)->u8[1]);
 #endif /* UIP_CONF_IPV6 */
   }
-/* is_reliable = packetbuf_attr(PACKETBUF_ATTR_RELIABLE) ||
-    packetbuf_attr(PACKETBUF_ATTR_ERELIABLE);*/
+/* is_reliable = packetbuf_get_attr(PACKETBUF_ATTR_RELIABLE) ||
+    packetbuf_get_attr(PACKETBUF_ATTR_ERELIABLE);*/
   len = NETSTACK_FRAMER.create();
   strobe_len = len + sizeof(struct cxmac_hdr);
   if(len < 0 || strobe_len > (int)sizeof(strobe)) {
@@ -482,19 +482,19 @@ send_packet(void)
 
 #if WITH_STREAMING
   if(is_streaming == 1 &&
-     (rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+     (rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
 		   &is_streaming_to) ||
-      rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+      rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
 		   &is_streaming_to_too))) {
     is_already_streaming = 1;
   }
-  if(packetbuf_attr(PACKETBUF_ATTR_PACKET_TYPE) ==
+  if(packetbuf_get_attr(PACKETBUF_ATTR_PACKET_TYPE) ==
      PACKETBUF_ATTR_PACKET_TYPE_STREAM) {
     is_streaming = 1;
     if(rimeaddr_cmp(&is_streaming_to, &rimeaddr_null)) {
-      rimeaddr_copy(&is_streaming_to, packetbuf_addr(PACKETBUF_ADDR_RECEIVER));
-    } else if(!rimeaddr_cmp(&is_streaming_to, packetbuf_addr(PACKETBUF_ADDR_RECEIVER))) {
-      rimeaddr_copy(&is_streaming_to_too, packetbuf_addr(PACKETBUF_ADDR_RECEIVER));
+      rimeaddr_copy(&is_streaming_to, packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER));
+    } else if(!rimeaddr_cmp(&is_streaming_to, packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER))) {
+      rimeaddr_copy(&is_streaming_to_too, packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER));
     }
     stream_until = RTIMER_NOW() + DEFAULT_STREAM_TIME;
   }
@@ -508,7 +508,7 @@ send_packet(void)
      the time for the next expected encounter and setup a ctimer to
      switch on the radio just before the encounter. */
   for(e = list_head(encounter_list); e != NULL; e = list_item_next(e)) {
-    const rimeaddr_t *neighbor = packetbuf_addr(PACKETBUF_ADDR_RECEIVER);
+    const rimeaddr_t *neighbor = packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER);
 
     if(rimeaddr_cmp(neighbor, &e->neighbor)) {
       rtimer_clock_t wait, now, expected;
@@ -526,7 +526,7 @@ send_packet(void)
 
 #if WITH_ACK_OPTIMIZATION
       /* Wait until the receiver is expected to be awake */
-      if(packetbuf_attr(PACKETBUF_ATTR_PACKET_TYPE) !=
+      if(packetbuf_get_attr(PACKETBUF_ATTR_PACKET_TYPE) !=
 	 PACKETBUF_ATTR_PACKET_TYPE_ACK &&
 	 is_streaming == 0) {
 	/* Do not wait if we are sending an ACK, because then the
@@ -578,7 +578,7 @@ send_packet(void)
 	    is_dispatch = hdr->dispatch == DISPATCH;
 	    is_strobe_ack = hdr->type == TYPE_STROBE_ACK;
 	    if(is_dispatch && is_strobe_ack) {
-	      if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+	      if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
 			      &rimeaddr_node_addr)) {
 		/* We got an ACK from the receiver, so we can immediately send
 		   the packet. */
@@ -629,9 +629,9 @@ send_packet(void)
   /* If we have received the strobe ACK, and we are sending a packet
      that will need an upper layer ACK (as signified by the
      PACKETBUF_ATTR_RELIABLE packet attribute), we keep the radio on. */
-  if(got_strobe_ack && (packetbuf_attr(PACKETBUF_ATTR_RELIABLE) ||
-			packetbuf_attr(PACKETBUF_ATTR_ERELIABLE) ||
-			packetbuf_attr(PACKETBUF_ATTR_PACKET_TYPE) ==
+  if(got_strobe_ack && (packetbuf_get_attr(PACKETBUF_ATTR_RELIABLE) ||
+			packetbuf_get_attr(PACKETBUF_ATTR_ERELIABLE) ||
+			packetbuf_get_attr(PACKETBUF_ATTR_PACKET_TYPE) ==
 			PACKETBUF_ATTR_PACKET_TYPE_STREAM)) {
     on(); /* Wait for ACK packet */
     waiting_for_packet = 1;
@@ -653,7 +653,7 @@ send_packet(void)
 
 #if WITH_ENCOUNTER_OPTIMIZATION
   if(got_strobe_ack && !is_streaming) {
-    register_encounter(packetbuf_addr(PACKETBUF_ADDR_RECEIVER), encounter_time);
+    register_encounter(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER), encounter_time);
   }
 #endif /* WITH_ENCOUNTER_OPTIMIZATION */
   watchdog_start();
@@ -728,9 +728,9 @@ input_packet(void)
 
     if(hdr->dispatch != DISPATCH) {
       someone_is_sending = 0;
-      if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+      if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                                      &rimeaddr_node_addr) ||
-	 rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+	 rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                       &rimeaddr_null)) {
 	/* This is a regular packet that is destined to us or to the
 	   broadcast address. */
@@ -765,7 +765,7 @@ input_packet(void)
     } else if(hdr->type == TYPE_STROBE) {
       someone_is_sending = 2;
 
-      if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+      if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                       &rimeaddr_node_addr)) {
 	/* This is a strobe packet for us. */
 
@@ -775,7 +775,7 @@ input_packet(void)
 	   message is a strobe ack. */
 	hdr->type = TYPE_STROBE_ACK;
 	packetbuf_set_addr(PACKETBUF_ADDR_RECEIVER,
-			   packetbuf_addr(PACKETBUF_ADDR_SENDER));
+			   packetbuf_get_addr(PACKETBUF_ADDR_SENDER));
 	packetbuf_set_addr(PACKETBUF_ADDR_SENDER, &rimeaddr_node_addr);
 	packetbuf_compact();
 	if(NETSTACK_FRAMER.create() >= 0) {
@@ -789,7 +789,7 @@ input_packet(void)
 	} else {
 	  PRINTF("cxmac: failed to send strobe ack\n");
 	}
-      } else if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+      } else if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                              &rimeaddr_null)) {
 	/* If the receiver address is null, the strobe is sent to
 	   prepare for an incoming broadcast packet. If this is the
@@ -807,7 +807,7 @@ input_packet(void)
 #if CXMAC_CONF_ANNOUNCEMENTS
     } else if(hdr->type == TYPE_ANNOUNCEMENT) {
       packetbuf_hdrreduce(sizeof(struct cxmac_hdr));
-      parse_announcements(packetbuf_addr(PACKETBUF_ADDR_SENDER));
+      parse_announcements(packetbuf_get_addr(PACKETBUF_ADDR_SENDER));
 #endif /* CXMAC_CONF_ANNOUNCEMENTS */
     } else if(hdr->type == TYPE_STROBE_ACK) {
       PRINTDEBUG("cxmac: stray strobe ack\n");
@@ -857,7 +857,7 @@ cycle_announcement(void *ptr)
 	     cycle_announcement, NULL);
   if(is_listening > 0) {
     is_listening--;
-    /*    printf("is_listening %d\n", is_listening);*/
+    /*    PRINTF("is_listening %d\n", is_listening);*/
   }
 }
 /*---------------------------------------------------------------------------*/

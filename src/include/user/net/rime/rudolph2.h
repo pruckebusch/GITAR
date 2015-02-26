@@ -61,13 +61,7 @@
 #include "kernel.h"
 #include "rudolph2-constdef.h"
 
-static component_t* rudolph2_cmpobj_ref;
-static const component_info_t rudolph2_cmpobj_info = {RUDOLPH2, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t rudolph2_cmp_user;
-
-static void rudolph2_object_stub_init(){
-	 rudolph2_cmpobj_ref = kernel_get_cmp_ref(&rudolph2_cmpobj_info);
-}
+static const component_t* rudolph2_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/polite.h"

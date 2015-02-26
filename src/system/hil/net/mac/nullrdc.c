@@ -151,7 +151,7 @@ send_one_packet(mac_callback_t sent, void *ptr)
 
     NETSTACK_RADIO.prepare(packetbuf_hdrptr(), packetbuf_totlen());
 
-    is_broadcast = rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+    is_broadcast = rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                                 &rimeaddr_null);
 
     if(NETSTACK_RADIO.receiving_packet() ||
@@ -302,9 +302,9 @@ packet_input(void)
   if(NETSTACK_FRAMER.parse() < 0) {
     PRINTF("nullrdc: failed to parse %u\n", packetbuf_datalen());
 #if NULLRDC_ADDRESS_FILTER
-  } else if(!rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+  } else if(!rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                                          &rimeaddr_node_addr) &&
-            !rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+            !rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                           &rimeaddr_null)) {
     PRINTF("nullrdc: not for us\n");
 #endif /* NULLRDC_ADDRESS_FILTER */
@@ -316,12 +316,12 @@ packet_input(void)
        of the incoming packet with the last few ones we saw. */
     int i;
     for(i = 0; i < MAX_SEQNOS; ++i) {
-      if(packetbuf_attr(PACKETBUF_ATTR_PACKET_ID) == received_seqnos[i].seqno &&
-         rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_SENDER),
+      if(packetbuf_get_attr(PACKETBUF_ATTR_PACKET_ID) == received_seqnos[i].seqno &&
+         rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_SENDER),
                       &received_seqnos[i].sender)) {
         /* Drop the packet. */
         PRINTF("nullrdc: drop duplicate link layer packet %u\n",
-               packetbuf_attr(PACKETBUF_ATTR_PACKET_ID));
+               packetbuf_get_attr(PACKETBUF_ATTR_PACKET_ID));
         duplicate = 1;
       }
     }
@@ -330,9 +330,9 @@ packet_input(void)
         memcpy(&received_seqnos[i], &received_seqnos[i - 1],
                sizeof(struct seqno));
       }
-      received_seqnos[0].seqno = packetbuf_attr(PACKETBUF_ATTR_PACKET_ID);
+      received_seqnos[0].seqno = packetbuf_get_attr(PACKETBUF_ATTR_PACKET_ID);
       rimeaddr_copy(&received_seqnos[0].sender,
-                    packetbuf_addr(PACKETBUF_ADDR_SENDER));
+                    packetbuf_get_addr(PACKETBUF_ADDR_SENDER));
     }
 #endif /* NULLRDC_802154_AUTOACK */
 

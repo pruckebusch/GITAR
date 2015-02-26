@@ -47,7 +47,7 @@
 
 #include "src/user/net/rime/rucb.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)
@@ -102,32 +102,27 @@ PROCESS_THREAD(example_rucb_process, ev, data)
 
   
   rucb_open(&rucb, 137, &rucb_call);
-  SENSORS_ACTIVATE(button_sensor);
+  SENSORS_ACTIVATE(*button_sensor_get());
 
   PROCESS_PAUSE();
 
-  if(rimeaddr_node_addr.u8[0] == 51 &&
-      rimeaddr_node_addr.u8[1] == 0) {
+  if(rimeaddr_get_node_addr()->u8[0] == 51 &&
+      rimeaddr_get_node_addr()->u8[1] == 0) {
     rimeaddr_t recv;
 
     recv.u8[0] = 52;
     recv.u8[1] = 0;
     start_time = clock_time();
 
-    /*PRINTF("%u.%u: sending rucb to address %u.%u at time %u\n",
-        rimeaddr_node_addr.u8[0],
-        rimeaddr_node_addr.u8[1],
-        recv.u8[0],
-        recv.u8[1],
-        start_time);*/
+    /*PRINTF("%u.%u: sending rucb to address %u.%u at time %u\n", rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],recv.u8[0],recv.u8[1],start_time);*/
 
     rucb_send(&rucb, &recv);
   }
 
   while(1) {
 
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
-			     data == &button_sensor);
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_get_sensors_event() &&
+			     data == button_sensor_get());
     /*rucb_stop(&rucb);*/
 
   }

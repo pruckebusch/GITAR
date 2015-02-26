@@ -49,7 +49,6 @@
 
 #include <stddef.h> /* For offsetof */
 
-#define PACKET_TIMEOUT (CLOCK_SECOND * 10)
 
 #define DEBUG 0
 #if DEBUG
@@ -58,6 +57,8 @@
 #else
 #define PRINTF(...)
 #endif
+
+#define PACKET_TIMEOUT (CLOCK_SECOND * 10)
 
 /*---------------------------------------------------------------------------*/
 static void
@@ -185,9 +186,7 @@ mesh_send(struct mesh_conn *c, const rimeaddr_t *to)
 {
   int could_send;
 
-  PRINTF("%d.%d: mesh_send to %d.%d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 to->u8[0], to->u8[1]);
+  PRINTF("%d.%d: mesh_send to %d.%d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],to->u8[0], to->u8[1]);
   
   could_send = multihop_send(&c->multihop, to);
 

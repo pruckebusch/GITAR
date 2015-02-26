@@ -339,7 +339,7 @@ static void
 poll_handler(void){
   uint8_t ireg = 0;
   ireg = accm_read_reg(ADXL345_INT_SOURCE);
-  //printf("0x%02X, 0x%02X, 0x%02X, 0x%02X\n", ireg, ireg2, int1_mask, int2_mask);
+  //PRINTF("0x%02X, 0x%02X, 0x%02X, 0x%02X\n", ireg, ireg2, int1_mask, int2_mask);
 
   /* Invoke callbacks for the corresponding interrupts */
   if(ireg & int1_mask){

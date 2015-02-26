@@ -72,13 +72,7 @@
 #include "kernel.h"
 #include "multihop-constdef.h"
 
-static component_t* multihop_cmpobj_ref;
-static const component_info_t multihop_cmpobj_info = {MULTIHOP, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t multihop_cmp_user;
-
-static void multihop_object_stub_init(){
-	 multihop_cmpobj_ref = kernel_get_cmp_ref(&multihop_cmpobj_info);
-}
+static const component_t* multihop_cmpobj_ref;
 
 
 #include "src/include/system/hil/net/rime/rimeaddr.h"

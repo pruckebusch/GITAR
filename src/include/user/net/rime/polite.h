@@ -95,13 +95,7 @@
 #include "kernel.h"
 #include "polite-constdef.h"
 
-static component_t* polite_cmpobj_ref;
-static const component_info_t polite_cmpobj_info = {POLITE, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t polite_cmp_user;
-
-static void polite_object_stub_init(){
-	 polite_cmpobj_ref = kernel_get_cmp_ref(&polite_cmpobj_info);
-}
+static const component_t* polite_cmpobj_ref;
 
 
 #include "src/include/system/hil/net/rime/abc.h"

@@ -46,7 +46,7 @@
 #include "src/system/hil/net/rime/packetbuf.h"
 #include "src/system/hil/net/rime/abc.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)

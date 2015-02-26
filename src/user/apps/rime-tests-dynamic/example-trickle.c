@@ -65,9 +65,7 @@ AUTOSTART_PROCESSES(&example_trickle_process);
 static void
 trickle_recv(struct trickle_conn *c)
 {
-  PRINTF("%d.%d: trickle message received '%s'\n",
-	 rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],
-	 (char *)packetbuf_dataptr());
+  PRINTF("%d.%d: trickle message received '%s'\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],(char *)packetbuf_dataptr());
 }
 const static struct trickle_callbacks trickle_call = {trickle_recv};
 static struct trickle_conn trickle;

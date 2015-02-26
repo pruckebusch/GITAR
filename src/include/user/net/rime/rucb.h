@@ -42,13 +42,7 @@
 #include "kernel.h"
 #include "rucb-constdef.h"
 
-static component_t* rucb_cmpobj_ref;
-static const component_info_t rucb_cmpobj_info = {RUCB, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t rucb_cmp_user;
-
-static void rucb_object_stub_init(){
-	 rucb_cmpobj_ref = kernel_get_cmp_ref(&rucb_cmpobj_info);
-}
+static const component_t* rucb_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/runicast.h"

@@ -34,19 +34,18 @@
 #include "kernel.h"
 #include "button-sensor-constdef.h"
 
-static hil_component_t* button_sensor_cmpobj_ref;
-static const component_info_t button_sensor_cmpobj_info = {BUTTON_SENSOR_UID, 2, 7, HIL_COMPONENT};
-
-static void button_sensor_object_stub_init(){
-	 button_sensor_cmpobj_ref = kernel_get_hil_cmp_ref(&button_sensor_cmpobj_info);
-}
+static const hil_component_t* button_sensor_cmpobj_ref;
 
 
 #include "src/include/system/hil/dev/sensors.h"
 
 extern const struct sensors_sensor button_sensor;
 
-struct sensors_sensor* button_sensor_get();
+
+/* Stub function declaration for button_sensor_get() */
+static inline struct sensors_sensor* button_sensor_get(){
+	return ( (struct sensors_sensor* (*)()) button_sensor_cmpobj_ref->interface.function_array[FUNCTION_BUTTON_SENSOR_GET])();
+}
 
 #define BUTTON_SENSOR "Button"
 

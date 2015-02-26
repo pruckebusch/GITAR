@@ -50,7 +50,7 @@
 
 #include "src/user/net/rime/rudolph1.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)
@@ -88,8 +88,7 @@ write_chunk(struct rudolph1_conn *c, int offset, int flag,
 
   if(flag == RUDOLPH1_FLAG_LASTCHUNK) {
     int i;
-    PRINTF("+++ rudolph1 entire file received at %d, %d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1]);
+    PRINTF("+++ rudolph1 entire file received at %d, %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
     leds_off(LEDS_RED);
     leds_on(LEDS_YELLOW);
 
@@ -98,10 +97,8 @@ write_chunk(struct rudolph1_conn *c, int offset, int flag,
       unsigned char buf;
       cfs_read(fd, &buf, 1);
       if(buf != (unsigned char)i) {
-	PRINTF("%d.%d: error: diff at %d, %d != %d\n",
-	       rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	       i, i, buf);
-	break;
+				PRINTF("%d.%d: error: diff at %d, %d != %d\n", rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],i, i, buf);
+				break;
       }
     }
     cfs_close(fd);
@@ -117,9 +114,7 @@ read_chunk(struct rudolph1_conn *c, int offset, uint8_t *to, int maxsize)
 
   cfs_seek(fd, offset, CFS_SEEK_SET);
   ret = cfs_read(fd, to, maxsize);
-  /*  PRINTF("%d.%d: read_chunk %d bytes at %d, %d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 ret, offset, (unsigned char)to[0]);*/
+  /*  PRINTF("%d.%d: read_chunk %d bytes at %d, %d\n",rimeaddr_get_node_addr()->u8[0],rimeaddr_get_node_addr()->u8[1],ret, offset, (unsigned char)to[0]);*/
   cfs_close(fd);
   return ret;
 }
@@ -145,15 +140,15 @@ PROCESS_THREAD(example_rudolph1_process, ev, data)
 
   
   rudolph1_open(&rudolph1, 140, &rudolph1_call);
-  SENSORS_ACTIVATE(button_sensor);
+  SENSORS_ACTIVATE(*button_sensor_get());
 
   rtimer_set(&t, RTIMER_NOW() + RTIMER_ARCH_SECOND, 1,
 	     log_queuelen, NULL);
   
   PROCESS_PAUSE();
   
-  if(rimeaddr_node_addr.u8[0] == 1 &&
-     rimeaddr_node_addr.u8[1] == 1) {
+  if(rimeaddr_get_node_addr()->u8[0] == 1 &&
+     rimeaddr_get_node_addr()->u8[1] == 1) {
     {
       int i;
  
@@ -170,8 +165,8 @@ PROCESS_THREAD(example_rudolph1_process, ev, data)
   
   while(1) {
 
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
-			     data == &button_sensor);
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_get_sensors_event() &&
+			     data == button_sensor_get());
     rudolph1_stop(&rudolph1);
 
   }

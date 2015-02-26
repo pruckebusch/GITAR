@@ -61,13 +61,7 @@
 #include "kernel.h"
 #include "rudolph1-constdef.h"
 
-static component_t* rudolph1_cmpobj_ref;
-static const component_info_t rudolph1_cmpobj_info = {RUDOLPH1, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t rudolph1_cmp_user;
-
-static void rudolph1_object_stub_init(){
-	 rudolph1_cmpobj_ref = kernel_get_cmp_ref(&rudolph1_cmpobj_info);
-}
+static const component_t* rudolph1_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/trickle.h"

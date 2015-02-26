@@ -61,13 +61,7 @@
 #include "kernel.h"
 #include "collect-constdef.h"
 
-static component_t* collect_cmpobj_ref;
-static const component_info_t collect_cmpobj_info = {COLLECT, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t collect_cmp_user;
-
-static void collect_object_stub_init(){
-	 collect_cmpobj_ref = kernel_get_cmp_ref(&collect_cmpobj_info);
-}
+static const component_t* collect_cmpobj_ref;
 
 
 #include "src/include/user/net/rime/unicast.h"

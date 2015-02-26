@@ -45,7 +45,9 @@
 #include "contiki-conf.h"
 #include "src/user/net/rime/multihop.h"
 
+#include "include/system/hil/net/rime/packetbuf.h"
 #include "include/user/net/rime/route.h"
+
 //~ #include "net/rime.h"
 //~ #include <string.h>
 
@@ -76,29 +78,25 @@ data_packet_received(struct unicast_conn *uc, const rimeaddr_t *from)
   /* Copy the packet attributes to avoid them being overwritten or
      cleared by an application program that uses the packet buffer for
      its own needs. */
-  rimeaddr_copy(&sender, packetbuf_addr(PACKETBUF_ADDR_ESENDER));
-  rimeaddr_copy(&receiver, packetbuf_addr(PACKETBUF_ADDR_ERECEIVER));
+  rimeaddr_copy(&sender, packetbuf_get_addr(PACKETBUF_ADDR_ESENDER));
+  rimeaddr_copy(&receiver, packetbuf_get_addr(PACKETBUF_ADDR_ERECEIVER));
 
-  PRINTF("data_packet_received from %d.%d towards %d.%d len %d\n",
-	 from->u8[0], from->u8[1],
-	 packetbuf_addr(PACKETBUF_ADDR_ERECEIVER)->u8[0],
-	 packetbuf_addr(PACKETBUF_ADDR_ERECEIVER)->u8[1],
-	 packetbuf_datalen());
+  PRINTF("data_packet_received from %d.%d towards %d.%d len %d\n",from->u8[0], from->u8[1],packetbuf_get_addr(PACKETBUF_ADDR_ERECEIVER)->u8[0],packetbuf_get_addr(PACKETBUF_ADDR_ERECEIVER)->u8[1],packetbuf_datalen());
 
-  if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_ERECEIVER),
-				 &rimeaddr_node_addr)) {
+  if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_ERECEIVER),
+				 rimeaddr_get_node_addr())) {
     PRINTF("for us!\n");
     if(c->cb->recv) {
       c->cb->recv(c, &sender, from,
-		  packetbuf_attr(PACKETBUF_ATTR_HOPS));
+		  packetbuf_get_attr(PACKETBUF_ATTR_HOPS));
     }
   } else {
     nexthop = NULL;
     if(c->cb->forward) {
       packetbuf_set_attr(PACKETBUF_ATTR_HOPS,
-			 packetbuf_attr(PACKETBUF_ATTR_HOPS) + 1);
+			 packetbuf_get_attr(PACKETBUF_ATTR_HOPS) + 1);
       nexthop = c->cb->forward(c, &sender, &receiver,
-			       from, packetbuf_attr(PACKETBUF_ATTR_HOPS) - 1);
+			       from, packetbuf_get_attr(PACKETBUF_ATTR_HOPS) - 1);
     }
     if(nexthop) {
       PRINTF("forwarding to %d.%d\n", nexthop->u8[0], nexthop->u8[1]);
@@ -134,16 +132,15 @@ multihop_send(struct multihop_conn *c, const rimeaddr_t *to)
   }
   packetbuf_compact();
   packetbuf_set_addr(PACKETBUF_ADDR_ERECEIVER, to);
-  packetbuf_set_addr(PACKETBUF_ADDR_ESENDER, &rimeaddr_node_addr);
+  packetbuf_set_addr(PACKETBUF_ADDR_ESENDER, rimeaddr_get_node_addr());
   packetbuf_set_attr(PACKETBUF_ATTR_HOPS, 1);
-  nexthop = c->cb->forward(c, &rimeaddr_node_addr, to, NULL, 0);
+  nexthop = c->cb->forward(c, rimeaddr_get_node_addr(), to, NULL, 0);
   
   if(nexthop == NULL) {
     PRINTF("multihop_send: no route\n");
     return 0;
   } else {
-    PRINTF("multihop_send: sending data towards %d.%d\n",
-	   nexthop->u8[0], nexthop->u8[1]);
+    PRINTF("multihop_send: sending data towards %d.%d\n",nexthop->u8[0], nexthop->u8[1]);
     unicast_send(&c->c, nexthop);
     return 1;
   }

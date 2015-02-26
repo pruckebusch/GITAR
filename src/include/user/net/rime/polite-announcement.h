@@ -61,13 +61,7 @@
 #include "kernel.h"
 #include "polite-announcement-constdef.h"
 
-static component_t* polite_announcement_cmpobj_ref;
-static const component_info_t polite_announcement_cmpobj_info = {POLITE_ANNOUNCEMENT, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t polite_announcement_cmp_user;
-
-static void polite_announcement_object_stub_init(){
-	 polite_announcement_cmpobj_ref = kernel_get_cmp_ref(&polite_announcement_cmpobj_info);
-}
+static const component_t* polite_announcement_cmpobj_ref;
 
 
 #include "src/include/system/hil/sys/timer/clock.h"

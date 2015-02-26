@@ -79,7 +79,7 @@ collect_link_estimate_update_tx(struct collect_link_estimate *le, uint8_t tx)
     return;
   }
   if(tx == 0) {
-    /*    printf("ERROR tx == 0\n");*/
+    /*    PRINTF("ERROR tx == 0\n");*/
     return;
   }
   if(le != NULL) {

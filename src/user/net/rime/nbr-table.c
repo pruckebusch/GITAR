@@ -38,6 +38,7 @@
 //~ #include <stddef.h>
 //~ #include <string.h>
 
+#include "include/system/hil/lib/util/string.h"
 #include "include/system/hil/lib/util/memb.h"
 #include "include/system/hil/lib/util/list.h"
 
@@ -116,7 +117,7 @@ index_from_lladdr(const rimeaddr_t *lladdr)
   /* Allow lladdr-free insertion, useful e.g. for IPv6 ND.
    * Only one such entry is possible at a time, indexed by rimeaddr_null. */
   if(lladdr == NULL) {
-    lladdr = &rimeaddr_null;
+    lladdr = rimeaddr_get_null();
   }
   key = list_head(nbr_table_keys);
   while(key != NULL) {
@@ -281,7 +282,7 @@ nbr_table_add_lladdr(nbr_table_t *table, const rimeaddr_t *lladdr)
   /* Allow lladdr-free insertion, useful e.g. for IPv6 ND.
    * Only one such entry is possible at a time, indexed by rimeaddr_null. */
   if(lladdr == NULL) {
-    lladdr = &rimeaddr_null;
+    lladdr = rimeaddr_get_null();
   }
 
   if((index = index_from_lladdr(lladdr)) == -1) {

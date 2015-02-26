@@ -166,17 +166,17 @@ output(struct channel *c)
     if(PACKETBUF_IS_ADDR(a->type)) {
       const rimeaddr_t *rimeaddr;
       /*      memcpy(&hdrptr[byteptr], (uint8_t *)packetbuf_attr_aget(a->type), len / 8);*/
-      rimeaddr = packetbuf_addr(a->type);
+      rimeaddr = packetbuf_get_addr(a->type);
       hdrptr[byteptr] = rimeaddr->u8[0];
       hdrptr[byteptr + 1] = rimeaddr->u8[1];
       
       PRINTF("%d.%d: address %d.%d\n",
 	    rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	    ((uint8_t *)packetbuf_addr(a->type))[0],
-	    ((uint8_t *)packetbuf_addr(a->type))[1]);
+	    ((uint8_t *)packetbuf_get_addr(a->type))[0],
+	    ((uint8_t *)packetbuf_get_addr(a->type))[1]);
     } else {
       packetbuf_attr_t val;
-      val = packetbuf_attr(a->type);
+      val = packetbuf_get_attr(a->type);
       memcpy(&hdrptr[byteptr], &val, len / 8);
       PRINTF("%d.%d: value %d\n",
 	    rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],

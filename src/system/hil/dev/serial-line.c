@@ -114,7 +114,7 @@ PROCESS_THREAD(serial_line_process, ev, data)
         /* Terminate */
         buf[ptr++] = (uint8_t)'\0';
         
-        //printf("Posting serial line event\n");
+        //PRINTF("Posting serial line event\n");
 
         /* Broadcast event */
         process_post(PROCESS_BROADCAST, serial_line_event_message, buf);

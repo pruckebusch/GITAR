@@ -42,12 +42,7 @@
 #include "kernel.h"
 #include "autostart-constdef.h"
 
-static hil_component_t* autostart_cmpobj_ref;
-static const component_info_t autostart_cmpobj_info = {AUTOSTART, 2, 7, HIL_COMPONENT};
-
-static void autostart_object_stub_init(){
-	 autostart_cmpobj_ref = kernel_get_hil_cmp_ref(&autostart_cmpobj_info);
-}
+static const hil_component_t* autostart_cmpobj_ref;
 
 
 #include "src/include/system/hil/sys/process/process.h"
@@ -55,7 +50,7 @@ static void autostart_object_stub_init(){
 #if ! CC_NO_VA_ARGS
 #if AUTOSTART_ENABLE
 #define AUTOSTART_PROCESSES(...)					\
-const struct process * autostart_processes[] = {__VA_ARGS__, NULL}
+struct process * const autostart_processes[] = {__VA_ARGS__, NULL}
 #else /* AUTOSTART_ENABLE */
 #define AUTOSTART_PROCESSES(...)					\
 extern int _dummy
@@ -64,17 +59,17 @@ extern int _dummy
 #error "C compiler must support __VA_ARGS__ macro"
 #endif
 
-CLIF extern const struct process * autostart_processes[];
+CLIF extern struct process * const autostart_processes[];
 
 
-/* Stub function declaration for autostart_start(const struct process **) */
-static inline void autostart_start(const struct process * processes[]){
-	( (void (*)(const struct process **)) autostart_cmpobj_ref->interface.function_array[FUNCTION_AUTOSTART_START])( processes);
+/* Stub function declaration for autostart_start(struct process **) */
+static inline void autostart_start(struct process * const processes[]){
+	( (void (*)(struct process * const *)) autostart_cmpobj_ref->interface.function_array[FUNCTION_AUTOSTART_START])(processes);
 }
 
-/* Stub function declaration for autostart_exit(const struct process **) */
-static inline void autostart_exit(const struct process * processes[]){
-	( (void (*)(const struct process **)) autostart_cmpobj_ref->interface.function_array[FUNCTION_AUTOSTART_EXIT])( processes);
+/* Stub function declaration for autostart_exit(struct process **) */
+static inline void autostart_exit(struct process * const processes[]){
+	( (void (*)(struct process * const *)) autostart_cmpobj_ref->interface.function_array[FUNCTION_AUTOSTART_EXIT])(processes);
 }
 
 #endif /* __AUTOSTART_H__ */

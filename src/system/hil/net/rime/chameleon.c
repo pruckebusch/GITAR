@@ -79,7 +79,7 @@ static void printbin(int n, int digits) {
     }
     output[i] = 0;
 
-    printf(output);
+    PRINTF(output);
 }
 
 static void printhdr(uint8_t *hdr, int len) {
@@ -88,16 +88,16 @@ static void printhdr(uint8_t *hdr, int len) {
     j = 0;
     for (i = 0; i < len; ++i) {
         printbin(hdr[i], 8);
-        printf(" (0x%0x), ", hdr[i]);
+        PRINTF(" (0x%0x), ", hdr[i]);
         ++j;
         if (j == 10) {
-            printf("\n");
+            PRINTF("\n");
             j = 0;
         }
     }
 
     if (j != 0) {
-        printf("\n");
+        PRINTF("\n");
     }
 }
 #endif /* DEBUG */

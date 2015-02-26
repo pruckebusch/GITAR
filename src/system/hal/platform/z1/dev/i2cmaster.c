@@ -41,17 +41,17 @@
 #include "i2cmaster.h"
 #include "isr_compat.h"
 
-static signed   char tx_byte_ctr, rx_byte_ctr;
+signed   char tx_byte_ctr, rx_byte_ctr;
 #if I2C_RX_WITH_INTERRUPT
 #else
-static unsigned char rx_buf[2];
+unsigned char rx_buf[2];
 #endif
-static unsigned char* tx_buf_ptr;
-static unsigned char* rx_buf_ptr;
-//~ static unsigned char receive_data;
-//~ static unsigned char transmit_data1;
-//~ static unsigned char transmit_data2;
-static volatile unsigned int i;	// volatile to prevent optimization
+unsigned char* tx_buf_ptr;
+unsigned char* rx_buf_ptr;
+//~  unsigned char receive_data;
+//~  unsigned char transmit_data1;
+//~  unsigned char transmit_data2;
+volatile unsigned int i;	// volatile to prevent optimization
 
 //------------------------------------------------------------------------------
 // void i2c_receiveinit(unsigned char slave_address, 

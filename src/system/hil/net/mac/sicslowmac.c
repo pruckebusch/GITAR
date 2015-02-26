@@ -106,7 +106,7 @@ send_packet(mac_callback_t sent, void *ptr)
   params.fcf.frame_type = FRAME802154_DATAFRAME;
   params.fcf.security_enabled = 0;
   params.fcf.frame_pending = 0;
-  params.fcf.ack_required = packetbuf_attr(PACKETBUF_ATTR_RELIABLE);
+  params.fcf.ack_required = packetbuf_get_attr(PACKETBUF_ATTR_RELIABLE);
   params.fcf.panid_compression = 0;
 
   /* Insert IEEE 802.15.4 (2003) version bit. */
@@ -127,7 +127,7 @@ send_packet(mac_callback_t sent, void *ptr)
    *  If the output address is NULL in the Rime buf, then it is broadcast
    *  on the 802.15.4 network.
    */
-  if(rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
+  if(rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER), &rimeaddr_null)) {
     /* Broadcast requires short address mode. */
     params.fcf.dest_addr_mode = FRAME802154_SHORTADDRMODE;
     params.dest_addr[0] = 0xFF;
@@ -135,7 +135,7 @@ send_packet(mac_callback_t sent, void *ptr)
 
   } else {
     rimeaddr_copy((rimeaddr_t *)&params.dest_addr,
-                  packetbuf_addr(PACKETBUF_ADDR_RECEIVER));
+                  packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER));
     params.fcf.dest_addr_mode = FRAME802154_LONGADDRMODE;
   }
 
@@ -147,7 +147,7 @@ send_packet(mac_callback_t sent, void *ptr)
    * phase 1.
    */
 #if NETSTACK_CONF_BRIDGE_MODE
-  rimeaddr_copy((rimeaddr_t *)&params.src_addr,packetbuf_addr(PACKETBUF_ADDR_SENDER));
+  rimeaddr_copy((rimeaddr_t *)&params.src_addr,packetbuf_get_addr(PACKETBUF_ADDR_SENDER));
 #else
   rimeaddr_copy((rimeaddr_t *)&params.src_addr, &rimeaddr_node_addr);
 #endif
@@ -208,7 +208,7 @@ input_packet(void)
       if(!is_broadcast_addr(frame.fcf.dest_addr_mode, frame.dest_addr)) {
         packetbuf_set_addr(PACKETBUF_ADDR_RECEIVER, (rimeaddr_t *)&frame.dest_addr);
 #if !NETSTACK_CONF_BRIDGE_MODE
-        if(!rimeaddr_cmp(packetbuf_addr(PACKETBUF_ADDR_RECEIVER),
+        if(!rimeaddr_cmp(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER),
                          &rimeaddr_node_addr)) {
           /* Not for this node */
           PRINTF("6MAC: not for us\n");
@@ -220,8 +220,8 @@ input_packet(void)
     packetbuf_set_addr(PACKETBUF_ADDR_SENDER, (rimeaddr_t *)&frame.src_addr);
 
     PRINTF("6MAC-IN: %2X", frame.fcf.frame_type);
-    PRINTADDR(packetbuf_addr(PACKETBUF_ADDR_SENDER));
-    PRINTADDR(packetbuf_addr(PACKETBUF_ADDR_RECEIVER));
+    PRINTADDR(packetbuf_get_addr(PACKETBUF_ADDR_SENDER));
+    PRINTADDR(packetbuf_get_addr(PACKETBUF_ADDR_RECEIVER));
     PRINTF("%u\n", packetbuf_datalen());
     NETSTACK_MAC.input();
   } else {

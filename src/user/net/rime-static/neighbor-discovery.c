@@ -51,17 +51,8 @@
 
 #include "lib/util/random.h"
 
-#if CONTIKI_TARGET_NETSIM
-#include "ether.h"
-#endif
-
 #include <string.h>
-#include <stdio.h>
 #include <stddef.h>
-
-struct adv_msg {
-  uint16_t val;
-};
 
 #define DEBUG 0
 #if DEBUG
@@ -70,6 +61,10 @@ struct adv_msg {
 #else
 #define PRINTF(...)
 #endif
+
+struct adv_msg {
+  uint16_t val;
+};
 
 /*---------------------------------------------------------------------------*/
 static void
@@ -86,9 +81,7 @@ send_adv(void *ptr)
   if(c->u->sent) {
     c->u->sent(c);
   }
-  PRINTF("%d.%d: sending neighbor advertisement with val %d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 c->val);
+  PRINTF("%d.%d: sending neighbor advertisement with val %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],c->val);
 }
 /*---------------------------------------------------------------------------*/
 static void
@@ -99,9 +92,7 @@ adv_packet_received(struct broadcast_conn *ibc, const rimeaddr_t *from)
 
   memcpy(&msg, packetbuf_dataptr(), sizeof(struct adv_msg));
 
-  PRINTF("%d.%d: adv_packet_received from %d.%d with val %d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 from->u8[0], from->u8[1], msg.val);
+  PRINTF("%d.%d: adv_packet_received from %d.%d with val %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],from->u8[0], from->u8[1], msg.val);
   
   /* If we receive an announcement with a lower value than ours, we
      cancel our own announcement. */
@@ -144,7 +135,7 @@ send_timer(void *ptr)
 
   c->current_interval = interval;
 
-  /*  printf("current_interval %lu\n", (long unsigned int) interval);*/
+  /*  PRINTF("current_interval %lu\n", (long unsigned int) interval);*/
 
   PRINTF("current_interval %lu\n", (long unsigned int) interval);
 
@@ -161,9 +152,7 @@ neighbor_discovery_open(struct neighbor_discovery_conn *c, uint16_t channel,
 			clock_time_t max,
 			const struct neighbor_discovery_callbacks *cb)
 {
-  PRINTF("%d.%d: neighbor discovery open channel %d\n",
-         rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 channel);
+  PRINTF("%d.%d: neighbor discovery open channel %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],channel);
   broadcast_open(&c->c, channel, &broadcast_callbacks);
   c->u = cb;
   c->initial_interval = initial;

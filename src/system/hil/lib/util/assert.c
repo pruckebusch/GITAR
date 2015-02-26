@@ -28,12 +28,20 @@
  *
  */
 
+#define DEBUG 0
+#if DEBUG
 #include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#define PRINTDEBUG(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#define PRINTDEBUG(...)
+#endif
 
 void
 _xassert(const char *file, int lineno)
 {
-  printf("Assertion failed: file %s, line %d.\n", file, lineno);
+  PRINTF("Assertion failed: file %s, line %d.\n", file, lineno);
   /*
    * loop for a while;
    * call _reset_vector__();

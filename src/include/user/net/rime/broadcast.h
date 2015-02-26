@@ -67,13 +67,7 @@
 #include "kernel.h"
 #include "broadcast-constdef.h"
 
-static component_t* broadcast_cmpobj_ref;
-static const component_info_t broadcast_cmpobj_info = {BROADCAST, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t broadcast_cmp_user;
-
-static void broadcast_object_stub_init(){
-	 broadcast_cmpobj_ref = kernel_get_cmp_ref(&broadcast_cmpobj_info);
-}
+static const component_t* broadcast_cmpobj_ref;
 
 
 #include "src/include/system/hil/net/rime/abc.h"

@@ -85,7 +85,7 @@
 
 #include "src/user/net/rime/multihop.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)
@@ -138,8 +138,7 @@ received_announcement(struct announcement *a,
 {
   struct example_neighbor *e;
 
-  /*  PRINTF("Got announcement from %d.%d, id %d, value %d\n",
-      from->u8[0], from->u8[1], id, value);*/
+  /*  PRINTF("Got announcement from %d.%d, id %d, value %d\n",from->u8[0], from->u8[1], id, value);*/
 
   /* We received an announcement from a neighbor so we need to update
      the neighbor list, or add a new entry to the table. */
@@ -196,15 +195,11 @@ forward(struct multihop_conn *c,
       ++i;
     }
     if(n != NULL) {
-      PRINTF("%d.%d: Forwarding packet to %d.%d (%d in list), hops %d\n",
-	     rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	     n->addr.u8[0], n->addr.u8[1], num,
-	     packetbuf_attr(PACKETBUF_ATTR_HOPS));
+      PRINTF("%d.%d: Forwarding packet to %d.%d (%d in list), hops %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],n->addr.u8[0], n->addr.u8[1], num,packetbuf_get_attr(PACKETBUF_ATTR_HOPS));
       return &n->addr;
     }
   }
-  PRINTF("%d.%d: did not find a neighbor to foward to\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1]);
+  PRINTF("%d.%d: did not find a neighbor to foward to\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
   return NULL;
 }
 static const struct multihop_callbacks multihop_call = {recv, forward};
@@ -236,15 +231,15 @@ PROCESS_THREAD(example_multihop_process, ev, data)
 
   /* Activate the button sensor. We use the button to drive traffic -
      when the button is pressed, a packet is sent. */
-  SENSORS_ACTIVATE(button_sensor);
+  SENSORS_ACTIVATE(*button_sensor_get());
 
   /* Loop forever, send a packet when the button is pressed. */
   while(1) {
     rimeaddr_t to;
 
     /* Wait until we get a sensor event with the button sensor as data. */
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event &&
-			     data == &button_sensor);
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_get_sensors_event() &&
+			     data == button_sensor_get());
 
     /* Copy the "Hello" to the packet buffer. */
     packetbuf_copyfrom("Hello", 6);

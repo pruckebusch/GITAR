@@ -45,14 +45,10 @@
 #include "contiki-conf.h"
 #include "src/user/net/rime/route-discovery.h"
 
-//~ #include "include/system/hil/net/rime.h"
+#include "include/system/hil/net/rime/packetbuf.h"
 #include "include/user/net/rime/route.h"
 
 //~ #include <stddef.h> /* For offsetof */
-//~ #if CONTIKI_TARGET_NETSIM
-//~ #include "ether.h"
-//~ #endif
-
 #include "include/user/net/rime/route-discovery-object.h"
 
 #define DEBUG 0
@@ -115,18 +111,13 @@ send_rrep(struct route_discovery_conn *c, const rimeaddr_t *dest)
   packetbuf_set_datalen(sizeof(struct rrep_hdr));
   rrepmsg->hops = 0;
   rimeaddr_copy(&rrepmsg->dest, dest);
-  rimeaddr_copy(&rrepmsg->originator, &rimeaddr_node_addr);
+  rimeaddr_copy(&rrepmsg->originator, rimeaddr_get_node_addr());
   rt = route_lookup(dest);
   if(rt != NULL) {
-    PRINTF("%d.%d: send_rrep to %d.%d via %d.%d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   dest->u8[0],dest->u8[1],
-	   rt->nexthop.u8[0],rt->nexthop.u8[1]);
+    PRINTF("%d.%d: send_rrep to %d.%d via %d.%d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],dest->u8[0],dest->u8[1],rt->nexthop.u8[0],rt->nexthop.u8[1]);
     unicast_send(&c->rrepconn, &rt->nexthop);
   } else {
-    PRINTF("%d.%d: no route for rrep to %d.%d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   dest->u8[0],dest->u8[1]);
+    PRINTF("%d.%d: no route for rrep to %d.%d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],dest->u8[0],dest->u8[1]);
   }
 }
 /*---------------------------------------------------------------------------*/
@@ -134,11 +125,7 @@ static void
 insert_route(const rimeaddr_t *originator, const rimeaddr_t *last_hop,
 	     uint8_t hops)
 {
-  PRINTF("%d.%d: Inserting %d.%d into routing table, next hop %d.%d, hop count %d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 originator->u8[0], originator->u8[1],
-	 last_hop->u8[0], last_hop->u8[1],
-	 hops);
+  PRINTF("%d.%d: Inserting %d.%d into routing table, next hop %d.%d, hop count %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],originator->u8[0], originator->u8[1],last_hop->u8[0], last_hop->u8[1],hops);
   
   route_add(originator, last_hop, hops, 0);
   /*
@@ -146,11 +133,7 @@ insert_route(const rimeaddr_t *originator, const rimeaddr_t *last_hop,
   
   rt = route_lookup(originator);
   if(rt == NULL || hops < rt->hop_count) {
-    PRINTF("%d.%d: Inserting %d.%d into routing table, next hop %d.%d, hop count %d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   originator->u8[0], originator->u8[1],
-	   last_hop->u8[0], last_hop->u8[1],
-	   hops);
+    PRINTF("%d.%d: Inserting %d.%d into routing table, next hop %d.%d, hop count %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],originator->u8[0], originator->u8[1],last_hop->u8[0], last_hop->u8[1],hops);
     route_add(originator, last_hop, hops, 0);
 #if CONTIKI_TARGET_NETSIM
     ether_set_line(last_hop->u8[0], last_hop->u8[1]);
@@ -168,21 +151,13 @@ rrep_packet_received(struct unicast_conn *uc, const rimeaddr_t *from)
   struct route_discovery_conn *c = (struct route_discovery_conn *)
     ((char *)uc - offsetof(struct route_discovery_conn, rrepconn));
 
-  PRINTF("%d.%d: rrep_packet_received from %d.%d towards %d.%d len %d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 from->u8[0],from->u8[1],
-	 msg->dest.u8[0],msg->dest.u8[1],
-	 packetbuf_datalen());
+  PRINTF("%d.%d: rrep_packet_received from %d.%d towards %d.%d len %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],from->u8[0],from->u8[1],msg->dest.u8[0],msg->dest.u8[1],packetbuf_datalen());
 
-  PRINTF("from %d.%d hops %d rssi %d lqi %d\n",
-	 from->u8[0], from->u8[1],
-	 msg->hops,
-	 packetbuf_attr(PACKETBUF_ATTR_RSSI),
-	 packetbuf_attr(PACKETBUF_ATTR_LINK_QUALITY));
+  PRINTF("from %d.%d hops %d rssi %d lqi %d\n",from->u8[0], from->u8[1],msg->hops,packetbuf_get_attr(PACKETBUF_ATTR_RSSI),packetbuf_get_attr(PACKETBUF_ATTR_LINK_QUALITY));
 
   insert_route(&msg->originator, from, msg->hops);
 
-  if(rimeaddr_cmp(&msg->dest, &rimeaddr_node_addr)) {
+  if(rimeaddr_cmp(&msg->dest, rimeaddr_get_node_addr())) {
     PRINTF("rrep for us!\n");
     rrep_pending = 0;
     ctimer_stop(&c->t);
@@ -205,7 +180,7 @@ rrep_packet_received(struct unicast_conn *uc, const rimeaddr_t *from)
       msg->hops++;
       unicast_send(&c->rrepconn, &rt->nexthop);
     } else {
-      PRINTF("%d.%d: no route to %d.%d\n", rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1], msg->dest.u8[0], msg->dest.u8[1]);
+      PRINTF("%d.%d: no route to %d.%d\n", rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1], msg->dest.u8[0], msg->dest.u8[1]);
     }
   }
 }
@@ -218,34 +193,19 @@ rreq_packet_received(struct netflood_conn *nf, const rimeaddr_t *from,
   struct route_discovery_conn *c = (struct route_discovery_conn *)
     ((char *)nf - offsetof(struct route_discovery_conn, rreqconn));
 
-  PRINTF("%d.%d: rreq_packet_received from %d.%d hops %d rreq_id %d last %d.%d/%d\n",
-	 rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	 from->u8[0], from->u8[1],
-	 hops, msg->rreq_id,
-     c->last_rreq_originator.u8[0],
-     c->last_rreq_originator.u8[1],
-	 c->last_rreq_id);
+  PRINTF("%d.%d: rreq_packet_received from %d.%d hops %d rreq_id %d last %d.%d/%d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],from->u8[0], from->u8[1],hops, msg->rreq_id,c->last_rreq_originator.u8[0],c->last_rreq_originator.u8[1],c->last_rreq_id);
 
   if(!(rimeaddr_cmp(&c->last_rreq_originator, originator) &&
        c->last_rreq_id == msg->rreq_id)) {
 
-    PRINTF("%d.%d: rreq_packet_received: request for %d.%d originator %d.%d / %d\n",
-	   rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1],
-	   msg->dest.u8[0], msg->dest.u8[1],
-	   originator->u8[0], originator->u8[1],
-	   msg->rreq_id);
+    PRINTF("%d.%d: rreq_packet_received: request for %d.%d originator %d.%d / %d\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1],msg->dest.u8[0], msg->dest.u8[1],originator->u8[0], originator->u8[1],msg->rreq_id);
 
     rimeaddr_copy(&c->last_rreq_originator, originator);
     c->last_rreq_id = msg->rreq_id;
 
-    if(rimeaddr_cmp(&msg->dest, &rimeaddr_node_addr)) {
-      PRINTF("%d.%d: route_packet_received: route request for our address\n",
-	     rimeaddr_node_addr.u8[0], rimeaddr_node_addr.u8[1]);
-      PRINTF("from %d.%d hops %d rssi %d lqi %d\n",
-	     from->u8[0], from->u8[1],
-	     hops,
-	     packetbuf_attr(PACKETBUF_ATTR_RSSI),
-	     packetbuf_attr(PACKETBUF_ATTR_LINK_QUALITY));
+    if(rimeaddr_cmp(&msg->dest, rimeaddr_get_node_addr())) {
+      PRINTF("%d.%d: route_packet_received: route request for our address\n",rimeaddr_get_node_addr()->u8[0], rimeaddr_get_node_addr()->u8[1]);
+      PRINTF("from %d.%d hops %d rssi %d lqi %d\n",from->u8[0], from->u8[1],hops,packetbuf_get_attr(PACKETBUF_ATTR_RSSI),packetbuf_get_attr(PACKETBUF_ATTR_LINK_QUALITY));
 
       insert_route(originator, from, hops);
       
@@ -254,11 +214,7 @@ rreq_packet_received(struct netflood_conn *nf, const rimeaddr_t *from,
       return 0; /* Don't continue to flood the rreq packet. */
     } else {
       /*      PRINTF("route request for %d\n", msg->dest_id);*/
-      PRINTF("from %d.%d hops %d rssi %d lqi %d\n",
-	     from->u8[0], from->u8[1],
-	     hops,
-	     packetbuf_attr(PACKETBUF_ATTR_RSSI),
-	     packetbuf_attr(PACKETBUF_ATTR_LINK_QUALITY));
+      PRINTF("from %d.%d hops %d rssi %d lqi %d\n",from->u8[0], from->u8[1],hops,packetbuf_get_attr(PACKETBUF_ATTR_RSSI),packetbuf_get_attr(PACKETBUF_ATTR_LINK_QUALITY));
       insert_route(originator, from, hops);
     }
     

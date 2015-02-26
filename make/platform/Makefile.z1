@@ -33,7 +33,7 @@ ifndef GITAR_TARGET_MAIN
 GITAR_TARGET_MAIN = kernel-main.c
 endif
 
-PLATFORM_FILES += $(HIL_DEV) $(HAL_CHIPS) $(HAL_CPU) $(HAL_PLATFORM) z1-system-facade.c
+PLATFORM_FILES += $(HIL_DEV) $(HAL_CHIPS) $(HAL_CPU) $(HAL_PLATFORM) z1-system-facade.c z1-control.c
 
 #${info including platform source files '$(PLATFORM_FILES)' in dirs '$(PLATFORM_DIRS)'}
 

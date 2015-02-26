@@ -380,7 +380,7 @@ queuebuf_new_from_packetbuf(void)
 #if QUEUEBUF_STATS
       ++queuebuf_len;
       PRINTF("queuebuf len %d\n", queuebuf_len);
-      printf("#A q=%d\n", queuebuf_len);
+      PRINTF("#A q=%d\n", queuebuf_len);
       if(queuebuf_len == queuebuf_max_len + 1) {
   memb_free(&bufmem, buf);
   queuebuf_len--;
@@ -423,7 +423,7 @@ queuebuf_free(struct queuebuf *buf)
     memb_free(&bufmem, buf);
 #if QUEUEBUF_STATS
     --queuebuf_len;
-    printf("#A q=%d\n", queuebuf_len);
+    PRINTF("#A q=%d\n", queuebuf_len);
 #endif /* QUEUEBUF_STATS */
 #if QUEUEBUF_DEBUG
     list_remove(queuebuf_list, buf);
@@ -494,12 +494,12 @@ queuebuf_debug_print(void)
 {
 #if QUEUEBUF_DEBUG
   struct queuebuf *q;
-  printf("queuebuf_list: ");
+  PRINTF("queuebuf_list: ");
   for(q = list_head(queuebuf_list); q != NULL;
       q = list_item_next(q)) {
-    printf("%s,%d,%lu ", q->file, q->line, q->time);
+    PRINTF("%s,%d,%lu ", q->file, q->line, q->time);
   }
-  printf("\n");
+  PRINTF("\n");
 #endif /* QUEUEBUF_DEBUG */
 }
 /*---------------------------------------------------------------------------*/

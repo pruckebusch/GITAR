@@ -62,7 +62,7 @@ remove_queued_packet(void *item)
   queuebuf_free(i->buf);
   ctimer_stop(&i->lifetimer);
   memb_free(q->memb, i);
-  /*  printf("removing queued packet due to timeout\n");*/
+  /*  PRINTF("removing queued packet due to timeout\n");*/
 }
 /*---------------------------------------------------------------------------*/
 int

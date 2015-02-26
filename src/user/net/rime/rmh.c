@@ -77,7 +77,7 @@ received(struct runicast_conn *uc, const rimeaddr_t *from, uint8_t seqno)
 	 msg->dest.u8[0], msg->dest.u8[1],
 	 packetbuf_datalen());
 
-  if(rimeaddr_cmp(&msg->dest, &rimeaddr_node_addr)) {
+  if(rimeaddr_cmp(&msg->dest, rimeaddr_get_node_addr())) {
     PRINTF("for us!\n");
     packetbuf_hdrreduce(sizeof(struct data_hdr));
     if(c->cb->recv) {
@@ -139,7 +139,7 @@ rmh_send(struct rmh_conn *c, rimeaddr_t *to, uint8_t num_rexmit, uint8_t max_hop
     return 0;
   }
   
-  nexthop = c->cb->forward(c, &rimeaddr_node_addr, to, NULL, 0);
+  nexthop = c->cb->forward(c, rimeaddr_get_node_addr(), to, NULL, 0);
   if(nexthop == NULL) {
     PRINTF("rmh_send: no route\n");
     return 0;
@@ -150,7 +150,7 @@ rmh_send(struct rmh_conn *c, rimeaddr_t *to, uint8_t num_rexmit, uint8_t max_hop
     if(packetbuf_hdralloc(sizeof(struct data_hdr))) {
       hdr = packetbuf_hdrptr();
       rimeaddr_copy(&hdr->dest, to);
-      rimeaddr_copy(&hdr->originator, &rimeaddr_node_addr);
+      rimeaddr_copy(&hdr->originator, rimeaddr_get_node_addr());
       hdr->hops = 1;
       hdr->max_rexmits = num_rexmit;
       runicast_send(&c->c, nexthop, num_rexmit);

@@ -76,13 +76,7 @@
 #include "kernel.h"
 #include "netflood-constdef.h"
 
-static component_t* netflood_cmpobj_ref;
-static const component_info_t netflood_cmpobj_info = {NETFLOOD, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t netflood_cmp_user;
-
-static void netflood_object_stub_init(){
-	 netflood_cmpobj_ref = kernel_get_cmp_ref(&netflood_cmpobj_info);
-}
+static const component_t* netflood_cmpobj_ref;
 
 
 #include "src/include/system/hil/net/rime/queuebuf.h"

@@ -35,12 +35,7 @@
 #include "kernel.h"
 #include "sensors-constdef.h"
 
-static hil_component_t* sensors_cmpobj_ref;
-static const component_info_t sensors_cmpobj_info = {SENSORS_UID, 2, 7, HIL_COMPONENT};
-
-static void sensors_object_stub_init(){
-	 sensors_cmpobj_ref = kernel_get_hil_cmp_ref(&sensors_cmpobj_info);
-}
+static const hil_component_t* sensors_cmpobj_ref;
 
 
 //#include "contiki.h"
@@ -92,7 +87,11 @@ static inline void sensors_changed(const struct sensors_sensor *s){
 	( (void (*)(const struct sensors_sensor *)) sensors_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_CHANGED])(s);
 }
 
-process_event_t sensors_get_sensors_event();
+
+/* Stub function declaration for sensors_get_sensors_event() */
+static inline process_event_t sensors_get_sensors_event(){
+	return ( (process_event_t (*)()) sensors_cmpobj_ref->interface.function_array[FUNCTION_SENSORS_GET_SENSORS_EVENT])();
+}
 
 extern process_event_t sensors_event;
 

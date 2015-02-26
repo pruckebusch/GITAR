@@ -49,7 +49,7 @@
 
 /*---------------------------------------------------------------------------*/
 void
-autostart_start(const struct process * processes[])
+autostart_start(struct process * const processes[])
 {
   int i;
   //~ PRINTF("In start\n %p,%p", processes, processes[0] );
@@ -60,7 +60,7 @@ autostart_start(const struct process * processes[])
 }
 /*---------------------------------------------------------------------------*/
 void
-autostart_exit(const struct process * processes[])
+autostart_exit(struct process * const processes[])
 {
   int i;
   

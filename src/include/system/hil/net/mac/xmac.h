@@ -42,12 +42,7 @@
 #include "kernel.h"
 #include "xmac-constdef.h"
 
-static hil_component_t* xmac_cmpobj_ref;
-static const component_info_t xmac_cmpobj_info = {XMAC, 2, 7, HIL_COMPONENT};
-
-static void xmac_object_stub_init(){
-	 xmac_cmpobj_ref = kernel_get_hil_cmp_ref(&xmac_cmpobj_info);
-}
+static const hil_component_t* xmac_cmpobj_ref;
 
 
 #include "src/include/system/hil/sys/timer/rtimer.h"

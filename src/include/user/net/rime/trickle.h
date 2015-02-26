@@ -59,13 +59,7 @@
 #include "kernel.h"
 #include "trickle-constdef.h"
 
-static component_t* trickle_cmpobj_ref;
-static const component_info_t trickle_cmpobj_info = {TRICKLE, 2, 7, NET_COMPONENT};
-static component_user_list_entry_t trickle_cmp_user;
-
-static void trickle_object_stub_init(){
-	 trickle_cmpobj_ref = kernel_get_cmp_ref(&trickle_cmpobj_info);
-}
+static const component_t* trickle_cmpobj_ref;
 
 
 #include "src/include/system/hil/sys/timer/ctimer.h"

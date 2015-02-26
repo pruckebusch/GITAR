@@ -64,12 +64,7 @@
 #include "kernel.h"
 #include "etimer-constdef.h"
 
-static hil_component_t* etimer_cmpobj_ref;
-static const component_info_t etimer_cmpobj_info = {ETIMER, 2, 7, HIL_COMPONENT};
-
-static void etimer_object_stub_init(){
-	 etimer_cmpobj_ref = kernel_get_hil_cmp_ref(&etimer_cmpobj_info);
-}
+static const hil_component_t* etimer_cmpobj_ref;
 
 
 #include "src/include/system/hil/sys/timer/timer.h"

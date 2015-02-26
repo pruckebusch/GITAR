@@ -68,11 +68,7 @@ AUTOSTART_PROCESSES(&example_collect_process);
 static void
 recv(const rimeaddr_t *originator, uint8_t seqno, uint8_t hops)
 {
-  PRINTF("Sink got message from %d.%d, seqno %d, hops %d: len %d '%s'\n",
-	 originator->u8[0], originator->u8[1],
-	 seqno, hops,
-	 packetbuf_datalen(),
-	 (char *)packetbuf_dataptr());
+  PRINTF("Sink got message from %d.%d, seqno %d, hops %d: len %d '%s'\n",originator->u8[0], originator->u8[1],seqno, hops,packetbuf_datalen(),(char *)packetbuf_dataptr());
 }
 /*---------------------------------------------------------------------------*/
 static const struct collect_callbacks callbacks = { recv };

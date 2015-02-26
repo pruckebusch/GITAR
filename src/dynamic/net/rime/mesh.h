@@ -63,8 +63,8 @@
 
 #include "include/system/hil/net/rime/queuebuf.h"
 
-#include "include/user/net/rime/multihop.h"
-#include "include/user/net/rime/route-discovery.h"
+#include "include/net/rime/multihop.h"
+#include "include/net/rime/route-discovery.h"
 
 struct mesh_conn;
 

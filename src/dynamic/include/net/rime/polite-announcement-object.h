@@ -1,8 +1,8 @@
 #ifndef __POLITE_ANNOUNCEMENT_COMPONENT_OBJECT_H__
 #define __POLITE_ANNOUNCEMENT_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/polite-announcement.h"
-#include "src/include/user/net/rime/polite-announcement-constdef.h"
+#include "net/rime/polite-announcement.h"
+#include "include/net/rime/polite-announcement-constdef.h"
 
 void polite_announcement_object_init();
 

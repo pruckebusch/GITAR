@@ -1,8 +1,8 @@
 #ifndef __COLLECT_NEIGHBOR_COMPONENT_OBJECT_H__
 #define __COLLECT_NEIGHBOR_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/collect-neighbor.h"
-#include "src/include/user/net/rime/collect-neighbor-constdef.h"
+#include "net/rime/collect-neighbor.h"
+#include "include/net/rime/collect-neighbor-constdef.h"
 
 void collect_neighbor_object_init();
 

@@ -43,15 +43,15 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/mesh.h"
+#include "net/rime/mesh.h"
 
-#include "include/user/net/rime/route.h"
+#include "include/net/rime/route.h"
 
 
 //~ #include "net/rime.h"
 //~ #include <stddef.h> /* For offsetof */
 
-#include "include/user/net/rime/mesh-object.h"
+#include "include/net/rime/mesh-object.h"
 
 #define DEBUG 0
 #if DEBUG

@@ -1,8 +1,8 @@
 #ifndef __NETSTACK_HIL_COMPONENT_OBJECT_H__
 #define __NETSTACK_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/net/netstack.h"
-#include "src/include/system/hil/net/netstack-constdef.h"
+#include "system/hil/net/netstack.h"
+#include "include/system/hil/net/netstack-constdef.h"
 
 static const void* const netstack_cmpobj_functions[FUNCTION_NETSTACK_LAST]={netstack_init};
 

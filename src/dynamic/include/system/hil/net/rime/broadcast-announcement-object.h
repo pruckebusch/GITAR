@@ -1,8 +1,8 @@
 #ifndef __BROADCAST_ANNOUNCEMENT_HIL_COMPONENT_OBJECT_H__
 #define __BROADCAST_ANNOUNCEMENT_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/net/rime/broadcast-announcement.h"
-#include "src/include/system/hil/net/rime/broadcast-announcement-constdef.h"
+#include "system/hil/net/rime/broadcast-announcement.h"
+#include "include/system/hil/net/rime/broadcast-announcement-constdef.h"
 
 static const void* const broadcast_announcement_cmpobj_functions[FUNCTION_BROADCAST_ANNOUNCEMENT_LAST]={broadcast_announcement_init,broadcast_announcement_beacon_interval};
 

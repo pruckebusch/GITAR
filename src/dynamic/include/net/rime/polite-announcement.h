@@ -64,7 +64,7 @@
 static const component_t* polite_announcement_cmpobj_ref;
 
 
-#include "src/include/system/hil/sys/timer/clock.h"
+#include "include/system/hil/sys/timer/clock.h"
 
 
 /* Stub function declaration for polite_announcement_init(uint16_t,clock_time_t,clock_time_t) */

@@ -45,7 +45,7 @@
 static const hil_component_t* xmac_cmpobj_ref;
 
 
-#include "src/include/system/hil/sys/timer/rtimer.h"
+#include "include/system/hil/sys/timer/rtimer.h"
 #include "net/mac/rdc.h"
 #include "dev/radio.h"
 

@@ -1,8 +1,8 @@
 #ifndef __COLLECT_LINK_ESTIMATE_COMPONENT_OBJECT_H__
 #define __COLLECT_LINK_ESTIMATE_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/collect-link-estimate.h"
-#include "src/include/user/net/rime/collect-link-estimate-constdef.h"
+#include "net/rime/collect-link-estimate.h"
+#include "include/net/rime/collect-link-estimate-constdef.h"
 
 void collect_link_estimate_object_init();
 

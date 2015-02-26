@@ -1,8 +1,8 @@
 #ifndef __STBROADCAST_COMPONENT_OBJECT_H__
 #define __STBROADCAST_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/stbroadcast.h"
-#include "src/include/user/net/rime/stbroadcast-constdef.h"
+#include "net/rime/stbroadcast.h"
+#include "include/net/rime/stbroadcast-constdef.h"
 
 void stbroadcast_object_init();
 

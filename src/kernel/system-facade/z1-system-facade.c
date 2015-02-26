@@ -17,6 +17,8 @@ Include kernel level
 #include "src/kernel/core/runtime-mgmt/kernel-config.h"
 #include "src/kernel/system-facade/system-facade.h"
 
+#if COMPILE_DYNAMIC
+
 // Include HIL component objects
 #if WITH_RIME
 	//contiki system net
@@ -119,3 +121,9 @@ error_t system_register_hil_components(){
 	 
 	return SUCCESS;
 }
+
+#else
+error_t system_register_hil_components(){
+	return SUCCESS;
+}
+#endif

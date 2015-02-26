@@ -1,8 +1,8 @@
 #ifndef __ROUTE_COMPONENT_OBJECT_H__
 #define __ROUTE_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/route.h"
-#include "src/include/user/net/rime/route-constdef.h"
+#include "net/rime/route.h"
+#include "include/net/rime/route-constdef.h"
 
 void route_object_init();
 

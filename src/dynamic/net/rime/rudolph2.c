@@ -48,16 +48,16 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/user/net/rime/rudolph2.h"
+#include "net/rime/rudolph2.h"
 
 #include "include/system/hil/lib/cfs/cfs.h"
-#include "include/user/net/rime/polite.h"
+#include "include/net/rime/polite.h"
 
 //~ #include "include/system/hil/lib/net/rime.h"
 
 //~ #include <stddef.h> /* for offsetof */
 
-#include "include/user/net/rime/rudolph2-object.h"
+#include "include/net/rime/rudolph2-object.h"
 
 #define DEBUG 0
 #if DEBUG

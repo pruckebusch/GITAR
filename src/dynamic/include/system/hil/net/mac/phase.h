@@ -45,12 +45,12 @@
 static const hil_component_t* phase_cmpobj_ref;
 
 
-#include "src/include/system/hil/net/rime/rimeaddr.h"
-#include "src/include/system/hil/sys/timer/timer.h"
-#include "src/include/system/hil/sys/timer/rtimer.h"
-#include "src/include/system/hil/lib/util/list.h"
-#include "src/include/system/hil/lib/util/memb.h"
-#include "src/include/system/hil/net/netstack.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/sys/timer/timer.h"
+#include "include/system/hil/sys/timer/rtimer.h"
+#include "include/system/hil/lib/util/list.h"
+#include "include/system/hil/lib/util/memb.h"
+#include "include/system/hil/net/netstack.h"
 
 typedef enum {
   PHASE_UNKNOWN,

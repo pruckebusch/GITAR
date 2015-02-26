@@ -42,14 +42,14 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/user/net/rime/rudolph1.h"
+#include "net/rime/rudolph1.h"
 
 #include "include/system/hil/lib/cfs/cfs.h"
 
 //~ #include "src/system/hil/net/rime.h"
 //~ #include <stddef.h> /* for offsetof */
 
-#include "include/user/net/rime/rudolph1-object.h"
+#include "include/net/rime/rudolph1-object.h"
 
 #define DEBUG 0
 #if DEBUG

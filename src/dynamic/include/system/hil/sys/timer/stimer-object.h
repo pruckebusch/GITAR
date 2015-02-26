@@ -1,8 +1,8 @@
 #ifndef __STIMER_HIL_COMPONENT_OBJECT_H__
 #define __STIMER_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/sys/timer/stimer.h"
-#include "src/include/system/hil/sys/timer/stimer-constdef.h"
+#include "system/hil/sys/timer/stimer.h"
+#include "include/system/hil/sys/timer/stimer-constdef.h"
 
 static const void* const stimer_cmpobj_functions[FUNCTION_STIMER_LAST]={stimer_restart,stimer_expired,stimer_reset,stimer_remaining,stimer_set,stimer_elapsed};
 

@@ -56,7 +56,7 @@
 static const component_t* route_cmpobj_ref;
 
 
-#include "src/include/system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
 
 struct route_entry {
   struct route_entry *next;

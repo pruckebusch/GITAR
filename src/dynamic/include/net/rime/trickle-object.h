@@ -1,8 +1,8 @@
 #ifndef __TRICKLE_COMPONENT_OBJECT_H__
 #define __TRICKLE_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/trickle.h"
-#include "src/include/user/net/rime/trickle-constdef.h"
+#include "net/rime/trickle.h"
+#include "include/net/rime/trickle-constdef.h"
 
 void trickle_object_init();
 

@@ -37,15 +37,15 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/include/system/hil/sys/process/process.h"
-#include "src/include/system/hil/sys/process/autostart.h"
-#include "src/include/system/hil/sys/timer/clock.h"
-//~ #include "src/include/system/hil/net/rime.h"
-#include "src/include/system/hil/net/rime/packetbuf.h"
-#include "src/include/system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/sys/process/process.h"
+#include "include/system/hil/sys/process/autostart.h"
+#include "include/system/hil/sys/timer/clock.h"
+//~ #include "include/system/hil/net/rime.h"
+#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
 #include "include/system/hil/dev/button-sensor.h"
 
-#include "src/include/user/net/rime/rucb.h"
+#include "include/net/rime/rucb.h"
 
 #define DEBUG 0
 #if DEBUG

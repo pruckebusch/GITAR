@@ -62,10 +62,10 @@
 static const component_t* trickle_cmpobj_ref;
 
 
-#include "src/include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
-#include "src/include/user/net/rime/broadcast.h"
-#include "src/include/system/hil/net/rime/queuebuf.h"
+#include "include/net/rime/broadcast.h"
+#include "include/system/hil/net/rime/queuebuf.h"
 
 #define TRICKLE_ATTRIBUTES  { PACKETBUF_ATTR_EPACKET_ID, PACKETBUF_ATTR_BIT * 8 },\
                             BROADCAST_ATTRIBUTES

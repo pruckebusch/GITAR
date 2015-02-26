@@ -98,10 +98,10 @@
 static const component_t* ipolite_cmpobj_ref;
 
 
-#include "src/include/user/net/rime/broadcast.h"
+#include "include/net/rime/broadcast.h"
 
-#include "src/include/system/hil/sys/timer/ctimer.h"
-#include "src/include/system/hil/net/rime/queuebuf.h"
+#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/net/rime/queuebuf.h"
 
 struct ipolite_conn;
 

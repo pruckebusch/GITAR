@@ -79,7 +79,7 @@
 static const hil_component_t* elfloader_cmpobj_ref;
 
 
-#include "src/include/system/hil/lib/cfs/cfs.h"
+#include "include/system/hil/lib/cfs/cfs.h"
 
 /**
  * Return value from elfloader_load() indicating that loading worked.

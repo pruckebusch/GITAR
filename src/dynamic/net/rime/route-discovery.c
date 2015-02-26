@@ -43,13 +43,13 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/route-discovery.h"
+#include "net/rime/route-discovery.h"
 
 #include "include/system/hil/net/rime/packetbuf.h"
-#include "include/user/net/rime/route.h"
+#include "include/net/rime/route.h"
 
 //~ #include <stddef.h> /* For offsetof */
-#include "include/user/net/rime/route-discovery-object.h"
+#include "include/net/rime/route-discovery-object.h"
 
 #define DEBUG 0
 #if DEBUG

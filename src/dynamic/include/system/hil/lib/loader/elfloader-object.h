@@ -1,8 +1,8 @@
 #ifndef __ELFLOADER_HIL_COMPONENT_OBJECT_H__
 #define __ELFLOADER_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/lib/loader/elfloader.h"
-#include "src/include/system/hil/lib/loader/elfloader-constdef.h"
+#include "system/hil/lib/loader/elfloader.h"
+#include "include/system/hil/lib/loader/elfloader-constdef.h"
 
 static const void* const elfloader_cmpobj_functions[FUNCTION_ELFLOADER_LAST]={elfloader_load,elfloader_init};
 

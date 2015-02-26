@@ -2,7 +2,7 @@
 #define __STRING_HIL_COMPONENT_OBJECT_H__
 
 #include <string.h>
-#include "src/include/system/hil/lib/util/string-constdef.h"
+#include "include/system/hil/lib/util/string-constdef.h"
 
 static const void* const string_cmpobj_functions[FUNCTION_STRING_LAST]={memccpy,memchr,memcmp,memcpy,memmove,strcat,strchr,strcmp,strcpy,strcasecmp,strlen,strncat,strncmp,strncpy ,strncasecmp,strrchr,strstr,bcmp,strsep,bcopy,strlcat,memset,bzero,strlcpy,strdup,swab,strtok_r,strtok,strspn,strcspn,strpbrk};
 

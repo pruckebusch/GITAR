@@ -64,15 +64,15 @@
 static const component_t* collect_cmpobj_ref;
 
 
-#include "src/include/user/net/rime/unicast.h"
+#include "include/net/rime/unicast.h"
 
-#include "src/include/system/hil/net/rime/packetqueue.h"
-#include "src/include/system/hil/sys/timer/ctimer.h"
-#include "src/include/system/hil/lib/util/list.h"
-#include "src/include/system/hil/net/rime/announcement.h"
+#include "include/system/hil/net/rime/packetqueue.h"
+#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/lib/util/list.h"
+#include "include/system/hil/net/rime/announcement.h"
 
-#include "src/include/user/net/rime/neighbor-discovery.h"
-#include "src/include/user/net/rime/collect-neighbor.h"
+#include "include/net/rime/neighbor-discovery.h"
+#include "include/net/rime/collect-neighbor.h"
 
 
 #define COLLECT_PACKET_ID_BITS 8

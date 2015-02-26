@@ -72,7 +72,7 @@
 #ifndef __STUNICAST_H__
 #define __STUNICAST_H__
 
-#include "include/user/net/rime/unicast.h"
+#include "include/net/rime/unicast.h"
 
 #include "include/system/hil/sys/timer/ctimer.h"
 #include "include/system/hil/net/rime/queuebuf.h"

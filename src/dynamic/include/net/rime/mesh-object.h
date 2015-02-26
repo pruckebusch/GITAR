@@ -1,8 +1,8 @@
 #ifndef __MESH_COMPONENT_OBJECT_H__
 #define __MESH_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/mesh.h"
-#include "src/include/user/net/rime/mesh-constdef.h"
+#include "net/rime/mesh.h"
+#include "include/net/rime/mesh-constdef.h"
 
 void mesh_object_init();
 

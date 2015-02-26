@@ -77,10 +77,10 @@
 static const component_t* stunicast_cmpobj_ref;
 
 
-#include "src/include/user/net/rime/unicast.h"
+#include "include/net/rime/unicast.h"
 
-#include "src/include/system/hil/sys/timer/ctimer.h"
-#include "src/include/system/hil/net/rime/queuebuf.h"
+#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/net/rime/queuebuf.h"
 
 struct stunicast_conn;
 

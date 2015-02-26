@@ -1,8 +1,8 @@
 #ifndef __MEMB_HIL_COMPONENT_OBJECT_H__
 #define __MEMB_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/lib/util/memb.h"
-#include "src/include/system/hil/lib/util/memb-constdef.h"
+#include "system/hil/lib/util/memb.h"
+#include "include/system/hil/lib/util/memb-constdef.h"
 
 static const void* const memb_cmpobj_functions[FUNCTION_MEMB_LAST]={memb_free,memb_alloc,memb_inmemb,memb_init};
 

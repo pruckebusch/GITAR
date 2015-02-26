@@ -43,7 +43,7 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/neighbor-discovery.h"
+#include "net/rime/neighbor-discovery.h"
 
 #include "include/system/hil/lib/util/random.h"
 #include "include/system/hil/lib/util/string.h"
@@ -55,7 +55,7 @@
 //~ #include <stdio.h>
 //~ #include <stddef.h>
 
-#include "include/user/net/rime/neighbor-discovery-object.h"
+#include "include/net/rime/neighbor-discovery-object.h"
 
 #define DEBUG 0
 #if DEBUG

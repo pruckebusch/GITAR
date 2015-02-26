@@ -45,7 +45,7 @@
 static const hil_component_t* energest_cmpobj_ref;
 
 
-#include "src/include/system/hil/sys/timer/rtimer.h"
+#include "include/system/hil/sys/timer/rtimer.h"
 
 typedef struct {
   /*  unsigned long cumulative[2];*/

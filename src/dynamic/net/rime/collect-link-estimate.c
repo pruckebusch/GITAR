@@ -42,10 +42,10 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/collect-link-estimate.h"
+#include "net/rime/collect-link-estimate.h"
 
-#include "include/user/net/rime/collect.h"
-#include "include/user/net/rime/collect-link-estimate-object.h"
+#include "include/net/rime/collect.h"
+#include "include/net/rime/collect-link-estimate-object.h"
 
 #define DEBUG 0
 #if DEBUG

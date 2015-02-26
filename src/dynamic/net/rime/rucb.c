@@ -37,12 +37,12 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/user/net/rime/rucb.h"
+#include "net/rime/rucb.h"
 //~ #include "include/system/hil/sys/process/timetable.h"
 //~ #include "include/system/hil/net/rime.h"
 //~ #include <string.h>
 
-#include "include/user/net/rime/rucb-object.h"
+#include "include/net/rime/rucb-object.h"
 
 #define DEBUG 0
 #if DEBUG

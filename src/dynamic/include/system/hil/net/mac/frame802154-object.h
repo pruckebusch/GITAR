@@ -1,8 +1,8 @@
 #ifndef __FRAME802154_HIL_COMPONENT_OBJECT_H__
 #define __FRAME802154_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/net/mac/frame802154.h"
-#include "src/include/system/hil/net/mac/frame802154-constdef.h"
+#include "system/hil/net/mac/frame802154.h"
+#include "include/system/hil/net/mac/frame802154-constdef.h"
 
 static const void* const frame802154_cmpobj_functions[FUNCTION_FRAME802154_LAST]={frame802154_parse,frame802154_create,frame802154_hdrlen};
 

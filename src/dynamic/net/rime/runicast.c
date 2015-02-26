@@ -43,14 +43,14 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/user/net/rime/runicast.h"
+#include "net/rime/runicast.h"
 #include "src/system/hil/net/rime/rimestats.h"
 
 #include "include/system/hil/net/rime/packetbuf.h"
 
 //~ #include <string.h>
 
-#include "include/user/net/rime/runicast-object.h"
+#include "include/net/rime/runicast-object.h"
 
 #define DEBUG 0
 #if DEBUG

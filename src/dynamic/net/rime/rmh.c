@@ -43,11 +43,11 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/rmh.h"
+#include "net/rime/rmh.h"
 
 //~ #include "include/system/hil/net/rime.h"
 
-#include "include/user/net/rime/rmh-object.h"
+#include "include/net/rime/rmh-object.h"
 
 #define DEBUG 0
 #if DEBUG

@@ -59,8 +59,8 @@
 #ifndef __RUDOLPH0_H__
 #define __RUDOLPH0_H__
 
-#include "include/user/net/rime/stbroadcast.h"
-#include "include/user/net/rime/polite.h"
+#include "include/net/rime/stbroadcast.h"
+#include "include/net/rime/polite.h"
 
 struct rudolph0_conn;
 

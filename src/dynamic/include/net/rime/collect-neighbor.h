@@ -56,11 +56,11 @@
 static const component_t* collect_neighbor_cmpobj_ref;
 
 
-#include "src/include/system/hil/net/rime/rimeaddr.h"
-#include "src/include/system/hil/lib/util/list.h"
-#include "src/include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/lib/util/list.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
-#include "src/include/user/net/rime/collect-link-estimate.h"
+#include "include/net/rime/collect-link-estimate.h"
 
 struct collect_neighbor_list {
   LIST_STRUCT(list);

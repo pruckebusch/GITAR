@@ -48,8 +48,8 @@ static const hil_component_t* channel_cmpobj_ref;
 struct channel;
 
 #include "contiki-conf.h"
-#include "src/include/system/hil/net/rime/packetbuf.h"
-#include "src/include/system/hil/net/rime/chameleon.h"
+#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/system/hil/net/rime/chameleon.h"
 
 struct channel {
   struct channel *next;

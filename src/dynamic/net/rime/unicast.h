@@ -62,7 +62,7 @@
 #ifndef __UNICAST_H__
 #define __UNICAST_H__
 
-#include "include/user/net/rime/broadcast.h"
+#include "include/net/rime/broadcast.h"
 
 struct unicast_conn;
 

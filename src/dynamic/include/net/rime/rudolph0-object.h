@@ -1,8 +1,8 @@
 #ifndef __RUDOLPH0_COMPONENT_OBJECT_H__
 #define __RUDOLPH0_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/rudolph0.h"
-#include "src/include/user/net/rime/rudolph0-constdef.h"
+#include "net/rime/rudolph0.h"
+#include "include/net/rime/rudolph0-constdef.h"
 
 void rudolph0_object_init();
 

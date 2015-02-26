@@ -1,8 +1,8 @@
 #ifndef __RUNICAST_COMPONENT_OBJECT_H__
 #define __RUNICAST_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/runicast.h"
-#include "src/include/user/net/rime/runicast-constdef.h"
+#include "net/rime/runicast.h"
+#include "include/net/rime/runicast-constdef.h"
 
 void runicast_object_init();
 

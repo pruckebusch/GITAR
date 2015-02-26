@@ -46,14 +46,14 @@
 //~ #include <stdio.h>
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/collect-neighbor.h"
+#include "net/rime/collect-neighbor.h"
 
 #include "include/system/hil/lib/util/memb.h"
 #include "include/system/hil/lib/util/list.h"
 
-#include "include/user/net/rime/collect.h"
+#include "include/net/rime/collect.h"
 
-#include "include/user/net/rime/collect-neighbor-object.h"
+#include "include/net/rime/collect-neighbor-object.h"
 
 #define DEBUG 0
 #if DEBUG

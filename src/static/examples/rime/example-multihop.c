@@ -70,20 +70,20 @@
  *
  */
 
-#include "src/system/hil/sys/process/process.h"
-#include "src/system/hil/sys/process/autostart.h"
-#include "src/system/hil/sys/timer/ctimer.h"
-#include "src/system/hil/sys/timer/clock.h"
-#include "src/system/hil/lib/util/random.h"
-#include "src/system/hil/lib/util/list.h"
-#include "src/system/hil/lib/util/memb.h"
-#include "src/system/hil/dev/button-sensor.h"
-#include "src/system/hil/net/rime.h"
-#include "src/system/hil/net/rime/packetbuf.h"
-#include "src/system/hil/net/rime/rimeaddr.h"
-#include "src/system/hil/net/rime/announcement.h"
+#include "hil/sys/process/process.h"
+#include "hil/sys/process/autostart.h"
+#include "hil/sys/timer/ctimer.h"
+#include "hil/sys/timer/clock.h"
+#include "hil/lib/util/random.h"
+#include "hil/lib/util/list.h"
+#include "hil/lib/util/memb.h"
+#include "hil/dev/button-sensor.h"
+#include "hil/net/rime.h"
+#include "hil/net/rime/packetbuf.h"
+#include "hil/net/rime/rimeaddr.h"
+#include "hil/net/rime/announcement.h"
 
-#include "src/user/net/rime/multihop.h"
+#include "net/rime/multihop.h"
 
 #define DEBUG 0
 #if DEBUG

@@ -1,8 +1,8 @@
 #ifndef __RIMEADDR_HIL_COMPONENT_OBJECT_H__
 #define __RIMEADDR_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/net/rime/rimeaddr.h"
-#include "src/include/system/hil/net/rime/rimeaddr-constdef.h"
+#include "system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/net/rime/rimeaddr-constdef.h"
 
 static const void* const rimeaddr_cmpobj_functions[FUNCTION_RIMEADDR_LAST]={rimeaddr_set_node_addr,rimeaddr_cmp,rimeaddr_get_node_addr,rimeaddr_get_null,rimeaddr_copy};
 

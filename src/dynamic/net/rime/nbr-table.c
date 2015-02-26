@@ -33,7 +33,7 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/nbr-table.h"
+#include "net/rime/nbr-table.h"
 
 //~ #include <stddef.h>
 //~ #include <string.h>
@@ -42,7 +42,7 @@
 #include "include/system/hil/lib/util/memb.h"
 #include "include/system/hil/lib/util/list.h"
 
-#include "include/user/net/rime/nbr-table-object.h"
+#include "include/net/rime/nbr-table-object.h"
 
 /* List of link-layer addresses of the neighbors, used as key in the tables */
 typedef struct nbr_table_key {

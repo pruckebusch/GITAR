@@ -1,8 +1,8 @@
 #ifndef __POLITE_COMPONENT_OBJECT_H__
 #define __POLITE_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/polite.h"
-#include "src/include/user/net/rime/polite-constdef.h"
+#include "net/rime/polite.h"
+#include "include/net/rime/polite-constdef.h"
 
 void polite_object_init();
 

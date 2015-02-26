@@ -1,8 +1,8 @@
 #ifndef __RANDOM_HIL_COMPONENT_OBJECT_H__
 #define __RANDOM_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/lib/util/random.h"
-#include "src/include/system/hil/lib/util/random-constdef.h"
+#include "system/hil/lib/util/random.h"
+#include "include/system/hil/lib/util/random-constdef.h"
 
 static const void* const random_cmpobj_functions[FUNCTION_RANDOM_LAST]={random_init,random_rand};
 

@@ -55,7 +55,7 @@
 #include "include/system/hil/lib/util/list.h"
 #include "include/system/hil/sys/timer/ctimer.h"
 
-#include "include/user/net/rime/collect-link-estimate.h"
+#include "include/net/rime/collect-link-estimate.h"
 
 struct collect_neighbor_list {
   LIST_STRUCT(list);

@@ -1,8 +1,8 @@
 #ifndef __ROUTE_DISCOVERY_COMPONENT_OBJECT_H__
 #define __ROUTE_DISCOVERY_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/route-discovery.h"
-#include "src/include/user/net/rime/route-discovery-constdef.h"
+#include "net/rime/route-discovery.h"
+#include "include/net/rime/route-discovery-constdef.h"
 
 void route_discovery_object_init();
 

@@ -1,8 +1,8 @@
 #ifndef __RIME_HIL_COMPONENT_OBJECT_H__
 #define __RIME_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/net/rime.h"
-#include "src/include/system/hil/net/rime-constdef.h"
+#include "system/hil/net/rime.h"
+#include "include/system/hil/net/rime-constdef.h"
 
 static const void* const rime_cmpobj_functions[FUNCTION_RIME_LAST]={rime_sniffer_add,rime_sniffer_remove,rime_output};
 

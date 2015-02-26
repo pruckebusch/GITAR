@@ -1,8 +1,8 @@
 #ifndef __ENERGEST_HIL_COMPONENT_OBJECT_H__
 #define __ENERGEST_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/lib/util/energest.h"
-#include "src/include/system/hil/lib/util/energest-constdef.h"
+#include "system/hil/lib/util/energest.h"
+#include "include/system/hil/lib/util/energest-constdef.h"
 
 static const void* const energest_cmpobj_functions[FUNCTION_ENERGEST_LAST]={energest_type_set,energest_init,energest_flush,energest_type_time};
 

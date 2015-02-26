@@ -40,7 +40,7 @@
 #ifndef __RUCB_H__
 #define __RUCB_H__
 
-#include "include/user/net/rime/runicast.h"
+#include "include/net/rime/runicast.h"
 
 struct rucb_conn;
 

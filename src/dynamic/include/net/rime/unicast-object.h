@@ -1,8 +1,8 @@
 #ifndef __UNICAST_COMPONENT_OBJECT_H__
 #define __UNICAST_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/unicast.h"
-#include "src/include/user/net/rime/unicast-constdef.h"
+#include "net/rime/unicast.h"
+#include "include/net/rime/unicast-constdef.h"
 
 void unicast_object_init();
 

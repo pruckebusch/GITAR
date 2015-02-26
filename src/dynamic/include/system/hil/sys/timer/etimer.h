@@ -67,8 +67,8 @@
 static const hil_component_t* etimer_cmpobj_ref;
 
 
-#include "src/include/system/hil/sys/timer/timer.h"
-#include "src/include/system/hil/sys/process/process.h"
+#include "include/system/hil/sys/timer/timer.h"
+#include "include/system/hil/sys/process/process.h"
 
 /**
  * A timer.

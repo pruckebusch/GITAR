@@ -43,12 +43,12 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/user/net/rime/unicast.h"
+#include "net/rime/unicast.h"
 #include "include/system/hil/net/rime.h"
 #include "include/system/hil/net/rime/packetbuf.h"
 //~ #include <string.h>
 
-#include "include/user/net/rime/unicast-object.h"
+#include "include/net/rime/unicast-object.h"
 
 #define DEBUG 0
 #if DEBUG

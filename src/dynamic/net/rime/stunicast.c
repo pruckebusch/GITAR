@@ -42,13 +42,13 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/user/net/rime/stunicast.h"
+#include "net/rime/stunicast.h"
 //~ #include "net/rime.h"
 //~ #include <string.h>
 
 #include "include/system/hil/net/rime/packetbuf.h"
 
-#include "include/user/net/rime/stunicast-object.h"
+#include "include/net/rime/stunicast-object.h"
 
 #define DEBUG 0
 #if DEBUG

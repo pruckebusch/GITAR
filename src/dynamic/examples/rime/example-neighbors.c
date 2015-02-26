@@ -51,19 +51,19 @@
  *         received.
  */
 
-#include "src/include/system/hil/sys/process/process.h"
-#include "src/include/system/hil/sys/process/autostart.h"
-#include "src/include/system/hil/sys/timer/etimer.h"
-#include "src/include/system/hil/sys/timer/clock.h"
-#include "src/include/system/hil/lib/util/random.h"
-#include "src/include/system/hil/lib/util/list.h"
-#include "src/include/system/hil/lib/util/memb.h"
-//~ #include "src/include/system/hil/net/rime.h"
-#include "src/include/system/hil/net/rime/packetbuf.h"
-#include "src/include/system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/sys/process/process.h"
+#include "include/system/hil/sys/process/autostart.h"
+#include "include/system/hil/sys/timer/etimer.h"
+#include "include/system/hil/sys/timer/clock.h"
+#include "include/system/hil/lib/util/random.h"
+#include "include/system/hil/lib/util/list.h"
+#include "include/system/hil/lib/util/memb.h"
+//~ #include "include/system/hil/net/rime.h"
+#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
 
-#include "src/include/user/net/rime/broadcast.h"
-#include "src/include/user/net/rime/unicast.h"
+#include "include/net/rime/broadcast.h"
+#include "include/net/rime/unicast.h"
 
 #define DEBUG 0
 #if DEBUG

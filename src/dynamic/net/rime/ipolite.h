@@ -93,7 +93,7 @@
 #ifndef __IPOLITE_H__
 #define __IPOLITE_H__
 
-#include "include/user/net/rime/broadcast.h"
+#include "include/net/rime/broadcast.h"
 
 #include "include/system/hil/sys/timer/ctimer.h"
 #include "include/system/hil/net/rime/queuebuf.h"

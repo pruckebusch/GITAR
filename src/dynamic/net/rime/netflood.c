@@ -42,11 +42,11 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/user/net/rime/netflood.h"
+#include "net/rime/netflood.h"
 #include "include/system/hil/lib/util/string.h"
 //~ #include <string.h>
 
-#include "include/user/net/rime/netflood-object.h"
+#include "include/net/rime/netflood-object.h"
 
 
 #define DEBUG 0

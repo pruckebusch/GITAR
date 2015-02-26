@@ -83,7 +83,7 @@
 static const component_t* runicast_cmpobj_ref;
 
 
-#include "src/include/user/net/rime/stunicast.h"
+#include "include/net/rime/stunicast.h"
 
 struct runicast_conn;
 

@@ -43,19 +43,19 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/polite-announcement.h"
+#include "net/rime/polite-announcement.h"
 
 #include "include/system/hil/lib/util/list.h"
 #include "include/system/hil/lib/util/string.h"
 #include "include/system/hil/net/rime/announcement.h"
-#include "include/user/net/rime/ipolite.h"
+#include "include/net/rime/ipolite.h"
 
 //~ #include "include/system/hil/net/rime.h"
 
 //~ #include <string.h>
 //~ #include <stddef.h>
 
-#include "include/user/net/rime/polite-announcement-object.h"
+#include "include/net/rime/polite-announcement-object.h"
 
 #define DEBUG 0
 #if DEBUG

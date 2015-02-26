@@ -62,7 +62,7 @@
 
 #include "include/system/hil/sys/timer/ctimer.h"
 #include "include/system/hil/net/rime/queuebuf.h"
-#include "include/user/net/rime/broadcast.h"
+#include "include/net/rime/broadcast.h"
 
 struct stbroadcast_conn;
 

@@ -1,8 +1,8 @@
 #ifndef __CRC16_HIL_COMPONENT_OBJECT_H__
 #define __CRC16_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/lib/util/crc16.h"
-#include "src/include/system/hil/lib/util/crc16-constdef.h"
+#include "system/hil/lib/util/crc16.h"
+#include "include/system/hil/lib/util/crc16-constdef.h"
 
 static const void* const crc16_cmpobj_functions[FUNCTION_CRC16_LAST]={crc16_add,crc16_data};
 

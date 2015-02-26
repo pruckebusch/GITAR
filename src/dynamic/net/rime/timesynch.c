@@ -44,7 +44,7 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/timesynch.h"
+#include "net/rime/timesynch.h"
 
 #include "include/system/hil/lib/util/random.h"
 #include "include/system/hil/net/rime/packetbuf.h"
@@ -52,7 +52,7 @@
 
 //~ #include <string.h>
 
-#include "include/user/net/rime/timesynch-object.h"
+#include "include/net/rime/timesynch-object.h"
 
 #if TIMESYNCH_CONF_ENABLED
 static int authority_level;

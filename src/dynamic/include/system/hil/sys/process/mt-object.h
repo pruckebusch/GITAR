@@ -1,8 +1,8 @@
 #ifndef __MT_HIL_COMPONENT_OBJECT_H__
 #define __MT_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/sys/process/mt.h"
-#include "src/include/system/hil/sys/process/mt-constdef.h"
+#include "system/hil/sys/process/mt.h"
+#include "include/system/hil/sys/process/mt-constdef.h"
 
 static const void* const mt_cmpobj_functions[FUNCTION_MT_LAST]={mt_start,mt_stop,mt_remove,mt_init,mt_exec,mt_exit,mt_yield};
 

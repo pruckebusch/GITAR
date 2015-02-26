@@ -43,7 +43,7 @@
 static const hil_component_t* cfs_coffee_cmpobj_ref;
 
 
-#include "src/include/system/hil/lib/cfs/cfs.h"
+#include "include/system/hil/lib/cfs/cfs.h"
 
 /**
  * Instruct Coffee that the access pattern to this file is adapted to 

@@ -65,9 +65,9 @@
 static const component_t* stbroadcast_cmpobj_ref;
 
 
-#include "src/include/system/hil/sys/timer/ctimer.h"
-#include "src/include/system/hil/net/rime/queuebuf.h"
-#include "src/include/user/net/rime/broadcast.h"
+#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/net/rime/queuebuf.h"
+#include "include/net/rime/broadcast.h"
 
 struct stbroadcast_conn;
 

@@ -42,10 +42,10 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/user/net/rime/trickle.h"
+#include "net/rime/trickle.h"
 #include "include/system/hil/lib/util/random.h"
 #include "include/system/hil/net/rime/packetbuf.h"
-#include "include/user/net/rime/trickle-object.h"
+#include "include/net/rime/trickle-object.h"
 
 #define DEBUG 0
 #if DEBUG

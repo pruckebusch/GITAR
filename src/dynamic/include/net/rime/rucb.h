@@ -45,7 +45,7 @@
 static const component_t* rucb_cmpobj_ref;
 
 
-#include "src/include/user/net/rime/runicast.h"
+#include "include/net/rime/runicast.h"
 
 struct rucb_conn;
 

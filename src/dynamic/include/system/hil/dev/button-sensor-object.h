@@ -1,8 +1,8 @@
 #ifndef __BUTTON_SENSOR_HIL_COMPONENT_OBJECT_H__
 #define __BUTTON_SENSOR_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/dev/button-sensor.h"
-#include "src/include/system/hil/dev/button-sensor-constdef.h"
+#include "system/hil/dev/button-sensor.h"
+#include "include/system/hil/dev/button-sensor-constdef.h"
 
 static const void* const button_sensor_cmpobj_functions[FUNCTION_BUTTON_SENSOR_LAST]={button_sensor_get};
 

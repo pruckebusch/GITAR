@@ -1,8 +1,8 @@
 #ifndef __ANNOUNCEMENT_HIL_COMPONENT_OBJECT_H__
 #define __ANNOUNCEMENT_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/net/rime/announcement.h"
-#include "src/include/system/hil/net/rime/announcement-constdef.h"
+#include "system/hil/net/rime/announcement.h"
+#include "include/system/hil/net/rime/announcement-constdef.h"
 
 static const void* const announcement_cmpobj_functions[FUNCTION_ANNOUNCEMENT_LAST]={announcement_bump,announcement_set_value,announcement_register_observer_callback,announcement_init,announcement_list,announcement_listen,announcement_remove,announcement_heard,announcement_register_listen_callback,announcement_remove_value,announcement_register};
 

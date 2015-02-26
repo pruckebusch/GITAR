@@ -12,7 +12,7 @@ CFLAGS += -DNETSTACK_CONF_NETWORK=rime_driver
 CFLAGS += -DWITH_RIME=1
 CFLAGS += -DCONF_SET_NODE_ID=1
 
-PROJECTDIRS += /home/user/Documents/Software/CLEAN_COPY/GITAR/src/user/apps/rime-tests-static/
+PROJECTDIRS += /home/user/Documents/Software/CLEAN_COPY/GITAR/src/static/examples/rime/
 PROJECT_SOURCEFILES += symbols.c example-abc.c example-broadcast.c example-mesh.c example-neighbors.c example-rucb.c example-rudolph1.c example-runicast.c example-unicast.c example-announcement.c example-collect.c example-multihop.c example-polite.c example-rudolph0.c example-rudolph2.c example-trickle.c
 
 #~ GITAR_PROJECT = example-abc

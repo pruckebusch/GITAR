@@ -42,12 +42,12 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/user/net/rime/ipolite.h"
+#include "net/rime/ipolite.h"
 
 #include "include/system/hil/lib/util/random.h"
 #include "include/system/hil/lib/util/string.h"
 
-#include "include/user/net/rime/ipolite-object.h"
+#include "include/net/rime/ipolite-object.h"
 
 #define DEBUG 0
 #if DEBUG

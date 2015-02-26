@@ -1,8 +1,8 @@
 #ifndef __COLLECT_COMPONENT_OBJECT_H__
 #define __COLLECT_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/collect.h"
-#include "src/include/user/net/rime/collect-constdef.h"
+#include "net/rime/collect.h"
+#include "include/net/rime/collect-constdef.h"
 
 void collect_object_init();
 

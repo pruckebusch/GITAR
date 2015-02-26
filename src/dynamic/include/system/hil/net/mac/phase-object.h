@@ -1,8 +1,8 @@
 #ifndef __PHASE_HIL_COMPONENT_OBJECT_H__
 #define __PHASE_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/net/mac/phase.h"
-#include "src/include/system/hil/net/mac/phase-constdef.h"
+#include "system/hil/net/mac/phase.h"
+#include "include/system/hil/net/mac/phase-constdef.h"
 
 static const void* const phase_cmpobj_functions[FUNCTION_PHASE_LAST]={phase_init,phase_wait,phase_update};
 

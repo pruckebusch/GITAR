@@ -1,8 +1,8 @@
 #ifndef __NEIGHBOR_DISCOVERY_COMPONENT_OBJECT_H__
 #define __NEIGHBOR_DISCOVERY_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/neighbor-discovery.h"
-#include "src/include/user/net/rime/neighbor-discovery-constdef.h"
+#include "net/rime/neighbor-discovery.h"
+#include "include/net/rime/neighbor-discovery-constdef.h"
 
 void neighbor_discovery_object_init();
 

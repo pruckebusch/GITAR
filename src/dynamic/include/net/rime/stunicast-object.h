@@ -1,8 +1,8 @@
 #ifndef __STUNICAST_COMPONENT_OBJECT_H__
 #define __STUNICAST_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/stunicast.h"
-#include "src/include/user/net/rime/stunicast-constdef.h"
+#include "net/rime/stunicast.h"
+#include "include/net/rime/stunicast-constdef.h"
 
 void stunicast_object_init();
 

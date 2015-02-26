@@ -70,8 +70,8 @@
 static const component_t* broadcast_cmpobj_ref;
 
 
-#include "src/include/system/hil/net/rime/abc.h"
-#include "src/include/system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/net/rime/abc.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
 
 struct broadcast_conn;
 

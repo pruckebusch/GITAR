@@ -1,8 +1,8 @@
 #ifndef __SYMTAB_HIL_COMPONENT_OBJECT_H__
 #define __SYMTAB_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/lib/loader/symtab.h"
-#include "src/include/system/hil/lib/loader/symtab-constdef.h"
+#include "system/hil/lib/loader/symtab.h"
+#include "include/system/hil/lib/loader/symtab-constdef.h"
 
 static const void* const symtab_cmpobj_functions[FUNCTION_SYMTAB_LAST]={symtab_lookup};
 

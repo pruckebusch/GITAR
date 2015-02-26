@@ -37,16 +37,16 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "src/system/hil/sys/process/process.h"
-#include "src/system/hil/sys/process/autostart.h"
-#include "src/system/hil/sys/timer/clock.h"
-#include "src/system/hil/lib/cfs/cfs.h"
-#include "src/system/hil/dev/button-sensor.h"
-#include "src/system/hil/dev/leds.h"
-#include "src/system/hil/net/rime.h"
-#include "src/system/hil/net/rime/rimeaddr.h"
+#include "hil/sys/process/process.h"
+#include "hil/sys/process/autostart.h"
+#include "hil/sys/timer/clock.h"
+#include "hil/lib/cfs/cfs.h"
+#include "hil/dev/button-sensor.h"
+#include "hil/dev/leds.h"
+#include "hil/net/rime.h"
+#include "hil/net/rime/rimeaddr.h"
 
-#include "src/user/net/rime/rudolph2.h"
+#include "net/rime/rudolph2.h"
 
 #define DEBUG 0
 #if DEBUG

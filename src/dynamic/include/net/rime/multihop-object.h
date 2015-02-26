@@ -1,8 +1,8 @@
 #ifndef __MULTIHOP_COMPONENT_OBJECT_H__
 #define __MULTIHOP_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/multihop.h"
-#include "src/include/user/net/rime/multihop-constdef.h"
+#include "net/rime/multihop.h"
+#include "include/net/rime/multihop-constdef.h"
 
 void multihop_object_init();
 

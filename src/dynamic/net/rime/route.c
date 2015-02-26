@@ -43,13 +43,13 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/route.h"
+#include "net/rime/route.h"
 
 #include "include/system/hil/lib/util/list.h"
 #include "include/system/hil/lib/util/memb.h"
 #include "include/system/hil/sys/timer/ctimer.h"
 
-#include "include/user/net/rime/route-object.h"
+#include "include/net/rime/route-object.h"
 
 #define DEBUG 0
 #if DEBUG

@@ -98,9 +98,9 @@
 static const component_t* polite_cmpobj_ref;
 
 
-#include "src/include/system/hil/net/rime/abc.h"
-#include "src/include/system/hil/net/rime/queuebuf.h"
-#include "src/include/system/hil/sys/timer/ctimer.h"
+#include "include/system/hil/net/rime/abc.h"
+#include "include/system/hil/net/rime/queuebuf.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
 struct polite_conn;
 

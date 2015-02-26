@@ -1,8 +1,8 @@
 #ifndef __NETFLOOD_COMPONENT_OBJECT_H__
 #define __NETFLOOD_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/netflood.h"
-#include "src/include/user/net/rime/netflood-constdef.h"
+#include "net/rime/netflood.h"
+#include "include/net/rime/netflood-constdef.h"
 
 void netflood_object_init();
 

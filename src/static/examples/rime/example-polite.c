@@ -1,12 +1,12 @@
 
-#include "src/system/hil/sys/process/process.h"
-#include "src/system/hil/sys/process/autostart.h"
-#include "src/system/hil/sys/timer/etimer.h"
-#include "src/system/hil/sys/timer/clock.h"
-#include "src/system/hil/net/rime.h"
-#include "src/system/hil/net/rime/packetbuf.h"
+#include "hil/sys/process/process.h"
+#include "hil/sys/process/autostart.h"
+#include "hil/sys/timer/etimer.h"
+#include "hil/sys/timer/clock.h"
+#include "hil/net/rime.h"
+#include "hil/net/rime/packetbuf.h"
 
-#include "src/user/net/rime/polite.h"
+#include "net/rime/polite.h"
 
 #define DEBUG 0
 #if DEBUG

@@ -43,15 +43,15 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/multihop.h"
+#include "net/rime/multihop.h"
 
 #include "include/system/hil/net/rime/packetbuf.h"
-#include "include/user/net/rime/route.h"
+#include "include/net/rime/route.h"
 
 //~ #include "net/rime.h"
 //~ #include <string.h>
 
-#include "include/user/net/rime/multihop-object.h"
+#include "include/net/rime/multihop-object.h"
 
 #define DEBUG 0
 #if DEBUG

@@ -1,8 +1,8 @@
 #ifndef __NODE_ID_HIL_COMPONENT_OBJECT_H__
 #define __NODE_ID_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/lib/util/node-id.h"
-#include "src/include/system/hil/lib/util/node-id-constdef.h"
+#include "system/hil/lib/util/node-id.h"
+#include "include/system/hil/lib/util/node-id-constdef.h"
 
 static const void* const node_id_cmpobj_functions[FUNCTION_NODE_ID_LAST]={node_id_burn,node_id_restore};
 

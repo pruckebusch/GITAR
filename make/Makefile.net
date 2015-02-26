@@ -1,9 +1,12 @@
-BASE_USER_DIR = $(GITAR)/src/user
-BASE_NET_DIR =  $(GITAR)/src/user/net
+ifeq ($(COMPILE_DYNAMIC),1)
+BASE_NET_DIR = $(GITAR)/src/dynamic/net
+else
+BASE_NET_DIR = $(GITAR)/src/static/net
+endif
+
 SYS_NET_DIR = $(GITAR)/src/system/hil/net
 
-NETDIRS += $(BASE_NET_DIR) $(BASE_USER_DIR)
-NETDIRS += $(SYS_NET_DIR)
+NETDIRS += $(SYS_NET_DIR) $(BASE_NET_DIR)
 NETFILES = netstack.c
 
 #MAC_RDC_MAC = sicslowmac.c
@@ -15,7 +18,6 @@ MAC_LIB = packetbuf.c queuebuf.c packetqueue.c
 
 NETFILES += $(MAC_RDC) $(MAC_MAC) $(MAC_FRAMER) $(MAC_LIB) #$(MAC_NBR_TBL)
 NETDIRS += $(SYS_NET_DIR)/mac
-NETDIRS +=  $(BASE_NET_DIR)/rime
 ifeq ($(WITH_RIME),1)
 ${info including rime netstack}
 RIME_BASE = abc.c chameleon.c channel.c packetqueue.c rimeaddr.c announcement.c chameleon-bitopt.c chameleon-raw.c packetbuf.c queuebuf.c rimestats.c timesynch.c nbr-table.c rime.c
@@ -28,7 +30,7 @@ RIME_MESH      = mesh.c route.c route-discovery.c
 RIME_COLLECT   = collect.c collect-neighbor.c neighbor-discovery.c collect-link-estimate.c
 RIME_RUDOLPH   = rudolph0.c rudolph1.c rudolph2.c
 
-NETDIRS +=  $(SYS_NET_DIR)/rime
+NETDIRS +=  $(SYS_NET_DIR)/rime $(BASE_NET_DIR)/rime
 NETFILES += $(RIME_BASE) $(RIME_SINGLEHOP) $(RIME_MULTIHOP) $(RIME_MESH) $(RIME_COLLECT) $(RIME_RUDOLPH) $(RIME_CHAMELEON) $(RIME_UIP6)
 
 else ifeq ($(WITH_UIP),1)

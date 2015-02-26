@@ -45,7 +45,7 @@
 static const hil_component_t* autostart_cmpobj_ref;
 
 
-#include "src/include/system/hil/sys/process/process.h"
+#include "include/system/hil/sys/process/process.h"
 
 #if ! CC_NO_VA_ARGS
 #if AUTOSTART_ENABLE

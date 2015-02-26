@@ -44,7 +44,7 @@
 static const hil_component_t* serial_line_cmpobj_ref;
 
 
-#include "src/include/system/hil/sys/process/process.h"
+#include "include/system/hil/sys/process/process.h"
 
 /**
  * Event posted when a line of input has been received.

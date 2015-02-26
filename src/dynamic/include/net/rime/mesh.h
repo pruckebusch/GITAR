@@ -66,10 +66,10 @@
 static const component_t* mesh_cmpobj_ref;
 
 
-#include "src/include/system/hil/net/rime/queuebuf.h"
+#include "include/system/hil/net/rime/queuebuf.h"
 
-#include "src/include/user/net/rime/multihop.h"
-#include "src/include/user/net/rime/route-discovery.h"
+#include "include/net/rime/multihop.h"
+#include "include/net/rime/route-discovery.h"
 
 struct mesh_conn;
 

@@ -72,7 +72,7 @@
 
 #include "include/system/hil/net/rime/rimeaddr.h"
 
-#include "include/user/net/rime/unicast.h"
+#include "include/net/rime/unicast.h"
 
 struct multihop_conn;
 

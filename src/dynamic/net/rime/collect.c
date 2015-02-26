@@ -43,7 +43,7 @@
  */
 
 #include "contiki-conf.h"
-#include "src/user/net/rime/collect.h"
+#include "net/rime/collect.h"
 #include "src/system/hil/net/rime/rimestats.h"
 
 #include "include/system/hil/net/netstack.h"
@@ -54,10 +54,10 @@
 #include "include/system/hil/lib/util/random.h"
 #include "include/system/hil/lib/util/string.h"
 
-#include "include/user/net/rime/collect-neighbor.h"
-#include "include/user/net/rime/collect-link-estimate.h"
+#include "include/net/rime/collect-neighbor.h"
+#include "include/net/rime/collect-link-estimate.h"
 
-#include "include/user/net/rime/collect-object.h"
+#include "include/net/rime/collect-object.h"
 
 //~ #include <string.h>
 //~ #include <stdio.h>

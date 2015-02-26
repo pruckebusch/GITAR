@@ -1,8 +1,8 @@
 #ifndef __BROADCAST_COMPONENT_OBJECT_H__
 #define __BROADCAST_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/broadcast.h"
-#include "src/include/user/net/rime/broadcast-constdef.h"
+#include "net/rime/broadcast.h"
+#include "include/net/rime/broadcast-constdef.h"
 
 void broadcast_object_init();
 

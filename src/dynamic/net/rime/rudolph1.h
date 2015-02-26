@@ -59,8 +59,8 @@
 #ifndef __RUDOLPH1_H__
 #define __RUDOLPH1_H__
 
-#include "include/user/net/rime/trickle.h"
-#include "include/user/net/rime/ipolite.h"
+#include "include/net/rime/trickle.h"
+#include "include/net/rime/ipolite.h"
 #include "include/system/hil/sys/timer/ctimer.h"
 
 struct rudolph1_conn;

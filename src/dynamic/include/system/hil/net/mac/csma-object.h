@@ -1,8 +1,8 @@
 #ifndef __CSMA_HIL_COMPONENT_OBJECT_H__
 #define __CSMA_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/net/mac/csma.h"
-#include "src/include/system/hil/net/mac/csma-constdef.h"
+#include "system/hil/net/mac/csma.h"
+#include "include/system/hil/net/mac/csma-constdef.h"
 
 static const void* const csma_cmpobj_functions[FUNCTION_CSMA_LAST]={};
 

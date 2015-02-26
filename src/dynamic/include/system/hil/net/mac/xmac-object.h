@@ -1,8 +1,8 @@
 #ifndef __XMAC_HIL_COMPONENT_OBJECT_H__
 #define __XMAC_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/net/mac/xmac.h"
-#include "src/include/system/hil/net/mac/xmac-constdef.h"
+#include "system/hil/net/mac/xmac.h"
+#include "include/system/hil/net/mac/xmac-constdef.h"
 
 static const void* const xmac_cmpobj_functions[FUNCTION_XMAC_LAST]={xmac_set_announcement_radio_txpower};
 

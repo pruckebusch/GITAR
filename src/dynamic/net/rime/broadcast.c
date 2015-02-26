@@ -43,13 +43,13 @@
  */
 
 
-//~ #include "src/user/net/rime/broadcast.h"
+//~ #include "net/rime/broadcast.h"
 //~ #include <string.h>
-#include "src/include/system/hil/net/rime/packetbuf.h"
-#include "src/include/system/hil/net/rime/abc.h"
-#include "src/include/system/hil/net/rime/rimeaddr.h"
+#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/system/hil/net/rime/abc.h"
+#include "include/system/hil/net/rime/rimeaddr.h"
 
-#include "include/user/net/rime/broadcast-object.h"
+#include "include/net/rime/broadcast-object.h"
 
 static const struct packetbuf_attrlist attributes[] =
   {

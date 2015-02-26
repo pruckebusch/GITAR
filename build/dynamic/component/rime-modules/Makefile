@@ -1,5 +1,6 @@
 TARGET=z1
 
+COMPILE_DYNAMIC=1
 WITH_RIME=1
 
 NETSTACK_CONF_NETWORK=rime_driver
@@ -11,8 +12,9 @@ MOTE = 1
 CFLAGS += -DNETSTACK_CONF_NETWORK=rime_driver
 CFLAGS += -DWITH_RIME=1
 CFLAGS += -DCONF_SET_NODE_ID=1
+CFLAGS += -DCOMPILE_DYNAMIC=1
 
-PROJECTDIRS += /home/user/Documents/Software/GITAR/src/user/net/rime/
+PROJECTDIRS += /home/user/Documents/Software/CLEAN_COPY/GITAR/src/dynamic/net/rime/
 PROJECT_SOURCEFILES + = broadcast.c collect-link-estimate.c ipolite.c multihop.c neighbor-discovery.c polite-announcement.c route.c rucb.c rudolph1.c runicast.c stunicast.c trickle.c collect.c collect-neighbor.c mesh.c nbr-table.c netflood.c polite.c rmh.c route-discovery.c rudolph0.c rudolph2.c stbroadcast.c timesynch.c unicast.c
 
 #~ GITAR_PROJECT = example-abc

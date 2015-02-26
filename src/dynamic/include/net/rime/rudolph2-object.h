@@ -1,8 +1,8 @@
 #ifndef __RUDOLPH2_COMPONENT_OBJECT_H__
 #define __RUDOLPH2_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/rudolph2.h"
-#include "src/include/user/net/rime/rudolph2-constdef.h"
+#include "net/rime/rudolph2.h"
+#include "include/net/rime/rudolph2-constdef.h"
 
 void rudolph2_object_init();
 

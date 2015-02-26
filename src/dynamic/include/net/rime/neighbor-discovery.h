@@ -64,8 +64,8 @@
 static const component_t* neighbor_discovery_cmpobj_ref;
 
 
-#include "src/include/user/net/rime/broadcast.h"
-#include "src/include/system/hil/sys/timer/ctimer.h"
+#include "include/net/rime/broadcast.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
 struct neighbor_discovery_conn;
 

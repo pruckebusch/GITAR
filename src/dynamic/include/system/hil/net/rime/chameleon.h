@@ -45,7 +45,7 @@
 static const hil_component_t* chameleon_cmpobj_ref;
 
 
-#include "src/include/system/hil/net/rime/channel.h"
+#include "include/system/hil/net/rime/channel.h"
 
 struct chameleon_module {
   struct channel *(* input)(void);

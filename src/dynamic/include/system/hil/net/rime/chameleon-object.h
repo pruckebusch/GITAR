@@ -1,8 +1,8 @@
 #ifndef __CHAMELEON_HIL_COMPONENT_OBJECT_H__
 #define __CHAMELEON_HIL_COMPONENT_OBJECT_H__
 
-#include "src/system/hil/net/rime/chameleon.h"
-#include "src/include/system/hil/net/rime/chameleon-constdef.h"
+#include "system/hil/net/rime/chameleon.h"
+#include "include/system/hil/net/rime/chameleon-constdef.h"
 
 static const void* const chameleon_cmpobj_functions[FUNCTION_CHAMELEON_LAST]={chameleon_parse,chameleon_init,chameleon_create,chameleon_hdrsize};
 

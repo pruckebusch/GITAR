@@ -67,7 +67,7 @@
 static const component_t* unicast_cmpobj_ref;
 
 
-#include "src/include/user/net/rime/broadcast.h"
+#include "include/net/rime/broadcast.h"
 
 struct unicast_conn;
 

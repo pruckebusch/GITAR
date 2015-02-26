@@ -64,9 +64,9 @@
 static const component_t* rudolph1_cmpobj_ref;
 
 
-#include "src/include/user/net/rime/trickle.h"
-#include "src/include/user/net/rime/ipolite.h"
-#include "src/include/system/hil/sys/timer/ctimer.h"
+#include "include/net/rime/trickle.h"
+#include "include/net/rime/ipolite.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
 struct rudolph1_conn;
 

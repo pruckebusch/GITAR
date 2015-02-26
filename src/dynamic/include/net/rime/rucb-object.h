@@ -1,8 +1,8 @@
 #ifndef __RUCB_COMPONENT_OBJECT_H__
 #define __RUCB_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/rucb.h"
-#include "src/include/user/net/rime/rucb-constdef.h"
+#include "net/rime/rucb.h"
+#include "include/net/rime/rucb-constdef.h"
 
 void rucb_object_init();
 

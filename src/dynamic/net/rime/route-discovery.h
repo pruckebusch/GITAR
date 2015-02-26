@@ -57,8 +57,8 @@
 #ifndef __ROUTE_DISCOVERY_H__
 #define __ROUTE_DISCOVERY_H__
 
-#include "include/user/net/rime/unicast.h"
-#include "include/user/net/rime/netflood.h"
+#include "include/net/rime/unicast.h"
+#include "include/net/rime/netflood.h"
 #include "include/system/hil/sys/timer/ctimer.h"
 
 struct route_discovery_conn;

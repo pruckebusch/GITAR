@@ -62,9 +62,9 @@
 static const component_t* route_discovery_cmpobj_ref;
 
 
-#include "src/include/user/net/rime/unicast.h"
-#include "src/include/user/net/rime/netflood.h"
-#include "src/include/system/hil/sys/timer/ctimer.h"
+#include "include/net/rime/unicast.h"
+#include "include/net/rime/netflood.h"
+#include "include/system/hil/sys/timer/ctimer.h"
 
 struct route_discovery_conn;
 

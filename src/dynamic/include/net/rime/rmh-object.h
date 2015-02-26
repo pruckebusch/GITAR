@@ -1,8 +1,8 @@
 #ifndef __RMH_COMPONENT_OBJECT_H__
 #define __RMH_COMPONENT_OBJECT_H__
 
-#include "src/user/net/rime/rmh.h"
-#include "src/include/user/net/rime/rmh-constdef.h"
+#include "net/rime/rmh.h"
+#include "include/net/rime/rmh-constdef.h"
 
 void rmh_object_init();
 

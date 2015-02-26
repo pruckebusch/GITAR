@@ -78,7 +78,7 @@
 #ifndef __RUNICAST_H__
 #define __RUNICAST_H__
 
-#include "include/user/net/rime/stunicast.h"
+#include "include/net/rime/stunicast.h"
 
 struct runicast_conn;
 

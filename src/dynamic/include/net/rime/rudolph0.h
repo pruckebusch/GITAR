@@ -64,8 +64,8 @@
 static const component_t* rudolph0_cmpobj_ref;
 
 
-#include "src/include/user/net/rime/stbroadcast.h"
-#include "src/include/user/net/rime/polite.h"
+#include "include/net/rime/stbroadcast.h"
+#include "include/net/rime/polite.h"
 
 struct rudolph0_conn;
 

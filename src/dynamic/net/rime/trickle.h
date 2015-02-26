@@ -59,7 +59,7 @@
 
 #include "include/system/hil/sys/timer/ctimer.h"
 
-#include "include/user/net/rime/broadcast.h"
+#include "include/net/rime/broadcast.h"
 #include "include/system/hil/net/rime/queuebuf.h"
 
 #define TRICKLE_ATTRIBUTES  { PACKETBUF_ATTR_EPACKET_ID, PACKETBUF_ATTR_BIT * 8 },\

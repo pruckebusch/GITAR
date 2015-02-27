@@ -1,0 +1,166 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AUTOSTART_PROCESSES	autostart.h	47;"	d
+AUTOSTART_PROCESSES	autostart.h	50;"	d
+CC_ASSIGN_AGGREGATE	cc.h	116;"	d
+CC_ASSIGN_AGGREGATE	cc.h	118;"	d
+CC_CONCAT	cc.h	137;"	d
+CC_CONCAT2	cc.h	129;"	d
+CC_CONST_FUNCTION	cc.h	83;"	d
+CC_CONST_FUNCTION	cc.h	85;"	d
+CC_DOUBLE_HASH	cc.h	101;"	d
+CC_DOUBLE_HASH	cc.h	103;"	d
+CC_FASTCALL	cc.h	74;"	d
+CC_FASTCALL	cc.h	76;"	d
+CC_FUNCTION_POINTER_ARGS	cc.h	64;"	d
+CC_FUNCTION_POINTER_ARGS	cc.h	66;"	d
+CC_INLINE	cc.h	107;"	d
+CC_INLINE	cc.h	109;"	d
+CC_NO_VA_ARGS	cc.h	122;"	d
+CC_REGISTER_ARG	cc.h	54;"	d
+CC_REGISTER_ARG	cc.h	56;"	d
+CC_UNSIGNED_CHAR_BUGS	cc.h	92;"	d
+CC_UNSIGNED_CHAR_BUGS	cc.h	94;"	d
+DEBUG	autostart.c	42;"	d	file:
+DEBUG	process.c	83;"	d	file:
+LC_END	lc-switch.h	71;"	d
+LC_END	lc.h	107;"	d
+LC_INIT	lc-switch.h	65;"	d
+LC_INIT	lc.h	70;"	d
+LC_RESUME	lc-switch.h	67;"	d
+LC_RESUME	lc.h	95;"	d
+LC_SET	lc-switch.h	69;"	d
+LC_SET	lc.h	83;"	d
+MT_OK	mt.h	193;"	d
+MT_STATE_EXITED	mt.c	51;"	d	file:
+MT_STATE_READY	mt.c	49;"	d	file:
+MT_STATE_RUNNING	mt.c	50;"	d	file:
+NULL	cc.h	126;"	d
+PRINTF	autostart.c	45;"	d	file:
+PRINTF	autostart.c	47;"	d	file:
+PRINTF	process.c	86;"	d	file:
+PRINTF	process.c	88;"	d	file:
+PROCESS	process.h	302;"	d
+PROCESS	process.h	307;"	d
+PROCESS_BEGIN	process.h	120;"	d
+PROCESS_BROADCAST	process.h	103;"	d
+PROCESS_CONF_NUMEVENTS	process.h	88;"	d
+PROCESS_CONTEXT_BEGIN	process.h	426;"	d
+PROCESS_CONTEXT_END	process.h	440;"	d
+PROCESS_CURRENT	process.h	402;"	d
+PROCESS_END	process.h	131;"	d
+PROCESS_ERR_FULL	process.h	82;"	d
+PROCESS_ERR_OK	process.h	74;"	d
+PROCESS_EVENT_COM	process.h	100;"	d
+PROCESS_EVENT_CONTINUE	process.h	96;"	d
+PROCESS_EVENT_EXIT	process.h	94;"	d
+PROCESS_EVENT_EXITED	process.h	98;"	d
+PROCESS_EVENT_INIT	process.h	92;"	d
+PROCESS_EVENT_MAX	process.h	101;"	d
+PROCESS_EVENT_MSG	process.h	97;"	d
+PROCESS_EVENT_NONE	process.h	91;"	d
+PROCESS_EVENT_POLL	process.h	93;"	d
+PROCESS_EVENT_SERVICE_REMOVED	process.h	95;"	d
+PROCESS_EVENT_TIMER	process.h	99;"	d
+PROCESS_EXIT	process.h	200;"	d
+PROCESS_EXITHANDLER	process.h	254;"	d
+PROCESS_LIST	process.h	526;"	d
+PROCESS_NAME	process.h	286;"	d
+PROCESS_NAME_STRING	process.h	318;"	d
+PROCESS_NAME_STRING	process.h	321;"	d
+PROCESS_NONE	process.h	85;"	d
+PROCESS_PAUSE	process.h	221;"	d
+PROCESS_POLLHANDLER	process.h	242;"	d
+PROCESS_PT_SPAWN	process.h	211;"	d
+PROCESS_STATE_CALLED	process.c	79;"	d	file:
+PROCESS_STATE_NONE	process.c	77;"	d	file:
+PROCESS_STATE_RUNNING	process.c	78;"	d	file:
+PROCESS_THREAD	process.h	273;"	d
+PROCESS_WAIT_EVENT	process.h	141;"	d
+PROCESS_WAIT_EVENT_UNTIL	process.h	157;"	d
+PROCESS_WAIT_UNTIL	process.h	192;"	d
+PROCESS_WAIT_WHILE	process.h	193;"	d
+PROCESS_YIELD	process.h	164;"	d
+PROCESS_YIELD_UNTIL	process.h	178;"	d
+PROCESS_ZOMBIE	process.h	104;"	d
+PT_BEGIN	pt.h	114;"	d
+PT_END	pt.h	126;"	d
+PT_ENDED	pt.h	60;"	d
+PT_EXIT	pt.h	245;"	d
+PT_EXITED	pt.h	59;"	d
+PT_INIT	pt.h	79;"	d
+PT_RESTART	pt.h	228;"	d
+PT_SCHEDULE	pt.h	270;"	d
+PT_SPAWN	pt.h	205;"	d
+PT_THREAD	pt.h	99;"	d
+PT_WAITING	pt.h	57;"	d
+PT_WAIT_THREAD	pt.h	191;"	d
+PT_WAIT_UNTIL	pt.h	147;"	d
+PT_WAIT_WHILE	pt.h	166;"	d
+PT_YIELD	pt.h	289;"	d
+PT_YIELDED	pt.h	58;"	d
+PT_YIELD_UNTIL	pt.h	309;"	d
+__AUTOSTART_H__	autostart.h	41;"	d
+__CC_H__	cc.h	45;"	d
+__LC_H__	lc.h	119;"	d
+__LC_SWITCH_H__	lc-switch.h	57;"	d
+__MT_H__	mt.h	83;"	d
+__PROCESS_H__	process.h	54;"	d
+__PT_H__	pt.h	49;"	d
+autostart_exit	autostart.c	/^autostart_exit(struct process * const processes[])$/;"	f
+autostart_start	autostart.c	/^autostart_start(struct process * const processes[])$/;"	f
+call_process	process.c	/^call_process(struct process *p, process_event_t ev, process_data_t data)$/;"	f	file:
+current	mt.c	/^static struct mt_thread *current;$/;"	v	typeref:struct:mt_thread	file:
+data	process.c	/^  process_data_t data;$/;"	m	struct:event_data	file:
+dataptr	mt.h	/^  process_data_t *dataptr;$/;"	m	struct:mt_thread
+do_event	process.c	/^do_event(void)$/;"	f	file:
+do_poll	process.c	/^do_poll(void)$/;"	f	file:
+ev	process.c	/^  process_event_t ev;$/;"	m	struct:event_data	file:
+event_data	process.c	/^struct event_data {$/;"	s	file:
+events	process.c	/^static struct event_data events[PROCESS_CONF_NUMEVENTS];$/;"	v	typeref:struct:event_data	file:
+evptr	mt.h	/^  process_event_t *evptr;$/;"	m	struct:mt_thread
+exit_process	process.c	/^exit_process(struct process *p, struct process *fromprocess)$/;"	f	file:
+fevent	process.c	/^static process_num_events_t nevents, fevent;$/;"	v	file:
+lastevent	process.c	/^static process_event_t lastevent;$/;"	v	file:
+lc	pt.h	/^  lc_t lc;$/;"	m	struct:pt
+lc_t	lc-switch.h	/^typedef unsigned short lc_t;$/;"	t
+mt_exec	mt.c	/^mt_exec(struct mt_thread *thread)$/;"	f
+mt_exit	mt.c	/^mt_exit(void)$/;"	f
+mt_init	mt.c	/^mt_init(void)$/;"	f
+mt_remove	mt.c	/^mt_remove(void)$/;"	f
+mt_start	mt.c	/^mt_start(struct mt_thread *thread, void (* function)(void *), void *data)$/;"	f
+mt_stop	mt.c	/^mt_stop(struct mt_thread *thread)$/;"	f
+mt_thread	mt.h	/^struct mt_thread {$/;"	s
+mt_yield	mt.c	/^mt_yield(void)$/;"	f
+name	process.h	/^  const char *name;$/;"	m	struct:process
+needspoll	process.h	/^  unsigned char state, needspoll;$/;"	m	struct:process
+nevents	process.c	/^static process_num_events_t nevents, fevent;$/;"	v	file:
+next	process.h	/^  struct process *next;$/;"	m	struct:process	typeref:struct:process::process
+p	process.c	/^  struct process *p;$/;"	m	struct:event_data	typeref:struct:event_data::process	file:
+poll_requested	process.c	/^static volatile unsigned char poll_requested;$/;"	v	file:
+process	process.h	/^struct process {$/;"	s
+process_alloc_event	process.c	/^process_alloc_event(void)$/;"	f
+process_current	process.c	/^struct process *process_current = NULL;$/;"	v	typeref:struct:process
+process_data_t	process.h	/^typedef void *        process_data_t;$/;"	t
+process_event_t	process.h	/^typedef unsigned char process_event_t;$/;"	t
+process_exit	process.c	/^process_exit(struct process *p)$/;"	f
+process_init	process.c	/^process_init(void)$/;"	f
+process_is_running	process.c	/^process_is_running(struct process *p)$/;"	f
+process_list	process.c	/^struct process *process_list = NULL;$/;"	v	typeref:struct:process
+process_maxevents	process.c	/^process_num_events_t process_maxevents;$/;"	v
+process_nevents	process.c	/^process_nevents(void)$/;"	f
+process_num_events_t	process.h	/^typedef unsigned char process_num_events_t;$/;"	t
+process_poll	process.c	/^process_poll(struct process *p)$/;"	f
+process_post	process.c	/^process_post(struct process *p, process_event_t ev, process_data_t data)$/;"	f
+process_post_synch	process.c	/^process_post_synch(struct process *p, process_event_t ev, process_data_t data)$/;"	f
+process_run	process.c	/^process_run(void)$/;"	f
+process_start	process.c	/^process_start(struct process *p, const char *arg)$/;"	f
+pt	process.h	/^  struct pt pt;$/;"	m	struct:process	typeref:struct:process::pt
+pt	pt.h	/^struct pt {$/;"	s
+state	mt.h	/^  int state;$/;"	m	struct:mt_thread
+state	process.h	/^  unsigned char state, needspoll;$/;"	m	struct:process
+thread	mt.h	/^  struct mtarch_thread thread;$/;"	m	struct:mt_thread	typeref:struct:mt_thread::mtarch_thread

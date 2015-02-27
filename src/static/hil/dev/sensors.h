@@ -34,7 +34,7 @@
 #define __SENSORS_H__
 
 //#include "contiki.h"
-#include "src/system/hil/sys/process/process.h"
+#include "hil/sys/process/process.h"
 
 /* some constants for the configure API */
 #define SENSORS_HW_INIT 128 /* internal - used only for initialization */

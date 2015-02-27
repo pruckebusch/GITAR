@@ -9,7 +9,7 @@
 
 #include "kernel.h"
 #include "component-db.h"
-#include "list.h"
+#include "hil/lib/util/list.h"
 
 void print_cmp(const component_t* c){
 	PRINTF("Component %p:\n", c);

@@ -36,8 +36,8 @@
 
 //#include "contiki.h"
 
-#include "src/system/hil/sys/process/process.h"
-#include "src/system/hil/dev/sensors.h"
+#include "hil/sys/process/process.h"
+#include "hil/dev/sensors.h"
 
 const extern struct sensors_sensor *sensors[];
 extern unsigned char sensors_flags[];

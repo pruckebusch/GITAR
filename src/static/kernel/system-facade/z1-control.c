@@ -31,52 +31,52 @@ Include system level
 
 // Include SYS
 // Contiki Process
-#include "src/system/hil/sys/process/process.h"
-#include "src/system/hil/sys/process/autostart.h"
-#include "src/system/hil/sys/process/pt.h"
+#include "hil/sys/process/process.h"
+#include "hil/sys/process/autostart.h"
+#include "hil/sys/process/pt.h"
 // Contiki Timers
-#include "src/system/hil/sys/timer/timer.h"
-#include "src/system/hil/sys/timer/ctimer.h"
-#include "src/system/hil/sys/timer/etimer.h"
-#include "src/system/hil/sys/timer/rtimer.h"
-#include "src/system/hil/sys/timer/clock.h"
+#include "hil/sys/timer/timer.h"
+#include "hil/sys/timer/ctimer.h"
+#include "hil/sys/timer/etimer.h"
+#include "hil/sys/timer/rtimer.h"
+#include "hil/sys/timer/clock.h"
 
 // Include Lib
 // Contiki loader
-#include "src/system/hil/lib/loader/loader.h"
+#include "hil/lib/loader/loader.h"
 
 // Contiki file system
 #include "cfs-coffee-arch.h"
-#include "src/system/hil/lib/cfs/cfs-coffee.h"
+#include "hil/lib/cfs/cfs-coffee.h"
 
 // Contiki net
-#include "src/system/hil/net/rime/rimeaddr.h"
+#include "hil/net/rime/rimeaddr.h"
 #if WITH_UIP  || WITH_UIP6 || WITH_RIME
-#include "src/system/hil/net/netstack.h"
+#include "hil/net/netstack.h"
 #endif
 
 // Contiki Util
-#include "src/system/hil/lib/util/random.h"
-#include "src/system/hil/lib/util/node-id.h"
-#include "src/system/hil/lib/util/energest.h"
-#include "src/system/hil/lib/util/crc16.h"
+#include "hil/lib/util/random.h"
+#include "hil/lib/util/node-id.h"
+#include "hil/lib/util/energest.h"
+#include "hil/lib/util/crc16.h"
 //#include "src/system/hil/lib/util/printf-debug.h"
 
-#include "src/system/hil/types/error.h"
+#include "hil/types/error.h"
 
 // Contiki HIL dev
-#include "src/system/hil/dev/leds.h"
-#include "src/system/hil/dev/serial-line.h"
-#include "src/system/hil/dev/button-sensor.h"
-#include "src/system/hil/dev/battery-sensor.h"
+#include "hil/dev/leds.h"
+#include "hil/dev/serial-line.h"
+#include "hil/dev/button-sensor.h"
+#include "hil/dev/battery-sensor.h"
 
 /*
 Include kernel level
 */
 
-#include "src/kernel/core/runtime-mgmt/kernel.h"
-#include "src/kernel/core/runtime-mgmt/kernel-config.h"
-#include "src/kernel/system-facade/system-facade.h"
+#include "kernel/core/runtime-mgmt/kernel.h"
+#include "kernel/core/runtime-mgmt/kernel-config.h"
+#include "kernel/system-facade/system-facade.h"
 
 #include "gpio-z1.h"
 

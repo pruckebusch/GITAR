@@ -7,7 +7,7 @@ endif
 .SUFFIXES:
 
 ### Define the CPU directory
-MSP430_CPU_DIR=$(GITAR)/src/system/hal/cpu/msp430/
+MSP430_CPU_DIR=$(SOURCE_BASE_DIR)/hal/cpu/msp430/
 
 ### Define the source files we have in the MSP430 port
 
@@ -146,7 +146,7 @@ endif
 ifndef CFLAGSNO
 CFLAGSNO = -Wall -mmcu=$(CC_MCU) $(CFLAGSWERROR)
 endif
-CFLAGS  += -Os -fno-strict-aliasing #-save-temps -ffunction-sections -Wl,--gc-sections -save-temps -g -Wa,-a,-ad
+CFLAGS  += -Os -fno-strict-aliasing -save-temps # -ffunction-sections -Wl,--gc-sections -save-temps -g -Wa,-a,-ad
 LDFLAGS += -mmcu=$(CC_MCU) -Wl,-Map=gitar-$(TARGET).map
 
 ### These flags can reduce the code size and RAM usage with up to 10%

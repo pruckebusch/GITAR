@@ -38,7 +38,7 @@
 #include "lib/cfs/cfs.h"
 #include "lib/loader/symtab.h"
 
-#include "src/system/hil/dev/leds.h"
+#include "hil/dev/leds.h"
 #include "gpio-z1.h"
 
 #include <stddef.h>

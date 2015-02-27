@@ -1,7 +1,7 @@
 #ifndef COMPONENT_DB_H
 #define COMPONENT_DB_H
 
-#include "list.h"
+#include "hil/lib/util/list.h"
 
 typedef struct hil_component_db_entry{
 	const hil_component_t* cmp_ref;

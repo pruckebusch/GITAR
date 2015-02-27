@@ -3,6 +3,7 @@
 #include <stdarg.h>
 
 #include "system-facade.h"
+#include "component-facade.h"
 #include "kernel.h"
 
 #define DEBUG 0
@@ -34,6 +35,7 @@ int main(){
 	
 	//now initialized pre-installed user level components
 	
+	component_facade_init();
 	
 	system_start();
 

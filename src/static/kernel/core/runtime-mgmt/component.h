@@ -80,10 +80,15 @@ typedef struct hil_component {
 //	const cmp_interface_t interface;
 //} hil_cmp_object_t;
 
+//~ typedef struct cmp_usr_lst_entry {
+	//~ struct component_user_list_entry* next;
+	//~ uint16_t UID;
+//~ } cmp_usr_lst_entry_t;
+
 //typedef struct required_object {
 //	const cmp_info_t info;
 //	cmp_usr_lst_entry_t usr_lst_entry;
-//	cmp_object** ref;
+//	cmp_object_t** ref;
 //} required_object_t;
 
 //typedef struct required_hil_object {

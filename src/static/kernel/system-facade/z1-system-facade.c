@@ -13,9 +13,9 @@ Include system level
 Include kernel level
 */
 
-#include "src/kernel/core/runtime-mgmt/kernel.h"
-#include "src/kernel/core/runtime-mgmt/kernel-config.h"
-#include "src/kernel/system-facade/system-facade.h"
+#include "kernel/core/runtime-mgmt/kernel.h"
+#include "kernel/core/runtime-mgmt/kernel-config.h"
+#include "kernel/system-facade/system-facade.h"
 
 #if COMPILE_DYNAMIC
 

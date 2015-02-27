@@ -1,10 +1,7 @@
-ifeq ($(COMPILE_DYNAMIC),1)
-BASE_NET_DIR = $(GITAR)/src/dynamic/net
-else
-BASE_NET_DIR = $(GITAR)/src/static/net
-endif
 
-SYS_NET_DIR = $(GITAR)/src/system/hil/net
+BASE_NET_DIR = $(SOURCE_BASE_DIR)/net
+
+SYS_NET_DIR = $(SOURCE_BASE_DIR)/hil/net
 
 NETDIRS += $(SYS_NET_DIR) $(BASE_NET_DIR)
 NETFILES = netstack.c

@@ -44,7 +44,7 @@
 
 #include "contiki-conf.h"
 #include "net/rime/collect.h"
-#include "src/system/hil/net/rime/rimestats.h"
+#include "hil/net/rime/rimestats.h"
 
 #include "include/system/hil/net/netstack.h"
 #include "include/system/hil/net/rime/packetqueue.h"

@@ -1,8 +1,8 @@
 #ifndef __LEDS_HIL_COMPONENT_OBJECT_H__
 #define __LEDS_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/dev/leds.h"
-#include "include/system/hil/dev/leds-constdef.h"
+#include "hil/dev/leds.h"
+#include "include/hil/dev/leds-constdef.h"
 
 static const void* const leds_cmpobj_functions[FUNCTION_LEDS_LAST]={leds_invert,leds_blink,leds_toggle,leds_on,leds_init,leds_get,leds_off};
 

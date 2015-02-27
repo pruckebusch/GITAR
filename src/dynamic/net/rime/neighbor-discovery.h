@@ -60,7 +60,7 @@
 #define __NEIGHBOR_DISCOVERY_H__
 
 #include "include/net/rime/broadcast.h"
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/hil/sys/timer/ctimer.h"
 
 struct neighbor_discovery_conn;
 

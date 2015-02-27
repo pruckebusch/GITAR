@@ -1,8 +1,8 @@
 #ifndef __PROCESS_HIL_COMPONENT_OBJECT_H__
 #define __PROCESS_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/sys/process/process.h"
-#include "include/system/hil/sys/process/process-constdef.h"
+#include "hil/sys/process/process.h"
+#include "include/hil/sys/process/process-constdef.h"
 
 static const void* const process_cmpobj_functions[FUNCTION_PROCESS_LAST]={process_post_synch,process_exit,process_poll,process_init,process_nevents,process_run,process_is_running,process_alloc_event,process_post,process_get_current_process,process_start};
 

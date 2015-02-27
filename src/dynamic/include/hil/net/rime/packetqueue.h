@@ -58,13 +58,13 @@
 static const hil_component_t* packetqueue_cmpobj_ref;
 
 
-#include "include/system/hil/lib/util/list.h"
-#include "include/system/hil/lib/util/memb.h"
+#include "include/hil/lib/util/list.h"
+#include "include/hil/lib/util/memb.h"
 
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/hil/sys/timer/ctimer.h"
 
-#include "include/system/hil/net/rime/packetbuf.h"
-#include "include/system/hil/net/rime/queuebuf.h"
+#include "include/hil/net/rime/packetbuf.h"
+#include "include/hil/net/rime/queuebuf.h"
 
 /**
  * \brief      Representation of a packet queue.

@@ -45,7 +45,7 @@
 #include "net/rime/rudolph0.h"
 
 //~ #include <stddef.h> /* for offsetof */
-//~ #include "include/system/hil/net/rime.h"
+//~ #include "include/hil/net/rime.h"
 
 #include "include/net/rime/rudolph0-object.h"
 

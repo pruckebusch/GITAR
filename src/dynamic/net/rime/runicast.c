@@ -46,7 +46,7 @@
 #include "net/rime/runicast.h"
 #include "hil/net/rime/rimestats.h"
 
-#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/hil/net/rime/packetbuf.h"
 
 //~ #include <string.h>
 

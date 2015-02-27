@@ -45,7 +45,7 @@
 #include "contiki-conf.h"
 #include "net/rime/route-discovery.h"
 
-#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/hil/net/rime/packetbuf.h"
 #include "include/net/rime/route.h"
 
 //~ #include <stddef.h> /* For offsetof */

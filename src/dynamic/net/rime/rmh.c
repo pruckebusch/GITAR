@@ -45,7 +45,7 @@
 #include "contiki-conf.h"
 #include "net/rime/rmh.h"
 
-//~ #include "include/system/hil/net/rime.h"
+//~ #include "include/hil/net/rime.h"
 
 #include "include/net/rime/rmh-object.h"
 

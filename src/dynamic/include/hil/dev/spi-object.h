@@ -1,8 +1,8 @@
 #ifndef __SPI_HIL_COMPONENT_OBJECT_H__
 #define __SPI_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/dev/spi.h"
-#include "include/system/hil/dev/spi-constdef.h"
+#include "hil/dev/spi.h"
+#include "include/hil/dev/spi-constdef.h"
 
 static const void* const spi_cmpobj_functions[FUNCTION_SPI_LAST]={spi_init};
 

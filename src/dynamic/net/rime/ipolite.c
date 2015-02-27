@@ -44,8 +44,8 @@
 
 #include "net/rime/ipolite.h"
 
-#include "include/system/hil/lib/util/random.h"
-#include "include/system/hil/lib/util/string.h"
+#include "include/hil/lib/util/random.h"
+#include "include/hil/lib/util/string.h"
 
 #include "include/net/rime/ipolite-object.h"
 

@@ -60,7 +60,7 @@
 #define __RUDOLPH2_H__
 
 #include "include/net/rime/polite.h"
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/hil/sys/timer/ctimer.h"
 
 struct rudolph2_conn;
 

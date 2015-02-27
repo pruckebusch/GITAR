@@ -1,8 +1,8 @@
 #ifndef __QUEUEBUF_HIL_COMPONENT_OBJECT_H__
 #define __QUEUEBUF_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/net/rime/queuebuf.h"
-#include "include/system/hil/net/rime/queuebuf-constdef.h"
+#include "hil/net/rime/queuebuf.h"
+#include "include/hil/net/rime/queuebuf-constdef.h"
 
 static const void* const queuebuf_cmpobj_functions[FUNCTION_QUEUEBUF_LAST]={queuebuf_addr,queuebuf_debug_print,queuebuf_new_from_packetbuf,queuebuf_update_attr_from_packetbuf,queuebuf_free,queuebuf_attr,queuebuf_init,queuebuf_dataptr,queuebuf_datalen,queuebuf_to_packetbuf};
 

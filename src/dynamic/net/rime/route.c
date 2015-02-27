@@ -45,9 +45,9 @@
 #include "contiki-conf.h"
 #include "net/rime/route.h"
 
-#include "include/system/hil/lib/util/list.h"
-#include "include/system/hil/lib/util/memb.h"
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/hil/lib/util/list.h"
+#include "include/hil/lib/util/memb.h"
+#include "include/hil/sys/timer/ctimer.h"
 
 #include "include/net/rime/route-object.h"
 

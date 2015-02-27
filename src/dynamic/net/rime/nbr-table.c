@@ -38,9 +38,9 @@
 //~ #include <stddef.h>
 //~ #include <string.h>
 
-#include "include/system/hil/lib/util/string.h"
-#include "include/system/hil/lib/util/memb.h"
-#include "include/system/hil/lib/util/list.h"
+#include "include/hil/lib/util/string.h"
+#include "include/hil/lib/util/memb.h"
+#include "include/hil/lib/util/list.h"
 
 #include "include/net/rime/nbr-table-object.h"
 

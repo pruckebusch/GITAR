@@ -46,9 +46,9 @@
 #include "contiki-conf.h"
 #include "net/rime/timesynch.h"
 
-#include "include/system/hil/lib/util/random.h"
-#include "include/system/hil/net/rime/packetbuf.h"
-//~ #include "include/system/hil/net/rime.h"
+#include "include/hil/lib/util/random.h"
+#include "include/hil/net/rime/packetbuf.h"
+//~ #include "include/hil/net/rime.h"
 
 //~ #include <string.h>
 

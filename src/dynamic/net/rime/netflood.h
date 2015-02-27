@@ -74,7 +74,7 @@
 #ifndef __NETFLOOD_H__
 #define __NETFLOOD_H__
 
-#include "include/system/hil/net/rime/queuebuf.h"
+#include "include/hil/net/rime/queuebuf.h"
 #include "include/net/rime/ipolite.h"
 
 struct netflood_conn;

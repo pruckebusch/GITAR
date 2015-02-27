@@ -48,8 +48,8 @@
 #include "contiki-conf.h"
 #include "net/rime/collect-neighbor.h"
 
-#include "include/system/hil/lib/util/memb.h"
-#include "include/system/hil/lib/util/list.h"
+#include "include/hil/lib/util/memb.h"
+#include "include/hil/lib/util/list.h"
 
 #include "include/net/rime/collect.h"
 

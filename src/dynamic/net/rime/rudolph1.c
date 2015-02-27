@@ -44,7 +44,7 @@
 
 #include "net/rime/rudolph1.h"
 
-#include "include/system/hil/lib/cfs/cfs.h"
+#include "include/hil/lib/cfs/cfs.h"
 
 //~ #include "src/system/hil/net/rime.h"
 //~ #include <stddef.h> /* for offsetof */

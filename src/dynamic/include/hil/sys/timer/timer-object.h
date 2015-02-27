@@ -1,8 +1,8 @@
 #ifndef __TIMER_HIL_COMPONENT_OBJECT_H__
 #define __TIMER_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/sys/timer/timer.h"
-#include "include/system/hil/sys/timer/timer-constdef.h"
+#include "hil/sys/timer/timer.h"
+#include "include/hil/sys/timer/timer-constdef.h"
 
 static const void* const timer_cmpobj_functions[FUNCTION_TIMER_LAST]={timer_remaining,timer_restart,timer_set,timer_expired,timer_reset};
 

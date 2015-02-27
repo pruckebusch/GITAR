@@ -71,7 +71,7 @@ static const component_t* rmh_cmpobj_ref;
 
 
 #include "include/net/rime/runicast.h"
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "include/hil/net/rime/rimeaddr.h"
 
 struct rmh_conn;
 

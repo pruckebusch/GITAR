@@ -1,8 +1,8 @@
 #ifndef __CHANNEL_HIL_COMPONENT_OBJECT_H__
 #define __CHANNEL_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/net/rime/channel.h"
-#include "include/system/hil/net/rime/channel-constdef.h"
+#include "hil/net/rime/channel.h"
+#include "include/hil/net/rime/channel-constdef.h"
 
 static const void* const channel_cmpobj_functions[FUNCTION_CHANNEL_LAST]={channel_lookup,channel_open,channel_set_attributes,channel_close,channel_init};
 

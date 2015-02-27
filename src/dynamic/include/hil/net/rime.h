@@ -70,7 +70,7 @@ static const hil_component_t* rime_cmpobj_ref;
 //~ #include "net/rime/runicast.h"
 //~ #include "net/rime/timesynch.h"
 //~ #include "net/rime/trickle.h"
-#include "include/system/hil/net/rime/channel.h"
+#include "include/hil/net/rime/channel.h"
 #include "net/mac/mac.h"
 /**
  * \brief      Initialize Rime

@@ -1,8 +1,8 @@
 #ifndef __CTIMER_HIL_COMPONENT_OBJECT_H__
 #define __CTIMER_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/sys/timer/ctimer.h"
-#include "include/system/hil/sys/timer/ctimer-constdef.h"
+#include "hil/sys/timer/ctimer.h"
+#include "include/hil/sys/timer/ctimer-constdef.h"
 
 static const void* const ctimer_cmpobj_functions[FUNCTION_CTIMER_LAST]={ctimer_reset,ctimer_set,ctimer_restart,ctimer_stop,ctimer_init,ctimer_expired};
 

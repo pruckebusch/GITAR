@@ -44,8 +44,8 @@
  */
 
 #include "net/rime/unicast.h"
-#include "include/system/hil/net/rime.h"
-#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/hil/net/rime.h"
+#include "include/hil/net/rime/packetbuf.h"
 //~ #include <string.h>
 
 #include "include/net/rime/unicast-object.h"

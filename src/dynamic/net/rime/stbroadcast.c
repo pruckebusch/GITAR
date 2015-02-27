@@ -44,7 +44,7 @@
  */
 
 #include "net/rime/stbroadcast.h"
-//~ #include "include/system/hil/net/rime.h"
+//~ #include "include/hil/net/rime.h"
 //~ #include <string.h>
 
 #include "include/net/rime/stbroadcast-object.h"

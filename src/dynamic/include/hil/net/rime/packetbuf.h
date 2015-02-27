@@ -58,7 +58,7 @@ static const hil_component_t* packetbuf_cmpobj_ref;
 
 
 #include "contiki-conf.h"
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "include/hil/net/rime/rimeaddr.h"
 
 /**
  * \brief      The size of the packetbuf, in bytes

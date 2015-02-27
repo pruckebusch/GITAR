@@ -46,7 +46,7 @@
 //~ #include "net/rime.h"
 //~ #include <string.h>
 
-#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/hil/net/rime/packetbuf.h"
 
 #include "include/net/rime/stunicast-object.h"
 

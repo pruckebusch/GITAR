@@ -79,7 +79,7 @@
 static const component_t* netflood_cmpobj_ref;
 
 
-#include "include/system/hil/net/rime/queuebuf.h"
+#include "include/hil/net/rime/queuebuf.h"
 #include "include/net/rime/ipolite.h"
 
 struct netflood_conn;

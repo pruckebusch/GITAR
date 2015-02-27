@@ -66,10 +66,10 @@ static const component_t* collect_cmpobj_ref;
 
 #include "include/net/rime/unicast.h"
 
-#include "include/system/hil/net/rime/packetqueue.h"
-#include "include/system/hil/sys/timer/ctimer.h"
-#include "include/system/hil/lib/util/list.h"
-#include "include/system/hil/net/rime/announcement.h"
+#include "include/hil/net/rime/packetqueue.h"
+#include "include/hil/sys/timer/ctimer.h"
+#include "include/hil/lib/util/list.h"
+#include "include/hil/net/rime/announcement.h"
 
 #include "include/net/rime/neighbor-discovery.h"
 #include "include/net/rime/collect-neighbor.h"

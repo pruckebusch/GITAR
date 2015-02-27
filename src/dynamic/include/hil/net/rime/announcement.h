@@ -71,7 +71,7 @@
 static const hil_component_t* announcement_cmpobj_ref;
 
 
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "include/hil/net/rime/rimeaddr.h"
 
 struct announcement;
 

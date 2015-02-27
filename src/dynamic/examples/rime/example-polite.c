@@ -1,9 +1,9 @@
-#include "include/system/hil/sys/process/process.h"
-#include "include/system/hil/sys/process/autostart.h"
-#include "include/system/hil/sys/timer/etimer.h"
-#include "include/system/hil/sys/timer/clock.h"
-//~ #include "include/system/hil/net/rime.h"
-#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/hil/sys/process/process.h"
+#include "include/hil/sys/process/autostart.h"
+#include "include/hil/sys/timer/etimer.h"
+#include "include/hil/sys/timer/clock.h"
+//~ #include "include/hil/net/rime.h"
+#include "include/hil/net/rime/packetbuf.h"
 
 #include "include/net/rime/polite.h"
 

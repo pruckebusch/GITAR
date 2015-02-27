@@ -73,7 +73,7 @@
 static const hil_component_t* stimer_cmpobj_ref;
 
 
-#include "include/system/hil/sys/timer/clock.h"
+#include "include/hil/sys/timer/clock.h"
 
 /**
  * A timer.

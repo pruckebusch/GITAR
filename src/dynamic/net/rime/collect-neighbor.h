@@ -51,9 +51,9 @@
 #ifndef __COLLECT_NEIGHBOR_H__
 #define __COLLECT_NEIGHBOR_H__
 
-#include "include/system/hil/net/rime/rimeaddr.h"
-#include "include/system/hil/lib/util/list.h"
-#include "include/system/hil/sys/timer/ctimer.h"
+#include "include/hil/net/rime/rimeaddr.h"
+#include "include/hil/lib/util/list.h"
+#include "include/hil/sys/timer/ctimer.h"
 
 #include "include/net/rime/collect-link-estimate.h"
 

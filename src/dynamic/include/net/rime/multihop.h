@@ -75,7 +75,7 @@
 static const component_t* multihop_cmpobj_ref;
 
 
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "include/hil/net/rime/rimeaddr.h"
 
 #include "include/net/rime/unicast.h"
 

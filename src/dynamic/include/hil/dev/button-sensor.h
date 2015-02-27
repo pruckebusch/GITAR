@@ -37,7 +37,7 @@
 static const hil_component_t* button_sensor_cmpobj_ref;
 
 
-#include "include/system/hil/dev/sensors.h"
+#include "include/hil/dev/sensors.h"
 
 extern const struct sensors_sensor button_sensor;
 

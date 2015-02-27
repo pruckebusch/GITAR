@@ -45,10 +45,10 @@
 #include "contiki-conf.h"
 #include "net/rime/neighbor-discovery.h"
 
-#include "include/system/hil/lib/util/random.h"
-#include "include/system/hil/lib/util/string.h"
-//~ #include "include/system/hil/net/rime.h"
-//~ #include "include/system/hil/dev/radio-sensor.h"
+#include "include/hil/lib/util/random.h"
+#include "include/hil/lib/util/string.h"
+//~ #include "include/hil/net/rime.h"
+//~ #include "include/hil/dev/radio-sensor.h"
 
 
 //~ #include <string.h>

@@ -38,8 +38,8 @@
  */
 
 #include "net/rime/rucb.h"
-//~ #include "include/system/hil/sys/process/timetable.h"
-//~ #include "include/system/hil/net/rime.h"
+//~ #include "include/hil/sys/process/timetable.h"
+//~ #include "include/hil/net/rime.h"
 //~ #include <string.h>
 
 #include "include/net/rime/rucb-object.h"

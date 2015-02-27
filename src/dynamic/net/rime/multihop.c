@@ -45,7 +45,7 @@
 #include "contiki-conf.h"
 #include "net/rime/multihop.h"
 
-#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/hil/net/rime/packetbuf.h"
 #include "include/net/rime/route.h"
 
 //~ #include "net/rime.h"

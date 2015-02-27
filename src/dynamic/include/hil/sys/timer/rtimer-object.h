@@ -1,8 +1,8 @@
 #ifndef __RTIMER_HIL_COMPONENT_OBJECT_H__
 #define __RTIMER_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/sys/timer/rtimer.h"
-#include "include/system/hil/sys/timer/rtimer-constdef.h"
+#include "hil/sys/timer/rtimer.h"
+#include "include/hil/sys/timer/rtimer-constdef.h"
 
 static const void* const rtimer_cmpobj_functions[FUNCTION_RTIMER_LAST]={rtimer_set,rtimer_now,rtimer_init,rtimer_run_next};
 

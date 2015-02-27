@@ -1,8 +1,8 @@
 #ifndef __SERIAL_LINE_HIL_COMPONENT_OBJECT_H__
 #define __SERIAL_LINE_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/dev/serial-line.h"
-#include "include/system/hil/dev/serial-line-constdef.h"
+#include "hil/dev/serial-line.h"
+#include "include/hil/dev/serial-line-constdef.h"
 
 static const void* const serial_line_cmpobj_functions[FUNCTION_SERIAL_LINE_LAST]={serial_line_init,serial_line_input_byte};
 

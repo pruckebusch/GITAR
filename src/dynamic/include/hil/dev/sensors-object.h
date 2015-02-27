@@ -1,8 +1,8 @@
 #ifndef __SENSORS_HIL_COMPONENT_OBJECT_H__
 #define __SENSORS_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/dev/sensors.h"
-#include "include/system/hil/dev/sensors-constdef.h"
+#include "hil/dev/sensors.h"
+#include "include/hil/dev/sensors-constdef.h"
 
 static const void* const sensors_cmpobj_functions[FUNCTION_SENSORS_LAST]={sensors_get_sensors_event,sensors_next,sensors_changed,sensors_find,sensors_first};
 

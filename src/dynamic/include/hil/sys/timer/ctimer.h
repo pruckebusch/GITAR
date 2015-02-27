@@ -59,7 +59,7 @@
 static const hil_component_t* ctimer_cmpobj_ref;
 
 
-#include "include/system/hil/sys/timer/etimer.h"
+#include "include/hil/sys/timer/etimer.h"
 
 struct ctimer {
   struct ctimer *next;

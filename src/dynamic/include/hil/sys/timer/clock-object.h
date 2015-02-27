@@ -1,8 +1,8 @@
 #ifndef __CLOCK_HIL_COMPONENT_OBJECT_H__
 #define __CLOCK_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/sys/timer/clock.h"
-#include "include/system/hil/sys/timer/clock-constdef.h"
+#include "hil/sys/timer/clock.h"
+#include "include/hil/sys/timer/clock-constdef.h"
 
 static const void* const clock_cmpobj_functions[FUNCTION_CLOCK_LAST]={clock_fine,clock_delay,clock_wait,clock_time,clock_seconds,clock_init,clock_fine_max,clock_set_seconds};
 

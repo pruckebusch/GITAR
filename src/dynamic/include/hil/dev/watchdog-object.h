@@ -1,8 +1,8 @@
 #ifndef __WATCHDOG_HIL_COMPONENT_OBJECT_H__
 #define __WATCHDOG_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/dev/watchdog.h"
-#include "include/system/hil/dev/watchdog-constdef.h"
+#include "hil/dev/watchdog.h"
+#include "include/hil/dev/watchdog-constdef.h"
 
 static const void* const watchdog_cmpobj_functions[FUNCTION_WATCHDOG_LAST]={watchdog_reboot,watchdog_stop,watchdog_start,watchdog_periodic,watchdog_init};
 

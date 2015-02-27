@@ -68,7 +68,7 @@
 #define __TIMESYNCH_H__
 
 //~ #include "net/mac/mac.h"
-#include "include/system/hil/sys/timer/rtimer.h"
+#include "include/hil/sys/timer/rtimer.h"
 
 /**
  * \brief      Initialize the timesynch module

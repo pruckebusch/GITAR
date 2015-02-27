@@ -43,8 +43,8 @@
  */
 
 #include "net/rime/trickle.h"
-#include "include/system/hil/lib/util/random.h"
-#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/hil/lib/util/random.h"
+#include "include/hil/net/rime/packetbuf.h"
 #include "include/net/rime/trickle-object.h"
 
 #define DEBUG 0

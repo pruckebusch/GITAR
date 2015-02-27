@@ -1,8 +1,8 @@
 #ifndef __XMEM_HIL_COMPONENT_OBJECT_H__
 #define __XMEM_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/dev/xmem.h"
-#include "include/system/hil/dev/xmem-constdef.h"
+#include "hil/dev/xmem.h"
+#include "include/hil/dev/xmem-constdef.h"
 
 static const void* const xmem_cmpobj_functions[FUNCTION_XMEM_LAST]={xmem_pread,xmem_init,xmem_erase,xmem_pwrite};
 

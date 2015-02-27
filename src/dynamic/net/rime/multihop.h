@@ -70,7 +70,7 @@
 #ifndef __MULTIHOP_H__
 #define __MULTIHOP_H__
 
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "include/hil/net/rime/rimeaddr.h"
 
 #include "include/net/rime/unicast.h"
 

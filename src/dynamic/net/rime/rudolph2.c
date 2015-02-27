@@ -50,10 +50,10 @@
 
 #include "net/rime/rudolph2.h"
 
-#include "include/system/hil/lib/cfs/cfs.h"
+#include "include/hil/lib/cfs/cfs.h"
 #include "include/net/rime/polite.h"
 
-//~ #include "include/system/hil/lib/net/rime.h"
+//~ #include "include/hil/lib/net/rime.h"
 
 //~ #include <stddef.h> /* for offsetof */
 

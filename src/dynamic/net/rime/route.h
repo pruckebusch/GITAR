@@ -51,7 +51,7 @@
 #ifndef __ROUTE_H__
 #define __ROUTE_H__
 
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "include/hil/net/rime/rimeaddr.h"
 
 struct route_entry {
   struct route_entry *next;

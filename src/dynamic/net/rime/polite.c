@@ -44,10 +44,10 @@
 
 #include "net/rime/polite.h"
 
-#include "include/system/hil/lib/util/random.h"
-#include "include/system/hil/lib/util/string.h"
+#include "include/hil/lib/util/random.h"
+#include "include/hil/lib/util/string.h"
 
-//~ #include "include/system/hil/net/rime.h"
+//~ #include "include/hil/net/rime.h"
 //~ #include <string.h>
 
 #include "include/net/rime/polite-object.h"

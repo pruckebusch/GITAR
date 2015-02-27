@@ -37,17 +37,17 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "include/system/hil/sys/process/process.h"
-#include "include/system/hil/sys/process/autostart.h"
-#include "include/system/hil/sys/timer/etimer.h"
-#include "include/system/hil/sys/timer/clock.h"
-#include "include/system/hil/lib/util/random.h"
-//~ #include "include/system/hil/net/rime.h"
-#include "include/system/hil/net/rime/packetbuf.h"
-#include "include/system/hil/net/rime/rimeaddr.h"
+#include "include/hil/sys/process/process.h"
+#include "include/hil/sys/process/autostart.h"
+#include "include/hil/sys/timer/etimer.h"
+#include "include/hil/sys/timer/clock.h"
+#include "include/hil/lib/util/random.h"
+//~ #include "include/hil/net/rime.h"
+#include "include/hil/net/rime/packetbuf.h"
+#include "include/hil/net/rime/rimeaddr.h"
 
 #include "include/net/rime/collect.h"
-#include "include/system/hil/lib/util/string.h"
+#include "include/hil/lib/util/string.h"
 
 #define DEBUG 0
 #if DEBUG

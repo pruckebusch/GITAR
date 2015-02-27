@@ -58,7 +58,7 @@
 static const hil_component_t* queuebuf_cmpobj_ref;
 
 
-#include "include/system/hil/net/rime/packetbuf.h"
+#include "include/hil/net/rime/packetbuf.h"
 
 /* QUEUEBUF_NUM is the total number of queuebuf */
 #ifdef QUEUEBUF_CONF_NUM

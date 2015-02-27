@@ -1,8 +1,8 @@
 #ifndef __AUTOSTART_HIL_COMPONENT_OBJECT_H__
 #define __AUTOSTART_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/sys/process/autostart.h"
-#include "include/system/hil/sys/process/autostart-constdef.h"
+#include "hil/sys/process/autostart.h"
+#include "include/hil/sys/process/autostart-constdef.h"
 
 static const void* const autostart_cmpobj_functions[FUNCTION_AUTOSTART_LAST]={autostart_exit,autostart_start};
 

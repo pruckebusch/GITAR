@@ -62,8 +62,8 @@
 static const hil_component_t* abc_cmpobj_ref;
 
 
-#include "include/system/hil/net/rime/packetbuf.h"
-#include "include/system/hil/net/rime/channel.h"
+#include "include/hil/net/rime/packetbuf.h"
+#include "include/hil/net/rime/channel.h"
 
 struct abc_conn;
 

@@ -1,8 +1,8 @@
 #ifndef __PACKETQUEUE_HIL_COMPONENT_OBJECT_H__
 #define __PACKETQUEUE_HIL_COMPONENT_OBJECT_H__
 
-#include "system/hil/net/rime/packetqueue.h"
-#include "include/system/hil/net/rime/packetqueue-constdef.h"
+#include "hil/net/rime/packetqueue.h"
+#include "include/hil/net/rime/packetqueue-constdef.h"
 
 static const void* const packetqueue_cmpobj_functions[FUNCTION_PACKETQUEUE_LAST]={packetqueue_enqueue_packetbuf,packetqueue_first,packetqueue_dequeue,packetqueue_ptr,packetqueue_queuebuf,packetqueue_init,packetqueue_len};
 

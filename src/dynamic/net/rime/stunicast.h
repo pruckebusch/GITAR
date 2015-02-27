@@ -74,8 +74,8 @@
 
 #include "include/net/rime/unicast.h"
 
-#include "include/system/hil/sys/timer/ctimer.h"
-#include "include/system/hil/net/rime/queuebuf.h"
+#include "include/hil/sys/timer/ctimer.h"
+#include "include/hil/net/rime/queuebuf.h"
 
 struct stunicast_conn;
 

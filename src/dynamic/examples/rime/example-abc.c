@@ -54,7 +54,7 @@
 #define PRINTF(...)
 #endif
 
-#include "app-cmp-objects/example-abc-object.h"
+#include "examples/rime/example-abc-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_abc_process, "ABC example");

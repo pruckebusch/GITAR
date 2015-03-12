@@ -73,7 +73,7 @@
 #define PRINTF(...)
 #endif
 
-#include "app-cmp-objects/example-neighbors-object.h"
+#include "examples/rime/example-neighbors-object.h"
 
 /* This is the structure of broadcast messages. */
 struct broadcast_message {

@@ -57,7 +57,7 @@
 #define PRINTF(...)
 #endif
 
-#include "app-cmp-objects/example-collect-object.h"
+#include "examples/rime/example-collect-object.h"
 
 static struct collect_conn tc;
 

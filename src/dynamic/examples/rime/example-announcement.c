@@ -53,7 +53,7 @@
 #define PRINTF(...)
 #endif
 
-#include "app-cmp-objects/example-announcement-object.h"
+#include "examples/rime/example-announcement-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_announcement_process, "Example announcement process");

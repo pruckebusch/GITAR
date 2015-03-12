@@ -59,7 +59,7 @@
 #define MAX_RETRANSMISSIONS 4
 #define NUM_HISTORY_ENTRIES 4
 
-#include "app-cmp-objects/example-runicast-object.h"
+#include "examples/rime/example-runicast-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(test_runicast_process, "runicast test");

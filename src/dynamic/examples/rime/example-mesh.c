@@ -55,7 +55,7 @@
 #define PRINTF(...)
 #endif
 
-#include "app-cmp-objects/example-mesh-object.h"
+#include "examples/rime/example-mesh-object.h"
 
 #define MESSAGE "Hello"
 

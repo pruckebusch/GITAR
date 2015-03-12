@@ -59,7 +59,7 @@
 
 #define FILESIZE 200
 
-#include "app-cmp-objects/example-rudolph0-object.h"
+#include "examples/rime/example-rudolph0-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_rudolph0_process, "Rudolph0 example");

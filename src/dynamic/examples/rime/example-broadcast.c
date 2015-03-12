@@ -56,7 +56,7 @@
 #define PRINTF(...)
 #endif
 
-#include "app-cmp-objects/example-broadcast-object.h"
+#include "examples/rime/example-broadcast-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_broadcast_process, "Broadcast example");

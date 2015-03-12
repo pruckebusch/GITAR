@@ -93,7 +93,7 @@
 #define PRINTF(...)
 #endif
 
-#include "app-cmp-objects/example-multihop-object.h"
+#include "examples/rime/example-multihop-object.h"
 
 #define CHANNEL 135
 

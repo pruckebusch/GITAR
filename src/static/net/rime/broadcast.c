@@ -44,6 +44,8 @@
 
 #include "net/rime/broadcast.h"
 #include "net/rime/packetbuf.h"
+#include "net/rime/abc.h"
+#include "net/rime/rimeaddr.h"
 #include <string.h>
 
 static const struct packetbuf_attrlist attributes[] =

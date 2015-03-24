@@ -44,7 +44,7 @@
 #include "hil/lib/cfs/cfs.h"
 #include "hil/dev/button-sensor.h"
 #include "hil/dev/leds.h"
-#include "hil/net/rime.h"
+//~ #include "hil/net/rime.h"
 #include "hil/net/rime/packetbuf.h"
 #include "hil/net/rime/rimeaddr.h"
 

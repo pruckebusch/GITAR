@@ -56,7 +56,7 @@
 #define PRINTF(...)
 #endif
 
-#include "examples/rime/example-broadcast-object.h"
+#include "include/examples/rime/example-broadcast-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_broadcast_process, "Broadcast example");
@@ -74,7 +74,7 @@ PROCESS_THREAD(example_broadcast_process, ev, data)
 {
   static struct etimer et;
 
-  PROCESS_EXITHANDLER(broadcast_close(&broadcast);)
+  PROCESS_EXITHANDLER(etimer_stop(&et);broadcast_close(&broadcast);)
 
   PROCESS_BEGIN();
 
@@ -95,3 +95,11 @@ PROCESS_THREAD(example_broadcast_process, ev, data)
   PROCESS_END();
 }
 /*---------------------------------------------------------------------------*/
+
+//~ void _start_example_broadcast(){
+	//~ process_start(&example_broadcast_process,NULL);
+//~ }
+//~ 
+//~ void _stop_example_broadcast(){
+	//~ process_exit(&example_broadcast_process);
+//~ }

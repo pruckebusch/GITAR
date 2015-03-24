@@ -40,11 +40,11 @@
 #include "hil/sys/process/process.h"
 #include "hil/sys/process/autostart.h"
 #include "hil/sys/timer/etimer.h"
-#include "hil/sys/timer/clock.h"
 #include "hil/lib/util/random.h"
-#include "hil/net/rime.h"
 #include "hil/net/rime/packetbuf.h"
-#include "hil/net/rime/rimeaddr.h"
+//~ #include "hil/sys/timer/clock.h"
+//~ #include "hil/net/rime.h"
+//~ #include "hil/net/rime/rimeaddr.h"
 
 #include "net/rime/broadcast.h"
 
@@ -71,7 +71,7 @@ PROCESS_THREAD(example_broadcast_process, ev, data)
 {
   static struct etimer et;
 
-  PROCESS_EXITHANDLER(broadcast_close(&broadcast);)
+  PROCESS_EXITHANDLER(etimer_stop(&et);broadcast_close(&broadcast);)
 
   PROCESS_BEGIN();
 
@@ -92,3 +92,11 @@ PROCESS_THREAD(example_broadcast_process, ev, data)
   PROCESS_END();
 }
 /*---------------------------------------------------------------------------*/
+
+//~ void _start_example_broadcast(){
+	//~ process_start(&example_broadcast_process,NULL);
+//~ }
+//~ 
+//~ void _stop_example_broadcast(){
+	//~ process_exit(&example_broadcast_process);
+//~ }

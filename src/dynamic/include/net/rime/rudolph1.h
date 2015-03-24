@@ -61,7 +61,7 @@
 #include "kernel.h"
 #include "rudolph1-constdef.h"
 
-static const component_t* rudolph1_cmpobj_ref;
+static const cmp_object_t* rudolph1_cmpobj_ref;
 
 
 #include "include/net/rime/trickle.h"

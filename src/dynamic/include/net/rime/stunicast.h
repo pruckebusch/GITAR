@@ -74,7 +74,7 @@
 #include "kernel.h"
 #include "stunicast-constdef.h"
 
-static const component_t* stunicast_cmpobj_ref;
+static const cmp_object_t* stunicast_cmpobj_ref;
 
 
 #include "include/net/rime/unicast.h"

@@ -49,7 +49,7 @@
 #include "kernel.h"
 #include "leds-constdef.h"
 
-static const hil_component_t* leds_cmpobj_ref;
+static const hil_cmp_object_t* leds_cmpobj_ref;
 
 
 /* Allow platform to override LED numbering */

@@ -95,7 +95,7 @@
 #include "kernel.h"
 #include "polite-constdef.h"
 
-static const component_t* polite_cmpobj_ref;
+static const cmp_object_t* polite_cmpobj_ref;
 
 
 #include "include/hil/net/rime/abc.h"

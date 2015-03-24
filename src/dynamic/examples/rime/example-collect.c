@@ -36,6 +36,14 @@
  * \author
  *         Adam Dunkels <adam@sics.se>
  */
+#include "include/hil/lib/util/string.h"
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 #include "include/hil/sys/process/process.h"
 #include "include/hil/sys/process/autostart.h"
@@ -47,17 +55,8 @@
 #include "include/hil/net/rime/rimeaddr.h"
 
 #include "include/net/rime/collect.h"
-#include "include/hil/lib/util/string.h"
 
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
-
-#include "examples/rime/example-collect-object.h"
+#include "include/examples/rime/example-collect-object.h"
 
 static struct collect_conn tc;
 

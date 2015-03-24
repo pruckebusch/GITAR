@@ -4,31 +4,14 @@
 #include "net/rime/netflood.h"
 #include "include/net/rime/netflood-constdef.h"
 
-void netflood_object_init();
-
-static const void* const netflood_cmpobj_functions[FUNCTION_NETFLOOD_LAST]={netflood_open,netflood_close,netflood_send};
-
-static const component_t const netflood_cmpobj = { { NETFLOOD, 2, 7, NET_COMPONENT, FUNCTION_NETFLOOD_LAST} , {netflood_cmpobj_functions} , {&netflood_object_init, NULL, NULL}};
-
-static const component_info_t ipolite_cmpobj_info = {IPOLITE, 2, 7, NET_COMPONENT, FUNCTION_IPOLITE_LAST};
-static component_user_list_entry_t ipolite_cmp_user;
-
-static const component_info_t packetbuf_cmpobj_info = {PACKETBUF, 2, 7, HIL_COMPONENT, FUNCTION_PACKETBUF_LAST};
-static const component_info_t queuebuf_cmpobj_info = {QUEUEBUF, 2, 7, HIL_COMPONENT, FUNCTION_QUEUEBUF_LAST};
-static const component_info_t rimeaddr_cmpobj_info = {RIMEADDR, 2, 7, HIL_COMPONENT, FUNCTION_RIMEADDR_LAST};
-
-void netflood_object_init(){
-	kernel_add_cmp(&netflood_cmpobj);
-
-	ipolite_cmp_user.unique_id=NETFLOOD;
-	 ipolite_cmpobj_ref = kernel_bind_cmp(&ipolite_cmpobj_info, &ipolite_cmp_user);
-
-	 packetbuf_cmpobj_ref = kernel_bind_hil_cmp(&packetbuf_cmpobj_info);
-
-	 queuebuf_cmpobj_ref = kernel_bind_hil_cmp(&queuebuf_cmpobj_info);
-
-	 rimeaddr_cmpobj_ref = kernel_bind_hil_cmp(&rimeaddr_cmpobj_info);
-
-}
+static const void* const netflood_fnctarray[FUNCTION_NETFLOOD_LAST] = {netflood_open,netflood_send,netflood_close};
+static const required_object_t const netflood_deparray[NETFLOOD_NUM_REQUIRED_OBJECTS] = {	{{IPOLITE_UID, 2, 7, NET_COMPONENT, FUNCTION_IPOLITE_LAST,IPOLITE_NUM_REQUIRED_OBJECTS,IPOLITE_NUM_REQUIRED_HILOBJECTS},{NULL,NETFLOOD_UID},&ipolite_cmpobj_ref},};
+static const required_hil_object_t const netflood_hildeparray[NETFLOOD_NUM_REQUIRED_HILOBJECTS] = {	{STRING_UID,&string_cmpobj_ref},	{PACKETBUF_UID,&packetbuf_cmpobj_ref},	{QUEUEBUF_UID,&queuebuf_cmpobj_ref},	{RIMEADDR_UID,&rimeaddr_cmpobj_ref},};
+const cmp_object_t const netflood_cmpobj = {
+ { NETFLOOD_UID, 2, 7, NET_COMPONENT, FUNCTION_NETFLOOD_LAST,NETFLOOD_NUM_REQUIRED_OBJECTS,NETFLOOD_NUM_REQUIRED_HILOBJECTS},
+ {netflood_fnctarray},
+ netflood_deparray,
+ netflood_hildeparray,
+};
 
 #endif /*__NETFLOOD_COMPONENT_OBJECT_H__*/

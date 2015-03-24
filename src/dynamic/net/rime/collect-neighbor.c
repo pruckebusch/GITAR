@@ -45,6 +45,14 @@
 //~ #include <limits.h>
 //~ #include <stdio.h>
 
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
+
 #include "contiki-conf.h"
 #include "net/rime/collect-neighbor.h"
 
@@ -54,14 +62,6 @@
 #include "include/net/rime/collect.h"
 
 #include "include/net/rime/collect-neighbor-object.h"
-
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 #ifdef COLLECT_NEIGHBOR_CONF_MAX_COLLECT_NEIGHBORS
 #define MAX_COLLECT_NEIGHBORS COLLECT_NEIGHBOR_CONF_MAX_COLLECT_NEIGHBORS

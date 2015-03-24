@@ -1,34 +1,18 @@
-#ifndef __EXAMPLE_COLLECT_APP_COMPONENT_OBJECT_H__
-#define __EXAMPLE_COLLECT_APP_COMPONENT_OBJECT_H__
+#ifndef __EXAMPLE_COLLECT_COMPONENT_OBJECT_H__
+#define __EXAMPLE_COLLECT_COMPONENT_OBJECT_H__
 
-void example_collect_object_init();
+#define FUNCTION_EXAMPLE_COLLECT_LAST 0
+#define EXAMPLE_COLLECT_NUM_REQUIRED_OBJECTS 1
+#define EXAMPLE_COLLECT_NUM_REQUIRED_HILOBJECTS 5
 
-static const component_t const example_collect_cmpobj = { { EXAMPLE_COLLECT, 2, 7, APP_COMPONENT, 0} , {NULL},{&example_collect_object_init, NULL, NULL}};
+static const void* const example_collect_fnctarray[FUNCTION_EXAMPLE_COLLECT_LAST] = {};
+static const required_object_t const example_collect_deparray[EXAMPLE_COLLECT_NUM_REQUIRED_OBJECTS] = {	{{COLLECT_UID, 2, 7, NET_COMPONENT, FUNCTION_COLLECT_LAST,COLLECT_NUM_REQUIRED_OBJECTS,COLLECT_NUM_REQUIRED_HILOBJECTS},{NULL,EXAMPLE_COLLECT_UID},&collect_cmpobj_ref},};
+static const required_hil_object_t const example_collect_hildeparray[EXAMPLE_COLLECT_NUM_REQUIRED_HILOBJECTS] = {	{ETIMER_UID,&etimer_cmpobj_ref},	{PACKETBUF_UID,&packetbuf_cmpobj_ref},	{RANDOM_UID,&random_cmpobj_ref},	{RIMEADDR_UID,&rimeaddr_cmpobj_ref},	{STRING_UID,&string_cmpobj_ref},};
+const cmp_object_t const example_collect_cmpobj = {
+ { EXAMPLE_COLLECT_UID, 2, 7, APP_COMPONENT, FUNCTION_EXAMPLE_COLLECT_LAST,EXAMPLE_COLLECT_NUM_REQUIRED_OBJECTS,EXAMPLE_COLLECT_NUM_REQUIRED_HILOBJECTS},
+ {example_collect_fnctarray},
+ example_collect_deparray,
+ example_collect_hildeparray,
+};
 
-static const component_info_t collect_cmpobj_info = {COLLECT, 2, 7, NET_COMPONENT, FUNCTION_COLLECT_LAST};
-static component_user_list_entry_t collect_cmp_user;
-
-static const component_info_t etimer_cmpobj_info = {ETIMER, 2, 7, HIL_COMPONENT, FUNCTION_ETIMER_LAST};
-static const component_info_t packetbuf_cmpobj_info = {PACKETBUF, 2, 7, HIL_COMPONENT, FUNCTION_PACKETBUF_LAST};
-static const component_info_t random_cmpobj_info = {RANDOM, 2, 7, HIL_COMPONENT, FUNCTION_RANDOM_LAST};
-static const component_info_t rimeaddr_cmpobj_info = {RIMEADDR, 2, 7, HIL_COMPONENT, FUNCTION_RIMEADDR_LAST};
-static const component_info_t string_cmpobj_info = {STRING, 2, 7, HIL_COMPONENT, FUNCTION_STRING_LAST};
-
-void example_collect_object_init(){
-	kernel_add_cmp(&example_collect_cmpobj);
-	collect_cmp_user.unique_id=EXAMPLE_COLLECT;
-	 collect_cmpobj_ref = kernel_bind_cmp(&collect_cmpobj_info, &collect_cmp_user);
-
-	 etimer_cmpobj_ref = kernel_bind_hil_cmp(&etimer_cmpobj_info);
-
-	 packetbuf_cmpobj_ref = kernel_bind_hil_cmp(&packetbuf_cmpobj_info);
-
-	 random_cmpobj_ref = kernel_bind_hil_cmp(&random_cmpobj_info);
-
-	 rimeaddr_cmpobj_ref = kernel_bind_hil_cmp(&rimeaddr_cmpobj_info);
-	 
-	 string_cmpobj_ref = kernel_bind_hil_cmp(&string_cmpobj_info);
-
-}
-
-#endif /*__EXAMPLE_COLLECT_APP_COMPONENT_OBJECT_H__*/
+#endif /*__EXAMPLE_COLLECT_COMPONENT_OBJECT_H__*/

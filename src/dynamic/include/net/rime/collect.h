@@ -61,7 +61,7 @@
 #include "kernel.h"
 #include "collect-constdef.h"
 
-static const component_t* collect_cmpobj_ref;
+static const cmp_object_t* collect_cmpobj_ref;
 
 
 #include "include/net/rime/unicast.h"
@@ -137,6 +137,7 @@ enum {
 
 /* Stub function declaration for collect_open(struct collect_conn *,uint16_t,uint8_t,const struct collect_callbacks *) */
 static inline void collect_open(struct collect_conn *c, uint16_t channels, uint8_t is_router, const struct collect_callbacks *callbacks){
+	//~ printf("Collect open stub %p\n",collect_cmpobj_ref);
 	( (void (*)(struct collect_conn *,uint16_t,uint8_t,const struct collect_callbacks *)) collect_cmpobj_ref->interface.function_array[FUNCTION_COLLECT_OPEN])(c,channels,is_router,callbacks);
 }
 

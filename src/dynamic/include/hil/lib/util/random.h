@@ -34,7 +34,7 @@
 #include "kernel.h"
 #include "random-constdef.h"
 
-static const hil_component_t* random_cmpobj_ref;
+static const hil_cmp_object_t* random_cmpobj_ref;
 
 
 /*

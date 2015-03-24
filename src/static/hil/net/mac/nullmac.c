@@ -41,13 +41,13 @@
 #include "net/rime/packetbuf.h"
 #include "net/netstack.h"
 
-/*---------------------------------------------------------------------------*/
-void
-mac_call_sent_callback(mac_callback_t sent, void *ptr, int status, int num_tx)
-{
-
-}
-/*---------------------------------------------------------------------------*/
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
 
 /*---------------------------------------------------------------------------*/
 static void

@@ -59,7 +59,7 @@
 #include "kernel.h"
 #include "trickle-constdef.h"
 
-static const component_t* trickle_cmpobj_ref;
+static const cmp_object_t* trickle_cmpobj_ref;
 
 
 #include "include/hil/sys/timer/ctimer.h"

@@ -67,7 +67,7 @@
 #include "kernel.h"
 #include "broadcast-constdef.h"
 
-static const component_t* broadcast_cmpobj_ref;
+static const cmp_object_t* broadcast_cmpobj_ref;
 
 
 #include "include/hil/net/rime/abc.h"

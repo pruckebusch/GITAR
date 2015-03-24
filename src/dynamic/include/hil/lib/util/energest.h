@@ -42,7 +42,7 @@
 #include "kernel.h"
 #include "energest-constdef.h"
 
-static const hil_component_t* energest_cmpobj_ref;
+static const hil_cmp_object_t* energest_cmpobj_ref;
 
 
 #include "include/system/hil/sys/timer/rtimer.h"

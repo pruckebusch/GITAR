@@ -4,28 +4,14 @@
 #include "net/rime/rucb.h"
 #include "include/net/rime/rucb-constdef.h"
 
-void rucb_object_init();
-
-static const void* const rucb_cmpobj_functions[FUNCTION_RUCB_LAST]={rucb_send,rucb_open,rucb_close};
-
-static const component_t const rucb_cmpobj = { { RUCB, 2, 7, NET_COMPONENT, FUNCTION_RUCB_LAST} , {rucb_cmpobj_functions} , {&rucb_object_init, NULL, NULL}};
-
-static const component_info_t runicast_cmpobj_info = {RUNICAST, 2, 7, NET_COMPONENT, FUNCTION_RUNICAST_LAST};
-static component_user_list_entry_t runicast_cmp_user;
-
-static const component_info_t packetbuf_cmpobj_info = {PACKETBUF, 2, 7, HIL_COMPONENT, FUNCTION_PACKETBUF_LAST};
-static const component_info_t rimeaddr_cmpobj_info = {RIMEADDR, 2, 7, HIL_COMPONENT, FUNCTION_RIMEADDR_LAST};
-
-void rucb_object_init(){
-	kernel_add_cmp(&rucb_cmpobj);
-
-	runicast_cmp_user.unique_id=RUCB;
-	 runicast_cmpobj_ref = kernel_bind_cmp(&runicast_cmpobj_info, &runicast_cmp_user);
-
-	 packetbuf_cmpobj_ref = kernel_bind_hil_cmp(&packetbuf_cmpobj_info);
-
-	 rimeaddr_cmpobj_ref = kernel_bind_hil_cmp(&rimeaddr_cmpobj_info);
-
-}
+static const void* const rucb_fnctarray[FUNCTION_RUCB_LAST] = {rucb_close,rucb_open,rucb_send};
+static const required_object_t const rucb_deparray[RUCB_NUM_REQUIRED_OBJECTS] = {	{{RUNICAST_UID, 2, 7, NET_COMPONENT, FUNCTION_RUNICAST_LAST,RUNICAST_NUM_REQUIRED_OBJECTS,RUNICAST_NUM_REQUIRED_HILOBJECTS},{NULL,RUCB_UID},&runicast_cmpobj_ref},};
+static const required_hil_object_t const rucb_hildeparray[RUCB_NUM_REQUIRED_HILOBJECTS] = {	{PACKETBUF_UID,&packetbuf_cmpobj_ref},	{RIMEADDR_UID,&rimeaddr_cmpobj_ref},};
+const cmp_object_t const rucb_cmpobj = {
+ { RUCB_UID, 2, 7, NET_COMPONENT, FUNCTION_RUCB_LAST,RUCB_NUM_REQUIRED_OBJECTS,RUCB_NUM_REQUIRED_HILOBJECTS},
+ {rucb_fnctarray},
+ rucb_deparray,
+ rucb_hildeparray,
+};
 
 #endif /*__RUCB_COMPONENT_OBJECT_H__*/

@@ -59,7 +59,7 @@
 
 #define FILESIZE 200
 
-#include "examples/rime/example-rudolph0-object.h"
+#include "include/examples/rime/example-rudolph0-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_rudolph0_process, "Rudolph0 example");

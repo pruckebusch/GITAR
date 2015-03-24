@@ -40,7 +40,7 @@
 #include "kernel.h"
 #include "cfs-coffee-constdef.h"
 
-static const hil_component_t* cfs_coffee_cmpobj_ref;
+static const hil_cmp_object_t* cfs_coffee_cmpobj_ref;
 
 
 #include "include/system/hil/lib/cfs/cfs.h"

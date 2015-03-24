@@ -1,15 +1,10 @@
-#ifndef __MEMB_HIL_COMPONENT_OBJECT_H__
-#define __MEMB_HIL_COMPONENT_OBJECT_H__
+#ifndef __MEMB_COMPONENT_OBJECT_H__
+#define __MEMB_COMPONENT_OBJECT_H__
 
-#include "system/hil/lib/util/memb.h"
-#include "include/system/hil/lib/util/memb-constdef.h"
+#include "hil/lib/util/memb.h"
+#include "include/hil/lib/util/memb-constdef.h"
 
-static const void* const memb_cmpobj_functions[FUNCTION_MEMB_LAST]={memb_free,memb_alloc,memb_inmemb,memb_init};
+static const void* const memb_fnctarray[FUNCTION_MEMB_LAST] = {memb_alloc,memb_free,memb_init,memb_inmemb};
+static const hil_cmp_object_t const memb_cmpobj = { MEMB_UID, {memb_fnctarray}};
 
-static const hil_component_t const memb_cmpobj = { { MEMB, 2, 7, HIL_COMPONENT,FUNCTION_MEMB_LAST} , {memb_cmpobj_functions} };
-
-static void memb_object_init(){
-	kernel_add_hil_cmp(&memb_cmpobj);
-}
-
-#endif /*__MEMB_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__MEMB_COMPONENT_OBJECT_H__*/

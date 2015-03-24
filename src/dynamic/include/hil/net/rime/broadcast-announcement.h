@@ -61,7 +61,7 @@
 #include "kernel.h"
 #include "broadcast-announcement-constdef.h"
 
-static const hil_component_t* broadcast_announcement_cmpobj_ref;
+static const hil_cmp_object_t* broadcast_announcement_cmpobj_ref;
 
 
 

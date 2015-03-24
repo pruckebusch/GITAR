@@ -42,7 +42,7 @@
 #include "kernel.h"
 #include "rucb-constdef.h"
 
-static const component_t* rucb_cmpobj_ref;
+static const cmp_object_t* rucb_cmpobj_ref;
 
 
 #include "include/net/rime/runicast.h"

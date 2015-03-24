@@ -47,7 +47,7 @@
 #include "kernel.h"
 #include "rime-constdef.h"
 
-static const hil_component_t* rime_cmpobj_ref;
+static const hil_cmp_object_t* rime_cmpobj_ref;
 
 
 //~ #include "net/rime/announcement.h"

@@ -4,34 +4,14 @@
 #include "net/rime/polite-announcement.h"
 #include "include/net/rime/polite-announcement-constdef.h"
 
-void polite_announcement_object_init();
-
-static const void* const polite_announcement_cmpobj_functions[FUNCTION_POLITE_ANNOUNCEMENT_LAST]={polite_announcement_init};
-
-static const component_t const polite_announcement_cmpobj = { { POLITE_ANNOUNCEMENT, 2, 7, NET_COMPONENT, FUNCTION_POLITE_ANNOUNCEMENT_LAST} , {polite_announcement_cmpobj_functions} , {&polite_announcement_object_init, NULL, NULL}};
-
-static const component_info_t ipolite_cmpobj_info = {IPOLITE, 2, 7, NET_COMPONENT, FUNCTION_IPOLITE_LAST};
-static component_user_list_entry_t ipolite_cmp_user;
-
-static const component_info_t announcement_cmpobj_info = {ANNOUNCEMENT, 2, 7, HIL_COMPONENT, FUNCTION_ANNOUNCEMENT_LAST};
-static const component_info_t ctimer_cmpobj_info = {CTIMER, 2, 7, HIL_COMPONENT, FUNCTION_CTIMER_LAST};
-static const component_info_t list_cmpobj_info = {LIST, 2, 7, HIL_COMPONENT, FUNCTION_LIST_LAST};
-static const component_info_t packetbuf_cmpobj_info = {PACKETBUF, 2, 7, HIL_COMPONENT, FUNCTION_PACKETBUF_LAST};
-
-void polite_announcement_object_init(){
-	kernel_add_cmp(&polite_announcement_cmpobj);
-
-	ipolite_cmp_user.unique_id=POLITE_ANNOUNCEMENT;
-	 ipolite_cmpobj_ref = kernel_bind_cmp(&ipolite_cmpobj_info, &ipolite_cmp_user);
-
-	 announcement_cmpobj_ref = kernel_bind_hil_cmp(&announcement_cmpobj_info);
-
-	 ctimer_cmpobj_ref = kernel_bind_hil_cmp(&ctimer_cmpobj_info);
-
-	 list_cmpobj_ref = kernel_bind_hil_cmp(&list_cmpobj_info);
-
-	 packetbuf_cmpobj_ref = kernel_bind_hil_cmp(&packetbuf_cmpobj_info);
-
-}
+static const void* const polite_announcement_fnctarray[FUNCTION_POLITE_ANNOUNCEMENT_LAST] = {polite_announcement_init};
+static const required_object_t const polite_announcement_deparray[POLITE_ANNOUNCEMENT_NUM_REQUIRED_OBJECTS] = {	{{IPOLITE_UID, 2, 7, NET_COMPONENT, FUNCTION_IPOLITE_LAST,IPOLITE_NUM_REQUIRED_OBJECTS,IPOLITE_NUM_REQUIRED_HILOBJECTS},{NULL,POLITE_ANNOUNCEMENT_UID},&ipolite_cmpobj_ref},};
+static const required_hil_object_t const polite_announcement_hildeparray[POLITE_ANNOUNCEMENT_NUM_REQUIRED_HILOBJECTS] = {	{ANNOUNCEMENT_UID,&announcement_cmpobj_ref},	{CTIMER_UID,&ctimer_cmpobj_ref},	{LIST_UID,&list_cmpobj_ref},	{STRING_UID,&string_cmpobj_ref},	{PACKETBUF_UID,&packetbuf_cmpobj_ref},};
+const cmp_object_t const polite_announcement_cmpobj = {
+ { POLITE_ANNOUNCEMENT_UID, 2, 7, NET_COMPONENT, FUNCTION_POLITE_ANNOUNCEMENT_LAST,POLITE_ANNOUNCEMENT_NUM_REQUIRED_OBJECTS,POLITE_ANNOUNCEMENT_NUM_REQUIRED_HILOBJECTS},
+ {polite_announcement_fnctarray},
+ polite_announcement_deparray,
+ polite_announcement_hildeparray,
+};
 
 #endif /*__POLITE_ANNOUNCEMENT_COMPONENT_OBJECT_H__*/

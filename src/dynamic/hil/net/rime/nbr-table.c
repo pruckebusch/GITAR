@@ -36,8 +36,8 @@
 
 #include <stddef.h>
 #include <string.h>
-#include "lib/util/memb.h"
-#include "lib/util/list.h"
+#include "hil/lib/util/memb.h"
+#include "hil/lib/util/list.h"
 #include "net/rime/nbr-table.h"
 
 /* List of link-layer addresses of the neighbors, used as key in the tables */

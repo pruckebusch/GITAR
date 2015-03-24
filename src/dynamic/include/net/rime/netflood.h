@@ -76,7 +76,7 @@
 #include "kernel.h"
 #include "netflood-constdef.h"
 
-static const component_t* netflood_cmpobj_ref;
+static const cmp_object_t* netflood_cmpobj_ref;
 
 
 #include "include/hil/net/rime/queuebuf.h"

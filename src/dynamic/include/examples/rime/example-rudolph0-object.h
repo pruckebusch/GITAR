@@ -1,34 +1,18 @@
-#ifndef __EXAMPLE_RUDOLPH0_APP_COMPONENT_OBJECT_H__
-#define __EXAMPLE_RUDOLPH0_APP_COMPONENT_OBJECT_H__
+#ifndef __EXAMPLE_RUDOLPH0_COMPONENT_OBJECT_H__
+#define __EXAMPLE_RUDOLPH0_COMPONENT_OBJECT_H__
 
-void example_rudolph0_object_init();
+#define FUNCTION_EXAMPLE_RUDOLPH0_LAST 0
+#define EXAMPLE_RUDOLPH0_NUM_REQUIRED_OBJECTS 1
+#define EXAMPLE_RUDOLPH0_NUM_REQUIRED_HILOBJECTS 5
 
-static const component_t const example_rudolph0_cmpobj = { { EXAMPLE_RUDOLPH0, 2, 7, APP_COMPONENT, 0} , {NULL},{&example_rudolph0_object_init, NULL, NULL}};
+static const void* const example_rudolph0_fnctarray[FUNCTION_EXAMPLE_RUDOLPH0_LAST] = {};
+static const required_object_t const example_rudolph0_deparray[EXAMPLE_RUDOLPH0_NUM_REQUIRED_OBJECTS] = {	{{RUDOLPH0_UID, 2, 7, NET_COMPONENT, FUNCTION_RUDOLPH0_LAST,RUDOLPH0_NUM_REQUIRED_OBJECTS,RUDOLPH0_NUM_REQUIRED_HILOBJECTS},{NULL,EXAMPLE_RUDOLPH0_UID},&rudolph0_cmpobj_ref},};
+static const required_hil_object_t const example_rudolph0_hildeparray[EXAMPLE_RUDOLPH0_NUM_REQUIRED_HILOBJECTS] = {	{BUTTON_SENSOR_UID,&button_sensor_cmpobj_ref},	{CFS_UID,&cfs_cmpobj_ref},	{LEDS_UID,&leds_cmpobj_ref},	{PROCESS_UID,&process_cmpobj_ref},	{SENSORS_UID,&sensors_cmpobj_ref},};
+const cmp_object_t const example_rudolph0_cmpobj = {
+ { EXAMPLE_RUDOLPH0_UID, 2, 7, APP_COMPONENT, FUNCTION_EXAMPLE_RUDOLPH0_LAST,EXAMPLE_RUDOLPH0_NUM_REQUIRED_OBJECTS,EXAMPLE_RUDOLPH0_NUM_REQUIRED_HILOBJECTS},
+ {example_rudolph0_fnctarray},
+ example_rudolph0_deparray,
+ example_rudolph0_hildeparray,
+};
 
-static const component_info_t rudolph0_cmpobj_info = {RUDOLPH0, 2, 7, NET_COMPONENT, FUNCTION_RUDOLPH0_LAST};
-static component_user_list_entry_t rudolph0_cmp_user;
-
-static const component_info_t button_sensor_cmpobj_info = {BUTTON_SENSOR_UID, 2, 7, HIL_COMPONENT, FUNCTION_BUTTON_SENSOR_LAST};
-static const component_info_t cfs_cmpobj_info = {CFS, 2, 7, HIL_COMPONENT, FUNCTION_CFS_LAST};
-static const component_info_t leds_cmpobj_info = {LEDS, 2, 7, HIL_COMPONENT, FUNCTION_LEDS_LAST};
-static const component_info_t process_cmpobj_info = {PROCESS, 2, 7, HIL_COMPONENT, FUNCTION_PROCESS_LAST};
-static const component_info_t sensors_cmpobj_info = {SENSORS_UID, 2, 7, HIL_COMPONENT, FUNCTION_SENSORS_LAST};
-
-void example_rudolph0_object_init(){
-	kernel_add_cmp(&example_rudolph0_cmpobj);
-	rudolph0_cmp_user.unique_id=EXAMPLE_RUDOLPH0;
-	 rudolph0_cmpobj_ref = kernel_bind_cmp(&rudolph0_cmpobj_info, &rudolph0_cmp_user);
-
-	 button_sensor_cmpobj_ref = kernel_bind_hil_cmp(&button_sensor_cmpobj_info);
-
-	 cfs_cmpobj_ref = kernel_bind_hil_cmp(&cfs_cmpobj_info);
-
-	 leds_cmpobj_ref = kernel_bind_hil_cmp(&leds_cmpobj_info);
-
-	 process_cmpobj_ref = kernel_bind_hil_cmp(&process_cmpobj_info);
-
-	 sensors_cmpobj_ref = kernel_bind_hil_cmp(&sensors_cmpobj_info);
-
-}
-
-#endif /*__EXAMPLE_RUDOLPH0_APP_COMPONENT_OBJECT_H__*/
+#endif /*__EXAMPLE_RUDOLPH0_COMPONENT_OBJECT_H__*/

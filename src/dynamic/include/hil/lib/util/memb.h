@@ -65,7 +65,7 @@
 #include "kernel.h"
 #include "memb-constdef.h"
 
-static const hil_component_t* memb_cmpobj_ref;
+static const hil_cmp_object_t* memb_cmpobj_ref;
 
 
 #include "sys/process/cc.h"

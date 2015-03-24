@@ -98,7 +98,7 @@ $(OBJECTDIR):
 
 ### Setup directory search path for source and header files
         
-SOURCEDIRS = $(PROJECTDIRS) $(GITAR) $(SOURCE_BASE_DIR)  $(PLATFORM_DIRS) $(CPU_DIRS) $(CONTIKIDIRS) $(KERNELDIRS) $(NETDIRS) $(APP_DIRS)
+SOURCEDIRS = . $(PROJECTDIRS) $(GITAR) $(SOURCE_BASE_DIR) $(PLATFORM_DIRS) $(CPU_DIRS) $(CONTIKIDIRS) $(KERNELDIRS) $(NETDIRS) $(APP_DIRS)
 #~ SOURCEDIRS += $(GITAR)/src/system/hal
 #~ SOURCEDIRS += $(GITAR)/src/system/hil
 #~ ifeq ($(COMPILE_DYNAMIC),1)
@@ -131,7 +131,7 @@ define FINALIZE_DEPENDENCY
 cp $(@:.o=.d) $(@:.o=.$$$$); \
 sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
     -e '/^$$/ d' -e 's/$$/ :/' < $(@:.o=.$$$$) >> $(@:.o=.d); \
-rm -f $(@:.o=.$$$$)
+#~ rm -f $(@:.o=.$$$$)
 endef
 
 clean:

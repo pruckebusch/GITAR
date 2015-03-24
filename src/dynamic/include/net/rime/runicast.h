@@ -80,7 +80,7 @@
 #include "kernel.h"
 #include "runicast-constdef.h"
 
-static const component_t* runicast_cmpobj_ref;
+static const cmp_object_t* runicast_cmpobj_ref;
 
 
 #include "include/net/rime/stunicast.h"

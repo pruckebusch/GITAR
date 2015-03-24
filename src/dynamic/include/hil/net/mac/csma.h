@@ -43,7 +43,7 @@
 #include "kernel.h"
 #include "csma-constdef.h"
 
-static const hil_component_t* csma_cmpobj_ref;
+static const hil_cmp_object_t* csma_cmpobj_ref;
 
 
 #include "net/mac/mac.h"

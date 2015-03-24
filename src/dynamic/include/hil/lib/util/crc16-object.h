@@ -1,15 +1,10 @@
-#ifndef __CRC16_HIL_COMPONENT_OBJECT_H__
-#define __CRC16_HIL_COMPONENT_OBJECT_H__
+#ifndef __CRC16_COMPONENT_OBJECT_H__
+#define __CRC16_COMPONENT_OBJECT_H__
 
-#include "system/hil/lib/util/crc16.h"
-#include "include/system/hil/lib/util/crc16-constdef.h"
+#include "hil/lib/util/crc16.h"
+#include "include/hil/lib/util/crc16-constdef.h"
 
-static const void* const crc16_cmpobj_functions[FUNCTION_CRC16_LAST]={crc16_add,crc16_data};
+static const void* const crc16_fnctarray[FUNCTION_CRC16_LAST] = {crc16_add,crc16_data};
+static const hil_cmp_object_t const crc16_cmpobj = { CRC16_UID, {crc16_fnctarray}};
 
-static const hil_component_t const crc16_cmpobj = { { CRC16, 2, 7, HIL_COMPONENT,FUNCTION_CRC16_LAST} , {crc16_cmpobj_functions} };
-
-static void crc16_object_init(){
-	kernel_add_hil_cmp(&crc16_cmpobj);
-}
-
-#endif /*__CRC16_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__CRC16_COMPONENT_OBJECT_H__*/

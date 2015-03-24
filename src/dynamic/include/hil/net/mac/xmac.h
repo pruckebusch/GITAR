@@ -42,7 +42,7 @@
 #include "kernel.h"
 #include "xmac-constdef.h"
 
-static const hil_component_t* xmac_cmpobj_ref;
+static const hil_cmp_object_t* xmac_cmpobj_ref;
 
 
 #include "include/system/hil/sys/timer/rtimer.h"

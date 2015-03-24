@@ -56,7 +56,7 @@
 #include "kernel.h"
 #include "collect-link-estimate-constdef.h"
 
-static const component_t* collect_link_estimate_cmpobj_ref;
+static const cmp_object_t* collect_link_estimate_cmpobj_ref;
 
 
 #define COLLECT_LINK_ESTIMATE_UNIT           8

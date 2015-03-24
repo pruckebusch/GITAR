@@ -59,7 +59,7 @@
 #include "hil/lib/util/random.h"
 #include "hil/lib/util/list.h"
 #include "hil/lib/util/memb.h"
-#include "hil/net/rime.h"
+//#include "hil/net/rime.h"
 #include "hil/net/rime/packetbuf.h"
 #include "hil/net/rime/rimeaddr.h"
 

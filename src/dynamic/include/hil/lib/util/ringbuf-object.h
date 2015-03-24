@@ -1,15 +1,10 @@
-#ifndef __RINGBUF_HIL_COMPONENT_OBJECT_H__
-#define __RINGBUF_HIL_COMPONENT_OBJECT_H__
+#ifndef __RINGBUF_COMPONENT_OBJECT_H__
+#define __RINGBUF_COMPONENT_OBJECT_H__
 
-#include "system/hil/lib/util/ringbuf.h"
-#include "include/system/hil/lib/util/ringbuf-constdef.h"
+#include "hil/lib/util/ringbuf.h"
+#include "include/hil/lib/util/ringbuf-constdef.h"
 
-static const void* const ringbuf_cmpobj_functions[FUNCTION_RINGBUF_LAST]={ringbuf_size,ringbuf_get,ringbuf_put,ringbuf_init,ringbuf_elements};
+static const void* const ringbuf_fnctarray[FUNCTION_RINGBUF_LAST] = {ringbuf_init,ringbuf_size,ringbuf_put,ringbuf_get,ringbuf_elements};
+static const hil_cmp_object_t const ringbuf_cmpobj = { RINGBUF_UID, {ringbuf_fnctarray}};
 
-static const hil_component_t const ringbuf_cmpobj = { { RINGBUF, 2, 7, HIL_COMPONENT,FUNCTION_RINGBUF_LAST} , {ringbuf_cmpobj_functions} };
-
-static void ringbuf_object_init(){
-	kernel_add_hil_cmp(&ringbuf_cmpobj);
-}
-
-#endif /*__RINGBUF_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__RINGBUF_COMPONENT_OBJECT_H__*/

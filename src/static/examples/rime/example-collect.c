@@ -42,7 +42,7 @@
 #include "hil/sys/timer/etimer.h"
 #include "hil/sys/timer/clock.h"
 #include "hil/lib/util/random.h"
-#include "hil/net/rime.h"
+//#include "hil/net/rime.h"
 #include "hil/net/rime/packetbuf.h"
 #include "hil/net/rime/rimeaddr.h"
 

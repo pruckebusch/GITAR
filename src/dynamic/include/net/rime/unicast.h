@@ -64,7 +64,7 @@
 #include "kernel.h"
 #include "unicast-constdef.h"
 
-static const component_t* unicast_cmpobj_ref;
+static const cmp_object_t* unicast_cmpobj_ref;
 
 
 #include "include/net/rime/broadcast.h"

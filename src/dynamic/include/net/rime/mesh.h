@@ -63,7 +63,7 @@
 #include "kernel.h"
 #include "mesh-constdef.h"
 
-static const component_t* mesh_cmpobj_ref;
+static const cmp_object_t* mesh_cmpobj_ref;
 
 
 #include "include/hil/net/rime/queuebuf.h"

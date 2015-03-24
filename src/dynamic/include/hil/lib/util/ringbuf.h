@@ -55,7 +55,7 @@
 #include "kernel.h"
 #include "ringbuf-constdef.h"
 
-static const hil_component_t* ringbuf_cmpobj_ref;
+static const hil_cmp_object_t* ringbuf_cmpobj_ref;
 
 
 #include "contiki-conf.h"

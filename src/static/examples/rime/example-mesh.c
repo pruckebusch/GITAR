@@ -40,7 +40,7 @@
 #include "hil/sys/process/process.h"
 #include "hil/sys/process/autostart.h"
 #include "hil/dev/button-sensor.h"
-#include "hil/net/rime.h"
+// #include "hil/net/rime.h"
 #include "hil/net/rime/packetbuf.h"
 #include "hil/net/rime/rimeaddr.h"
 

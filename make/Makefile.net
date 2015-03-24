@@ -8,7 +8,7 @@ NETFILES = netstack.c
 
 #MAC_RDC_MAC = sicslowmac.c
 MAC_RDC = cxmac.c xmac.c contikimac.c lpp.c nullrdc.c nullrdc-noframer.c phase.c
-MAC_MAC = csma.c nullmac.c
+MAC_MAC = csma.c nullmac.c mac.c
 MAC_FRAMER = framer-nullmac.c framer-802154.c frame802154.c
 MAC_LIB = packetbuf.c queuebuf.c packetqueue.c
 #~ MAC_NBR_TBL = nbr-table.c
@@ -17,8 +17,8 @@ NETFILES += $(MAC_RDC) $(MAC_MAC) $(MAC_FRAMER) $(MAC_LIB) #$(MAC_NBR_TBL)
 NETDIRS += $(SYS_NET_DIR)/mac
 ifeq ($(WITH_RIME),1)
 ${info including rime netstack}
-RIME_BASE = abc.c chameleon.c channel.c packetqueue.c rimeaddr.c announcement.c chameleon-bitopt.c chameleon-raw.c packetbuf.c queuebuf.c rimestats.c timesynch.c nbr-table.c rime.c
-#~ broadcast-announcement.
+RIME_BASE = abc.c chameleon.c channel.c packetqueue.c rimeaddr.c announcement.c chameleon-bitopt.c chameleon-raw.c packetbuf.c queuebuf.c rimestats.c rime.c nbr-table.c broadcast-announcement.c
+#timesynch.c 
 #~ RIME_CHAMELEON = chameleon.c channel.c chameleon-raw.c chameleon-bitopt.c
 #~ RIME_BASE      = rimeaddr.c rime.c timesynch.c rimestats.c announcement.c broadcast-announcement.c
 RIME_SINGLEHOP = broadcast.c stbroadcast.c unicast.c stunicast.c runicast.c rucb.c polite.c ipolite.c polite-announcement.c

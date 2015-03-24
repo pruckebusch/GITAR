@@ -53,7 +53,7 @@
 #include "kernel.h"
 #include "collect-neighbor-constdef.h"
 
-static const component_t* collect_neighbor_cmpobj_ref;
+static const cmp_object_t* collect_neighbor_cmpobj_ref;
 
 
 #include "include/hil/net/rime/rimeaddr.h"

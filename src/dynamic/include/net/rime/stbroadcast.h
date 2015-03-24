@@ -62,7 +62,7 @@
 #include "kernel.h"
 #include "stbroadcast-constdef.h"
 
-static const component_t* stbroadcast_cmpobj_ref;
+static const cmp_object_t* stbroadcast_cmpobj_ref;
 
 
 #include "include/hil/sys/timer/ctimer.h"

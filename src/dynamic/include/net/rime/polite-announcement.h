@@ -61,7 +61,7 @@
 #include "kernel.h"
 #include "polite-announcement-constdef.h"
 
-static const component_t* polite_announcement_cmpobj_ref;
+static const cmp_object_t* polite_announcement_cmpobj_ref;
 
 
 #include "include/hil/sys/timer/clock.h"

@@ -56,7 +56,7 @@
 #include "kernel.h"
 #include "rimeaddr-constdef.h"
 
-static const hil_component_t* rimeaddr_cmpobj_ref;
+static const hil_cmp_object_t* rimeaddr_cmpobj_ref;
 
 
 #include "contiki-conf.h"

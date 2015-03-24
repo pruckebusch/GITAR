@@ -54,7 +54,7 @@
 #include "kernel.h"
 #include "rtimer-constdef.h"
 
-static const hil_component_t* rtimer_cmpobj_ref;
+static const hil_cmp_object_t* rtimer_cmpobj_ref;
 
 
 #include "contiki-conf.h"

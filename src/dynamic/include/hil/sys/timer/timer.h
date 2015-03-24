@@ -75,7 +75,7 @@
 #include "kernel.h"
 #include "timer-constdef.h"
 
-static const hil_component_t* timer_cmpobj_ref;
+static const hil_cmp_object_t* timer_cmpobj_ref;
 
 
 #include "include/hil/sys/timer/clock.h"

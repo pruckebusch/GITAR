@@ -4,7 +4,7 @@
 #include "kernel.h"
 #include "string-constdef.h"
 
-static const hil_component_t* string_cmpobj_ref;
+static const hil_cmp_object_t* string_cmpobj_ref;
 
 static inline void *memccpy(void *a, const void *b, int c, size_t d){
 return ( ( void* (*)(void *, const void *, int, size_t)) string_cmpobj_ref->interface.function_array[FUNCTION_STRING_MEMCCPY])( a,b,c,d );

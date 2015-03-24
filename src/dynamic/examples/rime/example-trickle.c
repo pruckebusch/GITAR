@@ -56,7 +56,7 @@
 #define PRINTF(...)
 #endif
 
-#include "examples/rime/example-trickle-object.h"
+#include "include/examples/rime/example-trickle-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_trickle_process, "Trickle example");

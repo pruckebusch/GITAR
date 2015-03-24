@@ -1,28 +1,18 @@
-#ifndef __EXAMPLE_TRICKLE_APP_COMPONENT_OBJECT_H__
-#define __EXAMPLE_TRICKLE_APP_COMPONENT_OBJECT_H__
+#ifndef __EXAMPLE_TRICKLE_COMPONENT_OBJECT_H__
+#define __EXAMPLE_TRICKLE_COMPONENT_OBJECT_H__
 
-void example_trickle_object_init();
+#define FUNCTION_EXAMPLE_TRICKLE_LAST 0
+#define EXAMPLE_TRICKLE_NUM_REQUIRED_OBJECTS 1
+#define EXAMPLE_TRICKLE_NUM_REQUIRED_HILOBJECTS 3
 
-static const component_t const example_trickle_cmpobj = { { EXAMPLE_TRICKLE, 2, 7, APP_COMPONENT, 0} , {NULL},{&example_trickle_object_init, NULL, NULL}};
+static const void* const example_trickle_fnctarray[FUNCTION_EXAMPLE_TRICKLE_LAST] = {};
+static const required_object_t const example_trickle_deparray[EXAMPLE_TRICKLE_NUM_REQUIRED_OBJECTS] = {	{{TRICKLE_UID, 2, 7, NET_COMPONENT, FUNCTION_TRICKLE_LAST,TRICKLE_NUM_REQUIRED_OBJECTS,TRICKLE_NUM_REQUIRED_HILOBJECTS},{NULL,EXAMPLE_TRICKLE_UID},&trickle_cmpobj_ref},};
+static const required_hil_object_t const example_trickle_hildeparray[EXAMPLE_TRICKLE_NUM_REQUIRED_HILOBJECTS] = {	{BUTTON_SENSOR_UID,&button_sensor_cmpobj_ref},	{PACKETBUF_UID,&packetbuf_cmpobj_ref},	{SENSORS_UID,&sensors_cmpobj_ref},};
+const cmp_object_t const example_trickle_cmpobj = {
+ { EXAMPLE_TRICKLE_UID, 2, 7, APP_COMPONENT, FUNCTION_EXAMPLE_TRICKLE_LAST,EXAMPLE_TRICKLE_NUM_REQUIRED_OBJECTS,EXAMPLE_TRICKLE_NUM_REQUIRED_HILOBJECTS},
+ {example_trickle_fnctarray},
+ example_trickle_deparray,
+ example_trickle_hildeparray,
+};
 
-static const component_info_t trickle_cmpobj_info = {TRICKLE, 2, 7, NET_COMPONENT, FUNCTION_TRICKLE_LAST};
-static component_user_list_entry_t trickle_cmp_user;
-
-static const component_info_t button_sensor_cmpobj_info = {BUTTON_SENSOR_UID, 2, 7, HIL_COMPONENT, FUNCTION_BUTTON_SENSOR_LAST};
-static const component_info_t packetbuf_cmpobj_info = {PACKETBUF, 2, 7, HIL_COMPONENT, FUNCTION_PACKETBUF_LAST};
-static const component_info_t sensors_cmpobj_info = {SENSORS_UID, 2, 7, HIL_COMPONENT, FUNCTION_SENSORS_LAST};
-
-void example_trickle_object_init(){
-	kernel_add_cmp(&example_trickle_cmpobj);
-	trickle_cmp_user.unique_id=EXAMPLE_TRICKLE;
-	 trickle_cmpobj_ref = kernel_bind_cmp(&trickle_cmpobj_info, &trickle_cmp_user);
-
-	 button_sensor_cmpobj_ref = kernel_bind_hil_cmp(&button_sensor_cmpobj_info);
-
-	 packetbuf_cmpobj_ref = kernel_bind_hil_cmp(&packetbuf_cmpobj_info);
-
-	 sensors_cmpobj_ref = kernel_bind_hil_cmp(&sensors_cmpobj_info);
-
-}
-
-#endif /*__EXAMPLE_TRICKLE_APP_COMPONENT_OBJECT_H__*/
+#endif /*__EXAMPLE_TRICKLE_COMPONENT_OBJECT_H__*/

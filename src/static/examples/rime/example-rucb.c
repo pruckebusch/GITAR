@@ -41,7 +41,7 @@
 #include "hil/sys/process/autostart.h"
 #include "hil/sys/timer/clock.h"
 #include "hil/dev/button-sensor.h"
-#include "hil/net/rime.h"
+// #include "hil/net/rime.h"
 #include "hil/net/rime/packetbuf.h"
 #include "hil/net/rime/rimeaddr.h"
 

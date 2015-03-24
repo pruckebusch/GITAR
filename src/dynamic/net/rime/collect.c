@@ -42,6 +42,16 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
+#include "include/hil/lib/util/string.h"
+#define DEBUG 0
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
+
+
 #include "contiki-conf.h"
 #include "net/rime/collect.h"
 #include "hil/net/rime/rimestats.h"
@@ -52,7 +62,6 @@
 #include "include/hil/net/rime/rimeaddr.h"
 //~ #include "include/hil/dev/radio-sensor.h"
 #include "include/hil/lib/util/random.h"
-#include "include/hil/lib/util/string.h"
 
 #include "include/net/rime/collect-neighbor.h"
 #include "include/net/rime/collect-link-estimate.h"
@@ -65,13 +74,6 @@
 
 /* Debug definition: draw routing tree in Cooja. */
 #define DRAW_TREE 0
-#define DEBUG 0
-#if DEBUG
-#include <stdio.h>
-#define PRINTF(...) printf(__VA_ARGS__)
-#else
-#define PRINTF(...)
-#endif
 
 static const struct packetbuf_attrlist attributes[] =
   {

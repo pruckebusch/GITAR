@@ -255,13 +255,6 @@ error_t system_init(){
     PRINTF("Node id is not set.\n");
   }
 
-#if WITH_UIP  || WITH_UIP6 || WITH_RIME
-	#warning Adding netstack initialisers!!!
-	NETSTACK_RDC.init();
-  NETSTACK_MAC.init();
-  NETSTACK_NETWORK.init();
-#endif
-
 #if DEBUG
   uart0_set_input(serial_line_input_byte);
   serial_line_init();
@@ -285,6 +278,13 @@ error_t system_init(){
 
 error_t system_start(){
 	 
+#if WITH_UIP  || WITH_UIP6 || WITH_RIME
+	#warning Adding netstack initialisers!!!
+	NETSTACK_RDC.init();
+  NETSTACK_MAC.init();
+  NETSTACK_NETWORK.init();
+  PRINTF("Network initialized\n");
+#endif
   //~ print_processes(autostart_processes);
   putchar('\n');
   PRINTF("Starting processes \n");

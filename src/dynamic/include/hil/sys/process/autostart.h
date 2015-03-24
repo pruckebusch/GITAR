@@ -42,7 +42,7 @@
 #include "kernel.h"
 #include "autostart-constdef.h"
 
-static const hil_component_t* autostart_cmpobj_ref;
+static const hil_cmp_object_t* autostart_cmpobj_ref;
 
 
 #include "include/hil/sys/process/process.h"

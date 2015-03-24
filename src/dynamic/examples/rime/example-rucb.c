@@ -61,7 +61,7 @@
 static unsigned long bytecount;
 static clock_time_t start_time;
 
-#include "examples/rime/example-rucb-object.h"
+#include "include/examples/rime/example-rucb-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_rucb_process, "Rucb example");

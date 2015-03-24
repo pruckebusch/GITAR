@@ -53,7 +53,7 @@
 #define PRINTF(...)
 #endif
 
-#include "examples/rime/example-announcement-object.h"
+#include "include/examples/rime/example-announcement-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_announcement_process, "Example announcement process");

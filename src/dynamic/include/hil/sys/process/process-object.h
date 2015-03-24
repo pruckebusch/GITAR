@@ -1,15 +1,10 @@
-#ifndef __PROCESS_HIL_COMPONENT_OBJECT_H__
-#define __PROCESS_HIL_COMPONENT_OBJECT_H__
+#ifndef __PROCESS_COMPONENT_OBJECT_H__
+#define __PROCESS_COMPONENT_OBJECT_H__
 
 #include "hil/sys/process/process.h"
 #include "include/hil/sys/process/process-constdef.h"
 
-static const void* const process_cmpobj_functions[FUNCTION_PROCESS_LAST]={process_post_synch,process_exit,process_poll,process_init,process_nevents,process_run,process_is_running,process_alloc_event,process_post,process_get_current_process,process_start};
+static const void* const process_fnctarray[FUNCTION_PROCESS_LAST] = {process_is_running,process_nevents,process_poll,process_post,process_start,process_post_synch,process_exit,process_get_current_process,process_alloc_event,process_init,process_run};
+static const hil_cmp_object_t const process_cmpobj = { PROCESS_UID, {process_fnctarray}};
 
-static const hil_component_t const process_cmpobj = { { PROCESS, 2, 7, HIL_COMPONENT,FUNCTION_PROCESS_LAST} , {process_cmpobj_functions} };
-
-static void process_object_init(){
-	kernel_add_hil_cmp(&process_cmpobj);
-}
-
-#endif /*__PROCESS_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__PROCESS_COMPONENT_OBJECT_H__*/

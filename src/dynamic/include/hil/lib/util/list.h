@@ -70,7 +70,7 @@
 #include "kernel.h"
 #include "list-constdef.h"
 
-static const hil_component_t* list_cmpobj_ref;
+static const hil_cmp_object_t* list_cmpobj_ref;
 
 
 #define LIST_CONCAT2(s1, s2) s1##s2

@@ -15,7 +15,7 @@
 #define PRINTF(...)
 #endif
 
-#include "examples/rime/example-polite-object.h"
+#include "include/examples/rime/example-polite-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_polite_process, "");

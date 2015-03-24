@@ -44,10 +44,9 @@ int main(){
 		if(system_run() == SUCCESS){
 			//~ PRINTF("System RUNNED %u times\n", system_run_counter);
 		} else {
-			//~ PRINTF("System Failure\n", system_run_counter);
+			PRINTF("System Failure @ run %u\n", system_run_counter);
 			break;
 		}
-		PRINTF("System RUNNED %u times\n", system_run_counter);		
 	}
 	
 	system_exit();

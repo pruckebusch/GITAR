@@ -1,15 +1,10 @@
-#ifndef __SENSORS_HIL_COMPONENT_OBJECT_H__
-#define __SENSORS_HIL_COMPONENT_OBJECT_H__
+#ifndef __SENSORS_COMPONENT_OBJECT_H__
+#define __SENSORS_COMPONENT_OBJECT_H__
 
 #include "hil/dev/sensors.h"
 #include "include/hil/dev/sensors-constdef.h"
 
-static const void* const sensors_cmpobj_functions[FUNCTION_SENSORS_LAST]={sensors_get_sensors_event,sensors_next,sensors_changed,sensors_find,sensors_first};
+static const void* const sensors_fnctarray[FUNCTION_SENSORS_LAST] = {sensors_next,sensors_changed,sensors_first,sensors_get_sensors_event,sensors_find};
+static const hil_cmp_object_t const sensors_cmpobj = { SENSORS_UID, {sensors_fnctarray}};
 
-static const hil_component_t const sensors_cmpobj = { { SENSORS, 2, 7, HIL_COMPONENT,FUNCTION_SENSORS_LAST} , {sensors_cmpobj_functions} };
-
-static void sensors_object_init(){
-	kernel_add_hil_cmp(&sensors_cmpobj);
-}
-
-#endif /*__SENSORS_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__SENSORS_COMPONENT_OBJECT_H__*/

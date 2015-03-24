@@ -64,7 +64,7 @@
 #include "kernel.h"
 #include "etimer-constdef.h"
 
-static const hil_component_t* etimer_cmpobj_ref;
+static const hil_cmp_object_t* etimer_cmpobj_ref;
 
 
 #include "include/hil/sys/timer/timer.h"

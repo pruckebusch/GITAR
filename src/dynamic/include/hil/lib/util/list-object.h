@@ -1,15 +1,10 @@
-#ifndef __LIST_HIL_COMPONENT_OBJECT_H__
-#define __LIST_HIL_COMPONENT_OBJECT_H__
+#ifndef __LIST_COMPONENT_OBJECT_H__
+#define __LIST_COMPONENT_OBJECT_H__
 
-#include "system/hil/lib/util/list.h"
-#include "include/system/hil/lib/util/list-constdef.h"
+#include "hil/lib/util/list.h"
+#include "include/hil/lib/util/list-constdef.h"
 
-static const void* const list_cmpobj_functions[FUNCTION_LIST_LAST]={list_tail,list_add,list_item_next,list_head,list_chop,list_init,list_insert,list_remove,list_copy,list_push,list_pop,list_length};
+static const void* const list_fnctarray[FUNCTION_LIST_LAST] = {list_length,list_push,list_tail,list_copy,list_pop,list_head,list_init,list_chop,list_remove,list_insert,list_add,list_item_next};
+static const hil_cmp_object_t const list_cmpobj = { LIST_UID, {list_fnctarray}};
 
-static const hil_component_t const list_cmpobj = { { LIST, 2, 7, HIL_COMPONENT,FUNCTION_LIST_LAST} , {list_cmpobj_functions} };
-
-static void list_object_init(){
-	kernel_add_hil_cmp(&list_cmpobj);
-}
-
-#endif /*__LIST_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__LIST_COMPONENT_OBJECT_H__*/

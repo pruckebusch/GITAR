@@ -41,7 +41,7 @@
 #include "kernel.h"
 #include "serial-line-constdef.h"
 
-static const hil_component_t* serial_line_cmpobj_ref;
+static const hil_cmp_object_t* serial_line_cmpobj_ref;
 
 
 #include "include/hil/sys/process/process.h"

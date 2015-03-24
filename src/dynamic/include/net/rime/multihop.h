@@ -72,7 +72,7 @@
 #include "kernel.h"
 #include "multihop-constdef.h"
 
-static const component_t* multihop_cmpobj_ref;
+static const cmp_object_t* multihop_cmpobj_ref;
 
 
 #include "include/hil/net/rime/rimeaddr.h"

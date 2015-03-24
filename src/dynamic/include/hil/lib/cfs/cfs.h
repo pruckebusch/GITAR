@@ -60,7 +60,7 @@
 #include "kernel.h"
 #include "cfs-constdef.h"
 
-static const hil_component_t* cfs_cmpobj_ref;
+static const hil_cmp_object_t* cfs_cmpobj_ref;
 
 
 #include "contiki.h"

@@ -58,7 +58,7 @@
 
 #define FILESIZE 2000
 
-#include "examples/rime/example-rudolph2-object.h"
+#include "include/examples/rime/example-rudolph2-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_rudolph2_process, "Rudolph2 example");

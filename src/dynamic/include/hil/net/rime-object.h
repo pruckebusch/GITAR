@@ -1,15 +1,10 @@
-#ifndef __RIME_HIL_COMPONENT_OBJECT_H__
-#define __RIME_HIL_COMPONENT_OBJECT_H__
+#ifndef __RIME_COMPONENT_OBJECT_H__
+#define __RIME_COMPONENT_OBJECT_H__
 
-#include "system/hil/net/rime.h"
-#include "include/system/hil/net/rime-constdef.h"
+#include "hil/net/rime.h"
+#include "include/hil/net/rime-constdef.h"
 
-static const void* const rime_cmpobj_functions[FUNCTION_RIME_LAST]={rime_sniffer_add,rime_sniffer_remove,rime_output};
+static const void* const rime_fnctarray[FUNCTION_RIME_LAST] = {rime_sniffer_remove,rime_output,rime_sniffer_add};
+static const hil_cmp_object_t const rime_cmpobj = { RIME_UID, {rime_fnctarray}};
 
-static const hil_component_t const rime_cmpobj = { { RIME, 2, 7, HIL_COMPONENT,FUNCTION_RIME_LAST} , {rime_cmpobj_functions} };
-
-static void rime_object_init(){
-	kernel_add_hil_cmp(&rime_cmpobj);
-}
-
-#endif /*__RIME_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__RIME_COMPONENT_OBJECT_H__*/

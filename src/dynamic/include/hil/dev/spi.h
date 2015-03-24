@@ -41,7 +41,7 @@
 #include "kernel.h"
 #include "spi-constdef.h"
 
-static const hil_component_t* spi_cmpobj_ref;
+static const hil_cmp_object_t* spi_cmpobj_ref;
 
 
 /* Define macros to use for checking SPI transmission status depending

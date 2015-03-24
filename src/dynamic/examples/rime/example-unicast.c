@@ -54,7 +54,7 @@
 #define PRINTF(...)
 #endif
 
-#include "examples/rime/example-unicast-object.h"
+#include "include/examples/rime/example-unicast-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_unicast_process, "Example unicast");

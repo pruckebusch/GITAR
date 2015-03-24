@@ -73,7 +73,7 @@
 #define PRINTF(...)
 #endif
 
-#include "examples/rime/example-neighbors-object.h"
+#include "include/examples/rime/example-neighbors-object.h"
 
 /* This is the structure of broadcast messages. */
 struct broadcast_message {

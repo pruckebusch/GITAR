@@ -3,7 +3,7 @@
 #include "hil/sys/process/autostart.h"
 #include "hil/sys/timer/etimer.h"
 #include "hil/sys/timer/clock.h"
-#include "hil/net/rime.h"
+//#include "hil/net/rime.h"
 #include "hil/net/rime/packetbuf.h"
 
 #include "net/rime/polite.h"

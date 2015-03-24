@@ -95,7 +95,7 @@
 #include "kernel.h"
 #include "ipolite-constdef.h"
 
-static const component_t* ipolite_cmpobj_ref;
+static const cmp_object_t* ipolite_cmpobj_ref;
 
 
 #include "include/net/rime/broadcast.h"

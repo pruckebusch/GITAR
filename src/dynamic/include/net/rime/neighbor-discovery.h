@@ -61,7 +61,7 @@
 #include "kernel.h"
 #include "neighbor-discovery-constdef.h"
 
-static const component_t* neighbor_discovery_cmpobj_ref;
+static const cmp_object_t* neighbor_discovery_cmpobj_ref;
 
 
 #include "include/net/rime/broadcast.h"

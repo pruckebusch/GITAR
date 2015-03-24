@@ -61,7 +61,7 @@
 #include "kernel.h"
 #include "rudolph2-constdef.h"
 
-static const component_t* rudolph2_cmpobj_ref;
+static const cmp_object_t* rudolph2_cmpobj_ref;
 
 
 #include "include/net/rime/polite.h"

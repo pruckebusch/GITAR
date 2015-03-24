@@ -56,7 +56,7 @@
 #include "kernel.h"
 #include "compower-constdef.h"
 
-static const hil_component_t* compower_cmpobj_ref;
+static const hil_cmp_object_t* compower_cmpobj_ref;
 
 
 /**

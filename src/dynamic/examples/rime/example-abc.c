@@ -54,7 +54,7 @@
 #define PRINTF(...)
 #endif
 
-#include "examples/rime/example-abc-object.h"
+#include "include/examples/rime/example-abc-object.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(example_abc_process, "ABC example");
@@ -72,7 +72,7 @@ PROCESS_THREAD(example_abc_process, ev, data)
 {
   static struct etimer et;
 
-  PROCESS_EXITHANDLER(abc_close(&abc);)
+  PROCESS_EXITHANDLER(etimer_stop(&et);abc_close(&abc);)
 
   PROCESS_BEGIN();
 
@@ -93,3 +93,11 @@ PROCESS_THREAD(example_abc_process, ev, data)
   PROCESS_END();
 }
 /*---------------------------------------------------------------------------*/
+
+void _start_example_abc(){
+	process_start(&example_abc_process,NULL);
+}
+
+void _stop_example_abc(){
+	process_exit(&example_abc_process);
+}

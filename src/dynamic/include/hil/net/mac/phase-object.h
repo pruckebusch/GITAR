@@ -1,15 +1,10 @@
-#ifndef __PHASE_HIL_COMPONENT_OBJECT_H__
-#define __PHASE_HIL_COMPONENT_OBJECT_H__
+#ifndef __PHASE_COMPONENT_OBJECT_H__
+#define __PHASE_COMPONENT_OBJECT_H__
 
-#include "system/hil/net/mac/phase.h"
-#include "include/system/hil/net/mac/phase-constdef.h"
+#include "hil/net/mac/phase.h"
+#include "include/hil/net/mac/phase-constdef.h"
 
-static const void* const phase_cmpobj_functions[FUNCTION_PHASE_LAST]={phase_init,phase_wait,phase_update};
+static const void* const phase_fnctarray[FUNCTION_PHASE_LAST] = {phase_init,phase_update,phase_wait};
+static const hil_cmp_object_t const phase_cmpobj = { PHASE_UID, {phase_fnctarray}};
 
-static const hil_component_t const phase_cmpobj = { { PHASE, 2, 7, HIL_COMPONENT,FUNCTION_PHASE_LAST} , {phase_cmpobj_functions} };
-
-static void phase_object_init(){
-	kernel_add_hil_cmp(&phase_cmpobj);
-}
-
-#endif /*__PHASE_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__PHASE_COMPONENT_OBJECT_H__*/

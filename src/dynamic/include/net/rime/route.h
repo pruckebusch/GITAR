@@ -53,7 +53,7 @@
 #include "kernel.h"
 #include "route-constdef.h"
 
-static const component_t* route_cmpobj_ref;
+static const cmp_object_t* route_cmpobj_ref;
 
 
 #include "include/hil/net/rime/rimeaddr.h"

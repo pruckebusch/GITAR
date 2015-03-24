@@ -1,15 +1,10 @@
-#ifndef __NODE_ID_HIL_COMPONENT_OBJECT_H__
-#define __NODE_ID_HIL_COMPONENT_OBJECT_H__
+#ifndef __NODE_ID_COMPONENT_OBJECT_H__
+#define __NODE_ID_COMPONENT_OBJECT_H__
 
-#include "system/hil/lib/util/node-id.h"
-#include "include/system/hil/lib/util/node-id-constdef.h"
+#include "hil/lib/util/node-id.h"
+#include "include/hil/lib/util/node-id-constdef.h"
 
-static const void* const node_id_cmpobj_functions[FUNCTION_NODE_ID_LAST]={node_id_burn,node_id_restore};
+static const void* const node_id_fnctarray[FUNCTION_NODE_ID_LAST] = {node_id_restore,node_id_burn};
+static const hil_cmp_object_t const node_id_cmpobj = { NODE_ID_UID, {node_id_fnctarray}};
 
-static const hil_component_t const node_id_cmpobj = { { NODE_ID, 2, 7, HIL_COMPONENT,FUNCTION_NODE_ID_LAST} , {node_id_cmpobj_functions} };
-
-static void node_id_object_init(){
-	kernel_add_hil_cmp(&node_id_cmpobj);
-}
-
-#endif /*__NODE_ID_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__NODE_ID_COMPONENT_OBJECT_H__*/

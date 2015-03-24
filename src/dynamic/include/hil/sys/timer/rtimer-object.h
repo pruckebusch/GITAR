@@ -1,15 +1,10 @@
-#ifndef __RTIMER_HIL_COMPONENT_OBJECT_H__
-#define __RTIMER_HIL_COMPONENT_OBJECT_H__
+#ifndef __RTIMER_COMPONENT_OBJECT_H__
+#define __RTIMER_COMPONENT_OBJECT_H__
 
 #include "hil/sys/timer/rtimer.h"
 #include "include/hil/sys/timer/rtimer-constdef.h"
 
-static const void* const rtimer_cmpobj_functions[FUNCTION_RTIMER_LAST]={rtimer_set,rtimer_now,rtimer_init,rtimer_run_next};
+static const void* const rtimer_fnctarray[FUNCTION_RTIMER_LAST] = {rtimer_init,rtimer_run_next,rtimer_set,rtimer_now};
+static const hil_cmp_object_t const rtimer_cmpobj = { RTIMER_UID, {rtimer_fnctarray}};
 
-static const hil_component_t const rtimer_cmpobj = { { RTIMER, 2, 7, HIL_COMPONENT,FUNCTION_RTIMER_LAST} , {rtimer_cmpobj_functions} };
-
-static void rtimer_object_init(){
-	kernel_add_hil_cmp(&rtimer_cmpobj);
-}
-
-#endif /*__RTIMER_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__RTIMER_COMPONENT_OBJECT_H__*/

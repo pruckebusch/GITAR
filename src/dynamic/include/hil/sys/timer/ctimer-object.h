@@ -1,15 +1,10 @@
-#ifndef __CTIMER_HIL_COMPONENT_OBJECT_H__
-#define __CTIMER_HIL_COMPONENT_OBJECT_H__
+#ifndef __CTIMER_COMPONENT_OBJECT_H__
+#define __CTIMER_COMPONENT_OBJECT_H__
 
 #include "hil/sys/timer/ctimer.h"
 #include "include/hil/sys/timer/ctimer-constdef.h"
 
-static const void* const ctimer_cmpobj_functions[FUNCTION_CTIMER_LAST]={ctimer_reset,ctimer_set,ctimer_restart,ctimer_stop,ctimer_init,ctimer_expired};
+static const void* const ctimer_fnctarray[FUNCTION_CTIMER_LAST] = {ctimer_init,ctimer_restart,ctimer_expired,ctimer_set,ctimer_reset,ctimer_stop};
+static const hil_cmp_object_t const ctimer_cmpobj = { CTIMER_UID, {ctimer_fnctarray}};
 
-static const hil_component_t const ctimer_cmpobj = { { CTIMER, 2, 7, HIL_COMPONENT,FUNCTION_CTIMER_LAST} , {ctimer_cmpobj_functions} };
-
-static void ctimer_object_init(){
-	kernel_add_hil_cmp(&ctimer_cmpobj);
-}
-
-#endif /*__CTIMER_HIL_COMPONENT_OBJECT_H__*/
+#endif /*__CTIMER_COMPONENT_OBJECT_H__*/

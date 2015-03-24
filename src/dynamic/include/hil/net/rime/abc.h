@@ -59,7 +59,7 @@
 #include "kernel.h"
 #include "abc-constdef.h"
 
-static const hil_component_t* abc_cmpobj_ref;
+static const hil_cmp_object_t* abc_cmpobj_ref;
 
 
 #include "include/hil/net/rime/packetbuf.h"

@@ -67,7 +67,7 @@
 #include "kernel.h"
 #include "rmh-constdef.h"
 
-static const component_t* rmh_cmpobj_ref;
+static const cmp_object_t* rmh_cmpobj_ref;
 
 
 #include "include/net/rime/runicast.h"

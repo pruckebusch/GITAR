@@ -196,6 +196,7 @@ new_announcement(uint16_t id, uint8_t has_value,
 {
   if(bump == ANNOUNCEMENT_BUMP) {
     c.current_interval = c.initial_interval;
+    PRINTF("New announcement\n");
     set_timers();
     /*  } else if(newval != oldval) {
     c.current_interval = c.min_interval;
@@ -212,11 +213,12 @@ broadcast_announcement_init(uint16_t channel,
                             clock_time_t min,
                             clock_time_t max)
 {
+	 PRINTF("before broadcast open\n");
   broadcast_open(&c.c, channel, &broadcast_callbacks);
   c.initial_interval = initial;
   c.min_interval = min;
   c.max_interval = max;
-
+	PRINTF("before anouncement register");
   announcement_register_observer_callback(new_announcement);
 }
 /*---------------------------------------------------------------------------*/

@@ -34,7 +34,7 @@
 #include "kernel.h"
 #include "button-sensor-constdef.h"
 
-static const hil_component_t* button_sensor_cmpobj_ref;
+static const hil_cmp_object_t* button_sensor_cmpobj_ref;
 
 
 #include "include/hil/dev/sensors.h"

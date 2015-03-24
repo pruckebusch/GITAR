@@ -34,7 +34,7 @@
 #include "kernel.h"
 #include "symtab-constdef.h"
 
-static const hil_component_t* symtab_cmpobj_ref;
+static const hil_cmp_object_t* symtab_cmpobj_ref;
 
 
 

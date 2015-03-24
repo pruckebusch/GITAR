@@ -78,7 +78,7 @@
 #include "hil/lib/util/list.h"
 #include "hil/lib/util/memb.h"
 #include "hil/dev/button-sensor.h"
-#include "hil/net/rime.h"
+//#include "hil/net/rime.h"
 #include "hil/net/rime/packetbuf.h"
 #include "hil/net/rime/rimeaddr.h"
 #include "hil/net/rime/announcement.h"

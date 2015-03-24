@@ -37,7 +37,7 @@
 #include "kernel.h"
 #include "node-id-constdef.h"
 
-static const hil_component_t* node_id_cmpobj_ref;
+static const hil_cmp_object_t* node_id_cmpobj_ref;
 
 
 

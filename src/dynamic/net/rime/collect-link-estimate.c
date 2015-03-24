@@ -40,13 +40,7 @@
  * \author
  *         Adam Dunkels <adam@sics.se>
  */
-
-#include "contiki-conf.h"
-#include "net/rime/collect-link-estimate.h"
-
-#include "include/net/rime/collect.h"
-#include "include/net/rime/collect-link-estimate-object.h"
-
+ 
 #define DEBUG 0
 #if DEBUG
 #include <stdio.h>
@@ -54,6 +48,14 @@
 #else
 #define PRINTF(...)
 #endif
+
+#include "contiki-conf.h"
+#include "net/rime/collect-link-estimate.h"
+
+#include "include/net/rime/collect.h"
+#include "include/net/rime/collect-link-estimate-object.h"
+
+
 
 #define INITIAL_LINK_ESTIMATE 16
 

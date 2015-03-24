@@ -56,7 +56,7 @@
 #include "kernel.h"
 #include "crc16-constdef.h"
 
-static const hil_component_t* crc16_cmpobj_ref;
+static const hil_cmp_object_t* crc16_cmpobj_ref;
 
 
 /**

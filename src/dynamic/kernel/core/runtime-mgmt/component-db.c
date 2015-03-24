@@ -3,6 +3,8 @@
 #include "component-db.h"
 #include <string.h>
 
+#if COMPILE_DYNAMIC
+
 extern const uint16_t num_hil_cmp;
 extern const uint16_t num_preinstalled_cmp;
 extern const hil_component_db_entry_t const hilcomponents[];
@@ -76,4 +78,35 @@ hil_component_db_entry_t* component_hil_db_select_name(const char* name){
 	}
 	return NULL;
 }
+
+#endif
+
+#else
+void component_db_init(){
+}
+
+component_db_entry_t* component_db_add(const cmp_object_t* cmp){
+	return NULL;
+}
+
+component_db_entry_t* component_db_select_uid(const cmp_info_t* cmp_info){
+	return NULL;
+}
+
+const hil_component_db_entry_t* component_hil_db_select_uid(const uint16_t UID){
+	return NULL;
+}
+
+#ifdef COMPONENT_CONF_WITH_NAME
+
+component_db_entry_t* component_db_select_name(const cmp_info_t* cmp_info){
+	return NULL;
+}
+
+hil_component_db_entry_t* component_hil_db_select_name(const char* name){
+	return NULL;
+}
+
+#endif
+
 #endif

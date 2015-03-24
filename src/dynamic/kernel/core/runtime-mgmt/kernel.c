@@ -11,6 +11,8 @@
 #include "component-db.h"
 #include "hil/lib/util/list.h"
 
+#if COMPILE_DYNAMIC
+
 void print_cmp(const cmp_object_t* c){
 	PRINTF("Component %p:\n", c);
 	PRINTF("\t -->descr T=%u Vr=%u Vsr=%u UID=%u, Nf=%u\n", c->info.type, c->info.version, c->info.subrelease, c->info.UID, c->info.num_functions);
@@ -57,3 +59,26 @@ const hil_cmp_object_t* kernel_bind_hil_cmp(const uint16_t UID){
 	PRINTF("Gitar kernel search HIL component failed\n");
 	return NULL;
 }
+#else
+
+void print_cmp(const cmp_object_t* c){
+}
+
+void print_hilcmp(const hil_cmp_object_t* c){
+}
+
+void kernel_init(){
+}
+
+void kernel_add_cmp(const cmp_object_t* cmp){
+}
+
+const cmp_object_t* kernel_bind_cmp(const cmp_info_t* info, const cmp_usr_lst_entry_t* cmp_user){
+	return NULL;
+}
+
+const hil_cmp_object_t* kernel_bind_hil_cmp(const uint16_t UID){
+	return NULL;
+}
+
+#endif

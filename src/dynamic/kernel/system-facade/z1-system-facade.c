@@ -6,11 +6,12 @@
 #define PRINTF(...)
 #endif
 
-#if COMPILE_DYNAMIC
-
 #include "kernel/core/runtime-mgmt/kernel.h"
 #include "kernel/core/runtime-mgmt/kernel-config.h"
 #include "kernel/system-facade/system-facade.h"
+
+#if COMPILE_DYNAMIC
+
 #include "kernel/system-facade/hil-components.h"
 
 error_t system_register_hil_components(){

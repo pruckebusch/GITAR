@@ -32,6 +32,12 @@ savedefines:
 
 OBJECTDIR = obj_$(TARGET)
 
+ifeq ($(COMPILE_DYNAMIC),1)
+SOURCE_BASE_DIR += $(GITAR)/src/dynamic
+else
+SOURCE_BASE_DIR += $(GITAR)/src/static
+endif
+
 include $(GITAR)/make/Makefile.kernel
 
 include $(GITAR)/make/Makefile.contiki
@@ -39,7 +45,7 @@ include $(GITAR)/make/Makefile.contiki
 ### Include application makefiles
 
 ifdef APPS
-  APP_DIRS = ${wildcard ${addprefix $(GITAR)/src/user/apps/, $(APPS)} $(APPS)}
+  APP_DIRS = ${wildcard ${addprefix $(SOURCE_BASE_DIR)/apps/, $(APPS)} $(APPS)}
   APPINCLUDES = ${foreach APP, $(APPS), ${wildcard ${foreach DIR, $(APP_DIRS), $(DIR)/Makefile.$(APP)}}}
   -include $(APPINCLUDES)
   APP_SOURCES = ${foreach APP, $(APPS), $($(APP)_src)}
@@ -92,10 +98,15 @@ $(OBJECTDIR):
 
 ### Setup directory search path for source and header files
         
-SOURCEDIRS = $(PROJECTDIRS) $(GITAR) $(PLATFORM_DIRS) $(CPU_DIRS) $(CONTIKIDIRS) $(KERNELDIRS) $(NETDIRS) $(APP_DIRS)
-SOURCEDIRS += $(GITAR)/src/system/hal
-SOURCEDIRS += $(GITAR)/src/system/hil
-SOURCEDIRS += $(GITAR)/src/
+SOURCEDIRS = . $(PROJECTDIRS) $(GITAR) $(SOURCE_BASE_DIR) $(PLATFORM_DIRS) $(CPU_DIRS) $(CONTIKIDIRS) $(KERNELDIRS) $(NETDIRS) $(APP_DIRS)
+#~ SOURCEDIRS += $(GITAR)/src/system/hal
+#~ SOURCEDIRS += $(GITAR)/src/system/hil
+#~ ifeq ($(COMPILE_DYNAMIC),1)
+#~ SOURCEDIRS += $(GITAR)/src/dynamic
+#~ else
+#~ SOURCEDIRS += $(GITAR)/src/static
+#~ endif
+
 
 SOURCEFILES = $(KERNELFILES) $(CONTIKIFILES) $(PLATFORM_FILES) $(CPU_FILES) $(NETFILES) $(APP_SOURCES)
 
@@ -120,7 +131,7 @@ define FINALIZE_DEPENDENCY
 cp $(@:.o=.d) $(@:.o=.$$$$); \
 sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
     -e '/^$$/ d' -e 's/$$/ :/' < $(@:.o=.$$$$) >> $(@:.o=.d); \
-rm -f $(@:.o=.$$$$)
+#~ rm -f $(@:.o=.$$$$)
 endef
 
 clean:

@@ -1,0 +1,21 @@
+#ifndef KERNEL_CONFIG_H
+#define KERNEL_CONFIG_H
+
+#include "unique-names.h"
+
+//~ #define COMPONENT_CONF_WITH_PROCESS_ARRAY 0
+//~ #define COMPONENT_CONF_WITH_NAME 0
+
+#define NUM_COMPONENTS 10
+
+
+enum CMP_TYPE {
+	NULL_COMPONENT,
+	HIL_COMPONENT,
+	NET_COMPONENT,
+	APP_COMPONENT,
+};
+
+
+
+#endif /*KERNEL_CONFIG_H*/

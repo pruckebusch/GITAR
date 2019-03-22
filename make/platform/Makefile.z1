@@ -22,8 +22,8 @@ PLATFORM_LIB = node-id.c checkpoint-arch.c
 PLATFORM_DEV = cc2420-arch.c xmem.c i2cmaster.c adxl345.c button-sensor.c light-sensor.c relay-phidget.c temperature-sensor.c tmp102.c z1-phidgets.c battery-sensor.c  light-ziglet.c radio-sensor.c sky-sensors.c tlc59116.c #potentiometer-sensor.c light.c
 HAL_PLATFORM = gitar-z1-platform.c $(PLATFORM_DEV) $(PLATFORM_LIB)
 
-PLATFORM_DIRS = ${addprefix $(GITAR)/src/system/hal/platform/z1/, . dev lib lib/cfs lib/util }
-PLATFORM_DIRS += ${addprefix $(GITAR)/src/system/hal/chips/, . cc2420 sht11 }
+PLATFORM_DIRS = ${addprefix $(SOURCE_BASE_DIR)/hal/platform/z1/, . dev lib lib/cfs lib/util }
+PLATFORM_DIRS += ${addprefix $(SOURCE_BASE_DIR)/hal/chips/, . cc2420 sht11 }
 
 #ifndef GITAR_TARGET_MAIN
 #GITAR_TARGET_MAIN = gitar-z1-main.c
@@ -33,7 +33,7 @@ ifndef GITAR_TARGET_MAIN
 GITAR_TARGET_MAIN = kernel-main.c
 endif
 
-PLATFORM_FILES += $(HIL_DEV) $(HAL_CHIPS) $(HAL_CPU) $(HAL_PLATFORM) z1-system-facade.c
+PLATFORM_FILES += $(HIL_DEV) $(HAL_CHIPS) $(HAL_CPU) $(HAL_PLATFORM) z1-system-facade.c z1-control.c
 
 #${info including platform source files '$(PLATFORM_FILES)' in dirs '$(PLATFORM_DIRS)'}
 

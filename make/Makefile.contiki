@@ -34,10 +34,10 @@ DEV = #nullradio.c
 
 CONTIKIFILES = $(SYS) $(LIB) $(DEV)
 
-CONTIKIDIRS = ${addprefix $(GITAR)/src/system/, hil hal . }
-CONTIKIDIRS += ${addprefix $(GITAR)/src/system/hil/, net sys lib dev types}
-CONTIKIDIRS += ${addprefix $(GITAR)/src/system/hil/sys/, process timer }
-CONTIKIDIRS += ${addprefix $(GITAR)/src/system/hil/lib/, cfs loader rime util queue }
-CONTIKIDIRS += ${addprefix $(GITAR)/src/system/hil/net/, rime }
+CONTIKIDIRS = ${addprefix $(SOURCE_BASE_DIR)/, hil hal . }
+CONTIKIDIRS += ${addprefix $(SOURCE_BASE_DIR)/hil/, net sys lib dev types}
+CONTIKIDIRS += ${addprefix $(SOURCE_BASE_DIR)/hil/sys/, process timer }
+CONTIKIDIRS += ${addprefix $(SOURCE_BASE_DIR)/hil/lib/, cfs loader rime util queue }
+CONTIKIDIRS += ${addprefix $(SOURCE_BASE_DIR)/hil/net/, rime }
 
 #${info including contiki source files '$(CONTIKIFILES)' in dirs '$(CONTIKIDIRS)'}
